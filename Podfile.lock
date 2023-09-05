@@ -1,0 +1,84 @@
+PODS:
+  - Alamofire (5.1.0)
+  - FLAnimatedImage (1.0.17)
+  - FSPagerView (0.8.3)
+  - IQKeyboardManagerSwift (6.5.12)
+  - JJException (0.2.13):
+    - JJException/All (= 0.2.13)
+  - JJException/All (0.2.13):
+    - JJException/ARC
+    - JJException/DeallocBlock
+    - JJException/Main
+    - JJException/MRC
+    - JJException/Swizzle
+  - JJException/ARC (0.2.13):
+    - JJException/DeallocBlock
+    - JJException/Main
+    - JJException/Swizzle
+  - JJException/DeallocBlock (0.2.13)
+  - JJException/Main (0.2.13)
+  - JJException/MRC (0.2.13):
+    - JJException/Main
+    - JJException/Swizzle
+  - JJException/Swizzle (0.2.13)
+  - JXSegmentedView (1.2.7)
+  - MBProgressHUD (1.2.0)
+  - MJRefresh (3.7.5)
+  - PINCache (2.3)
+  - SDWebImage (5.0.6):
+    - SDWebImage/Core (= 5.0.6)
+  - SDWebImage/Core (5.0.6)
+  - SDWebImageFLPlugin (0.3.0):
+    - FLAnimatedImage (>= 1.0.11)
+    - SDWebImage/Core (~> 5.0)
+  - SnapKit (5.0.1)
+  - SwiftPopMenu (2.0.2)
+
+DEPENDENCIES:
+  - Alamofire (= 5.1.0)
+  - FSPagerView
+  - IQKeyboardManagerSwift
+  - JJException
+  - JXSegmentedView (~> 1.2.7)
+  - MBProgressHUD
+  - MJRefresh
+  - PINCache (= 2.3)
+  - SDWebImage (~> 5.0.6)
+  - SDWebImageFLPlugin (~> 0.3.0)
+  - SnapKit (~> 5.0.0)
+  - SwiftPopMenu
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - FLAnimatedImage
+    - FSPagerView
+    - IQKeyboardManagerSwift
+    - JJException
+    - JXSegmentedView
+    - MBProgressHUD
+    - MJRefresh
+    - PINCache
+    - SDWebImage
+    - SDWebImageFLPlugin
+    - SnapKit
+    - SwiftPopMenu
+
+SPEC CHECKSUMS:
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
+  IQKeyboardManagerSwift: 371b08cb39664fb56030f5345c815a4ffc74bbc0
+  JJException: fce490b5c046078709283d38de73fe2f624bc14c
+  JXSegmentedView: eb1cad21f57c2543c00c3e08b8fd3c7ca54f5acd
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
+  SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
+  SDWebImageFLPlugin: cf3f4ae49f249dd785129346fd61bbc8433a88cf
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftPopMenu: e8ad0724497781abec06c16e158d08d741c794cd
+
+PODFILE CHECKSUM: ba7a72506c20ac63731665bae255d9a04e794f47
+
+COCOAPODS: 1.11.3
