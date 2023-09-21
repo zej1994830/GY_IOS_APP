@@ -23,3 +23,11 @@ struct Api {
     //设备有效期
     static let getdevicetime: String = "account/checkdateinvalid"
 }
+
+extension Api {
+    //水温差段列表
+    static let getswclist: String = "group/getsectionlist"
+    //水温差总览
+    static let getswczonglan: String = "wcpandect/getwcindextaglistbypart"
+    
+}

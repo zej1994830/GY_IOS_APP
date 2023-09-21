@@ -10,15 +10,19 @@ import FSPagerView
 import SwiftPopMenu
 class GYMainViewController: GYViewController {
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.isHiddenNavigationBar = true
+    }
     var bannerarray:NSArray = []
     var deviceArray:NSMutableArray = []
     //主页六个cell。默认布局
-    var mainStrArray:NSArray = [["main_shuiwen","水温差","#8494FF","#476DFC"],["main_luke","炉壳温度","#FF9090","#FF4848"],["mian_liuliang","流量计","#03D6A3","#02BE8B"],["main_qinshi","侵蚀结厚","#FFB23F","#F9861B"],["main_redian","热电偶","#C082FF","#A75FF0"],["mian_fengkou","风口套","#4DD9F8","#12AAFF"]]
+    var mainStrArray:NSArray = [["main_shuiwen","水温差","#8494FF","#476DFC"],["main_luke","炉壳温度","#FF9090","#FF4848"],["main_liuliang","流量计","#03D6A3","#02BE8B"],["main_qinshi","侵蚀结厚","#FFB23F","#F9861B"],["main_redian","热电偶","#C082FF","#A75FF0"],["main_fengkou","风口套","#4DD9F8","#12AAFF"]]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(locationSuccess(_:)), name: NotificationConstant.locationSuccess, object: nil)
-        self.isHiddenNavigationBar = true
+        
         
         setupViews()
         addLayout()
@@ -124,7 +128,6 @@ extension GYMainViewController {
                 guard let weakSelf = self else{
                     return
                 }
-                GYHUD.hideHudForView(weakSelf.view)
                 
                 let rresult = result as! [String:Any]
                 let data: NSDictionary = rresult["data"] as! NSDictionary
@@ -132,6 +135,7 @@ extension GYMainViewController {
                 CommonCache.cacheData(userBaseInfo, key: CacheKey.userDataInfoCacheKey)
                 weakSelf.nextrequest(device_db: GYDeviceData.default.device_db)
                 weakSelf.view.addSubview(weakSelf.deviceView)
+                weakSelf.deviceView.dismiss()
                 weakSelf.leftBtn.setTitle(GYDeviceData.default.device_name, for: .normal)
             }
         }
@@ -143,6 +147,7 @@ extension GYMainViewController {
             guard let weakSelf = self else{
                 return
             }
+            GYHUD.hideHudForView(weakSelf.view)
             let rresult = result as! [String:Any]
             let data: NSDictionary = rresult["data"] as! NSDictionary
             weakSelf.bannerarray = data["news_list"] as! NSArray
@@ -156,6 +161,7 @@ extension GYMainViewController {
     }
      
     func setupViews() {
+//        self.view.addSubview(deviceView)
         self.view.addSubview(bgHeadView)
         self.view.addSubview(leftBtn)
         self.view.addSubview(leftImageV)
@@ -200,8 +206,8 @@ extension GYMainViewController {
         pageController.snp.makeConstraints { make in
             make.width.equalTo(200)
             make.height.equalTo(20)
-            make.bottom.equalTo(bannerView).offset(-10)
-            make.right.equalTo(-20)
+            make.bottom.equalTo(bannerView)
+            make.right.equalTo(-30)
         }
         
         collectionV.snp.makeConstraints { make in
@@ -245,10 +251,20 @@ extension GYMainViewController:UICollectionViewDelegate,UICollectionViewDataSour
             cell = GYMainViewCell()
         }
         
+        cell?.dataarray = mainStrArray[indexPath.row] as! NSArray
         return cell ?? UICollectionViewCell()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let vc = GYWaterTemDiffViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.row == 1 {
+            
+        }
+        
+        
+    }
+
 }
 
-func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-}

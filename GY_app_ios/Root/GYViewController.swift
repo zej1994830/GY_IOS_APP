@@ -57,6 +57,7 @@ class GYViewController: UIViewController,UIGestureRecognizerDelegate {
         self.navTintColor = UIColor.black
         
         self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 20, weight: .medium)]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,6 +124,7 @@ extension GYViewController {
     @objc func back(){
      
         self.navigationController?.popViewController(animated: true)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 20, weight: .medium)]
     }
     
     @objc func warn() {

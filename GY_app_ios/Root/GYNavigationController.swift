@@ -13,10 +13,11 @@ class GYNavigationController: UINavigationController {
         super.viewDidLoad()
         setupViews()
         addLayout()
+
     }
     
     override func popToRootViewController(animated: Bool) -> [UIViewController]? {
-        
+        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 20, weight: .medium)]
         if animated {
             let popVc = self.viewControllers.last
             popVc?.hidesBottomBarWhenPushed = false
@@ -26,6 +27,8 @@ class GYNavigationController: UINavigationController {
     }
     
     override func popViewController(animated: Bool) -> UIViewController? {
+        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 20, weight: .medium)]
+        self.navigationBar.backgroundColor = .clear
         if self.viewControllers.count == 2 {
             let vc = super.popViewController(animated: animated)
             vc?.hidesBottomBarWhenPushed = false
@@ -36,7 +39,6 @@ class GYNavigationController: UINavigationController {
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        
         if viewControllers.count > 0 {
             
             viewController.hidesBottomBarWhenPushed = true

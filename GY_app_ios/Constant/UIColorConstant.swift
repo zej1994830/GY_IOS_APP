@@ -26,7 +26,7 @@ struct UIColorConstant {
     // 文字黑色
     static let textBlack = UIColor.UIColorFromHexvalue(color_vaule: "#333333")
     // 文字灰色
-    static let textGray = UIColor.UIColorFromHexvalue(color_vaule: "#999999")
+    static let textGray = UIColor.UIColorFromHexvalue(color_vaule: "#666666")
     
 //    // 文字浅灰色
 //    static let textLightGray = UIColor.UIColorFromHexvalue(color_vaule: "#BFBFBF")

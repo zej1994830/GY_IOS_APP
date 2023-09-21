@@ -12,13 +12,21 @@ class GYMainViewCell: UICollectionViewCell {
     
     var dataarray:NSArray = []{
         didSet{
-            
+            imageV.image = UIImage(named: dataarray[0] as! String)
+            titleLabel.text = dataarray[1] as? String
+            colorlayer(color1: dataarray[2] as! String, color2: dataarray[3] as! String)
         }
     }
     
     private lazy var midView:UIView = {
         let view = UIView()
         return view
+    }()
+    
+    private lazy var bgimageV:UIImageView = {
+        let imagev = UIImageView()
+        imagev.image = UIImage(named: "main_bg_kuai")
+        return imagev
     }()
     
     private lazy var imageV:UIImageView = {
@@ -45,13 +53,35 @@ class GYMainViewCell: UICollectionViewCell {
 }
 extension GYMainViewCell {
     private func setupViews(){
-        self.addSubview(midView)
-        midView.addSubview(imageV)
+        self.contentView.addSubview(bgimageV)
+        self.contentView.addSubview(midView)
         midView.addSubview(titleLabel)
+        midView.addSubview(imageV)
     }
     
     private func addLayout(){
+        bgimageV.snp.makeConstraints { make in
+            make.top.equalTo(7.5)
+            make.left.equalTo(43)
+            make.right.equalTo(-39)
+            make.bottom.equalTo(0)
+        }
         
+        midView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.right.top.bottom.equalTo(0)
+            make.height.equalTo(28)
+        }
+        
+        imageV.snp.makeConstraints { make in
+            make.left.equalTo(0)
+            make.right.equalTo(titleLabel.snp.left).offset(-4)
+            make.centerY.equalTo(titleLabel)
+            make.width.height.equalTo(24)
+        }
     }
     
     func colorlayer(color1:String , color2:String){

@@ -46,7 +46,7 @@ class GYUserBaseInfoData: GYUserLoginData {
         let cachedUserInfo = GYUserBaseInfoData.default
         cachedUserInfo.subordinate_unit = data["subordinate_unit"] as! String
         cachedUserInfo.user_type = data["user_type"] as! Int64
-        cachedUserInfo.user_id2 = data["user_id"] as! String
+//        cachedUserInfo.user_id2 = data["user_id"] as! String
         cachedUserInfo.landing_time = data["landing_time"] as! NSArray
         cachedUserInfo.user_name = data["user_name"] as! String
         cachedUserInfo.user_account = data["user_account"] as! String
@@ -111,8 +111,8 @@ class GYDeviceData:GYCodingObject {
         let cachedUserInfo = GYDeviceData.default
         cachedUserInfo.device_type = data["device_type"] as! Int64
         cachedUserInfo.id = data["id"] as! Int64
-        cachedUserInfo.end_time = data["end_time"] as! String
-        cachedUserInfo.start_time = data["start_time"] as! String
+        cachedUserInfo.end_time = data["end_time"] as? String ?? ""
+        cachedUserInfo.start_time = data["start_time"] as? String ?? ""
         cachedUserInfo.device_db = data["device_db"] as! String
         cachedUserInfo.device_name = data["device_name"] as! String
 

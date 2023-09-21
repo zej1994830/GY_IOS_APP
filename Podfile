@@ -17,8 +17,10 @@ target 'GY_app_ios' do
   pod 'SDWebImage', '~> 5.0.6'
   pod 'SDWebImageFLPlugin', '~> 0.3.0'
   pod 'PINCache', '2.3'
-#  pod 'SwiftyJSON'
+  pod 'SwiftyJSON'
+  pod 'HandyJSON'
   pod 'SwiftPopMenu'
+  pod 'JJCollectionViewRoundFlowLayout_Swift'
   
   target 'GY_app_iosTests' do
     inherit! :search_paths

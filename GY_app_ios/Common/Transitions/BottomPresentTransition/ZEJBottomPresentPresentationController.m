@@ -39,8 +39,10 @@
         maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(maskClick)];
         [maskView addGestureRecognizer:tapGesture];
+        maskView.userInteractionEnabled = YES;
         [self.containerView addSubview:maskView];
         _maskView = maskView;
+        
     }
     return _maskView;
 }
@@ -73,6 +75,7 @@
 
 -(void)maskClick {
     [self.presentedViewController dismissViewControllerAnimated:YES completion:^{
+   
     }];
 }
 

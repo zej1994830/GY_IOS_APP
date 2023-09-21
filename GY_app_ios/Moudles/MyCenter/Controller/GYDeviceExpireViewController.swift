@@ -13,7 +13,9 @@ class GYDeviceExpireViewController: ZEJRollDownViewController {
         super.viewDidLoad()
 
         setupViews()
-        addLayout()    }
+        addLayout()
+        
+    }
     
     private lazy var bgView:UIView = {
         let view = UIView()
