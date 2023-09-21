@@ -37,7 +37,7 @@ class GYWTDDetailViewController: GYViewController {
     private lazy var collectionV: UICollectionView = {
         let layout = UICollectionViewFlowLayout.init()
         layout.minimumInteritemSpacing = 1
-        layout.minimumLineSpacing = 1
+        layout.minimumLineSpacing = 1 
         layout.scrollDirection = .vertical
         layout.estimatedItemSize = rellySizeForiPhoneWidth(124, 81)
 //        layout.sectionInset = UIEdgeInsets.init(top: 0, left: 22, bottom: 0, right: -22)
