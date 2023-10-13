@@ -14,7 +14,7 @@ class GYLoginViewController: GYViewController {
         setupViews()
         addLayout()
         
-        
+        self.isHiddenBgView = true
     }
     
     private lazy var titleImageView: UIImageView = {
@@ -51,6 +51,7 @@ class GYLoginViewController: GYViewController {
         let tf = UITextField()
         tf.placeholder = "手机号/账号"
         tf.font = UIFont.systemFont(ofSize: 16.0)
+        tf.text = UserDefaults.standard.object(forKey: "user_account") as? String
         return tf
     }()
     
@@ -74,6 +75,7 @@ class GYLoginViewController: GYViewController {
         tf.placeholder = "密码"
         tf.font = UIFont.systemFont(ofSize: 16.0)
         tf.isSecureTextEntry = true
+        tf.text = UserDefaults.standard.object(forKey: "password")  as? String
         return tf
     }()
     
@@ -162,7 +164,10 @@ extension GYLoginViewController {
         
         GYHUD.showGif()
         
-        let params = ["user_account":phoneTextfield.text!,"password":String(format: passwordTextfield.text!)] as [String : Any]
+        let password = String(format: passwordTextfield.text!).data(using: .utf8)
+            
+        let params = ["user_account":phoneTextfield.text!,"password":password!.base64EncodedString()] as [String : Any]
+        
         GYNetworkManager.share.requestData(.get, api: Api.getlogin,parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -174,6 +179,11 @@ extension GYLoginViewController {
                 //存储
                 let userBaseInfo = GYUserBaseInfoData.init(signData: data)
                 CommonCache.cacheData(userBaseInfo, key: CacheKey.userDataInfoCacheKey)
+                
+                //本地存储
+                UserDefaults.standard.set(weakSelf.phoneTextfield.text!, forKey: "user_account")
+                UserDefaults.standard.set(weakSelf.passwordTextfield.text!, forKey: "password")
+                UserDefaults.standard.synchronize()
                 //通知
                 NotificationCenter.default.post(name: NotificationConstant.locationSuccess, object: nil,userInfo: nil)
                 weakSelf.dismiss(animated: true)

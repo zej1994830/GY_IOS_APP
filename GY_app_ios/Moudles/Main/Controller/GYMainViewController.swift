@@ -18,11 +18,11 @@ class GYMainViewController: GYViewController {
     var deviceArray:NSMutableArray = []
     //主页六个cell。默认布局
     var mainStrArray:NSArray = [["main_shuiwen","水温差","#8494FF","#476DFC"],["main_luke","炉壳温度","#FF9090","#FF4848"],["main_liuliang","流量计","#03D6A3","#02BE8B"],["main_qinshi","侵蚀结厚","#FFB23F","#F9861B"],["main_redian","热电偶","#C082FF","#A75FF0"],["main_fengkou","风口套","#4DD9F8","#12AAFF"]]
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(locationSuccess(_:)), name: NotificationConstant.locationSuccess, object: nil)
-        
         
         setupViews()
         addLayout()
@@ -150,7 +150,7 @@ extension GYMainViewController {
             GYHUD.hideHudForView(weakSelf.view)
             let rresult = result as! [String:Any]
             let data: NSDictionary = rresult["data"] as! NSDictionary
-            weakSelf.bannerarray = data["news_list"] as! NSArray
+            weakSelf.bannerarray = data["new_list"] as! NSArray
             weakSelf.pageController.numberOfPages = weakSelf.bannerarray.count
             weakSelf.bannerView.reloadData()
         }
@@ -169,6 +169,8 @@ extension GYMainViewController {
         self.view.addSubview(bannerView)
         self.view.addSubview(pageController)
         self.view.addSubview(collectionV)
+        
+        self.isHiddenBgView = true
     }
     func addLayout() {
         bgHeadView.snp.makeConstraints { make in
@@ -257,12 +259,24 @@ extension GYMainViewController:UICollectionViewDelegate,UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
+            //水温差
             let vc = GYWaterTemDiffViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.row == 1 {
-            
+            //炉壳温度
+            let vc = GYFurnaceShellMainViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.row == 2 {
+            //流量计
+        }else if indexPath.row == 3 {
+            //侵蚀厚度
+            let vc = GYErosionThicknessMainViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.row == 4 {
+            //热电偶
+        }else if indexPath.row == 5 {
+            //风口套
         }
-        
         
     }
 

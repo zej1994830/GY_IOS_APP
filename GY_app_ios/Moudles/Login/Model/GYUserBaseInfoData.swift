@@ -36,7 +36,8 @@ class GYUserBaseInfoData: GYUserLoginData {
     convenience init(signData: NSDictionary){
         self.init()
         self.isLogin = true
-        self.user_id = signData["user_id"] as! Int64
+        self.user_id = signData["userId"] as! Int64
+//        self.user_id = signData["user_id"] as! Int64
 //        self.token = signData.token
         
 //        SDWebImageDownloader.shared.setValue(signData.token, forHTTPHeaderField: "token ")

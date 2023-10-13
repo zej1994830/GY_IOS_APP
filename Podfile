@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+ platform :ios, '12.0'
 
 target 'GY_app_ios' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -9,6 +9,7 @@ target 'GY_app_ios' do
   pod 'Alamofire', '5.1.0' #网络请求库
   pod 'MJRefresh'          #下拉刷新
   pod 'SnapKit', '~> 5.0.0'           #自动布局库
+  pod 'SnapKitExtend'
   pod 'MBProgressHUD'      #HUD指示器
   pod 'IQKeyboardManagerSwift'
   pod 'FSPagerView'
@@ -21,6 +22,11 @@ target 'GY_app_ios' do
   pod 'HandyJSON'
   pod 'SwiftPopMenu'
   pod 'JJCollectionViewRoundFlowLayout_Swift'
+  pod 'DGCharts'
+  pod 'ChartsRealm'
+  pod 'BRPickerView'
+#  pod 'AAChartKit', :git => 'https://github.com/AAChartModel/AAChartKit.git'
+  pod 'AAInfographics', :git => 'https://github.com/AAChartModel/AAChartKit-Swift.git'
   
   target 'GY_app_iosTests' do
     inherit! :search_paths

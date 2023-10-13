@@ -29,5 +29,7 @@ extension Api {
     static let getswclist: String = "group/getsectionlist"
     //水温差总览
     static let getswczonglan: String = "wcpandect/getwcindextaglistbypart"
+    //水温差趋势
+    static let getswctrend: String = "wcpandect/getWCHistroyByGroupId"
     
 }

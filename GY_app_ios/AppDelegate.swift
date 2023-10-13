@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        if (GYUserBaseInfoData.default.user_id == 0){
             let loginVC = GYLoginViewController()
+//            let loginVC = GYThermocoupleViewController()
             loginVC.modalPresentationStyle = .fullScreen
             Global_TopViewController!.present(loginVC, animated: true, completion: nil)
             CommonCache.share.userDataCache.removeObject(forKey: CacheKey.userDataInfoCacheKey)

@@ -13,7 +13,6 @@ class GYPasswordViewController: GYViewController {
         super.viewDidLoad()
 
         self.title = "修改密码"
-        self.view.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
         
         setupViews()
         addLayout()

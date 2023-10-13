@@ -22,7 +22,6 @@ class GYLoginTimeViewController: GYViewController {
         
         // Do any additional setup after loading the view.
         self.title = "登录记录"
-        self.view.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
         
         
     }

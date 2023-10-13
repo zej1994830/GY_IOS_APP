@@ -1,5 +1,27 @@
 PODS:
+  - AAInfographics (7.3.0)
   - Alamofire (5.1.0)
+  - BRPickerView (2.8.1):
+    - BRPickerView/AddressPickerView (= 2.8.1)
+    - BRPickerView/Base (= 2.8.1)
+    - BRPickerView/DatePickerView (= 2.8.1)
+    - BRPickerView/StringPickerView (= 2.8.1)
+  - BRPickerView/AddressPickerView (2.8.1):
+    - BRPickerView/Base
+  - BRPickerView/Base (2.8.1)
+  - BRPickerView/DatePickerView (2.8.1):
+    - BRPickerView/Base
+  - BRPickerView/StringPickerView (2.8.1):
+    - BRPickerView/Base
+  - Charts (3.4.0):
+    - Charts/Core (= 3.4.0)
+  - Charts/Core (3.4.0)
+  - ChartsRealm (3.4.0):
+    - Charts (~> 3.4.0)
+    - RealmSwift (~> 3.18.0)
+  - DGCharts (5.0.0):
+    - DGCharts/Core (= 5.0.0)
+  - DGCharts/Core (5.0.0)
   - FLAnimatedImage (1.0.17)
   - FSPagerView (0.8.3)
   - HandyJSON (5.0.2)
@@ -27,6 +49,11 @@ PODS:
   - MBProgressHUD (1.2.0)
   - MJRefresh (3.7.5)
   - PINCache (2.3)
+  - Realm (3.18.0):
+    - Realm/Headers (= 3.18.0)
+  - Realm/Headers (3.18.0)
+  - RealmSwift (3.18.0):
+    - Realm (= 3.18.0)
   - SDWebImage (5.0.6):
     - SDWebImage/Core (= 5.0.6)
   - SDWebImage/Core (5.0.6)
@@ -34,11 +61,17 @@ PODS:
     - FLAnimatedImage (>= 1.0.11)
     - SDWebImage/Core (~> 5.0)
   - SnapKit (5.0.1)
+  - SnapKitExtend (1.1.0):
+    - SnapKit
   - SwiftPopMenu (2.0.2)
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
+  - AAInfographics (from `https://github.com/AAChartModel/AAChartKit-Swift.git`)
   - Alamofire (= 5.1.0)
+  - BRPickerView
+  - ChartsRealm
+  - DGCharts
   - FSPagerView
   - HandyJSON
   - IQKeyboardManagerSwift
@@ -51,12 +84,17 @@ DEPENDENCIES:
   - SDWebImage (~> 5.0.6)
   - SDWebImageFLPlugin (~> 0.3.0)
   - SnapKit (~> 5.0.0)
+  - SnapKitExtend
   - SwiftPopMenu
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - BRPickerView
+    - Charts
+    - ChartsRealm
+    - DGCharts
     - FLAnimatedImage
     - FSPagerView
     - HandyJSON
@@ -67,14 +105,31 @@ SPEC REPOS:
     - MBProgressHUD
     - MJRefresh
     - PINCache
+    - Realm
+    - RealmSwift
     - SDWebImage
     - SDWebImageFLPlugin
     - SnapKit
+    - SnapKitExtend
     - SwiftPopMenu
     - SwiftyJSON
 
+EXTERNAL SOURCES:
+  AAInfographics:
+    :git: https://github.com/AAChartModel/AAChartKit-Swift.git
+
+CHECKOUT OPTIONS:
+  AAInfographics:
+    :commit: 30f36c21323cfe188dbed2d9e1b7b01fbea6e445
+    :git: https://github.com/AAChartModel/AAChartKit-Swift.git
+
 SPEC CHECKSUMS:
+  AAInfographics: ee2a7959acdd0a00243b7f5a3f03a1fa2bdf0781
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  BRPickerView: 2531a2d4d0fea0b57a1c738de215af0f88863a2f
+  Charts: 0f66db9237f5437b1b61b106a34552d026c0b97d
+  ChartsRealm: 2ae8bf478211a94b3b6dd20738db0b9b132eb66b
+  DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
@@ -85,12 +140,15 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
+  Realm: 7b3d04740facf45e958a514b466a32b04f1113d6
+  RealmSwift: c817b5f374668cf08f649afb05f55d92a787649c
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
   SDWebImageFLPlugin: cf3f4ae49f249dd785129346fd61bbc8433a88cf
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SnapKitExtend: aa30cf37196195fae9c4354686cc7710184ebfcc
   SwiftPopMenu: e8ad0724497781abec06c16e158d08d741c794cd
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 6e8c216569847b6a37ee7ce0c9b318c032e0b3de
+PODFILE CHECKSUM: 1ae0cb8bc735bc93d46b88131f75f86dcc17214e
 
 COCOAPODS: 1.11.3

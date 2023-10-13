@@ -24,7 +24,6 @@ class GYDeviceTimeViewController: GYViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "设备有效期"
-        self.view.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
         
         setupViews()
         addLayout()

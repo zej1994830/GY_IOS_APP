@@ -193,7 +193,7 @@ class GYNetworkManager {
             }
             
             /// 处理403授权失败
-            weakSelf.handleResponseError(result: result)
+//            weakSelf.handleResponseError(result: result)
             
             
             switch result.result{
@@ -213,9 +213,12 @@ class GYNetworkManager {
         return dataRequest
     }
     
-    private func handleResponseError(result: AFDataResponse<Data?>){
+    private func handleResponseError(result: AFDataResponse<Any>){
         /// 处理403授权失败, 只有当状态为登录,且授权失败才会响应登录界面,如果本身状态未登录,就不需要反复提醒
-        
+        if result.response?.statusCode != 200 && result.response?.statusCode != nil {
+            GYHUD.hideHudForView()
+            GYHUD.show(String(format: "statusCode = %d", result.response!.statusCode))
+        }
         
     }
     
@@ -307,8 +310,12 @@ class GYNetworkManager {
         let header:HTTPHeaders = [
             HTTPHeader(name: "api_token", value: token?.count != 0 ? token! : "0123456789ABCDEF")
         ]
-        
-        Alamofire.AF.request(urlString, method: method, parameters: parameters,headers: header).responseJSON {(response) in
+        Alamofire.AF.request(urlString, method: method, parameters: parameters,headers: header).responseJSON {[weak self] (response) in
+            guard let weakSelf = self else{
+                return
+            }
+            //处理401返回失败
+            weakSelf.handleResponseError(result: response)
             
             switch response.result {
             case .success(let json):

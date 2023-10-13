@@ -176,7 +176,12 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/AAInfographics/AAInfographics.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BRPickerView/BRPickerView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Charts/Charts.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ChartsRealm/ChartsRealm.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework"
@@ -187,14 +192,22 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImageFLPlugin/SDWebImageFLPlugin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SnapKitExtend/SnapKitExtend.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftPopMenu/SwiftPopMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/AAInfographics/AAInfographics.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BRPickerView/BRPickerView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Charts/Charts.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ChartsRealm/ChartsRealm.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework"
@@ -205,9 +218,12 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImageFLPlugin/SDWebImageFLPlugin.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SnapKitExtend/SnapKitExtend.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftPopMenu/SwiftPopMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
 fi
