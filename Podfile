@@ -27,6 +27,7 @@ target 'GY_app_ios' do
   pod 'BRPickerView'
 #  pod 'AAChartKit', :git => 'https://github.com/AAChartModel/AAChartKit.git'
   pod 'AAInfographics', :git => 'https://github.com/AAChartModel/AAChartKit-Swift.git'
+  pod 'SpreadsheetView'
   
   target 'GY_app_iosTests' do
     inherit! :search_paths

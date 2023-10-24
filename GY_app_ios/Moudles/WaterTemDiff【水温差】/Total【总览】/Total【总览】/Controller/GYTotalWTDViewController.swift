@@ -7,7 +7,7 @@
 
 import UIKit
 import SwiftPopMenu
-import HandyJSON
+
 class GYTotalWTDViewController: GYViewController {
     var model:GYWTDBaseModel = GYWTDBaseModel()
     
@@ -140,6 +140,7 @@ extension GYTotalWTDViewController {
     }
     
     func requestdata(){
+        GYHUD.showGif(view: self.view)
         let params = ["device_db":GYDeviceData.default.device_db,"function_type":0] as [String:Any]
         GYNetworkManager.share.requestData(.get, api: Api.getswclist, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
@@ -181,6 +182,7 @@ extension GYTotalWTDViewController {
             guard let weakSelf = self else{
                 return
             }
+            GYHUD.hideHudForView(weakSelf.view)
             let dic:NSDictionary = result as! NSDictionary
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.dataArray = dicc["temperature_list"] as! NSArray

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import HandyJSON
 import AAInfographics
 
 class GYWTDTrendViewController: GYViewController {
@@ -172,7 +171,7 @@ class GYWTDTrendViewController: GYViewController {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#12B48D")
         view.label2.text = "入温"
-        view.label3.text = "00.00"
+        view.label3.text = "0.00"
         return view
     }()
     
@@ -180,7 +179,7 @@ class GYWTDTrendViewController: GYViewController {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F5C105")
         view.label2.text = "出温"
-        view.label3.text = "00.00"
+        view.label3.text = "0.00"
         return view
     }()
     
@@ -188,7 +187,7 @@ class GYWTDTrendViewController: GYViewController {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#0182F9")
         view.label2.text = "流量"
-        view.label3.text = "00.00"
+        view.label3.text = "0.00"
         return view
     }()
     
@@ -231,6 +230,10 @@ class GYWTDTrendViewController: GYViewController {
         view.dataSource = self
         view.backgroundColor = .white
         view.isHidden = true
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
         return view
     }()
     
@@ -397,11 +400,15 @@ extension GYWTDTrendViewController {
     }
     
     func request() {
-        let params = ["start_time":currentLastHourDateString,"end_time":currentDateString,"rate":rate,"device_db":GYDeviceData.default.device_db,"stove_id":1] as [String : Any]
+        GYHUD.showGif(view: self.view)
+        let params = ["start_time":currentLastHourDateString,"end_time":currentDateString,"rate":rate,"device_db":GYDeviceData.default.device_db,"stove_id":model.id!] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getswctrend, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
                 return
             }
+            
+            GYHUD.hideHudForView(weakSelf.view)
+            
             let dic:NSDictionary = result as! NSDictionary
             if dic["stauts"] != nil{
                 GYHUD.show("请求错误")
@@ -452,6 +459,7 @@ extension GYWTDTrendViewController {
             .categories(categories)
             .markerSymbol(.circle)
             .zoomType(.x)//缩放功能
+            .legendEnabled(true)
         lineView2.aa_drawChartWithChartModel(chartmodel)
     }
     
@@ -573,6 +581,14 @@ extension GYWTDTrendViewController:AAChartViewDelegate {
             
             """
         )
+//        let labelarray = ["热流","出温","入温","温差","流量"]
+//        let labelarray2 = ["reFlow","outTemp","inTemp","tempWc","flow"]
+        let dic = dataarray[clickEventMessage.index!] as! NSDictionary
+        wenchaView.label3.text =  String(format: "%.2f", dic["tempWc"] as! Double)
+        ruwenView.label3.text = String(format: "%.2f", dic["inTemp"] as! Double)
+        chuwenView.label3.text = String(format: "%.2f", dic["outTemp"] as! Double)
+        liuliangView.label3.text = String(format: "%.2f", dic["flow"] as! Double)
+        reliuView.label3.text = String(format: "%.0f", dic["reFlow"] as! Double)
     }
 }
 

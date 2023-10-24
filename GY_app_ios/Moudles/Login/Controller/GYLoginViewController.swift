@@ -90,6 +90,7 @@ class GYLoginViewController: GYViewController {
     
     
     
+    
 }
 
 extension GYLoginViewController {
@@ -103,6 +104,21 @@ extension GYLoginViewController {
         passwordView.addSubview(passwordImageV)
         passwordView.addSubview(passwordTextfield)
         self.view.addSubview(submitBtn)
+        
+        //径向渐变的效果尝试
+//        let view = UIView(frame: CGRect(x: 0, y: 100, width: 200, height: 200))
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.frame = view.frame
+//        gradientLayer.colors = [UIColor.white.cgColor,UIColor.yellow.cgColor]
+//        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
+//        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+//        gradientLayer.type = .radial
+//        gradientLayer.locations = [0.3,1]
+//        gradientLayer.cornerRadius = 100
+//        gradientLayer.masksToBounds = true
+//        view.layer.addSublayer(gradientLayer)
+//
+//        self.view.addSubview(view)
     }
     
     func addLayout(){

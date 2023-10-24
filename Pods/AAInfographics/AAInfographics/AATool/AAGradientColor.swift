@@ -41,6 +41,8 @@ public enum AALinearGradientDirection: Int {
     case toTopRight      //⇗⇗⇗⇗⇗⇗
     case toBottomLeft    //⇙⇙⇙⇙⇙⇙
     case toBottomRight   //⇘⇘⇘⇘⇘⇘
+    case toBottomTop     //⇧⇩⇦⇨
+    case toTopBottom
 }
 
 public class AAGradientColor  {
@@ -426,7 +428,7 @@ public class AAGradientColor  {
      */
     private class func linearGradientDirectionDictionary(
         direction: AALinearGradientDirection
-    ) -> [String : Int] {
+    ) -> [String : Double] {
         switch direction {
         case .toTop:
             return ["x1":0, "y1":1, "x2":0, "y2":0]
@@ -444,6 +446,10 @@ public class AAGradientColor  {
             return ["x1":1, "y1":0, "x2":0, "y2":1]
         case .toBottomRight:
             return ["x1":0, "y1":0, "x2":1, "y2":1]
+        case.toBottomTop:
+            return ["x1":0.5, "y1":0.5, "x2":1, "y2":1]
+        case.toTopBottom:
+            return ["x1":0, "y1":0, "x2":0.5, "y2":0.5]
         }
     }
 }

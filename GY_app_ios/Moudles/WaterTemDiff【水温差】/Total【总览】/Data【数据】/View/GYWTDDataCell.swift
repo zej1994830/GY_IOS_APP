@@ -6,10 +6,20 @@
 //
 
 import UIKit
-
+import HandyJSON
 class GYWTDDataCell: UICollectionViewCell {
     static let indentifier: String = "GYMainViewCell"
     var tempheaderView:GYWTDDataBaseHeaderView = GYWTDDataBaseHeaderView()
+    var dataArray:NSArray = []{
+        didSet{
+            collectionV.snp.updateConstraints { make in
+                make.height.equalTo(36 + strArray.count * 36)
+            }
+            collectionV.reloadData()
+        }
+    }
+    var titleStr:String = ""
+    var strArray:NSMutableArray = []
     
     private lazy var collectionV: UICollectionView = {
         let layout = UICollectionViewFlowLayout.init()
@@ -53,15 +63,16 @@ extension GYWTDDataCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
     func addLayout() {
         collectionV.snp.makeConstraints { make in
             make.left.top.right.bottom.equalTo(0)
+            make.height.equalTo(36 + strArray.count * 36)
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return dataArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         // 返回每个 section 的 header 大小
-        return CGSize(width: 119, height: 216)
+        return CGSize(width: 119, height: 36 + dataArray.count * 36)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
@@ -78,6 +89,8 @@ extension GYWTDDataCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
         if kind == UICollectionView.elementKindSectionHeader {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GYWTDDataBaseHeaderView.indentifier, for: indexPath) as! GYWTDDataBaseHeaderView
             tempheaderView = view
+            view.titleStr = titleStr
+            view.strArray = strArray
             return view
         }else{
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GYTotalWTDFooterView.indentifier, for: indexPath) as! GYTotalWTDFooterView
@@ -89,11 +102,11 @@ extension GYWTDDataCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell:GYWTDDataBaseCell? = collectionView.dequeueReusableCell(withReuseIdentifier: GYWTDDataBaseCell.indentifier, for: indexPath) as? GYWTDDataBaseCell
-        
         if cell == nil {
             cell = GYWTDDataBaseCell()
         }
-        
+        cell?.strArray = strArray
+        cell?.model = GYWTDDataData.deserialize(from: dataArray[indexPath.row] as? NSDictionary)
         return cell!
     }
     

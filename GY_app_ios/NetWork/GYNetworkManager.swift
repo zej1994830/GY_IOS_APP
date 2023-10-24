@@ -218,6 +218,7 @@ class GYNetworkManager {
         if result.response?.statusCode != 200 && result.response?.statusCode != nil {
             GYHUD.hideHudForView()
             GYHUD.show(String(format: "statusCode = %d", result.response!.statusCode))
+            return
         }
         
     }
@@ -314,9 +315,12 @@ class GYNetworkManager {
             guard let weakSelf = self else{
                 return
             }
-            //处理401返回失败
-            weakSelf.handleResponseError(result: response)
-            
+            //处理失败
+            if response.response?.statusCode != 200 && response.response?.statusCode != nil {
+                GYHUD.hideHudForView()
+                GYHUD.show(String(format: "statusCode = %d", response.response!.statusCode))
+                return
+            }
             switch response.result {
             case .success(let json):
                 finishedCallback(json)

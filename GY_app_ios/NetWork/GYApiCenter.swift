@@ -22,6 +22,11 @@ struct Api {
     static let getbanner: String = "account/GetRotationChart"
     //设备有效期
     static let getdevicetime: String = "account/checkdateinvalid"
+    //历史报警
+    static let getListHistoryData:String = "alarm/ListHistoryData"
+    //实时报警
+    static let getListTimeData:String = "alarm/ListTimeData"
+    
 }
 
 extension Api {
@@ -31,5 +36,15 @@ extension Api {
     static let getswczonglan: String = "wcpandect/getwcindextaglistbypart"
     //水温差趋势
     static let getswctrend: String = "wcpandect/getWCHistroyByGroupId"
-    
+    //水温差数据
+    static let getswcdata: String = "wcpandect/getwcgrouptagdatlist"
+    //温差 入温 出温 流量 热流趋势
+    static let getGroupDataListByPartId: String = "wcpandect/getGroupDataListByPartId"
+    //数据 月日时分
+    static let getwctimedata: String = "wctime/getwctimedata"
+    //设备巡检 信息接口
+    static let getdeviceaddresslist: String = "devicechecker/getdeviceaddresslist"
+    //设备巡检 TAGList接口
+    static let gettaglistbydeviceaddr: String = "devicechecker/gettaglistbydeviceaddr"
 }
+

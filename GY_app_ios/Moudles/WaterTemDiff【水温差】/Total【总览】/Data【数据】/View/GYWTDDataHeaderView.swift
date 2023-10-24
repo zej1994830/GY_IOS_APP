@@ -9,6 +9,7 @@ import UIKit
 
 class GYWTDDataHeaderView: UICollectionReusableView {
     static let indentifier: String = "GYWTDDataHeaderView"
+    var ClickBlock: ((NSMutableArray)->())? = nil
     
     private lazy var optionLabel:UILabel = {
         let label = UILabel()
@@ -24,6 +25,7 @@ class GYWTDDataHeaderView: UICollectionReusableView {
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.isSelected = true
+        btn.addTarget(self, action: #selector(btnClick(_:)), for: .touchUpInside)
         return btn
     }()
     
@@ -35,6 +37,7 @@ class GYWTDDataHeaderView: UICollectionReusableView {
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.isSelected = true
+        btn.addTarget(self, action: #selector(btnClick(_:)), for: .touchUpInside)
         return btn
     }()
     
@@ -46,6 +49,7 @@ class GYWTDDataHeaderView: UICollectionReusableView {
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.isSelected = true
+        btn.addTarget(self, action: #selector(btnClick(_:)), for: .touchUpInside)
         return btn
     }()
     
@@ -57,6 +61,7 @@ class GYWTDDataHeaderView: UICollectionReusableView {
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.isSelected = true
+        btn.addTarget(self, action: #selector(btnClick(_:)), for: .touchUpInside)
         return btn
     }()
     
@@ -68,6 +73,7 @@ class GYWTDDataHeaderView: UICollectionReusableView {
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.isSelected = true
+        btn.addTarget(self, action: #selector(btnClick(_:)), for: .touchUpInside)
         return btn
     }()
     
@@ -128,6 +134,31 @@ extension GYWTDDataHeaderView {
             make.centerY.equalTo(liuliangBtn)
             make.width.equalTo(wenchaBtn)
             make.bottom.equalTo(-13.5)
+        }
+    }
+    
+    @objc func btnClick(_ button:UIButton) {
+        button.isSelected = !button.isSelected
+        
+        var str:NSMutableArray = []
+        if wenchaBtn.isSelected {
+            str.add("温差")
+        }
+        if ruwenBtn.isSelected {
+            str.add("入温")
+        }
+        if chuwenBtn.isSelected {
+            str.add("出温")
+        }
+        if liuliangBtn.isSelected {
+            str.add("流量")
+        }
+        if reliuBtn.isSelected {
+            str.add("热流")
+        }
+        
+        if let block = ClickBlock{
+            block(str)
         }
     }
 }

@@ -9,9 +9,14 @@ import UIKit
 import DGCharts
 
 class GYWTDTrendItemsViewController: GYViewController {
+    var dataSectionArray:NSArray = []
+    var sectionStr:String = ""
+    var dataArray:NSArray = []
+    
     var currentDateString:String = ""
     var currentLastHourDateString:String = ""
     var model:GYWTDDataModel = GYWTDDataModel()
+    var indexrow:Int = 0
     var timeArray:[String] = ["5分钟","15分钟","30分钟","1小时","2小时","8小时","16小时","1天","7天","15天","1个月"]
     
     private lazy var headView:UIView = {
@@ -205,6 +210,7 @@ class GYWTDTrendItemsViewController: GYViewController {
 
         setupViews()
         addLayout()
+        requestdata()
     }
     
 
@@ -335,6 +341,53 @@ extension GYWTDTrendItemsViewController {
         collectionV.snp.makeConstraints { make in
             make.left.right.bottom.equalTo(0)
             make.top.equalTo(lineView.snp.bottom).offset(10)
+        }
+    }
+    
+    
+}
+
+extension GYWTDTrendItemsViewController {
+    func requestdata(){
+        let params = ["device_db":GYDeviceData.default.device_db,"function_type":0] as [String:Any]
+        GYNetworkManager.share.requestData(.get, api: Api.getswclist, parameters: params) { [weak self] (result) in
+            guard let weakSelf = self else{
+                return
+            }
+            let dic:NSDictionary = result as! NSDictionary
+            let dicc:NSDictionary = dic["data"] as! NSDictionary
+            weakSelf.dataSectionArray = dicc["section_list"] as! NSArray
+            weakSelf.requestnextdata(array: weakSelf.dataSectionArray)
+        }
+        
+    }
+    //目前的接口，没有符合带组别+时间段的
+    func requestnextdata(array:NSArray){
+        //显示项。这里认为只要重新筛选，那么默认全部显示数据
+        var partidString:String = ""
+        sectionStr = ""
+        for temp in array {
+            let dic:NSDictionary = temp as! NSDictionary
+            if partidString.count == 0 {
+                //筛选状态
+                partidString = String(format: "%d", dic["id"] as! Int64)
+                //段名
+                sectionStr = String(format: "%@", dic["name"] as! String)
+            }else{
+                partidString = String(format: "%@,%d", partidString,(dic["id"] as! Int64))
+                sectionStr = String(format: "%@,%@", sectionStr,(dic["name"] as! String))
+            }
+            
+        }
+        
+        let params = ["device_db":GYDeviceData.default.device_db,"partidString":partidString] as [String : Any]
+        GYNetworkManager.share.requestData(.get, api: Api.getswczonglan, parameters: params) {[weak self] (result) in
+            guard let weakSelf = self else{
+                return
+            }
+            let dic:NSDictionary = result as! NSDictionary
+            let dicc:NSDictionary = dic["data"] as! NSDictionary
+            weakSelf.dataArray = dicc["temperature_list"] as! NSArray
         }
     }
     

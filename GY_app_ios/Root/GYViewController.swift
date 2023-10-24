@@ -10,6 +10,7 @@ import JXSegmentedView
 import SnapKit
 import SnapKitExtend
 import Alamofire
+import HandyJSON
 
 class GYViewController: UIViewController,UIGestureRecognizerDelegate {
     lazy var noDataView: GYNoDataView = {
@@ -149,7 +150,8 @@ extension GYViewController {
     }
     
     @objc func warn() {
-        
+        let vc = GYWTDWarnViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

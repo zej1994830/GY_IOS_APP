@@ -55,9 +55,10 @@ class GYMainViewController: GYViewController {
         return imagev
     }()
     
-    private lazy var rightbtn:UIButton = {
+    private lazy var rightBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "my_baojing"), for: .normal)
+        btn.addTarget(self, action: #selector(rightBtnClick), for: .touchUpInside)
         return btn
     }()
     
@@ -165,7 +166,7 @@ extension GYMainViewController {
         self.view.addSubview(bgHeadView)
         self.view.addSubview(leftBtn)
         self.view.addSubview(leftImageV)
-        self.view.addSubview(rightbtn)
+        self.view.addSubview(rightBtn)
         self.view.addSubview(bannerView)
         self.view.addSubview(pageController)
         self.view.addSubview(collectionV)
@@ -191,7 +192,7 @@ extension GYMainViewController {
             make.height.equalTo(6.37)
         }
         
-        rightbtn.snp.makeConstraints { make in
+        rightBtn.snp.makeConstraints { make in
             make.right.equalTo(-25)
             make.centerY.equalTo(leftBtn)
             make.width.equalTo(16)
@@ -235,10 +236,13 @@ extension GYMainViewController:  FSPagerViewDelegate, FSPagerViewDataSource {
         pageController.currentPage = pagerView.currentIndex
     }
     
-
-    
     @objc func leftbtnClick() {
         deviceView.show()
+    }
+    
+    @objc func rightBtnClick() {
+        let vc = GYWTDWarnViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 extension GYMainViewController:UICollectionViewDelegate,UICollectionViewDataSource {

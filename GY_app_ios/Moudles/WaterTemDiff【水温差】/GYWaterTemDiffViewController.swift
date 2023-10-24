@@ -13,23 +13,23 @@ class GYWaterTemDiffViewController: GYViewController {
     var dataArray:NSArray = [[["ic_zonglan","总览"],["ic_shuju","数据"],["ic_leida","雷达"]],[["ic_wencha","温差"],["ic_rushui","入温"],["ic_chushui","出温"],["ic_liuliang","流量"],["ic_reliu","热流"]],[["ic_shishi","实时"],["ic_lishi","历史"]],[["ic_fenzhong","分钟"],["ic_xiaoshi","小时"],["ic_ri","日"],["ic_yue","月"]],[["ic_shebei","设备巡检"]]]
     
     private lazy var collectionView: UICollectionView = {
-        let layout = JJCollectionViewRoundFlowLayout_Swift.init()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 30.rellyWidthNumber, bottom: 0, right: 30.rellyWidthNumber)
-        layout.itemSize = rellySizeForiPhoneWidth(49, 80)
-        layout.minimumLineSpacing = 13.25
-        layout.minimumInteritemSpacing = 31.5
-        layout.scrollDirection = .vertical
-        layout.isCalculateHeader = true
-        layout.isCalculateFooter = true
-        
-        let view = UICollectionView.init(frame: CGRectZero, collectionViewLayout: layout)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.delegate = self
-        view.dataSource = self
-        view.showsVerticalScrollIndicator = false
-        view.showsHorizontalScrollIndicator = false
-        view.backgroundColor = .white
-        view.register(GYWaterTemDiffCell.self, forCellWithReuseIdentifier: "GYWaterTemDiffCell")
+            let layout = JJCollectionViewRoundFlowLayout_Swift.init()
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 30.rellyWidthNumber, bottom: 0, right: 30.rellyWidthNumber)
+            layout.itemSize = rellySizeForiPhoneWidth(49, 80)
+            layout.minimumLineSpacing = 13.25
+            layout.minimumInteritemSpacing = 31.5
+            layout.scrollDirection = .vertical
+            layout.isCalculateHeader = true
+            layout.isCalculateFooter = true
+            
+            let view = UICollectionView.init(frame: CGRectZero, collectionViewLayout: layout)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.delegate = self
+            view.dataSource = self
+            view.showsVerticalScrollIndicator = false
+            view.showsHorizontalScrollIndicator = false
+            view.backgroundColor = .white
+            view.register(GYWaterTemDiffCell.self, forCellWithReuseIdentifier: "GYWaterTemDiffCell")
         view.register(GYWaterTimeDiffHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: GYWaterTimeDiffHeaderView.indentifier)
         view.register(GYWaterTimeDiffFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GYWaterTimeDiffFooterView.indentifier)
         view.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
@@ -128,13 +128,38 @@ extension GYWaterTemDiffViewController:UICollectionViewDataSource,UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
+            //总览-总览
             let vc = GYTotalWTDViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.section == 0 && indexPath.row == 1 {
+            //总览-数据
             let vc = GYWTDDataViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.section == 0 && indexPath.row == 2 {
+            //总览-雷达图
             let vc = GYWTDRadarViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.section == 1 {
+            //趋势
+            let vc = GYWTDTrendItemsViewController()
+            vc.indexrow = indexPath.row
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.section == 2 {
+            //报警
+            let vc = GYWTDWarnViewController()
+            if indexPath.row == 0 {
+                //实时
+                vc.isrealtime = true
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.section == 3 {
+            //数据
+            let vc = GYWTDDataTimeViewController()
+            vc.rate = indexPath.row
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.section == 4 {
+            //设备巡检
+            let vc = GYWTDDeviceAddressViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

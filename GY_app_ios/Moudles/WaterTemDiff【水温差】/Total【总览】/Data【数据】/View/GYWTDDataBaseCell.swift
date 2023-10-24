@@ -9,6 +9,16 @@ import UIKit
 
 class GYWTDDataBaseCell: UICollectionViewCell {
     static let indentifier: String = "GYWTDDataBaseCell"
+    var model: GYWTDDataData? = nil{
+        didSet{
+            tv.snp.updateConstraints { make in
+                make.height.equalTo(36 * strArray.count + 36)
+            }
+            tv.reloadData()
+        }
+    }
+    
+    var strArray:NSMutableArray = []
     
     private lazy var tv:UITableView = {
         let tableview = UITableView()
@@ -38,6 +48,7 @@ extension GYWTDDataBaseCell:UITableViewDelegate,UITableViewDataSource {
     func addLayout() {
         tv.snp.makeConstraints { make in
             make.left.top.right.bottom.equalTo(0)
+            make.height.equalTo(36 * strArray.count + 36)
         }
     }
     
@@ -46,16 +57,29 @@ extension GYWTDDataBaseCell:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return strArray.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(frame: CGRect(x: 0, y: 0, width: 119, height: 36))
-        cell.contentView.backgroundColor = .white
-        // 添加自定义分割线视图
-        let separatorView = UIView(frame: CGRect(x: 0, y: 0, width: cell.bounds.width, height: 1))
-        separatorView.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
-        cell.addSubview(separatorView)
-        return cell
+        var cell:GYWTDDataBaseBaseCell? = tableView.dequeueReusableCell(withIdentifier: GYWTDDataBaseBaseCell.indentifier) as? GYWTDDataBaseBaseCell
+        if cell == nil {
+            cell = GYWTDDataBaseBaseCell(style: .default, reuseIdentifier: GYWTDDataBaseBaseCell.indentifier)
+        }
+        cell?.istitleView = false
+        if indexPath.row == 0 {
+            cell?.istitleView = true
+            cell?.valueLabel.text = model?.stove_number
+        }else if indexPath.row == 1 {
+            cell?.valueLabel.text = "\(model?.wcValue ?? 1)"
+        }else if indexPath.row == 2 {
+            cell?.valueLabel.text = "\(model?.inTagValue ?? 1)"
+        }else if indexPath.row == 3 {
+            cell?.valueLabel.text = "\(model?.outTagValue ?? 1)"
+        }else if indexPath.row == 4 {
+            cell?.valueLabel.text = "\(model?.flowTagValue ?? 1)"
+        }else if indexPath.row == 5 {
+            cell?.valueLabel.text = "\(model?.reFlowTagValue ?? 1)"
+        }
+        return cell ?? UITableViewCell()
     }
 }
