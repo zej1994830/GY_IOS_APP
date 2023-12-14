@@ -278,8 +278,12 @@ extension GYMainViewController:UICollectionViewDelegate,UICollectionViewDataSour
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.row == 4 {
             //热电偶
+            let vc = GYThermocoupleViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.row == 5 {
             //风口套
+            let vc = GYErosionThicknessMainViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }

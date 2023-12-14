@@ -10,14 +10,14 @@ import UIKit
 class GYWTDDeviceAdressCell: UICollectionViewCell {
     static let indentifier: String = "GYWTDDeviceAdressCell"
     
-    var isNor: Bool = true {
+    var isException: Bool = true {
         didSet{
-            if isNor {
-                iconImageV.image = UIImage(named: "ic_zhengchang")
-                typeLabel.text = "正常"
-            }else{
+            if isException {
                 iconImageV.image = UIImage(named: "ic_yichang")
                 typeLabel.text = "异常"
+            }else{
+                iconImageV.image = UIImage(named: "ic_zhengchang")
+                typeLabel.text = "正常"
             }
         }
     }

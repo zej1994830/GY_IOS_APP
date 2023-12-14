@@ -16,20 +16,20 @@ class GYWTDWarnCell: UITableViewCell {
             timeLabel.text = model?.date
             
             //0:低低报警;1:低报警;2:高报警；3:高高报警
-            if model?.alarm_type == 0 {
-                imageV.image = UIImage(named: "ic_didi")
-            }else if model?.alarm_type == 1 {
-                imageV.image = UIImage(named: "ic_di")
+            if model?.alarm_type == 1 {
+                imageV.image = UIImage(named: "ic_chaodi")
             }else if model?.alarm_type == 2 {
-                imageV.image = UIImage(named: "ic_gao")
+                imageV.image = UIImage(named: "ic_didi")
             }else if model?.alarm_type == 3 {
-                    imageV.image = UIImage(named: "ic_gaogao")
+                imageV.image = UIImage(named: "ic_di")
             }else if model?.alarm_type == 4 {
-                
+                imageV.image = UIImage(named: "ic_gao")
             }else if model?.alarm_type == 5 {
-                
+                imageV.image = UIImage(named: "ic_gaogao")
             }else if model?.alarm_type == 6 {
-                
+                imageV.image = UIImage(named: "ic_chaogao")
+            }else if model?.alarm_type == 7 {
+                imageV.image = UIImage(named: "ic_chaogaogao")
             }
         }
     }

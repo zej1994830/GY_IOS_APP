@@ -10,9 +10,11 @@ import UIKit
 class GYWTDTrendItemsGroupViewController: ZEJBottomPresentViewController {
 
     var ClickBlock: ((NSMutableArray)->())? = nil
-   
+
+    //3:GYTHCurveViewController
+    var type:Int = 0
     //源数组
-    var dataArray:NSMutableArray = [] {
+    var dataArray:NSArray = [] {
         didSet{
     
         }
@@ -148,6 +150,10 @@ extension GYWTDTrendItemsGroupViewController:UITableViewDelegate,UITableViewData
             cell = GYWTDTrendItemsGroupCell(style: .default, reuseIdentifier: GYWTDTrendItemsGroupCell.indentifier)
         }
         cell?.titleStr = String(format: "C1-%d", indexPath.row)
+        if type == 3 {
+            let dic:NSDictionary = dataArray[indexPath.row] as! NSDictionary
+//            cell?.titleStr = dic["stove_name"]
+        }
         return cell ?? UITableViewCell()
     }
 }

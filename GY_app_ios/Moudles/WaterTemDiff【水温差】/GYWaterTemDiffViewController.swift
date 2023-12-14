@@ -9,8 +9,8 @@ import UIKit
 import JJCollectionViewRoundFlowLayout_Swift
 
 class GYWaterTemDiffViewController: GYViewController {
-    var headdataArray:NSArray = ["总览","趋势","报警","数据","设备巡检"]
-    var dataArray:NSArray = [[["ic_zonglan","总览"],["ic_shuju","数据"],["ic_leida","雷达"]],[["ic_wencha","温差"],["ic_rushui","入温"],["ic_chushui","出温"],["ic_liuliang","流量"],["ic_reliu","热流"]],[["ic_shishi","实时"],["ic_lishi","历史"]],[["ic_fenzhong","分钟"],["ic_xiaoshi","小时"],["ic_ri","日"],["ic_yue","月"]],[["ic_shebei","设备巡检"]]]
+    var headdataArray:NSArray = ["总览","图示","趋势","报警","数据","设备巡检"]
+    var dataArray:NSArray = [[["ic_zonglan","总览"],["ic_shuju","数据"],["ic_leida","雷达"]],[["ic_wencha","温差"],["ic_rushui","入温"],["ic_chushui","出温"],["ic_liuliang","流量"],["ic_reliu","热流"]],[["ic_wencha","温差"],["ic_rushui","入温"],["ic_chushui","出温"],["ic_liuliang","流量"],["ic_reliu","热流"]],[["ic_shishi","实时"],["ic_lishi","历史"]],[["ic_fenzhong","分钟"],["ic_xiaoshi","小时"],["ic_ri","日"],["ic_yue","月"]],[["ic_shebei","设备巡检"]]]
     
     private lazy var collectionView: UICollectionView = {
             let layout = JJCollectionViewRoundFlowLayout_Swift.init()
@@ -84,7 +84,7 @@ extension GYWaterTemDiffViewController:UICollectionViewDataSource,UICollectionVi
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -94,8 +94,10 @@ extension GYWaterTemDiffViewController:UICollectionViewDataSource,UICollectionVi
         case 1:
             return 5
         case 2:
-            return 2
+            return 5
         case 3:
+            return 2
+        case 4:
             return 4
         default:
             return 1
@@ -140,11 +142,16 @@ extension GYWaterTemDiffViewController:UICollectionViewDataSource,UICollectionVi
             let vc = GYWTDRadarViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.section == 1 {
+            //图示
+            let vc = GYGraphicViewController()
+            vc.indexrow = indexPath.row
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.section == 2 {
             //趋势
             let vc = GYWTDTrendItemsViewController()
             vc.indexrow = indexPath.row
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if indexPath.section == 2 {
+        }else if indexPath.section == 3 {
             //报警
             let vc = GYWTDWarnViewController()
             if indexPath.row == 0 {
@@ -152,12 +159,12 @@ extension GYWaterTemDiffViewController:UICollectionViewDataSource,UICollectionVi
                 vc.isrealtime = true
             }
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if indexPath.section == 3 {
+        }else if indexPath.section == 4 {
             //数据
             let vc = GYWTDDataTimeViewController()
             vc.rate = indexPath.row
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if indexPath.section == 4 {
+        }else if indexPath.section == 5 {
             //设备巡检
             let vc = GYWTDDeviceAddressViewController()
             self.navigationController?.pushViewController(vc, animated: true)

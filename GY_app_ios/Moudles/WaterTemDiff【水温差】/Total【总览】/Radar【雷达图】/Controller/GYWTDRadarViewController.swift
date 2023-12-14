@@ -13,6 +13,7 @@ class GYWTDRadarViewController: GYViewController {
     var datatempSectionArray:NSMutableArray = []
     let labelarray = ["热流","出温","入温","温差","流量"]
     var nameStr:String = "热流"
+    var tempmodel:GYWTDRadarModel = GYWTDRadarModel()
     
     var dataArray:NSArray = []
     var sectionStr:String = ""
@@ -35,14 +36,14 @@ class GYWTDRadarViewController: GYViewController {
         btn.setTitle("七进七出", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: -30)
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 5)
-        btn.contentEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: -30)
+//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 5)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(screenBtnClick), for: .touchUpInside)
         return btn
     }()
@@ -256,6 +257,7 @@ extension GYWTDRadarViewController {
             make.centerY.equalTo(screenLabel)
             make.left.equalTo(screenLabel.snp.right)
             make.height.equalTo(40)
+            make.width.equalTo(70)
         }
         
         screenBtn2.snp.makeConstraints { make in
@@ -309,29 +311,29 @@ extension GYWTDRadarViewController {
             make.height.equalTo(APP.WIDTH)
         }
         
-        label0.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(-15)
-            make.height.equalTo(20)
-        }
-        
-        label90.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.right.equalTo(-10)
-            make.height.equalTo(20)
-        }
-    
-        label180.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(10)
-            make.height.equalTo(20)
-        }
-        
-        label270.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(5)
-            make.height.equalTo(20)
-        }
+//        label180.snp.makeConstraints { make in
+//            make.centerX.equalToSuperview()
+//            make.bottom.equalTo(-15)
+//            make.height.equalTo(20)
+//        }
+//
+//        label90.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+//            make.right.equalTo(-10)
+//            make.height.equalTo(20)
+//        }
+//
+//        label0.snp.makeConstraints { make in
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(10)
+//            make.height.equalTo(20)
+//        }
+//
+//        label270.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+//            make.left.equalTo(5)
+//            make.height.equalTo(20)
+//        }
         
         namepickView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -369,8 +371,8 @@ extension GYWTDRadarViewController {
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
         screenBtn.setTitle(sectionStr, for: .normal)
-        let params = ["device_db":GYDeviceData.default.device_db,"partidString":partidString] as [String : Any]
-        GYNetworkManager.share.requestData(.get, api: Api.getswczonglan, parameters: params) {[weak self] (result) in
+        let params = ["device_db":GYDeviceData.default.device_db,"partidString":partidString,"rate":"1","typeString":"[0,1,2,3,4]"] as [String : Any]
+        GYNetworkManager.share.requestData(.get, api: Api.getswcdata, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
                 return
             }
@@ -379,11 +381,11 @@ extension GYWTDRadarViewController {
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.dataArray = dicc["temperature_list"] as! NSArray
             let diccc:NSDictionary = weakSelf.dataArray.firstObject as! NSDictionary
-            let tempmodel:GYWTDBaseModel = GYWTDBaseModel.deserialize(from: diccc)!
-            if tempmodel.stove_list.count > 10 {
-                weakSelf.radarCharData(array: NSArray(array: Array(tempmodel.stove_list.prefix(10))))
+            weakSelf.tempmodel = GYWTDRadarModel.deserialize(from: diccc)!
+            if weakSelf.tempmodel.stove_list.count > 10 {
+                weakSelf.radarCharData(array: NSArray(array: Array(weakSelf.tempmodel.stove_list.prefix(10))))
             }else{
-                weakSelf.radarCharData(array: tempmodel.stove_list)
+                weakSelf.radarCharData(array: weakSelf.tempmodel.stove_list)
             }
             
         }
@@ -391,30 +393,172 @@ extension GYWTDRadarViewController {
     
     func radarCharData(array:NSArray) {
         var dataEntries = [AASeriesElement]()
-        var data = [Double]()
+        var data = [Any]()
+        var data2 = [Any]()
         var datanameStr:String = ""
         var chartmodelStr = [String]()
         datatempSectionArray = NSMutableArray.init(array: array)
-        for i in 0..<array.count {
-            let dataModel = GYWTDDataModel.deserialize(from: array[i] as? NSDictionary)
-            if nameStr == "热流" {
-                data.append((dataModel?.reFlowTagValue)!)
-            }else if nameStr == "出温" {
-                data.append((dataModel?.outTagValue)!)
-            }else if nameStr == "入温" {
-                data.append((dataModel?.inTagValue)!)
-            }else if nameStr == "温差" {
-                data.append((dataModel?.wcValue)!)
-            }else if nameStr == "流量" {
-                data.append((dataModel?.flowTagValue)!)
-            }
-            if i == 0 {
-                datanameStr = (dataModel?.name)!
+        let angle = Int(tempmodel.offsetAngle! + tempmodel.offsetAngle2!) % 360
+        for i in 0..<360  {
+            if tempmodel.clockwise == 1 {
+                if angle == 0 {
+                    if i == angle {
+                        chartmodelStr.append("0°")
+                        continue
+                    }
+                }
+                if angle > 0 {
+                    if i + 1 == angle {
+                        chartmodelStr.append("0°")
+                        continue
+                    }
+                }else {
+                    if i == angle + 360 {
+                        chartmodelStr.append("0°")
+                        continue
+                    }
+                }
+                
+                if angle + 90 > 0 {
+                    if i == (angle + 90) % 360 {
+                        chartmodelStr.append("90°")
+                        continue
+                    }
+                    
+                    if angle + 90 == 360 && i == 360{
+                        chartmodelStr.append("90°")
+                        continue
+                    }
+                }else{
+                    if i == (angle + 90 + 360) % 360 {
+                        chartmodelStr.append("90°")
+                        continue
+                    }
+                }
+                
+                if angle + 180 > 0 {
+                    if i + 1 == (angle + 180) % 360{
+                        chartmodelStr.append("180°")
+                        continue
+                    }
+                    if angle + 180 == 360 && i + 1 == 360{
+                        chartmodelStr.append("180°")
+                        continue
+                    }
+                }else{
+                    if i + 1 == (angle + 180 + 360) % 360 {
+                        chartmodelStr.append("180°")
+                        continue
+                    }
+                }
+                
+                if angle + 270 > 0 {
+                    if i == (angle + 270) % 360{
+                        chartmodelStr.append("270°")
+                        continue
+                    }
+                    if angle + 270 == 360 && i + 1 == 360{
+                        chartmodelStr.append("270°")
+                        continue
+                    }
+                }else{
+                    if i == (angle + 270 + 360) % 360 {
+                        chartmodelStr.append("270°")
+                        continue
+                    }
+                }
             }else{
-                datanameStr = datanameStr + "，" + (dataModel?.name)!
+                //逆时针
+                if angle > 0 {
+                    if i == 360 - angle {
+                        chartmodelStr.append("0°")
+                        continue
+                    }
+                }else {
+                    if i == -angle {
+                        chartmodelStr.append("0°")
+                        continue
+                    }
+                }
+                
+                if angle + 90 > 0 {
+                    if i == 360 - (angle + 90) {
+                        chartmodelStr.append("90°")
+                        continue
+                    }
+                }else{
+                    if i == (-90 - angle) % 360 {
+                        chartmodelStr.append("90°")
+                        continue
+                    }
+                }
+                
+                if angle + 180 > 0 {
+                    if i + 1 == 360 - (angle + 180) {
+                        chartmodelStr.append("180°")
+                        continue
+                    }
+                }else{
+                    if i + 1 == (180 - angle) % 360 {
+                        chartmodelStr.append("180°")
+                        continue
+                    }
+                }
+                //没完
+                if angle + 270 > 0 {
+                    if i == 360 - (angle + 270) {
+                        chartmodelStr.append("270°")
+                        continue
+                    }
+                }else{
+                    if i == (270 - angle) % 360 {
+                        chartmodelStr.append("270°")
+                        continue
+                    }
+                }
             }
             chartmodelStr.append("")
         }
+        for i in 0..<array.count {
+            let dataModel = GYWTDRadarData.deserialize(from: array[i] as? NSDictionary)
+            var angle:Int = Int((dataModel?.angle)!)
+            if tempmodel.clockwise == 1 {
+                print("当前为顺时针")
+                //顺时针
+                if angle > 360 {
+                    angle = angle - 360
+                }else if angle < 0 {
+                    angle = angle + 360
+                }
+            }else{
+                print("当前为逆时针")
+                angle = 360 - angle
+                if angle > 360 {
+                    angle = angle - 360
+                }else if angle < 0 {
+                    angle = angle + 360
+                }
+            }
+            if nameStr == "热流" {
+                data2.append([angle,(dataModel?.reFlowTagValue)!] as [Any])
+            }else if nameStr == "出温" {
+                data2.append([angle,(dataModel?.outTagValue)!] as [Any])
+            }else if nameStr == "入温" {
+                data2.append([angle,(dataModel?.inTagValue)!] as [Any])
+            }else if nameStr == "温差" {
+                data2.append([angle,(dataModel?.wcValue)!] as [Any])
+            }else if nameStr == "流量" {
+                data2.append([angle,(dataModel?.flowTagValue)!] as [Any])
+            }
+            if i == 0 {
+                datanameStr = (dataModel?.stove_number)!
+            }else{
+                datanameStr = datanameStr + "，" + (dataModel?.stove_number)!
+            }
+        }
+        
+        data.append([359,0])
+        data.append([0,0])
         groupBtn.setTitle(datanameStr, for: .normal)
         
         let gradientColor = AAGradientColor.linearGradient(
@@ -424,13 +568,18 @@ extension GYWTDRadarViewController {
         )
     
         let aa = AASeriesElement()
-            .name(nameStr)
+            .name("原点")
             .data(data)
             .color(gradientColor)
-        
             
-        dataEntries.append(aa)
         
+        let aa2 = AASeriesElement()
+            .name(nameStr)
+            .data(data2)
+            .color(gradientColor)
+        
+        dataEntries.append(aa)
+        dataEntries.append(aa2)
         
         let chartmodel = AAChartModel()
             .chartType(.area)
@@ -439,7 +588,7 @@ extension GYWTDRadarViewController {
             .xAxisVisible(true)
             .xAxisGridLineWidth(0.5)
             .yAxisVisible(true)
-            .yAxisLineWidth(1)
+//            .yAxisLineWidth(1)
             .yAxisLabelsEnabled(false)
             .markerSymbol(.circle)
             .markerSymbolStyle(.borderBlank)
@@ -447,7 +596,8 @@ extension GYWTDRadarViewController {
             .categories(chartmodelStr)
 //            .margin(right: 30,left: 50)
             .series(dataEntries)
-        
+            .zoomType(.xy)
+            
         radarCharView.aa_drawChartWithChartModel(chartmodel)
         
        
@@ -507,10 +657,10 @@ extension GYWTDRadarViewController:AAChartViewDelegate {
         )
 //        let labelarray = ["热流","出温","入温","温差","流量"]
 //        let labelarray2 = ["reFlow","outTemp","inTemp","tempWc","flow"]
-        let dic:NSDictionary = dataArray[0] as! NSDictionary
-        let tempmodel:GYWTDBaseModel = GYWTDBaseModel.deserialize(from: dic)!
-        let dataModel = GYWTDDataModel.deserialize(from: tempmodel.stove_list[clickEventMessage.index!] as? NSDictionary)
-        midshowview.label2.text = dataModel?.name
+//        let dic:NSDictionary = dataArray[0] as! NSDictionary
+//        let tempmodel:GYWTDBaseModel = GYWTDBaseModel.deserialize(from: dic)!
+        let dataModel = GYWTDRadarData.deserialize(from: datatempSectionArray[clickEventMessage.index!] as? NSDictionary)
+        midshowview.label2.text = dataModel?.stove_number
         if nameStr == "热流" {
             midshowview.label3.text = String(format: "%.2f", (dataModel?.reFlowTagValue)!)
         }else if nameStr == "出温" {
@@ -523,6 +673,10 @@ extension GYWTDRadarViewController:AAChartViewDelegate {
             midshowview.label3.text = String(format: "%.2f", (dataModel?.flowTagValue)!)
         }
         
+        if clickEventMessage.name == "原点" {
+            midshowview.label2.text = "原点"
+            midshowview.label3.text = "0.00"
+        }
     }
 }
 

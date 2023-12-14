@@ -26,7 +26,7 @@ class GYWTDDataCell: UICollectionViewCell {
         layout.minimumInteritemSpacing = 1
         layout.minimumLineSpacing = 1
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = rellySizeForiPhoneWidth(119, 216)
+        layout.itemSize = CGSize(width: 119, height: 216)
         layout.sectionHeadersPinToVisibleBounds = true
         
         let collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
@@ -70,9 +70,14 @@ extension GYWTDDataCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
         return dataArray.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: 119, height: Int(36 + strArray.count * 36))
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         // 返回每个 section 的 header 大小
-        return CGSize(width: 119, height: 36 + dataArray.count * 36)
+        return CGSize(width: 119, height: 36 + strArray.count * 36)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {

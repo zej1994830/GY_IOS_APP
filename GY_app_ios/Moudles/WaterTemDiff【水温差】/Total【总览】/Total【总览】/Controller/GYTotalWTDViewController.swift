@@ -200,7 +200,8 @@ extension GYTotalWTDViewController {
     }
     
     @objc func baojingClick(){
-        
+        let vc = GYWTDWarnViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func selectClick(){

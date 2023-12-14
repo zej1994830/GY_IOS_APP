@@ -128,7 +128,40 @@ extension GYFurnaceShellMainViewController:UICollectionViewDataSource,UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if indexPath.section == 0 {
+            //总览
+            if indexPath.row == 0 {
+                //总览
+                let vc = GYFSTotalViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else if indexPath.row == 1 {
+                //柱状图
+                let vc = GYFSTotalBarChartViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                //趋势
+            }else if indexPath.row == 1 {
+                //柱状图
+                let vc = GYGraphicBarChartViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+
+            }else if indexPath.row == 2 {
+                //雷达图
+            }
+        }else if indexPath.section == 2 {
+            //报警
+        }else if indexPath.section == 3 {
+            //数据
+            let vc = GYFSDataTimeViewController()
+            vc.rate = indexPath.row
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.section == 4 {
+            //设备巡检
+            let vc = GYFSDeviceAddressViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 

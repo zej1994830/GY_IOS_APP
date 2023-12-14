@@ -121,7 +121,20 @@ extension GYErosionThicknessMainViewController:UICollectionViewDataSource,UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                //侵蚀形貌
+                let vc = GYETErosionMorphologyViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else if indexPath.row == 1 {
+                let vc = GYETDataResultViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else if indexPath.row == 2 {
+                let vc = GYETStereoscopicMorphologyViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        }
     }
 }
 

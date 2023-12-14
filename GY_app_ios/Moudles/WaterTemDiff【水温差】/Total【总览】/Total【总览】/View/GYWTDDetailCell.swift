@@ -25,6 +25,9 @@ class GYWTDDetailCell: UICollectionViewCell {
                 valueLabel.text = String(format: "%.2f", valueStr)
             }
             
+            if valueStr == -9999 {
+                valueLabel.text = " "
+            }
         }
     }
     

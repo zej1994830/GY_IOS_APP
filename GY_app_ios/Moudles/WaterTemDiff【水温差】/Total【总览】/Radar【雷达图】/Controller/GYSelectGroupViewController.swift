@@ -10,7 +10,8 @@ import HandyJSON
 
 class GYSelectGroupViewController: ZEJBottomPresentViewController {
     var ClickBlock: ((NSMutableArray)->())? = nil
-    
+    //3=GYTHCurveViewController
+    var type:Int = 0
     //源数组
     var dataArray:NSMutableArray = [] {
         didSet{
@@ -27,9 +28,7 @@ class GYSelectGroupViewController: ZEJBottomPresentViewController {
     
     var isSelectAll:Bool = true {
         didSet{
-            if isSelectAll {
-                tableView.reloadData()
-            }
+            tableView.reloadData()
         }
     }
     
@@ -165,19 +164,28 @@ extension GYSelectGroupViewController:UITableViewDelegate,UITableViewDataSource 
             cell = GYSelectGroupCell(style: .default, reuseIdentifier: GYSelectGroupCell.indentifier)
         }
         if dataArray.count != 0 {
-//            let dic:NSDictionary = dataArray[indexPath.row] as! NSDictionary
-            let dataModel = GYWTDDataModel.deserialize(from: dataArray[indexPath.row] as? NSDictionary)
+            let dataModel = GYWTDRadarData.deserialize(from: dataArray[indexPath.row] as? NSDictionary)
             
-            cell?.titleStr = (dataModel?.name)!
+            cell?.titleStr = (dataModel?.stove_number)!
+            if type == 3 {
+                cell?.titleStr = (dataModel?.stove_name)!
+            }
+            cell?.iselectAll = false
             //判断一下临时和源数组，找出上次的选中状态
             for temp in tempArray {
-                let tempmodel = GYWTDDataModel.deserialize(from: (temp as! NSDictionary))
-                if dataModel?.name == tempmodel?.name{
-                    cell?.iselectAll = true
-                    break
+                let tempmodel = GYWTDRadarData.deserialize(from: (temp as! NSDictionary))
+                if type == 3 {
+                    if dataModel?.stove_name == tempmodel?.stove_name{
+                        cell?.iselectAll = true
+                        break
+                    }
                 }else{
-                    cell?.iselectAll = false
+                    if dataModel?.stove_number == tempmodel?.stove_number{
+                        cell?.iselectAll = true
+                        break
+                    }
                 }
+                
             }
         }
         
@@ -193,8 +201,13 @@ extension GYSelectGroupViewController:UITableViewDelegate,UITableViewDataSource 
 
 extension GYSelectGroupViewController {
     @objc func selectBtnClick() {
-        isSelectAll = true
-        tempArray = NSMutableArray(array: dataArray)
+        isSelectAll = !isSelectAll
+        if isSelectAll {
+            tempArray = NSMutableArray(array: dataArray)
+        }else{
+            tempArray.removeAllObjects()
+        }
+        
         tableView.reloadData()
     }
     
@@ -214,22 +227,42 @@ extension GYSelectGroupViewController {
     }
     
     func changedataarray(name:String,isOn:Bool) {
-        //根据名字直接从缓存数组里增删
-        if isOn {
-            for temp in dataArray {
-                let dic:NSDictionary = temp as! NSDictionary
-                if name == (dic["name"] as! String){
-                    tempArray.add(temp)
+        if type == 3 {
+            //根据名字直接从缓存数组里增删
+            if isOn {
+                for temp in dataArray {
+                    let dic:NSDictionary = temp as! NSDictionary
+                    if name == (dic["stove_name"] as! String){
+                        tempArray.add(temp)
+                    }
+                }
+            }else{
+                for temp in dataArray {
+                    let dic:NSDictionary = temp as! NSDictionary
+                    if name == (dic["stove_name"] as! String){
+                        tempArray.remove(temp)
+                    }
                 }
             }
         }else{
-            for temp in dataArray {
-                let dic:NSDictionary = temp as! NSDictionary
-                if name == (dic["name"] as! String){
-                    tempArray.remove(temp)
+            //根据名字直接从缓存数组里增删
+            if isOn {
+                for temp in dataArray {
+                    let dic:NSDictionary = temp as! NSDictionary
+                    if name == (dic["stove_number"] as! String){
+                        tempArray.add(temp)
+                    }
+                }
+            }else{
+                for temp in dataArray {
+                    let dic:NSDictionary = temp as! NSDictionary
+                    if name == (dic["stove_number"] as! String){
+                        tempArray.remove(temp)
+                    }
                 }
             }
         }
+        
     }
     
 }

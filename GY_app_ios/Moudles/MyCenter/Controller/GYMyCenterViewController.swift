@@ -168,7 +168,7 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
     }
     
     func request() {
-        let params = ["user_id":GYUserBaseInfoData.default.user_id,"device_db":GYDeviceData.default.device_db,"device_id":GYDeviceData.default.id] as [String : Any]
+        let params = ["user_id":GYUserBaseInfoData.default.user_id,"device_id":GYDeviceData.default.id] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getdevicetime, parameters: params) { [weak self]result in
             guard let weakSelf = self else{
                 return
@@ -176,8 +176,8 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             let rresult = result as! [String:Any]
             if rresult["message"] as! String == "操作成功" {
                 let rrresult = rresult["data"] as! [String:Any]
-                let rrrresult = rrresult["result"] as! [String:Any]
-                let is_invalid = rrrresult["is_invalid"] as! Int64
+                let rrrresult = rrresult["result"] as! Int64
+                let is_invalid = rrresult["is_invalid"] as! Int64
                 weakSelf.is_invalid = is_invalid
             }else{
                 

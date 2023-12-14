@@ -125,7 +125,7 @@ extension GYWTDDeviceAddressViewController {
     
     func request() {
         GYHUD.showGif(view: self.view)
-        let params = ["device_db":GYDeviceData.default.device_db,"function_type":1] as [String:Any]
+        let params = ["device_db":GYDeviceData.default.device_db,"function_type":0] as [String:Any]
         GYNetworkManager.share.requestData(.get, api: Api.getdeviceaddresslist, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -134,7 +134,9 @@ extension GYWTDDeviceAddressViewController {
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.deviceDataArray = dicc["temperature_list"] as! NSArray
             weakSelf.namepickView.reloadAllComponents()
-            
+            if weakSelf.deviceDataArray.count == 0 {
+                return
+            }
             let diccc:NSDictionary = weakSelf.deviceDataArray.firstObject as! NSDictionary
             weakSelf.nameBtn.setTitle(diccc["masterAddress"] as? String, for: .normal)
             weakSelf.requestnextdata(dic: diccc)
@@ -142,7 +144,7 @@ extension GYWTDDeviceAddressViewController {
     }
     
     func requestnextdata(dic:NSDictionary) {
-        let params = ["device_db":GYDeviceData.default.device_db,"function_type":1,"deviceAddr":dic["masterAddressNumber"] ?? 0] as [String:Any]
+        let params = ["device_db":GYDeviceData.default.device_db,"function_type":0,"deviceAddr":dic["masterAddressNumber"] ?? 0] as [String:Any]
         GYNetworkManager.share.requestData(.get, api: Api.gettaglistbydeviceaddr, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -172,7 +174,7 @@ extension GYWTDDeviceAddressViewController:UICollectionViewDelegate,UICollection
             cell = GYWTDDeviceAdressCell()
         }
         let dic:NSDictionary = dataArray[indexPath.row] as! NSDictionary
-        cell?.isNor = ((dic["isException"] as? Int) != nil)
+        cell?.isException = ((dic["isException"] as? Int) != nil)
         cell?.titleStr = dic["name"] as! String
         return cell!
     }

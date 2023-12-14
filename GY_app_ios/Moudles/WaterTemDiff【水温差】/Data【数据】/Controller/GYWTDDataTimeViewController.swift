@@ -273,6 +273,7 @@ extension GYWTDDataTimeViewController {
             }))
             
         }
+        
     }
     
     func requestdata(){
@@ -309,7 +310,7 @@ extension GYWTDDataTimeViewController {
             currentDateString = currentDateString + ":00:00"
             currentLastHourDateString = currentLastHourDateString + ":00:00"
         }else if rate == 2 {
-            currentDateString = currentDateString + "00:00:00"
+            currentDateString = currentDateString + " 00:00:00"
             currentLastHourDateString = currentLastHourDateString + "00:00:00"
         }else if rate == 3 {
             currentDateString = currentDateString + "-00 00:00:00"

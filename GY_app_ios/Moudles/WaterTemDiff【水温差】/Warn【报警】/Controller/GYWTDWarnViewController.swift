@@ -12,6 +12,7 @@ class GYWTDWarnViewController: GYViewController {
     var currentLastHourDateString:String = ""
     var rightBarbtn:UIBarButtonItem? = nil
     var dataArray:NSArray = []
+    var function_type:Int = 0
     var isrealtime:Bool = false {
         didSet{
             if isrealtime {
@@ -125,7 +126,7 @@ extension GYWTDWarnViewController {
     func realtimerequest() {
         GYHUD.showGif(view: self.view)
 
-        let params = ["device_db":GYDeviceData.default.device_db,"function_type":0] as [String : Any]
+        let params = ["device_db":GYDeviceData.default.device_db,"function_type":function_type] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getListTimeData, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -140,7 +141,7 @@ extension GYWTDWarnViewController {
     func historyrequest() {
         GYHUD.showGif(view: self.view)
 
-        let params = ["device_db":GYDeviceData.default.device_db,"function_type":0,"start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","number":0] as [String : Any]
+        let params = ["device_db":GYDeviceData.default.device_db,"function_type":function_type,"start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","number":0] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getListHistoryData, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
                 return

@@ -191,18 +191,20 @@ extension GYLoginViewController {
             GYHUD.hideHudForView()
             let rresult = result as! [String:Any]
             if rresult["message"] as! String == "操作成功" {
-                let data: NSDictionary = rresult["data"] as! NSDictionary
-                //存储
-                let userBaseInfo = GYUserBaseInfoData.init(signData: data)
-                CommonCache.cacheData(userBaseInfo, key: CacheKey.userDataInfoCacheKey)
+                if let data: NSDictionary = rresult["data"] as? NSDictionary {
+                    //存储
+                    let userBaseInfo = GYUserBaseInfoData.init(signData: data)
+                    CommonCache.cacheData(userBaseInfo, key: CacheKey.userDataInfoCacheKey)
+                    
+                    //本地存储
+                    UserDefaults.standard.set(weakSelf.phoneTextfield.text!, forKey: "user_account")
+                    UserDefaults.standard.set(weakSelf.passwordTextfield.text!, forKey: "password")
+                    UserDefaults.standard.synchronize()
+                    //通知
+                    NotificationCenter.default.post(name: NotificationConstant.locationSuccess, object: nil,userInfo: nil)
+                    weakSelf.dismiss(animated: true)
+                }
                 
-                //本地存储
-                UserDefaults.standard.set(weakSelf.phoneTextfield.text!, forKey: "user_account")
-                UserDefaults.standard.set(weakSelf.passwordTextfield.text!, forKey: "password")
-                UserDefaults.standard.synchronize()
-                //通知
-                NotificationCenter.default.post(name: NotificationConstant.locationSuccess, object: nil,userInfo: nil)
-                weakSelf.dismiss(animated: true)
             }
         }
     }

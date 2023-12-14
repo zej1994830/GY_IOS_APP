@@ -126,6 +126,29 @@ extension GYThermocoupleViewController:UICollectionViewDataSource,UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if indexPath.section == 0 {
+            //实时
+            if indexPath.row == 0 {
+                //雷达
+                let vc = GYTRTRadarViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else if indexPath.row == 1 {
+                //数据
+                let vc = GYThermocoupleReadlTimeDataViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }else if indexPath.section == 1 {
+            //历史
+            if indexPath.row == 0 {
+                //曲线
+                let vc = GYTHCurveViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else if indexPath.row == 1 {
+                //数据
+                let vc = GYThermocoupleHistoryDataViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
 }
 

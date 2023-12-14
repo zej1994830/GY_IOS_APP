@@ -31,7 +31,7 @@ class GYLoginTimeViewController: GYViewController {
         tableview.delegate = self
         tableview.dataSource = self
         tableview.backgroundColor = UIColor.white
-        tableview.contentOffset = CGPointMake(0, 20)
+//        tableview.contentOffset = CGPointMake(0, 20)
         return tableview
         
     }()

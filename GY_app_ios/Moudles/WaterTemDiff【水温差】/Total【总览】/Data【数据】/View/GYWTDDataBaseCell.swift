@@ -69,17 +69,21 @@ extension GYWTDDataBaseCell:UITableViewDelegate,UITableViewDataSource {
         if indexPath.row == 0 {
             cell?.istitleView = true
             cell?.valueLabel.text = model?.stove_number
-        }else if indexPath.row == 1 {
-            cell?.valueLabel.text = "\(model?.wcValue ?? 1)"
-        }else if indexPath.row == 2 {
-            cell?.valueLabel.text = "\(model?.inTagValue ?? 1)"
-        }else if indexPath.row == 3 {
-            cell?.valueLabel.text = "\(model?.outTagValue ?? 1)"
-        }else if indexPath.row == 4 {
-            cell?.valueLabel.text = "\(model?.flowTagValue ?? 1)"
-        }else if indexPath.row == 5 {
-            cell?.valueLabel.text = "\(model?.reFlowTagValue ?? 1)"
+        }else{
+            let str:String = strArray[indexPath.row - 1] as! String
+            if str == "温差" {
+                cell?.valueLabel.text = "\(model?.wcValue ?? 1)"
+            }else if str == "入温" {
+                cell?.valueLabel.text = "\(model?.inTagValue ?? 1)"
+            }else if str == "出温" {
+                cell?.valueLabel.text = "\(model?.outTagValue ?? 1)"
+            }else if str == "流量" {
+                cell?.valueLabel.text = "\(model?.flowTagValue ?? 1)"
+            }else if str == "热流" {
+                cell?.valueLabel.text = "\(model?.reFlowTagValue ?? 1)"
+            }
         }
+        
         return cell ?? UITableViewCell()
     }
 }

@@ -85,6 +85,7 @@ class GYWTDTrendViewController: GYViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.isSelected = true
         btn.addTarget(self, action: #selector(optionBtnClick(_:)), for: .touchUpInside)
+        btn.tag = 100
         return btn
     }()
     
@@ -97,6 +98,7 @@ class GYWTDTrendViewController: GYViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.isSelected = true
         btn.addTarget(self, action: #selector(optionBtnClick(_:)), for: .touchUpInside)
+        btn.tag = 101
         return btn
     }()
     
@@ -109,6 +111,7 @@ class GYWTDTrendViewController: GYViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.isSelected = true
         btn.addTarget(self, action: #selector(optionBtnClick(_:)), for: .touchUpInside)
+        btn.tag = 102
         return btn
     }()
     
@@ -121,6 +124,7 @@ class GYWTDTrendViewController: GYViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.isSelected = true
         btn.addTarget(self, action: #selector(optionBtnClick(_:)), for: .touchUpInside)
+        btn.tag = 103
         return btn
     }()
     
@@ -133,6 +137,7 @@ class GYWTDTrendViewController: GYViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.isSelected = true
         btn.addTarget(self, action: #selector(optionBtnClick(_:)), for: .touchUpInside)
+        btn.tag = 104
         return btn
     }()
     
@@ -382,7 +387,7 @@ extension GYWTDTrendViewController {
         arr.snp.makeConstraints { make in
             make.top.equalTo(midtimeLabel.snp.bottom).offset(11)
         }
-        
+
         lineView2.snp.makeConstraints { make in
             make.left.right.equalTo(bgView)
             make.top.equalTo(bgView.snp.bottom).offset(20)
@@ -401,7 +406,7 @@ extension GYWTDTrendViewController {
     
     func request() {
         GYHUD.showGif(view: self.view)
-        let params = ["start_time":currentLastHourDateString,"end_time":currentDateString,"rate":rate,"device_db":GYDeviceData.default.device_db,"stove_id":model.id!] as [String : Any]
+        let params = ["start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","rate":rate,"device_db":GYDeviceData.default.device_db,"stove_id":model.id!] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getswctrend, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -489,6 +494,53 @@ extension GYWTDTrendViewController {
     @objc func optionBtnClick(_ button:UIButton){
         button.isSelected = !button.isSelected
         
+        var dataEntries = [AASeriesElement]()
+        var labelarray:NSMutableArray = []
+        let labelarray2:NSMutableArray = []
+        let colorarray:NSMutableArray = []
+        
+        for i in 0..<5 {
+            let tempbutton:UIButton = self.view.viewWithTag(i + 100)! as! UIButton
+            if tempbutton.isSelected  {
+                labelarray.add(["热流","出温","入温","温差","流量"][i])
+                labelarray2.add(["reFlow","outTemp","inTemp","tempWc","flow"][i])
+                colorarray.add(["#0182F9","#BC7DFC","#12B48D","#F5C105","#FF6E66"][i])
+            }
+        }
+        
+        var categories = [String]()
+        for i in 0..<dataarray.count {
+            let dic = dataarray[i] as! NSDictionary
+            categories.append(dic["dt"]! as! String)
+        }
+        
+        for j in 0..<labelarray.count {
+            var data = [Any]()
+            for i in 0..<dataarray.count {
+                let dic = dataarray[i] as! NSDictionary
+                data.append(dic[labelarray2[j]] as Any)
+            }
+            let aa = AASeriesElement()
+                .name(labelarray[j] as! String)
+                .data(data)
+            dataEntries.append(aa)
+        }
+        
+        
+        let chartmodel = AAChartModel()
+            .chartType(.line)
+            .colorsTheme(colorarray as! [Any])
+            .xAxisLabelsStyle(AAStyle(color: AAColor.black,fontSize: 14))
+            .dataLabelsEnabled(false)
+            .animationType(.bounce)
+            .series(dataEntries)
+            .markerSymbolStyle(.borderBlank)
+            .markerRadius(0)
+            .categories(categories)
+            .markerSymbol(.circle)
+            .zoomType(.x)//缩放功能
+            .legendEnabled(true)
+        lineView2.aa_drawChartWithChartModel(chartmodel)
     }
     
 }
@@ -554,6 +606,39 @@ extension GYWTDTrendViewController:UICollectionViewDataSource,UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectIndex = indexPath
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" // 根据需要设置日期时间格式
+        let currentDate = Date()
+        //当前时间
+        currentDateString = dateFormatter.string(from: currentDate)
+        let calendar = Calendar.current
+//        ["5分钟","15分钟","30分钟","1小时","2小时","8小时","16小时","1天","7天","15天","1个月"]
+        if indexPath.row == 0 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .minute, value: -5, to: currentDate)!)
+        }else if indexPath.row == 1 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .minute, value: -15, to: currentDate)!)
+        }else if indexPath.row == 2 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .minute, value: -30, to: currentDate)!)
+        }else if indexPath.row == 3 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
+        }else if indexPath.row == 4 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -2, to: currentDate)!)
+        }else if indexPath.row == 5 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -8, to: currentDate)!)
+        }else if indexPath.row == 6 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -16, to: currentDate)!)
+        }else if indexPath.row == 7 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .day, value: -1, to: currentDate)!)
+        }else if indexPath.row == 8 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .day, value: -7, to: currentDate)!)
+        }else if indexPath.row == 9 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .day, value: -15, to: currentDate)!)
+        }else if indexPath.row == 10 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .month, value: -1, to: currentDate)!)
+        }
+        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+        request()
         collectionView.reloadData()
     }
     
@@ -590,6 +675,7 @@ extension GYWTDTrendViewController:AAChartViewDelegate {
         liuliangView.label3.text = String(format: "%.2f", dic["flow"] as! Double)
         reliuView.label3.text = String(format: "%.0f", dic["reFlow"] as! Double)
     }
+    
 }
 
 

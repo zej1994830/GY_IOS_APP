@@ -51,7 +51,7 @@ extension GYWaterTemDiffCell {
     func addLayout(){
         bgImageV.snp.makeConstraints { make in
             make.left.right.top.equalTo(0)
-            make.height.width.equalTo(49)
+            make.height.equalTo(49)
         }
         
         titleLabel.snp.makeConstraints { make in

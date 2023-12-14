@@ -56,7 +56,7 @@
 		C8A3883F2AE0FDC60022410F /* GYWTDWarnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3883E2AE0FDC60022410F /* GYWTDWarnCell.swift */; };
 		C8A388442AE10DC00022410F /* GYWTDWarnDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A388432AE10DC00022410F /* GYWTDWarnDataModel.swift */; };
 		C8A559C32AE222E900446837 /* GYWTDDataTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A559C22AE222E900446837 /* GYWTDDataTimeViewController.swift */; };
-		C8A7BBFB2AE60FEB002882A5 /* SpreadsheetView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8A7BBD12AE60EBF002882A5 /* SpreadsheetView.framework */; };
+		C8A658212AE7AF44003CA4AB /* GYWTDRadarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A658202AE7AF44003CA4AB /* GYWTDRadarModel.swift */; };
 		C8A7BC022AE63F65002882A5 /* SpreadsheetViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7BC012AE63F65002882A5 /* SpreadsheetViewCells.swift */; };
 		C8A7BC052AE65D31002882A5 /* GYWTDDeviceAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7BC042AE65D31002882A5 /* GYWTDDeviceAddressViewController.swift */; };
 		C8A7BC082AE66B18002882A5 /* GYWTDDeviceAdressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7BC072AE66B18002882A5 /* GYWTDDeviceAdressCell.swift */; };
@@ -68,6 +68,7 @@
 		C8AA2DA02A78DBAC005CBD77 /* GYAppDeviceConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AA2D9F2A78DBAC005CBD77 /* GYAppDeviceConstant.swift */; };
 		C8AA2DA52A78DC91005CBD77 /* UIViewFrameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AA2DA42A78DC91005CBD77 /* UIViewFrameExtension.swift */; };
 		C8AA2DA72A78E059005CBD77 /* GYViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AA2DA62A78E059005CBD77 /* GYViewController.swift */; };
+		C8AB60602B01D2710094A2F2 /* GYFSBarChartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB605F2B01D2710094A2F2 /* GYFSBarChartButton.swift */; };
 		C8AB6FED2ADE2710002EFEB9 /* GYSelectGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB6FEC2ADE2710002EFEB9 /* GYSelectGroupViewController.swift */; };
 		C8AB6FEF2ADE29BE002EFEB9 /* GYSelectGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB6FEE2ADE29BE002EFEB9 /* GYSelectGroupCell.swift */; };
 		C8AB6FF22ADE67EA002EFEB9 /* GYWTDData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB6FF12ADE67EA002EFEB9 /* GYWTDData.swift */; };
@@ -85,6 +86,10 @@
 		C8B39CE82A6E61AE00532C53 /* GY_app_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B39CE72A6E61AE00532C53 /* GY_app_iosTests.swift */; };
 		C8B39CF22A6E61AE00532C53 /* GY_app_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B39CF12A6E61AE00532C53 /* GY_app_iosUITests.swift */; };
 		C8B39CF42A6E61AE00532C53 /* GY_app_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B39CF32A6E61AE00532C53 /* GY_app_iosUITestsLaunchTests.swift */; };
+		C8B5EF842AFE152A00887C33 /* GYTotalBarChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B5EF832AFE152A00887C33 /* GYTotalBarChartModel.swift */; };
+		C8B687C32B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B687C22B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift */; };
+		C8B687C62B2989BF000768FC /* armadillo.obj in Resources */ = {isa = PBXBuildFile; fileRef = C8B687C52B2989BF000768FC /* armadillo.obj */; };
+		C8B687CB2B2992E7000768FC /* CaiJiHe_LED.fbx in Resources */ = {isa = PBXBuildFile; fileRef = C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */; };
 		C8BBE1162A9C46CC00E4CACE /* UIViewController+ZEJPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE0FE2A9C46CC00E4CACE /* UIViewController+ZEJPresent.m */; };
 		C8BBE1172A9C46CC00E4CACE /* ZEJRollDownPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1022A9C46CC00E4CACE /* ZEJRollDownPresentationController.m */; };
 		C8BBE1182A9C46CC00E4CACE /* ZEJRollDownAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1032A9C46CC00E4CACE /* ZEJRollDownAnimatedTransitioning.m */; };
@@ -96,21 +101,45 @@
 		C8BBE11F2A9C46CC00E4CACE /* ZEJSlidePresentTransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1152A9C46CC00E4CACE /* ZEJSlidePresentTransitionDelegate.m */; };
 		C8BBE1212A9C484A00E4CACE /* GYUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1202A9C484A00E4CACE /* GYUpdateViewController.swift */; };
 		C8BBE12F2A9C87E700E4CACE /* GYApiCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE12E2A9C87E700E4CACE /* GYApiCenter.swift */; };
+		C8BCA2132B0458BB005EE9D6 /* GYGraphicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCA2122B0458BB005EE9D6 /* GYGraphicViewController.swift */; };
+		C8BCA21A2B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCA2192B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift */; };
+		C8BD5E7B2B19CC2900F4A50A /* GYFSDataTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BD5E7A2B19CC2900F4A50A /* GYFSDataTimeViewController.swift */; };
+		C8BF8FAB2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FAA2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift */; };
+		C8BF8FAF2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FAE2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift */; };
+		C8BF8FB62B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FB52B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift */; };
+		C8BF8FB82B1D69D900FF9D65 /* GYTHCurveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */; };
+		C8C03E282B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */; };
+		C8C084E02B27F7DE0095F25B /* GYETDataResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C084DF2B27F7DE0095F25B /* GYETDataResultViewController.swift */; };
 		C8C4D3182A8F4539001297D2 /* GYHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4D3172A8F4539001297D2 /* GYHUD.swift */; };
 		C8C4D31E2A8F4DD9001297D2 /* CommonCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4D31D2A8F4DD9001297D2 /* CommonCache.swift */; };
+		C8C655E12B05BC4400DC4FC6 /* Pods_GY_app_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */; };
+		C8C656EC2B05BFF100DC4FC6 /* SpreadsheetView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C656EB2B05BFF100DC4FC6 /* SpreadsheetView.framework */; };
+		C8C72D612AFC834700E30E9A /* GYFSTotalBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C72D602AFC834700E30E9A /* GYFSTotalBarChartViewController.swift */; };
+		C8C7FA132B0F394800B07063 /* GYTRTRadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C7FA122B0F394800B07063 /* GYTRTRadarViewController.swift */; };
 		C8C950D12A97366F00AC3FEE /* GYMyCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D02A97366F00AC3FEE /* GYMyCenterCell.swift */; };
 		C8C950D32A98490700AC3FEE /* GYDeviceTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D22A98490700AC3FEE /* GYDeviceTimeViewController.swift */; };
 		C8C950D52A98750900AC3FEE /* GYLoginTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D42A98750900AC3FEE /* GYLoginTimeViewController.swift */; };
 		C8C950D72A98777E00AC3FEE /* GYLoginTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D62A98777E00AC3FEE /* GYLoginTimeCell.swift */; };
 		C8C950D92A988EF200AC3FEE /* GYPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D82A988EF200AC3FEE /* GYPasswordViewController.swift */; };
+		C8CF40CD2B0341AF00DE282A /* GYFSTotalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CF40CC2B0341AE00DE282A /* GYFSTotalDetailViewController.swift */; };
+		C8CF40D22B034D3700DE282A /* GYFSTotalTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CF40D12B034D3700DE282A /* GYFSTotalTrendViewController.swift */; };
+		C8D1D6A12B2A89F7008994B3 /* 1281702515263.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C8D1D6A02B2A89F7008994B3 /* 1281702515263.jpg */; };
+		C8D1D6A32B2A8A05008994B3 /* CaiJiHe_LED.obj in Resources */ = {isa = PBXBuildFile; fileRef = C8D1D6A22B2A8A05008994B3 /* CaiJiHe_LED.obj */; };
+		C8D241E72AF8908F00064574 /* GYFSTotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D241E62AF8908F00064574 /* GYFSTotalViewController.swift */; };
+		C8D241EA2AF8948600064574 /* GYFSTotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D241E92AF8948600064574 /* GYFSTotalCell.swift */; };
+		C8D241ED2AF89A0600064574 /* GYFSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D241EC2AF89A0600064574 /* GYFSModel.swift */; };
+		C8D63F792B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D63F782B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift */; };
 		C8DD77442A95A177003E184D /* GYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD77432A95A177003E184D /* GYNavigationController.swift */; };
 		C8DD77472A95A246003E184D /* GYImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD77462A95A246003E184D /* GYImageExtension.swift */; };
 		C8DD77482A95A69F003E184D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B39CDB2A6E61AD00532C53 /* LaunchScreen.storyboard */; };
 		C8DD774B2A95CFF4003E184D /* GYLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD774A2A95CFF4003E184D /* GYLoginViewController.swift */; };
+		C8DDBBC32B16E84E008A8ED8 /* GYTRTRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DDBBC22B16E84E008A8ED8 /* GYTRTRadarView.swift */; };
+		C8DDBBC52B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DDBBC42B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift */; };
+		C8DDBBC72B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DDBBC62B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift */; };
 		C8EB0EC52AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EB0EC42AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift */; };
 		C8EB0EC72AD10BE600049C6A /* GYWTDTrendItemsGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EB0EC62AD10BE600049C6A /* GYWTDTrendItemsGroupViewController.swift */; };
 		C8EB0ECC2AD131C500049C6A /* GYWTDTrendItemsGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EB0ECB2AD131C500049C6A /* GYWTDTrendItemsGroupCell.swift */; };
-		D9C1EF4F46FCBE70DA7B6A0C /* Pods_GY_app_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15264689D902FD38089CA6B1 /* Pods_GY_app_ios.framework */; };
+		C8FFF8AD2B26B2760067BF16 /* GYETErosionMorphologyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FFF8AC2B26B2760067BF16 /* GYETErosionMorphologyCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +238,7 @@
 		C8A3883E2AE0FDC60022410F /* GYWTDWarnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDWarnCell.swift; sourceTree = "<group>"; };
 		C8A388432AE10DC00022410F /* GYWTDWarnDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDWarnDataModel.swift; sourceTree = "<group>"; };
 		C8A559C22AE222E900446837 /* GYWTDDataTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDataTimeViewController.swift; sourceTree = "<group>"; };
+		C8A658202AE7AF44003CA4AB /* GYWTDRadarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDRadarModel.swift; sourceTree = "<group>"; };
 		C8A7BB602AE60EBE002882A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8A7BB622AE60EBE002882A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C8A7BB632AE60EBE002882A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -267,7 +297,7 @@
 		C8A7BBA82AE60EBF002882A5 /* SpreadsheetViewDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = SpreadsheetViewDelegate.html; sourceTree = "<group>"; };
 		C8A7BBA92AE60EBF002882A5 /* SpreadsheetViewDataSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = SpreadsheetViewDataSource.html; sourceTree = "<group>"; };
 		C8A7BBAA2AE60EBF002882A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C8A7BBAB2AE60EBF002882A5 /* .tgz */ = {isa = PBXFileReference; lastKnownFileType = file; path = .tgz; sourceTree = "<group>"; };
+		C8A7BBAB2AE60EBF002882A5 /* .tgz */ = {isa = PBXFileReference; lastKnownFileType = text; path = .tgz; sourceTree = "<group>"; };
 		C8A7BBAC2AE60EBF002882A5 /* Protocols.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Protocols.html; sourceTree = "<group>"; };
 		C8A7BBAE2AE60EBF002882A5 /* SpreadsheetViewDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = SpreadsheetViewDelegate.html; sourceTree = "<group>"; };
 		C8A7BBAF2AE60EBF002882A5 /* SpreadsheetViewDataSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = SpreadsheetViewDataSource.html; sourceTree = "<group>"; };
@@ -308,6 +338,7 @@
 		C8AA2D9F2A78DBAC005CBD77 /* GYAppDeviceConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYAppDeviceConstant.swift; sourceTree = "<group>"; };
 		C8AA2DA42A78DC91005CBD77 /* UIViewFrameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewFrameExtension.swift; sourceTree = "<group>"; };
 		C8AA2DA62A78E059005CBD77 /* GYViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYViewController.swift; sourceTree = "<group>"; };
+		C8AB605F2B01D2710094A2F2 /* GYFSBarChartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSBarChartButton.swift; sourceTree = "<group>"; };
 		C8AB6FEC2ADE2710002EFEB9 /* GYSelectGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSelectGroupViewController.swift; sourceTree = "<group>"; };
 		C8AB6FEE2ADE29BE002EFEB9 /* GYSelectGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSelectGroupCell.swift; sourceTree = "<group>"; };
 		C8AB6FF12ADE67EA002EFEB9 /* GYWTDData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDData.swift; sourceTree = "<group>"; };
@@ -330,6 +361,10 @@
 		C8B39CED2A6E61AE00532C53 /* GY_app_iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GY_app_iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B39CF12A6E61AE00532C53 /* GY_app_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GY_app_iosUITests.swift; sourceTree = "<group>"; };
 		C8B39CF32A6E61AE00532C53 /* GY_app_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GY_app_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C8B5EF832AFE152A00887C33 /* GYTotalBarChartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTotalBarChartModel.swift; sourceTree = "<group>"; };
+		C8B687C22B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETStereoscopicMorphologyViewController.swift; sourceTree = "<group>"; };
+		C8B687C52B2989BF000768FC /* armadillo.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = armadillo.obj; sourceTree = "<group>"; };
+		C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = CaiJiHe_LED.fbx; sourceTree = "<group>"; };
 		C8BBE0FE2A9C46CC00E4CACE /* UIViewController+ZEJPresent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ZEJPresent.m"; sourceTree = "<group>"; };
 		C8BBE0FF2A9C46CC00E4CACE /* UIViewController+ZEJPresent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ZEJPresent.h"; sourceTree = "<group>"; };
 		C8BBE1022A9C46CC00E4CACE /* ZEJRollDownPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZEJRollDownPresentationController.m; sourceTree = "<group>"; };
@@ -351,19 +386,44 @@
 		C8BBE1202A9C484A00E4CACE /* GYUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYUpdateViewController.swift; sourceTree = "<group>"; };
 		C8BBE12A2A9C626A00E4CACE /* GY_app_ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GY_app_ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		C8BBE12E2A9C87E700E4CACE /* GYApiCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYApiCenter.swift; sourceTree = "<group>"; };
+		C8BCA2122B0458BB005EE9D6 /* GYGraphicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGraphicViewController.swift; sourceTree = "<group>"; };
+		C8BCA2192B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGraphicBarChartViewController.swift; sourceTree = "<group>"; };
+		C8BD5E7A2B19CC2900F4A50A /* GYFSDataTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSDataTimeViewController.swift; sourceTree = "<group>"; };
+		C8BF8FAA2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSGraphicTrendViewController.swift; sourceTree = "<group>"; };
+		C8BF8FAE2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSDeviceAddressViewController.swift; sourceTree = "<group>"; };
+		C8BF8FB52B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYThermocoupleReadlTimeDataViewController.swift; sourceTree = "<group>"; };
+		C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTHCurveViewController.swift; sourceTree = "<group>"; };
+		C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETErosionMorphologyViewController.swift; sourceTree = "<group>"; };
+		C8C084DF2B27F7DE0095F25B /* GYETDataResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETDataResultViewController.swift; sourceTree = "<group>"; };
 		C8C4D3172A8F4539001297D2 /* GYHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYHUD.swift; sourceTree = "<group>"; };
 		C8C4D31D2A8F4DD9001297D2 /* CommonCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCache.swift; sourceTree = "<group>"; };
+		C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GY_app_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8C656EB2B05BFF100DC4FC6 /* SpreadsheetView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SpreadsheetView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8C72D602AFC834700E30E9A /* GYFSTotalBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalBarChartViewController.swift; sourceTree = "<group>"; };
+		C8C7FA122B0F394800B07063 /* GYTRTRadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarViewController.swift; sourceTree = "<group>"; };
 		C8C950D02A97366F00AC3FEE /* GYMyCenterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYMyCenterCell.swift; sourceTree = "<group>"; };
 		C8C950D22A98490700AC3FEE /* GYDeviceTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYDeviceTimeViewController.swift; sourceTree = "<group>"; };
 		C8C950D42A98750900AC3FEE /* GYLoginTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginTimeViewController.swift; sourceTree = "<group>"; };
 		C8C950D62A98777E00AC3FEE /* GYLoginTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginTimeCell.swift; sourceTree = "<group>"; };
 		C8C950D82A988EF200AC3FEE /* GYPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYPasswordViewController.swift; sourceTree = "<group>"; };
+		C8CF40CC2B0341AE00DE282A /* GYFSTotalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalDetailViewController.swift; sourceTree = "<group>"; };
+		C8CF40D12B034D3700DE282A /* GYFSTotalTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalTrendViewController.swift; sourceTree = "<group>"; };
+		C8D1D6A02B2A89F7008994B3 /* 1281702515263.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1281702515263.jpg; sourceTree = "<group>"; };
+		C8D1D6A22B2A8A05008994B3 /* CaiJiHe_LED.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CaiJiHe_LED.obj; sourceTree = "<group>"; };
+		C8D241E62AF8908F00064574 /* GYFSTotalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalViewController.swift; sourceTree = "<group>"; };
+		C8D241E92AF8948600064574 /* GYFSTotalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalCell.swift; sourceTree = "<group>"; };
+		C8D241EC2AF89A0600064574 /* GYFSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSModel.swift; sourceTree = "<group>"; };
+		C8D63F782B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYThermocoupleHistoryDataViewController.swift; sourceTree = "<group>"; };
 		C8DD77432A95A177003E184D /* GYNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYNavigationController.swift; sourceTree = "<group>"; };
 		C8DD77462A95A246003E184D /* GYImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYImageExtension.swift; sourceTree = "<group>"; };
 		C8DD774A2A95CFF4003E184D /* GYLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginViewController.swift; sourceTree = "<group>"; };
+		C8DDBBC22B16E84E008A8ED8 /* GYTRTRadarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarView.swift; sourceTree = "<group>"; };
+		C8DDBBC42B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarDetailViewController.swift; sourceTree = "<group>"; };
+		C8DDBBC62B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarDetailTrendViewController.swift; sourceTree = "<group>"; };
 		C8EB0EC42AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTrendItemsViewController.swift; sourceTree = "<group>"; };
 		C8EB0EC62AD10BE600049C6A /* GYWTDTrendItemsGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTrendItemsGroupViewController.swift; sourceTree = "<group>"; };
 		C8EB0ECB2AD131C500049C6A /* GYWTDTrendItemsGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTrendItemsGroupCell.swift; sourceTree = "<group>"; };
+		C8FFF8AC2B26B2760067BF16 /* GYETErosionMorphologyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETErosionMorphologyCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,8 +431,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8A7BBFB2AE60FEB002882A5 /* SpreadsheetView.framework in Frameworks */,
-				D9C1EF4F46FCBE70DA7B6A0C /* Pods_GY_app_ios.framework in Frameworks */,
+				C8C656EC2B05BFF100DC4FC6 /* SpreadsheetView.framework in Frameworks */,
+				C8C655E12B05BC4400DC4FC6 /* Pods_GY_app_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +458,8 @@
 		301D7CBE22A177CDCCAD3D21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C8C656EB2B05BFF100DC4FC6 /* SpreadsheetView.framework */,
+				C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */,
 				C8A7BB5D2AE60EBE002882A5 /* Framework */,
 				15264689D902FD38089CA6B1 /* Pods_GY_app_ios.framework */,
 				B22EADA5C7E1967A85F29021 /* Pods_GY_app_ios_GY_app_iosUITests.framework */,
@@ -558,6 +620,7 @@
 		C89EE8432AC3B0340097D1DE /* Radar【雷达图】 */ = {
 			isa = PBXGroup;
 			children = (
+				C8A6581C2AE7AED2003CA4AB /* Model */,
 				C89EE8472AC3B5AC0097D1DE /* View */,
 				C89EE8442AC3B04A0097D1DE /* Controller */,
 			);
@@ -593,6 +656,10 @@
 			isa = PBXGroup;
 			children = (
 				C8A2BC2E2AD25389009BB260 /* GYFurnaceShellMainViewController.swift */,
+				C8C72D5A2AFC7C6000E30E9A /* Total【总览】 */,
+				C8BCA2142B04AF83005EE9D6 /* Graphic【图示】 */,
+				C8BD5E772B19C77D00F4A50A /* Data【数据】 */,
+				C8BF8FAC2B1D589200FF9D65 /* Equipment【设备巡检】 */,
 			);
 			path = "FurnaceShell【炉壳温度】";
 			sourceTree = "<group>";
@@ -601,6 +668,9 @@
 			isa = PBXGroup;
 			children = (
 				C8A2BC352AD25BD2009BB260 /* GYErosionThicknessMainViewController.swift */,
+				C8C03E252B22BB94004C77B1 /* ErosionMorphology 【侵蚀形貌】 */,
+				C8C084DD2B27F7970095F25B /* DataResult【数据结果】 */,
+				C8B687C02B293A66000768FC /* StereoscopicMorphology 【立体形貌】 */,
 			);
 			path = "ErosionThickness【侵蚀结厚】";
 			sourceTree = "<group>";
@@ -609,6 +679,8 @@
 			isa = PBXGroup;
 			children = (
 				C8A2BC382AD25D71009BB260 /* GYThermocoupleViewController.swift */,
+				C8C7FA0F2B0F2CB700B07063 /* RealTime【实时】 */,
+				C8BF8FB02B1D5B3F00FF9D65 /* History【历史】 */,
 			);
 			path = "Thermocouple【热电偶】";
 			sourceTree = "<group>";
@@ -643,6 +715,14 @@
 				C8A559C22AE222E900446837 /* GYWTDDataTimeViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8A6581C2AE7AED2003CA4AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8A658202AE7AF44003CA4AB /* GYWTDRadarModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C8A7BB5D2AE60EBE002882A5 /* Framework */ = {
@@ -981,6 +1061,14 @@
 			path = UIExtension;
 			sourceTree = "<group>";
 		};
+		C8AB605B2B01D2570094A2F2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8AB605F2B01D2710094A2F2 /* GYFSBarChartButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C8AB6FF02ADE67C2002EFEB9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,7 +1081,6 @@
 			isa = PBXGroup;
 			children = (
 				C8DD77492A95CFDF003E184D /* Controller */,
-				C8AC912F2A9346B60081DF90 /* Model */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1016,6 +1103,7 @@
 				C89E762A2AA95FA300985EFC /* GYWaterTimeDiffHeaderView.swift */,
 				C89E762C2AA97EAF00985EFC /* GYWaterTimeDiffFooterView.swift */,
 				C896241B2AC26B51005DE286 /* Total【总览】 */,
+				C8BCA20D2B045857005EE9D6 /* Graphic【图示】 */,
 				C8EB0EC02AD0EE8F00049C6A /* Trend【趋势】 */,
 				C8EB0ECE2AD134CD00049C6A /* Warn【报警】 */,
 				C8EB0ECD2AD134A400049C6A /* Data【数据】 */,
@@ -1096,6 +1184,10 @@
 				C86C35AF2A8341C100AC28EC /* Moudles */,
 				C8C4D3192A8F45D5001297D2 /* Resource */,
 				C8B39CD92A6E61AD00532C53 /* Assets.xcassets */,
+				C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */,
+				C8D1D6A22B2A8A05008994B3 /* CaiJiHe_LED.obj */,
+				C8D1D6A02B2A89F7008994B3 /* 1281702515263.jpg */,
+				C8B687C52B2989BF000768FC /* armadillo.obj */,
 				C8B39CDB2A6E61AD00532C53 /* LaunchScreen.storyboard */,
 				C8B39CDE2A6E61AD00532C53 /* Info.plist */,
 			);
@@ -1117,6 +1209,30 @@
 				C8B39CF32A6E61AE00532C53 /* GY_app_iosUITestsLaunchTests.swift */,
 			);
 			path = GY_app_iosUITests;
+			sourceTree = "<group>";
+		};
+		C8B5EF7F2AFE14A700887C33 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8B5EF832AFE152A00887C33 /* GYTotalBarChartModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8B687C02B293A66000768FC /* StereoscopicMorphology 【立体形貌】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8B687C12B293A7D000768FC /* Controller */,
+			);
+			path = "StereoscopicMorphology 【立体形貌】";
+			sourceTree = "<group>";
+		};
+		C8B687C12B293A7D000768FC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8B687C22B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		C8BBE0FD2A9C46CC00E4CACE /* Present */ = {
@@ -1177,6 +1293,185 @@
 			path = SlidePresentTransition;
 			sourceTree = "<group>";
 		};
+		C8BCA20D2B045857005EE9D6 /* Graphic【图示】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCA2112B04586C005EE9D6 /* Controller */,
+			);
+			path = "Graphic【图示】";
+			sourceTree = "<group>";
+		};
+		C8BCA2112B04586C005EE9D6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCA2122B0458BB005EE9D6 /* GYGraphicViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BCA2142B04AF83005EE9D6 /* Graphic【图示】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCA2152B04B037005EE9D6 /* Trend【趋势】 */,
+				C8BCA2162B04B042005EE9D6 /* BarChart【柱状图】 */,
+				C8BCA2172B04B067005EE9D6 /* Radar【雷达图】 */,
+			);
+			path = "Graphic【图示】";
+			sourceTree = "<group>";
+		};
+		C8BCA2152B04B037005EE9D6 /* Trend【趋势】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FA72B1D569200FF9D65 /* Controller */,
+			);
+			path = "Trend【趋势】";
+			sourceTree = "<group>";
+		};
+		C8BCA2162B04B042005EE9D6 /* BarChart【柱状图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCA2182B04B0B6005EE9D6 /* Controller */,
+			);
+			path = "BarChart【柱状图】";
+			sourceTree = "<group>";
+		};
+		C8BCA2172B04B067005EE9D6 /* Radar【雷达图】 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Radar【雷达图】";
+			sourceTree = "<group>";
+		};
+		C8BCA2182B04B0B6005EE9D6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCA2192B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BD5E772B19C77D00F4A50A /* Data【数据】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BD5E782B19CBF400F4A50A /* Controller */,
+			);
+			path = "Data【数据】";
+			sourceTree = "<group>";
+		};
+		C8BD5E782B19CBF400F4A50A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BD5E7A2B19CC2900F4A50A /* GYFSDataTimeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BF8FA72B1D569200FF9D65 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FAA2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BF8FAC2B1D589200FF9D65 /* Equipment【设备巡检】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FAD2B1D58A000FF9D65 /* Controller */,
+			);
+			path = "Equipment【设备巡检】";
+			sourceTree = "<group>";
+		};
+		C8BF8FAD2B1D58A000FF9D65 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FAE2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BF8FB02B1D5B3F00FF9D65 /* History【历史】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FB32B1D5B8F00FF9D65 /* Curve【曲线】 */,
+				C8BF8FB22B1D5B7A00FF9D65 /* Data【数据】 */,
+			);
+			path = "History【历史】";
+			sourceTree = "<group>";
+		};
+		C8BF8FB12B1D5B6400FF9D65 /* Data【数据】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FB42B1D5BAF00FF9D65 /* Controller */,
+			);
+			path = "Data【数据】";
+			sourceTree = "<group>";
+		};
+		C8BF8FB22B1D5B7A00FF9D65 /* Data【数据】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8D63F772B201458003163B8 /* Controller */,
+			);
+			path = "Data【数据】";
+			sourceTree = "<group>";
+		};
+		C8BF8FB32B1D5B8F00FF9D65 /* Curve【曲线】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FB92B1D6D6800FF9D65 /* Controller */,
+			);
+			path = "Curve【曲线】";
+			sourceTree = "<group>";
+		};
+		C8BF8FB42B1D5BAF00FF9D65 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FB52B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BF8FB92B1D6D6800FF9D65 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C03E252B22BB94004C77B1 /* ErosionMorphology 【侵蚀形貌】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8FFF8AB2B26B2470067BF16 /* View */,
+				C8C03E262B22BC27004C77B1 /* Controller */,
+			);
+			path = "ErosionMorphology 【侵蚀形貌】";
+			sourceTree = "<group>";
+		};
+		C8C03E262B22BC27004C77B1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C084DD2B27F7970095F25B /* DataResult【数据结果】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C084DE2B27F7AD0095F25B /* Controller */,
+			);
+			path = "DataResult【数据结果】";
+			sourceTree = "<group>";
+		};
+		C8C084DE2B27F7AD0095F25B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C084DF2B27F7DE0095F25B /* GYETDataResultViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C8C4D3192A8F45D5001297D2 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -1193,6 +1488,61 @@
 			path = CommonUtil;
 			sourceTree = "<group>";
 		};
+		C8C72D5A2AFC7C6000E30E9A /* Total【总览】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8D241DF2AF88D6400064574 /* Total【总览】 */,
+				C8C72D5E2AFC82C700E30E9A /* BarChart【柱状图】 */,
+			);
+			path = "Total【总览】";
+			sourceTree = "<group>";
+		};
+		C8C72D5E2AFC82C700E30E9A /* BarChart【柱状图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8B5EF7F2AFE14A700887C33 /* Model */,
+				C8AB605B2B01D2570094A2F2 /* View */,
+				C8C72D5F2AFC831800E30E9A /* Controller */,
+			);
+			path = "BarChart【柱状图】";
+			sourceTree = "<group>";
+		};
+		C8C72D5F2AFC831800E30E9A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C72D602AFC834700E30E9A /* GYFSTotalBarChartViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C7FA0F2B0F2CB700B07063 /* RealTime【实时】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C7FA102B0F2CDC00B07063 /* Radar【雷达】 */,
+				C8BF8FB12B1D5B6400FF9D65 /* Data【数据】 */,
+			);
+			path = "RealTime【实时】";
+			sourceTree = "<group>";
+		};
+		C8C7FA102B0F2CDC00B07063 /* Radar【雷达】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8DDBBC12B16E823008A8ED8 /* View */,
+				C8C7FA112B0F2CEB00B07063 /* Controller */,
+			);
+			path = "Radar【雷达】";
+			sourceTree = "<group>";
+		};
+		C8C7FA112B0F2CEB00B07063 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C7FA122B0F394800B07063 /* GYTRTRadarViewController.swift */,
+				C8DDBBC42B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift */,
+				C8DDBBC62B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C8C950CF2A97348900AC3FEE /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1202,12 +1552,65 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		C8D241DF2AF88D6400064574 /* Total【总览】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8D241EB2AF899F200064574 /* Model */,
+				C8D241E82AF8947400064574 /* View */,
+				C8D241E32AF88FD700064574 /* Controller */,
+			);
+			path = "Total【总览】";
+			sourceTree = "<group>";
+		};
+		C8D241E32AF88FD700064574 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8D241E62AF8908F00064574 /* GYFSTotalViewController.swift */,
+				C8CF40CC2B0341AE00DE282A /* GYFSTotalDetailViewController.swift */,
+				C8CF40D12B034D3700DE282A /* GYFSTotalTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8D241E82AF8947400064574 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8D241E92AF8948600064574 /* GYFSTotalCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C8D241EB2AF899F200064574 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8D241EC2AF89A0600064574 /* GYFSModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8D63F772B201458003163B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8D63F782B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C8DD77492A95CFDF003E184D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				C8DD774A2A95CFF4003E184D /* GYLoginViewController.swift */,
+				C8AC912F2A9346B60081DF90 /* Model */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8DDBBC12B16E823008A8ED8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8DDBBC22B16E84E008A8ED8 /* GYTRTRadarView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C8EB0EC02AD0EE8F00049C6A /* Trend【趋势】 */ = {
@@ -1262,6 +1665,14 @@
 				C8A7BC032AE65CF7002882A5 /* Controller */,
 			);
 			path = "Equipment【设备巡检】";
+			sourceTree = "<group>";
+		};
+		C8FFF8AB2B26B2470067BF16 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8FFF8AC2B26B2760067BF16 /* GYETErosionMorphologyCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1404,8 +1815,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C89D8D7D2A9F09E10013E1B1 /* loading.gif in Resources */,
+				C8D1D6A12B2A89F7008994B3 /* 1281702515263.jpg in Resources */,
 				C8DD77482A95A69F003E184D /* LaunchScreen.storyboard in Resources */,
+				C8D1D6A32B2A8A05008994B3 /* CaiJiHe_LED.obj in Resources */,
 				C8B39CDA2A6E61AD00532C53 /* Assets.xcassets in Resources */,
+				C8B687CB2B2992E7000768FC /* CaiJiHe_LED.fbx in Resources */,
+				C8B687C62B2989BF000768FC /* armadillo.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1543,10 +1958,15 @@
 				C89E762B2AA95FA400985EFC /* GYWaterTimeDiffHeaderView.swift in Sources */,
 				C8C950D92A988EF200AC3FEE /* GYPasswordViewController.swift in Sources */,
 				C8AA2D9D2A78DB48005CBD77 /* UIExtension.swift in Sources */,
+				C8C7FA132B0F394800B07063 /* GYTRTRadarViewController.swift in Sources */,
 				C8BBE11C2A9C46CC00E4CACE /* ZEJBottomPresentPresentationController.m in Sources */,
+				C8BF8FAB2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift in Sources */,
+				C8C72D612AFC834700E30E9A /* GYFSTotalBarChartViewController.swift in Sources */,
 				C8A388442AE10DC00022410F /* GYWTDWarnDataModel.swift in Sources */,
+				C8BCA2132B0458BB005EE9D6 /* GYGraphicViewController.swift in Sources */,
 				C87426472A94A26D00F2382A /* GYMyCenterViewController.swift in Sources */,
 				C86C35A92A8331BE00AC28EC /* SpacingConstant.swift in Sources */,
+				C8BF8FB62B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift in Sources */,
 				C8AA2DA72A78E059005CBD77 /* GYViewController.swift in Sources */,
 				C8DD77442A95A177003E184D /* GYNavigationController.swift in Sources */,
 				C89624292AC2B84A005DE286 /* GYWTDDataBaseCell.swift in Sources */,
@@ -1556,32 +1976,44 @@
 				C89F6AE92AC16FA800FE541A /* GYWTDTrendCell.swift in Sources */,
 				C8BBE11D2A9C46CC00E4CACE /* ZEJBottomPresentTransitionDelegate.m in Sources */,
 				C8A2BC2F2AD25389009BB260 /* GYFurnaceShellMainViewController.swift in Sources */,
+				C8D63F792B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift in Sources */,
 				C800026D2ABADDB100E7AFF9 /* GYWTDDetaiSecCell.swift in Sources */,
 				C8A2BC392AD25D71009BB260 /* GYThermocoupleViewController.swift in Sources */,
 				C8A7BC082AE66B18002882A5 /* GYWTDDeviceAdressCell.swift in Sources */,
+				C8BF8FAF2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift in Sources */,
 				C86C35AE2A833D9C00AC28EC /* UINavigationController.swift in Sources */,
 				C89E133B2AB05E6300ECC5AA /* GYTotalWTDFooterView.swift in Sources */,
 				C8B30EDE2AB2934300570901 /* GYSelectWTDViewController.swift in Sources */,
 				C8A559C32AE222E900446837 /* GYWTDDataTimeViewController.swift in Sources */,
+				C8BF8FB82B1D69D900FF9D65 /* GYTHCurveViewController.swift in Sources */,
 				C8EB0EC52AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift in Sources */,
+				C8C03E282B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift in Sources */,
 				C87840072ABC2AD300E67037 /* GYWTDTrendViewController.swift in Sources */,
 				C8BBE1162A9C46CC00E4CACE /* UIViewController+ZEJPresent.m in Sources */,
 				C8AC912E2A9346B00081DF90 /* GYCodingObject.swift in Sources */,
 				C8A7BC022AE63F65002882A5 /* SpreadsheetViewCells.swift in Sources */,
 				C89624202AC26BA1005DE286 /* GYWTDDataViewController.swift in Sources */,
 				C80002692ABA877D00E7AFF9 /* GYWTDDetailViewController.swift in Sources */,
+				C8A658212AE7AF44003CA4AB /* GYWTDRadarModel.swift in Sources */,
+				C8CF40D22B034D3700DE282A /* GYFSTotalTrendViewController.swift in Sources */,
+				C8D241ED2AF89A0600064574 /* GYFSModel.swift in Sources */,
 				C8BBE1182A9C46CC00E4CACE /* ZEJRollDownAnimatedTransitioning.m in Sources */,
 				C8AA2D972A78D835005CBD77 /* GYTabbarController.swift in Sources */,
+				C8D241EA2AF8948600064574 /* GYFSTotalCell.swift in Sources */,
 				C8A7BC052AE65D31002882A5 /* GYWTDDeviceAddressViewController.swift in Sources */,
 				C8DD774B2A95CFF4003E184D /* GYLoginViewController.swift in Sources */,
+				C8C084E02B27F7DE0095F25B /* GYETDataResultViewController.swift in Sources */,
 				C8BBE1172A9C46CC00E4CACE /* ZEJRollDownPresentationController.m in Sources */,
 				C87426412A94A13400F2382A /* GYMainViewController.swift in Sources */,
 				C89EE8462AC3B0680097D1DE /* GYWTDRadarViewController.swift in Sources */,
 				C8BBE1212A9C484A00E4CACE /* GYUpdateViewController.swift in Sources */,
+				C8BD5E7B2B19CC2900F4A50A /* GYFSDataTimeViewController.swift in Sources */,
 				C8EB0ECC2AD131C500049C6A /* GYWTDTrendItemsGroupCell.swift in Sources */,
+				C8DDBBC52B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift in Sources */,
 				C800026B2ABADC3F00E7AFF9 /* GYWTDDetailCell.swift in Sources */,
 				C8A3883F2AE0FDC60022410F /* GYWTDWarnCell.swift in Sources */,
 				C89FE6582AA588BB003BE557 /* GYMainViewCell.swift in Sources */,
+				C8CF40CD2B0341AF00DE282A /* GYFSTotalDetailViewController.swift in Sources */,
 				C89792202A8608E900CDB5A1 /* GYNetworkManager.swift in Sources */,
 				C874263B2A9493AC00F2382A /* CacheConstant.swift in Sources */,
 				C8AB6FED2ADE2710002EFEB9 /* GYSelectGroupViewController.swift in Sources */,
@@ -1610,23 +2042,31 @@
 				C89E13392AB013BD00ECC5AA /* GYTotalWTDTVCell.swift in Sources */,
 				C89FE6532AA5877F003BE557 /* GYCustomFlowLayout.swift in Sources */,
 				C89F6AE72AC11CEE00FE541A /* GYWTDTrendData.swift in Sources */,
+				C8DDBBC72B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift in Sources */,
 				C8AB6FF42ADE79B1002EFEB9 /* GYWTDDataBaseBaseCell.swift in Sources */,
 				C874263D2A94983900F2382A /* gobalFunction.swift in Sources */,
 				C8BBE11F2A9C46CC00E4CACE /* ZEJSlidePresentTransitionDelegate.m in Sources */,
 				C8B30EE52AB2F5DD00570901 /* GYSelectWaterCell.swift in Sources */,
 				C809AB9F2AA0650E002301BE /* GYDeviceExpireViewController.swift in Sources */,
 				C8EB0EC72AD10BE600049C6A /* GYWTDTrendItemsGroupViewController.swift in Sources */,
+				C8FFF8AD2B26B2760067BF16 /* GYETErosionMorphologyCell.swift in Sources */,
+				C8B687C32B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift in Sources */,
+				C8D241E72AF8908F00064574 /* GYFSTotalViewController.swift in Sources */,
 				C8BBE11E2A9C46CC00E4CACE /* ZEJSlidePresentAnimatedTransitioning.m in Sources */,
 				C8AA2DA02A78DBAC005CBD77 /* GYAppDeviceConstant.swift in Sources */,
 				C8AB6FF22ADE67EA002EFEB9 /* GYWTDData.swift in Sources */,
 				C8AE7C612AA8620D006B9748 /* GYWaterTemDiffCell.swift in Sources */,
 				C8BBE11B2A9C46CC00E4CACE /* ZEJBottomPresentViewController.m in Sources */,
+				C8DDBBC32B16E84E008A8ED8 /* GYTRTRadarView.swift in Sources */,
+				C8BCA21A2B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift in Sources */,
 				C86C35A32A832A3000AC28EC /* GYNoDataView.swift in Sources */,
 				C89D32C92A8DA9AF0032C17B /* NotificationConstant.swift in Sources */,
 				C814A2C52AB40BF500FF1E87 /* GYWTDTotalData.swift in Sources */,
 				C86C35AC2A83347900AC28EC /* GYUIViewExtension.swift in Sources */,
+				C8B5EF842AFE152A00887C33 /* GYTotalBarChartModel.swift in Sources */,
 				C86C35A72A832F1800AC28EC /* UIColorConstant.swift in Sources */,
 				C8C4D31E2A8F4DD9001297D2 /* CommonCache.swift in Sources */,
+				C8AB60602B01D2710094A2F2 /* GYFSBarChartButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

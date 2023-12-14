@@ -6,18 +6,22 @@
 //
 
 import UIKit
-import DGCharts
+import AAInfographics
 
 class GYWTDTrendItemsViewController: GYViewController {
     var dataSectionArray:NSArray = []
+    var datatempSectionArray:NSArray = []
     var sectionStr:String = ""
     var dataArray:NSArray = []
-    
+    var indexrow:Int = 0
     var currentDateString:String = ""
     var currentLastHourDateString:String = ""
     var model:GYWTDDataModel = GYWTDDataModel()
-    var indexrow:Int = 0
     var timeArray:[String] = ["5分钟","15分钟","30分钟","1小时","2小时","8小时","16小时","1天","7天","15天","1个月"]
+    var rate:Int32 = 0
+    var selectIndex:IndexPath = IndexPath(row: -1, section: 0)
+    var maincolors = ["#EA173D","#02BE8B","#02BE8B","#A75FF0","#F9861B"]
+    var selectcolors = ["#BB1231","#02986F","#02986F","#864CC0","#C76B16"]
     
     private lazy var headView:UIView = {
         let view = UIView()
@@ -177,13 +181,10 @@ class GYWTDTrendItemsViewController: GYViewController {
         return view
     }()
     
-    private lazy var lineView:LineChartView = {
-        let view = LineChartView()
+    private lazy var lineView:AAChartView = {
+        let view = AAChartView()
+        view.isScrollEnabled = false
         view.delegate = self
-        //设置交互样式
-        view.scaleXEnabled = true //允取消X轴缩放
-        view.scaleYEnabled = true //取消Y轴缩放
-        view.doubleTapToZoomEnabled = true //双击缩放
         return view
     }()
     
@@ -205,6 +206,33 @@ class GYWTDTrendItemsViewController: GYViewController {
         return collectionView
     }()
     
+    private lazy var namepickView:UIPickerView = {
+        let view = UIPickerView()
+        view.delegate = self
+        view.dataSource = self
+        view.backgroundColor = .white
+        view.isHidden = true
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
+    
+    private lazy var timepickView:UIPickerView = {
+        let view = UIPickerView()
+        view.delegate = self
+        view.dataSource = self
+        view.backgroundColor = .white
+        view.isHidden = true
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -218,6 +246,7 @@ class GYWTDTrendItemsViewController: GYViewController {
 
 extension GYWTDTrendItemsViewController {
     func setupViews() {
+        self.title = ["温差","入水","出水","流量","热流"][indexrow]
         self.view.addSubview(headView)
         headView.addSubview(nameLabel)
         headView.addSubview(nameBtn)
@@ -238,19 +267,21 @@ extension GYWTDTrendItemsViewController {
         midView.addSubview(showGroupView5)
         midView.addSubview(lineView)
         midView.addSubview(collectionV)
+        self.view.addSubview(namepickView)
+        self.view.addSubview(timepickView)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd HH:mm" // 根据需要设置日期时间格式
-        let dateFormatter2 = DateFormatter()
-        dateFormatter2.dateFormat = "yyyy-MM-dd HH:mm" // 根据需要设置日期时间格式
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" // 根据需要设置日期时间格式
+//        let dateFormatter2 = DateFormatter()
+//        dateFormatter2.dateFormat = "yyyy-MM-dd HH:mm" // 根据需要设置日期时间格式
         let currentDate = Date()
         //当前时间
         currentDateString = dateFormatter.string(from: currentDate)
         //当前时间的上一个小时
         let calendar = Calendar.current
-        currentLastHourDateString = dateFormatter2.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
-        
-        timeBtn.setTitle(String(format: "%@ 至 %@", currentLastHourDateString,currentDateString), for: .normal)
+        currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
+        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
     }
     func addLayout() {
         headView.snp.makeConstraints { make in
@@ -349,6 +380,7 @@ extension GYWTDTrendItemsViewController {
 
 extension GYWTDTrendItemsViewController {
     func requestdata(){
+        GYHUD.showGif(view: self.view)
         let params = ["device_db":GYDeviceData.default.device_db,"function_type":0] as [String:Any]
         GYNetworkManager.share.requestData(.get, api: Api.getswclist, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
@@ -357,50 +389,93 @@ extension GYWTDTrendItemsViewController {
             let dic:NSDictionary = result as! NSDictionary
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.dataSectionArray = dicc["section_list"] as! NSArray
+            weakSelf.namepickView.reloadAllComponents()
+            weakSelf.datatempSectionArray = [weakSelf.dataSectionArray.firstObject as Any]
             weakSelf.requestnextdata(array: weakSelf.dataSectionArray)
         }
         
     }
-    //目前的接口，没有符合带组别+时间段的
     func requestnextdata(array:NSArray){
-        //显示项。这里认为只要重新筛选，那么默认全部显示数据
-        var partidString:String = ""
+        var partid:Int32 = 0
         sectionStr = ""
-        for temp in array {
-            let dic:NSDictionary = temp as! NSDictionary
-            if partidString.count == 0 {
-                //筛选状态
-                partidString = String(format: "%d", dic["id"] as! Int64)
-                //段名
-                sectionStr = String(format: "%@", dic["name"] as! String)
-            }else{
-                partidString = String(format: "%@,%d", partidString,(dic["id"] as! Int64))
-                sectionStr = String(format: "%@,%@", sectionStr,(dic["name"] as! String))
-            }
-            
-        }
-        
-        let params = ["device_db":GYDeviceData.default.device_db,"partidString":partidString] as [String : Any]
-        GYNetworkManager.share.requestData(.get, api: Api.getswczonglan, parameters: params) {[weak self] (result) in
+        let dic:NSDictionary = array.firstObject as! NSDictionary
+        partid = dic["id"] as! Int32
+        //段名
+        sectionStr = String(format: "%@", dic["name"] as! String)
+        nameBtn.setTitle(sectionStr, for: .normal)
+        let params = ["device_db":GYDeviceData.default.device_db,"partId":partid,"type":indexrow] as [String : Any]
+        GYNetworkManager.share.requestData(.get, api: Api.getGroupDataListByPartId, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
                 return
             }
+            GYHUD.hideHudForView(weakSelf.view)
             let dic:NSDictionary = result as! NSDictionary
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.dataArray = dicc["temperature_list"] as! NSArray
+            weakSelf.radarCharData(array: weakSelf.dataArray)
         }
     }
     
-    @objc func nameBtnClick() {
+    func radarCharData(array:NSArray) {
+        let data:NSMutableArray = []
+        let categories:NSMutableArray = []
         
+        for temp in array {
+            guard let tempp = temp as? NSDictionary else {
+                return
+            }
+            data.add(tempp["value"]!)
+            categories.add(tempp["name"]!)
+        }
+        
+        let model = AAChartModel()
+            .chartType(.line)
+            .colorsTheme([maincolors[indexrow]])
+            .animationType(.easeOutCubic)
+            .animationDuration(1200)
+            .zoomType(.x)
+            .series([
+                AASeriesElement()
+                    .name((nameBtn.titleLabel?.text)!)
+                    .data(data as! [Any])
+                    .allowPointSelect(true)
+                    .states(AAStates()
+                        .select(AASelect()
+                            .color(selectcolors[indexrow])))
+                    
+            ])
+            .categories(categories as! [String])
+            .tooltipEnabled(true)
+        
+        lineView.aa_drawChartWithChartModel(model)
+        
+    }
+    
+    @objc func nameBtnClick() {
+        namepickView.isHidden = false
     }
     
     @objc func pinlvBtnClick() {
-        
+        timepickView.isHidden = false
     }
     
     @objc func timeBtnClick() {
-        
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                    guard let weakSelf = self else{
+                        return
+                    }
+                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
+                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2![startIndex...], for: .normal)
+                    weakSelf.currentDateString = str2!
+                    weakSelf.currentLastHourDateString = str!
+                    weakSelf.requestdata()
+                }
+            }))
+            
+        }
     }
     
     @objc func groupBtnClick() {
@@ -411,8 +486,54 @@ extension GYWTDTrendItemsViewController {
     }
 }
 
+extension GYWTDTrendItemsViewController:UIPickerViewDelegate,UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == namepickView {
+            return dataSectionArray.count
+        }else{
+            return 2
+        }
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == namepickView {
+            let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
+            return (dic["name"] as! String)
+        }else{
+            if row == 0 {
+                return "分钟"
+            }else{
+                return "小时"
+            }
+        }
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        
+        if pickerView == namepickView {
+            requestnextdata(array: [[dataSectionArray[row]]])
+        }else{
+            if row == 0 {
+                rate = 0
+                pinlvBtn.setTitle("分钟", for: .normal)
+            }else{
+                rate = 1
+                pinlvBtn.setTitle("小时", for: .normal)
+            }
+            requestdata()
+        }
+    }
+}
 
-extension GYWTDTrendItemsViewController:UICollectionViewDelegate,UICollectionViewDataSource {
+extension GYWTDTrendItemsViewController:UICollectionViewDelegate,UICollectionViewDataSource,AAChartViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return timeArray.count
     }
@@ -424,27 +545,76 @@ extension GYWTDTrendItemsViewController:UICollectionViewDelegate,UICollectionVie
             cell = GYWTDTrendCell()
         }
         cell?.labelStr = timeArray[indexPath.row]
+        if indexPath == selectIndex {
+            cell?.btn.setTitleColor(.white, for: .normal)
+            cell?.btn.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
+        }else{
+            cell?.btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
+            cell?.btn.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
+        }
         return cell!
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectIndex = indexPath
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" // 根据需要设置日期时间格式
+        let currentDate = Date()
+        //当前时间
+        currentDateString = dateFormatter.string(from: currentDate)
+        let calendar = Calendar.current
+//        ["5分钟","15分钟","30分钟","1小时","2小时","8小时","16小时","1天","7天","15天","1个月"]
+        if indexPath.row == 0 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .minute, value: -5, to: currentDate)!)
+        }else if indexPath.row == 1 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .minute, value: -15, to: currentDate)!)
+        }else if indexPath.row == 2 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .minute, value: -30, to: currentDate)!)
+        }else if indexPath.row == 3 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
+        }else if indexPath.row == 4 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -2, to: currentDate)!)
+        }else if indexPath.row == 5 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -8, to: currentDate)!)
+        }else if indexPath.row == 6 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -16, to: currentDate)!)
+        }else if indexPath.row == 7 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .day, value: -1, to: currentDate)!)
+        }else if indexPath.row == 8 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .day, value: -7, to: currentDate)!)
+        }else if indexPath.row == 9 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .day, value: -15, to: currentDate)!)
+        }else if indexPath.row == 10 {
+            currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .month, value: -1, to: currentDate)!)
+        }
+        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+        requestdata()
+        collectionView.reloadData()
+    }
+    
+    open func aaChartView(_ aaChartView: AAChartView, clickEventMessage: AAClickEventMessageModel) {
+        print(
+            """
+
+            clicked point series element name: \(clickEventMessage.name ?? "")
+            🖱🖱🖱WARNING!!!!!!!!!!!!!!!!!!!! Click Event Message !!!!!!!!!!!!!!!!!!!! WARNING🖱🖱🖱
+            ==========================================================================================
+            ------------------------------------------------------------------------------------------
+            user finger CLICKED!!!,get the custom click event message: {
+            category = \(String(describing: clickEventMessage.category))
+            index = \(String(describing: clickEventMessage.index))
+            name = \(String(describing: clickEventMessage.name))
+            offset = \(String(describing: clickEventMessage.offset))
+            x = \(String(describing: clickEventMessage.x))
+            y = \(String(describing: clickEventMessage.y))
+            }
+            +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            
+            
+            """
+        )
+        
     }
 }
 
-extension GYWTDTrendItemsViewController:ChartViewDelegate {
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        
-    }
-    
-    func datareturnLineChartDataSet(color:String,name:String) -> LineChartDataSet {
-        var dataEntries = [ChartDataEntry]()
-        for i in 0..<30 {
-            let y = arc4random()%1000
-            let entry = ChartDataEntry.init(x: Double(i), y: Double(y))
-            dataEntries.append(entry)
-        }
-        let wenchaDataSet = LineChartDataSet(entries: dataEntries, label: name)
-        wenchaDataSet.colors = [UIColor.UIColorFromHexvalue(color_vaule: color)]
-        wenchaDataSet.lineWidth = 2
-        wenchaDataSet.circleColors = [UIColor.UIColorFromHexvalue(color_vaule: color)]
-        wenchaDataSet.drawCirclesEnabled = false //不绘制转折点
-        return wenchaDataSet
-    }
-}

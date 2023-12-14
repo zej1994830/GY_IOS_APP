@@ -17,7 +17,7 @@ class GYWTDDataViewController: GYViewController {
         layout.minimumInteritemSpacing = 1
         layout.minimumLineSpacing = 5
         layout.scrollDirection = .vertical
-        layout.estimatedItemSize = CGSize(width: APP.WIDTH, height: 216)
+        layout.itemSize = CGSize(width: APP.WIDTH, height: 216)
 //        layout.sectionHeadersPinToVisibleBounds = true
         layout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
 
@@ -113,6 +113,11 @@ extension GYWTDDataViewController:UICollectionViewDelegate,UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         // 返回每个 section 的 footer 大小
         return CGSizeZero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: Int(APP.WIDTH), height: Int(36 + strArray.count * 36))
     }
    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

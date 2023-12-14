@@ -16,10 +16,22 @@ class GYTotalWTDHeaderView: UICollectionReusableView {
     var ClickBlock: ((NSMutableArray)->())? = nil
     //先源后缓存
     var dataStrArray:NSMutableArray = []
+    //炉壳温度借用此view 隐藏显示项
+    var ishiddenrightview:Bool = false {
+        didSet {
+            showBtn.isHidden = ishiddenrightview
+        }
+    }
     
     var dataModel:GYWTDDataModel? = nil {
         didSet{
             titleLabel.text = dataModel?.section_name
+        }
+    }
+    
+    var dataFSModel:GYFSDataModel? = nil {
+        didSet{
+            titleLabel.text = dataFSModel?.partName
         }
     }
     
