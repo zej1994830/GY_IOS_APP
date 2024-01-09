@@ -148,6 +148,19 @@ extension GYThermocoupleViewController:UICollectionViewDataSource,UICollectionVi
                 let vc = GYThermocoupleHistoryDataViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+        }else if indexPath.section == 2 {
+            //报警
+            let vc = GYWTDWarnViewController()
+            if indexPath.row == 0 {
+                //实时
+                vc.isrealtime = true
+            }
+            vc.function_type = 2
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.section == 3 {
+            let vc = GYWTDDeviceAddressViewController()
+            vc.function_type = 4
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 class GYWTDTrendItemsGroupCell: UITableViewCell {
     static let indentifier: String = "GYWTDTrendItemsGroupCell"
+    var ClickBlock: ((Bool)->())? = nil
     
     var titleStr:String = "" {
         didSet{
@@ -23,7 +24,7 @@ class GYWTDTrendItemsGroupCell: UITableViewCell {
         return label
     }()
     
-    private lazy var cellBtn:ZQButton = {
+    lazy var cellBtn:ZQButton = {
         let btn = ZQButton()
         btn.setImage(UIImage(named: "ic_select"), for: .selected)
         btn.setImage(UIImage(named: "ic_select_nor"), for: .normal)
@@ -70,5 +71,8 @@ extension GYWTDTrendItemsGroupCell {
     
     @objc func btnClick(_ button:ZQButton) {
         button.isSelected = !button.isSelected
+        if let block = ClickBlock {
+            block(button.isSelected)
+        }
     }
 }

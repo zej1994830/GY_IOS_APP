@@ -7,6 +7,7 @@
 
 import UIKit
 import SceneKit
+import WebKit
 
 class GYETStereoscopicMorphologyViewController: GYViewController {
 
@@ -121,33 +122,6 @@ class GYETStereoscopicMorphologyViewController: GYViewController {
     }()
     
     private lazy var fbxView:SCNView = {
-//        let filePath = Bundle.main.path(forResource: "CaiJiHe_LED", ofType: "fbx")
-//        let view = SCNView()
-//        view.backgroundColor = .white
-//        view.autoenablesDefaultLighting = true
-//        let scene = SCNScene(named: "CaiJiHe_LED.obj")
-//
-//        view.scene = scene
-//
-//        //额外光照
-//        let ambientLightNode = SCNNode()
-        //        ambientLightNode.light = SCNLight()
-//        ambientLightNode.light!.type = .ambient
-//        ambientLightNode.light!.color = UIColor(white: 0.50, alpha: 1.0)
-//
-//        // Add ambient light to scene 光照
-//        scene?.rootNode.addChildNode(ambientLightNode)
-//
-//        // Create directional light
-//        let directionalLight = SCNNode()
-//        directionalLight.light = SCNLight()
-//        directionalLight.light!.type = .directional
-//        directionalLight.light!.color = UIColor(white: 0.40, alpha: 1.0)
-//        directionalLight.eulerAngles = SCNVector3(x: Float.pi, y: 0, z: 0)
-//
-//        // Add directional light
-//        scene!.rootNode.addChildNode(directionalLight)
-        
 
         // 创建一个场景
         let scene = SCNScene(named: "CaiJiHe_LED.obj")
@@ -175,12 +149,26 @@ class GYETStereoscopicMorphologyViewController: GYViewController {
         return view
     }()
     
+    
+    private lazy var webView:WKWebView = {
+        let webView = WKWebView()
+        if let url = URL(string: "http://192.168.102.2:8080/index.html") {
+                    // 创建 URLRequest 对象
+                    let request = URLRequest(url: url)
+                    
+                    // 加载网页
+                    webView.load(request)
+                }
+        
+        return webView
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupViews()
         addLayout()
 //        request()
+        
     }
     
 }
@@ -201,7 +189,15 @@ extension GYETStereoscopicMorphologyViewController {
         headView.addSubview(frontviewBtn)
         headView.addSubview(sideviewBtn)
         self.view.addSubview(midView)
-        midView.addSubview(fbxView)
+//        midView.addSubview(fbxView)
+        midView.addSubview(webView)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [ weak self] in
+            guard let weakSelf = self else{
+                return
+            }
+            weakSelf.webView.scrollView.setContentOffset(CGPoint(x: 200, y: 0), animated: true)
+        }
     }
     
     func addLayout() {
@@ -277,7 +273,7 @@ extension GYETStereoscopicMorphologyViewController {
             make.bottom.equalTo(0)
         }
         
-        fbxView.snp.makeConstraints { make in
+        webView.snp.makeConstraints { make in
             make.top.equalTo(20)
             make.left.right.equalTo(0)
             make.height.equalTo(APP.WIDTH)

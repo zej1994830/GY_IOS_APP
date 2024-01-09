@@ -580,10 +580,10 @@ extension GYWTDRadarViewController {
         
         dataEntries.append(aa)
         dataEntries.append(aa2)
-        
         let chartmodel = AAChartModel()
-            .chartType(.area)
+            .chartType(.polygon)
             .polar(true)
+            
             .dataLabelsEnabled(false)
             .xAxisVisible(true)
             .xAxisGridLineWidth(0.5)
@@ -597,7 +597,7 @@ extension GYWTDRadarViewController {
 //            .margin(right: 30,left: 50)
             .series(dataEntries)
             .zoomType(.xy)
-            
+        
         radarCharView.aa_drawChartWithChartModel(chartmodel)
         
        

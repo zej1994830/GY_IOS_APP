@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        if (GYUserBaseInfoData.default.user_id == 0){
             let loginVC = GYLoginViewController()
-//            let loginVC = GYThermocoupleViewController()
+//            let loginVC = TESTViewController()
             loginVC.modalPresentationStyle = .fullScreen
             Global_TopViewController!.present(loginVC, animated: true, completion: nil)
             CommonCache.share.userDataCache.removeObject(forKey: CacheKey.userDataInfoCacheKey)
@@ -36,6 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navBar.setBackgroundImage(UIImage(), for: .bottom, barMetrics: .default)
         navBar.shadowImage = UIImage()
         navBar.barTintColor = UIColor.white
+        
+        //开启本地服务器，用来加载fbx文件
+        let vc = ViewController()
+        vc.startLocalServer()
+        
+        networkReachability()
         
         return true
     }
@@ -73,5 +79,12 @@ extension UIDevice {
         let inputNumber = NSNumber.init(value: inputRotation)
         
         UIDevice.current.setValue(inputNumber, forKey: "orientation")
+    }
+}
+//MARK: - 网络监听
+extension AppDelegate {
+    
+    private func networkReachability(){
+        GYNetworkManager.share.startListeningNetWorking()
     }
 }

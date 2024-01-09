@@ -76,15 +76,16 @@ class GYWTDDataTimeViewController: GYViewController {
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
-        btn.setTitle("2023-04-16 14:43 至 04-18 14:43", for: .normal)
+        btn.setTitle("2023-04-16 14:43 至 2023-04-18 14:43", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 120, bottom: 0, right: -50)
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 340 - APP.WIDTH, bottom: 0, right: 10)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 340 - APP.WIDTH, bottom: 0, right: 10)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
         return btn
     }()
@@ -160,8 +161,8 @@ extension GYWTDDataTimeViewController {
         //当前时间的上一个小时
         let calendar = Calendar.current
         currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
-        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
-        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
         
         self.view.addSubview(headView)
         headView.addSubview(screenLabel)
@@ -264,10 +265,10 @@ extension GYWTDDataTimeViewController {
                     guard let weakSelf = self else{
                         return
                     }
-                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
+//                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
-                    weakSelf.timeBtn.setTitle(weakSelf.currentLastHourDateString + " 至 " + weakSelf.currentDateString[startIndex...], for: .normal)
+                    weakSelf.timeBtn.setTitle(weakSelf.currentLastHourDateString + " 至 " + weakSelf.currentDateString, for: .normal)
                     weakSelf.requestnextdata(array: weakSelf.datatempSectionArray )
                 }
             }))

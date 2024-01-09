@@ -38,7 +38,7 @@ class GYFSTotalTrendViewController: GYViewController {
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
-        btn.setTitle("2023-04-16 14:43 至 04-18 14:43", for: .normal)
+        btn.setTitle("2023-04-16 14:43 至 2023-04-18 14:43", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
@@ -46,7 +46,7 @@ class GYFSTotalTrendViewController: GYViewController {
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
 //        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 355 - APP.WIDTH, bottom: 0, right: 15)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
         return btn
@@ -177,8 +177,8 @@ extension GYFSTotalTrendViewController {
         //当前时间的上一个小时
         let calendar = Calendar.current
         currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
-        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
-        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
     
     }
     func addLayout() {
@@ -324,8 +324,8 @@ extension GYFSTotalTrendViewController {
                     guard let weakSelf = self else{
                         return
                     }
-                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
-                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2![startIndex...], for: .normal)
+//                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
+                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
                     weakSelf.request()
@@ -428,8 +428,8 @@ extension GYFSTotalTrendViewController:UICollectionViewDataSource,UICollectionVi
         }else if indexPath.row == 10 {
             currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .month, value: -1, to: currentDate)!)
         }
-        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
-        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
         request()
         collectionView.reloadData()
     }

@@ -191,8 +191,15 @@ extension GYSelectWaterViewController:UITableViewDelegate,UITableViewDataSource 
 
 extension GYSelectWaterViewController {
     @objc func selectBtnClick() {
-        isSelectAll = true
-        tempArray = NSMutableArray(array: dataArray)
+        if selectBtn.titleLabel?.text == "全选" {
+            selectBtn.setTitle("取消全选", for: .normal)
+            isSelectAll = false
+            tempArray.removeAllObjects()
+        }else{
+            selectBtn.setTitle("全选", for: .normal)
+            isSelectAll = true
+            tempArray = NSMutableArray(array: dataArray)
+        }
         tableView.reloadData()
     }
     

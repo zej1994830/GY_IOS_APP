@@ -204,7 +204,9 @@ extension GYSelectGroupViewController {
         isSelectAll = !isSelectAll
         if isSelectAll {
             tempArray = NSMutableArray(array: dataArray)
+            selectBtn.setTitle("全选", for: .normal)
         }else{
+            selectBtn.setTitle("取消全选", for: .normal)
             tempArray.removeAllObjects()
         }
         

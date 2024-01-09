@@ -14,7 +14,14 @@ class GYTotalWTDViewController: GYViewController {
     var dataSectionArray:NSArray = []
     var datatempSectionArray:NSMutableArray = []
     
-    var dataArray:NSArray = []
+    var dataArray:NSArray = []{
+        didSet {
+            noDataView.isHidden = dataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(collectionV)
+            }
+        }
+    }
     var sectionStr:String = ""
     
     var showDic:NSMutableDictionary = [:]

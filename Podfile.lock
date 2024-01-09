@@ -18,6 +18,9 @@ PODS:
   - DGCharts/Core (5.0.0)
   - FLAnimatedImage (1.0.17)
   - FSPagerView (0.8.3)
+  - GCDWebServer (3.5.4):
+    - GCDWebServer/Core (= 3.5.4)
+  - GCDWebServer/Core (3.5.4)
   - HandyJSON (5.0.2)
   - IQKeyboardManagerSwift (6.5.12)
   - JJCollectionViewRoundFlowLayout_Swift (2.5.2)
@@ -42,6 +45,7 @@ PODS:
   - JXSegmentedView (1.2.7)
   - MBProgressHUD (1.2.0)
   - MJRefresh (3.7.5)
+  - OpenGLUtils (0.0.2)
   - PINCache (2.3)
   - SDWebImage (5.0.6):
     - SDWebImage/Core (= 5.0.6)
@@ -62,6 +66,7 @@ DEPENDENCIES:
   - BRPickerView
   - DGCharts
   - FSPagerView
+  - GCDWebServer (~> 3.5.4)
   - HandyJSON
   - IQKeyboardManagerSwift
   - JJCollectionViewRoundFlowLayout_Swift
@@ -69,6 +74,7 @@ DEPENDENCIES:
   - JXSegmentedView (~> 1.2.7)
   - MBProgressHUD
   - MJRefresh
+  - OpenGLUtils (from `../openGL`)
   - PINCache (= 2.3)
   - SDWebImage (~> 5.0.6)
   - SDWebImageFLPlugin (~> 0.3.0)
@@ -85,6 +91,7 @@ SPEC REPOS:
     - DGCharts
     - FLAnimatedImage
     - FSPagerView
+    - GCDWebServer
     - HandyJSON
     - IQKeyboardManagerSwift
     - JJCollectionViewRoundFlowLayout_Swift
@@ -104,6 +111,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   AAInfographics:
     :git: https://github.com/AAChartModel/AAChartKit-Swift.git
+  OpenGLUtils:
+    :path: "../openGL"
 
 CHECKOUT OPTIONS:
   AAInfographics:
@@ -117,6 +126,7 @@ SPEC CHECKSUMS:
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   IQKeyboardManagerSwift: 371b08cb39664fb56030f5345c815a4ffc74bbc0
   JJCollectionViewRoundFlowLayout_Swift: 88caa983c8b5a07bc63abd79ff9f267eab436e41
@@ -124,6 +134,7 @@ SPEC CHECKSUMS:
   JXSegmentedView: eb1cad21f57c2543c00c3e08b8fd3c7ca54f5acd
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  OpenGLUtils: af967be364e96fbf9569d7b9c15602ac63d2807d
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
   SDWebImageFLPlugin: cf3f4ae49f249dd785129346fd61bbc8433a88cf
@@ -133,6 +144,6 @@ SPEC CHECKSUMS:
   SwiftPopMenu: e8ad0724497781abec06c16e158d08d741c794cd
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 2c6358d64cf6d7173047362d65e73987d791b909
+PODFILE CHECKSUM: bd5dbf1128db0a081160fe454b01413cc78b5f35
 
 COCOAPODS: 1.11.3

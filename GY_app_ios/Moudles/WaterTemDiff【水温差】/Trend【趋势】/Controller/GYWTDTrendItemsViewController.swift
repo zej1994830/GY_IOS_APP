@@ -13,6 +13,8 @@ class GYWTDTrendItemsViewController: GYViewController {
     var datatempSectionArray:NSArray = []
     var sectionStr:String = ""
     var dataArray:NSArray = []
+    var dataGroupArray:NSArray = []
+    var datatempGroupArray:NSMutableArray = []
     var indexrow:Int = 0
     var currentDateString:String = ""
     var currentLastHourDateString:String = ""
@@ -63,7 +65,7 @@ class GYWTDTrendItemsViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: -30)
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 5)
+        btn.contentHorizontalAlignment = .left
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(nameBtnClick), for: .touchUpInside)
         return btn
@@ -88,15 +90,16 @@ class GYWTDTrendItemsViewController: GYViewController {
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
-        btn.setTitle("2023-04-16 14:43 至 04-18 14:43", for: .normal)
+        btn.setTitle("2023-04-16 14:43 至 2023-04-18 14:43", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 325 - APP.WIDTH, bottom: 0, right: 10)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 325 - APP.WIDTH, bottom: 0, right: 10)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
         return btn
     }()
@@ -280,8 +283,8 @@ extension GYWTDTrendItemsViewController {
         //当前时间的上一个小时
         let calendar = Calendar.current
         currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
-        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
-        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
     }
     func addLayout() {
         headView.snp.makeConstraints { make in
@@ -373,6 +376,14 @@ extension GYWTDTrendItemsViewController {
             make.left.right.bottom.equalTo(0)
             make.top.equalTo(lineView.snp.bottom).offset(10)
         }
+        
+        namepickView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        timepickView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
     
@@ -411,52 +422,92 @@ extension GYWTDTrendItemsViewController {
             GYHUD.hideHudForView(weakSelf.view)
             let dic:NSDictionary = result as! NSDictionary
             let dicc:NSDictionary = dic["data"] as! NSDictionary
-            weakSelf.dataArray = dicc["temperature_list"] as! NSArray
-            weakSelf.radarCharData(array: weakSelf.dataArray)
+            weakSelf.dataGroupArray = dicc["temperature_list"] as! NSArray
+            weakSelf.requestlastdata(array: NSArray(objects: weakSelf.dataGroupArray.suffix(5)))
         }
     }
     
-    func radarCharData(array:NSArray) {
-        let data:NSMutableArray = []
-        let categories:NSMutableArray = []
+    func requestlastdata(array:NSArray) {
+        datatempGroupArray = NSMutableArray(array: array)
+        var namestr:String = ""
+        var stoveidString:String = ""
         
         for temp in array {
             guard let tempp = temp as? NSDictionary else {
                 return
             }
-            data.add(tempp["value"]!)
-            categories.add(tempp["name"]!)
+            
+            if namestr.count == 0 {
+                namestr = tempp["name"] as! String
+            }else {
+                namestr = namestr + "," + (tempp["name"] as! String)
+            }
+            
+            let id:Int64 = tempp["id"] as! Int64
+            let idstr = String(format: "%d", id)
+            if stoveidString.count == 0 {
+                stoveidString = idstr
+            }else {
+                stoveidString = stoveidString + "," + idstr
+            }
+        }
+        groupBtn.setTitle(namestr, for: .normal)
+        let params = ["device_db":GYDeviceData.default.device_db,"start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","rate":rate,"stoveidString":stoveidString,"type":indexrow] as [String : Any]
+        GYNetworkManager.share.requestData(.get, api: Api.getswctrenddata, parameters: params) {[weak self] (result) in
+            guard let weakSelf = self else{
+                return
+            }
+            GYHUD.hideHudForView(weakSelf.view)
+            let dic:NSDictionary = result as! NSDictionary
+            let dicc:NSDictionary = dic["data"] as! NSDictionary
+            weakSelf.dataArray = dicc["valueResult"] as! NSArray
+            weakSelf.radarCharData(array: weakSelf.dataArray)
+        }
+    }
+    func radarCharData(array:NSArray) {
+        var dataEntries = [AASeriesElement]()
+        let labelarray = groupBtn.titleLabel?.text?.components(separatedBy: ",")
+        var categories = [String]()
+        for i in 0..<array.count {
+            let dic = array[i] as! NSDictionary
+            let temparray:NSArray = dic["valueList"] as? NSArray ?? []
+            var data = [Any]()
+            for j in 0..<temparray.count {
+                let tempdic = temparray[j] as! NSDictionary
+                categories.append(tempdic["dt"]! as! String)
+                data.append(tempdic["value"] as Any)
+            }
+            let aa = AASeriesElement()
+                .name(labelarray![i])
+                .data(data)
+            dataEntries.append(aa)
         }
         
-        let model = AAChartModel()
+        
+        let chartmodel = AAChartModel()
             .chartType(.line)
-            .colorsTheme([maincolors[indexrow]])
-            .animationType(.easeOutCubic)
-            .animationDuration(1200)
-            .zoomType(.x)
-            .series([
-                AASeriesElement()
-                    .name((nameBtn.titleLabel?.text)!)
-                    .data(data as! [Any])
-                    .allowPointSelect(true)
-                    .states(AAStates()
-                        .select(AASelect()
-                            .color(selectcolors[indexrow])))
-                    
-            ])
-            .categories(categories as! [String])
-            .tooltipEnabled(true)
-        
-        lineView.aa_drawChartWithChartModel(model)
-        
+            .colorsTheme(["#0182F9","#BC7DFC","#12B48D","#F5C105","#FF6E66"])
+            .xAxisLabelsStyle(AAStyle(color: AAColor.black,fontSize: 14))
+            .dataLabelsEnabled(false)
+            .animationType(.bounce)
+            .series(dataEntries)
+            .markerSymbolStyle(.borderBlank)
+            .markerRadius(0)
+            .categories(categories)
+            .markerSymbol(.circle)
+            .zoomType(.x)//缩放功能
+            .legendEnabled(true)
+        lineView.aa_drawChartWithChartModel(chartmodel)
     }
     
     @objc func nameBtnClick() {
         namepickView.isHidden = false
+        timepickView.isHidden = true
     }
     
     @objc func pinlvBtnClick() {
         timepickView.isHidden = false
+        namepickView.isHidden = true
     }
     
     @objc func timeBtnClick() {
@@ -467,8 +518,8 @@ extension GYWTDTrendItemsViewController {
                     guard let weakSelf = self else{
                         return
                     }
-                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
-                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2![startIndex...], for: .normal)
+//                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
+                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
                     weakSelf.requestdata()
@@ -480,6 +531,14 @@ extension GYWTDTrendItemsViewController {
     
     @objc func groupBtnClick() {
         let vc = GYWTDTrendItemsGroupViewController()
+        vc.dataArray = dataGroupArray
+        vc.tempArray = datatempGroupArray
+        vc.ClickBlock = {[weak self] array in
+            guard let weakSelf = self else {
+                return
+            }
+            weakSelf.requestlastdata(array: array)
+        }
         self.zej_present(vc, vcTransitionDelegate: ZEJBottomPresentTransitionDelegate()){
             
         }
@@ -519,7 +578,7 @@ extension GYWTDTrendItemsViewController:UIPickerViewDelegate,UIPickerViewDataSou
         pickerView.isHidden = true
         
         if pickerView == namepickView {
-            requestnextdata(array: [[dataSectionArray[row]]])
+            requestnextdata(array: [dataSectionArray[row]])
         }else{
             if row == 0 {
                 rate = 0
@@ -587,8 +646,8 @@ extension GYWTDTrendItemsViewController:UICollectionViewDelegate,UICollectionVie
         }else if indexPath.row == 10 {
             currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .month, value: -1, to: currentDate)!)
         }
-        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
-        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
         requestdata()
         collectionView.reloadData()
     }

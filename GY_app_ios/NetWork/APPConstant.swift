@@ -11,11 +11,11 @@ import UIKit
  */
 struct APP{
     #if TESTING
-    static let API_SERVER: String = "http://192.168.100.69:5432/api/"
-//    static let API_SERVER: String = "http://36.129.131.242:8181/api/"
+//    static let API_SERVER: String = "http://192.168.100.69:5432/api/"
+    static let API_SERVER: String = "http://36.129.131.242:5432/api/"
     static let API_IMGAE_SERVER: String = "http://36.129.131.242:6060"
     #else
-    static let API_SERVER: String = "http://36.129.131.242:8181/api/"
+    static let API_SERVER: String = "http://36.129.131.242:5432/api/"
     static let API_IMGAE_SERVER: String = "http://36.129.131.242:6060"
     #endif
     

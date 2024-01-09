@@ -12,6 +12,7 @@
 		C80002692ABA877D00E7AFF9 /* GYWTDDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80002682ABA877D00E7AFF9 /* GYWTDDetailViewController.swift */; };
 		C800026B2ABADC3F00E7AFF9 /* GYWTDDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800026A2ABADC3F00E7AFF9 /* GYWTDDetailCell.swift */; };
 		C800026D2ABADDB100E7AFF9 /* GYWTDDetaiSecCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800026C2ABADDB100E7AFF9 /* GYWTDDetaiSecCell.swift */; };
+		C80528862B4B911900A38D5F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C80528852B4B911900A38D5F /* ViewController.m */; };
 		C809AB9F2AA0650E002301BE /* GYDeviceExpireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C809AB9E2AA0650E002301BE /* GYDeviceExpireViewController.swift */; };
 		C814A2C52AB40BF500FF1E87 /* GYWTDTotalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C814A2C42AB40BF500FF1E87 /* GYWTDTotalData.swift */; };
 		C81A26442A8C8F3D00E40516 /* GYDefaultNetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81A26432A8C8F3D00E40516 /* GYDefaultNetworkLogger.swift */; };
@@ -81,6 +82,7 @@
 		C8B30EE02AB2D3F800570901 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B30EDF2AB2D3F800570901 /* UIButton+Extension.swift */; };
 		C8B30EE32AB2E84C00570901 /* GYSelectWaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B30EE22AB2E84C00570901 /* GYSelectWaterViewController.swift */; };
 		C8B30EE52AB2F5DD00570901 /* GYSelectWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B30EE42AB2F5DD00570901 /* GYSelectWaterCell.swift */; };
+		C8B33AFB2B4694C60011626D /* SBRadarCharts.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B33AFA2B4694C60011626D /* SBRadarCharts.m */; };
 		C8B39CD12A6E61AC00532C53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B39CD02A6E61AC00532C53 /* AppDelegate.swift */; };
 		C8B39CDA2A6E61AD00532C53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8B39CD92A6E61AD00532C53 /* Assets.xcassets */; };
 		C8B39CE82A6E61AE00532C53 /* GY_app_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B39CE72A6E61AE00532C53 /* GY_app_iosTests.swift */; };
@@ -101,6 +103,9 @@
 		C8BBE11F2A9C46CC00E4CACE /* ZEJSlidePresentTransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1152A9C46CC00E4CACE /* ZEJSlidePresentTransitionDelegate.m */; };
 		C8BBE1212A9C484A00E4CACE /* GYUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1202A9C484A00E4CACE /* GYUpdateViewController.swift */; };
 		C8BBE12F2A9C87E700E4CACE /* GYApiCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE12E2A9C87E700E4CACE /* GYApiCenter.swift */; };
+		C8BC3B9A2B47F3E30052A236 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = C8BC3B992B47F3E30052A236 /* index.html */; };
+		C8BC3B9C2B47F3E70052A236 /* o3dv.min.js in Resources */ = {isa = PBXBuildFile; fileRef = C8BC3B9B2B47F3E70052A236 /* o3dv.min.js */; };
+		C8BC3E482B454FDF00B6CD93 /* GYMainFlagData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BC3E472B454FDF00B6CD93 /* GYMainFlagData.swift */; };
 		C8BCA2132B0458BB005EE9D6 /* GYGraphicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCA2122B0458BB005EE9D6 /* GYGraphicViewController.swift */; };
 		C8BCA21A2B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCA2192B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift */; };
 		C8BD5E7B2B19CC2900F4A50A /* GYFSDataTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BD5E7A2B19CC2900F4A50A /* GYFSDataTimeViewController.swift */; };
@@ -110,6 +115,8 @@
 		C8BF8FB82B1D69D900FF9D65 /* GYTHCurveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */; };
 		C8C03E282B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */; };
 		C8C084E02B27F7DE0095F25B /* GYETDataResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C084DF2B27F7DE0095F25B /* GYETDataResultViewController.swift */; };
+		C8C4C1552B43B22300065204 /* TESTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4C1542B43B22300065204 /* TESTViewController.swift */; };
+		C8C4C1582B43EC1100065204 /* GYFSGraphicRadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4C1572B43EC1100065204 /* GYFSGraphicRadarViewController.swift */; };
 		C8C4D3182A8F4539001297D2 /* GYHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4D3172A8F4539001297D2 /* GYHUD.swift */; };
 		C8C4D31E2A8F4DD9001297D2 /* CommonCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4D31D2A8F4DD9001297D2 /* CommonCache.swift */; };
 		C8C655E12B05BC4400DC4FC6 /* Pods_GY_app_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */; };
@@ -193,9 +200,12 @@
 		C80002682ABA877D00E7AFF9 /* GYWTDDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDetailViewController.swift; sourceTree = "<group>"; };
 		C800026A2ABADC3F00E7AFF9 /* GYWTDDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDetailCell.swift; sourceTree = "<group>"; };
 		C800026C2ABADDB100E7AFF9 /* GYWTDDetaiSecCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDetaiSecCell.swift; sourceTree = "<group>"; };
+		C80528842B4B911900A38D5F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		C80528852B4B911900A38D5F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C809AB9E2AA0650E002301BE /* GYDeviceExpireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYDeviceExpireViewController.swift; sourceTree = "<group>"; };
 		C814A2C42AB40BF500FF1E87 /* GYWTDTotalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTotalData.swift; sourceTree = "<group>"; };
 		C81A26432A8C8F3D00E40516 /* GYDefaultNetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYDefaultNetworkLogger.swift; sourceTree = "<group>"; };
+		C821FA552B2C2223004F98AD /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = "../../Downloads/assimp-master/lib/iOS/armv7/libassimp.a"; sourceTree = "<group>"; };
 		C86C35A22A832A3000AC28EC /* GYNoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYNoDataView.swift; sourceTree = "<group>"; };
 		C86C35A42A832B8D00AC28EC /* APPConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APPConstant.swift; sourceTree = "<group>"; };
 		C86C35A62A832F1800AC28EC /* UIColorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorConstant.swift; sourceTree = "<group>"; };
@@ -351,6 +361,8 @@
 		C8B30EDF2AB2D3F800570901 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		C8B30EE22AB2E84C00570901 /* GYSelectWaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSelectWaterViewController.swift; sourceTree = "<group>"; };
 		C8B30EE42AB2F5DD00570901 /* GYSelectWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSelectWaterCell.swift; sourceTree = "<group>"; };
+		C8B33AF92B4694C40011626D /* SBRadarCharts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRadarCharts.h; sourceTree = "<group>"; };
+		C8B33AFA2B4694C60011626D /* SBRadarCharts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRadarCharts.m; sourceTree = "<group>"; };
 		C8B39CCD2A6E61AC00532C53 /* GY_app_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GY_app_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B39CD02A6E61AC00532C53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8B39CD92A6E61AD00532C53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -386,6 +398,9 @@
 		C8BBE1202A9C484A00E4CACE /* GYUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYUpdateViewController.swift; sourceTree = "<group>"; };
 		C8BBE12A2A9C626A00E4CACE /* GY_app_ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GY_app_ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		C8BBE12E2A9C87E700E4CACE /* GYApiCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYApiCenter.swift; sourceTree = "<group>"; };
+		C8BC3B992B47F3E30052A236 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		C8BC3B9B2B47F3E70052A236 /* o3dv.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = o3dv.min.js; sourceTree = "<group>"; };
+		C8BC3E472B454FDF00B6CD93 /* GYMainFlagData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYMainFlagData.swift; sourceTree = "<group>"; };
 		C8BCA2122B0458BB005EE9D6 /* GYGraphicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGraphicViewController.swift; sourceTree = "<group>"; };
 		C8BCA2192B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGraphicBarChartViewController.swift; sourceTree = "<group>"; };
 		C8BD5E7A2B19CC2900F4A50A /* GYFSDataTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSDataTimeViewController.swift; sourceTree = "<group>"; };
@@ -395,6 +410,8 @@
 		C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTHCurveViewController.swift; sourceTree = "<group>"; };
 		C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETErosionMorphologyViewController.swift; sourceTree = "<group>"; };
 		C8C084DF2B27F7DE0095F25B /* GYETDataResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETDataResultViewController.swift; sourceTree = "<group>"; };
+		C8C4C1542B43B22300065204 /* TESTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TESTViewController.swift; sourceTree = "<group>"; };
+		C8C4C1572B43EC1100065204 /* GYFSGraphicRadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSGraphicRadarViewController.swift; sourceTree = "<group>"; };
 		C8C4D3172A8F4539001297D2 /* GYHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYHUD.swift; sourceTree = "<group>"; };
 		C8C4D31D2A8F4DD9001297D2 /* CommonCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCache.swift; sourceTree = "<group>"; };
 		C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GY_app_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -458,6 +475,7 @@
 		301D7CBE22A177CDCCAD3D21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C821FA552B2C2223004F98AD /* libassimp.a */,
 				C8C656EB2B05BFF100DC4FC6 /* SpreadsheetView.framework */,
 				C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */,
 				C8A7BB5D2AE60EBE002882A5 /* Framework */,
@@ -531,6 +549,7 @@
 		C874263E2A94A10900F2382A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				C8BC3E462B454FB700B6CD93 /* Model */,
 				C89FE6562AA5889D003BE557 /* View */,
 				C874263F2A94A11200F2382A /* Controller */,
 			);
@@ -1175,6 +1194,14 @@
 			isa = PBXGroup;
 			children = (
 				C8B39CD02A6E61AC00532C53 /* AppDelegate.swift */,
+				C8C4C1542B43B22300065204 /* TESTViewController.swift */,
+				C80528842B4B911900A38D5F /* ViewController.h */,
+				C80528852B4B911900A38D5F /* ViewController.m */,
+				C8BC3B992B47F3E30052A236 /* index.html */,
+				C8BC3B9B2B47F3E70052A236 /* o3dv.min.js */,
+				C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */,
+				C8B33AF92B4694C40011626D /* SBRadarCharts.h */,
+				C8B33AFA2B4694C60011626D /* SBRadarCharts.m */,
 				C8BBE12A2A9C626A00E4CACE /* GY_app_ios-Bridging-Header.h */,
 				C8AA2D952A78D801005CBD77 /* Root */,
 				C8AA2D9B2A78DB05005CBD77 /* Extension */,
@@ -1184,10 +1211,6 @@
 				C86C35AF2A8341C100AC28EC /* Moudles */,
 				C8C4D3192A8F45D5001297D2 /* Resource */,
 				C8B39CD92A6E61AD00532C53 /* Assets.xcassets */,
-				C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */,
-				C8D1D6A22B2A8A05008994B3 /* CaiJiHe_LED.obj */,
-				C8D1D6A02B2A89F7008994B3 /* 1281702515263.jpg */,
-				C8B687C52B2989BF000768FC /* armadillo.obj */,
 				C8B39CDB2A6E61AD00532C53 /* LaunchScreen.storyboard */,
 				C8B39CDE2A6E61AD00532C53 /* Info.plist */,
 			);
@@ -1293,6 +1316,14 @@
 			path = SlidePresentTransition;
 			sourceTree = "<group>";
 		};
+		C8BC3E462B454FB700B6CD93 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8BC3E472B454FDF00B6CD93 /* GYMainFlagData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C8BCA20D2B045857005EE9D6 /* Graphic【图示】 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1338,6 +1369,7 @@
 		C8BCA2172B04B067005EE9D6 /* Radar【雷达图】 */ = {
 			isa = PBXGroup;
 			children = (
+				C8C4C1562B43EBE800065204 /* Controller */,
 			);
 			path = "Radar【雷达图】";
 			sourceTree = "<group>";
@@ -1472,10 +1504,21 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		C8C4C1562B43EBE800065204 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C4C1572B43EC1100065204 /* GYFSGraphicRadarViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C8C4D3192A8F45D5001297D2 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C8D1D6A22B2A8A05008994B3 /* CaiJiHe_LED.obj */,
 				C89D8D7C2A9F09E10013E1B1 /* loading.gif */,
+				C8D1D6A02B2A89F7008994B3 /* 1281702515263.jpg */,
+				C8B687C52B2989BF000768FC /* armadillo.obj */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1819,6 +1862,8 @@
 				C8DD77482A95A69F003E184D /* LaunchScreen.storyboard in Resources */,
 				C8D1D6A32B2A8A05008994B3 /* CaiJiHe_LED.obj in Resources */,
 				C8B39CDA2A6E61AD00532C53 /* Assets.xcassets in Resources */,
+				C8BC3B9A2B47F3E30052A236 /* index.html in Resources */,
+				C8BC3B9C2B47F3E70052A236 /* o3dv.min.js in Resources */,
 				C8B687CB2B2992E7000768FC /* CaiJiHe_LED.fbx in Resources */,
 				C8B687C62B2989BF000768FC /* armadillo.obj in Resources */,
 			);
@@ -1972,6 +2017,7 @@
 				C89624292AC2B84A005DE286 /* GYWTDDataBaseCell.swift in Sources */,
 				C8B39CD12A6E61AC00532C53 /* AppDelegate.swift in Sources */,
 				C8A2BC362AD25BD2009BB260 /* GYErosionThicknessMainViewController.swift in Sources */,
+				C80528862B4B911900A38D5F /* ViewController.m in Sources */,
 				C8DD77472A95A246003E184D /* GYImageExtension.swift in Sources */,
 				C89F6AE92AC16FA800FE541A /* GYWTDTrendCell.swift in Sources */,
 				C8BBE11D2A9C46CC00E4CACE /* ZEJBottomPresentTransitionDelegate.m in Sources */,
@@ -1985,6 +2031,7 @@
 				C89E133B2AB05E6300ECC5AA /* GYTotalWTDFooterView.swift in Sources */,
 				C8B30EDE2AB2934300570901 /* GYSelectWTDViewController.swift in Sources */,
 				C8A559C32AE222E900446837 /* GYWTDDataTimeViewController.swift in Sources */,
+				C8C4C1582B43EC1100065204 /* GYFSGraphicRadarViewController.swift in Sources */,
 				C8BF8FB82B1D69D900FF9D65 /* GYTHCurveViewController.swift in Sources */,
 				C8EB0EC52AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift in Sources */,
 				C8C03E282B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift in Sources */,
@@ -2009,6 +2056,7 @@
 				C8BBE1212A9C484A00E4CACE /* GYUpdateViewController.swift in Sources */,
 				C8BD5E7B2B19CC2900F4A50A /* GYFSDataTimeViewController.swift in Sources */,
 				C8EB0ECC2AD131C500049C6A /* GYWTDTrendItemsGroupCell.swift in Sources */,
+				C8B33AFB2B4694C60011626D /* SBRadarCharts.m in Sources */,
 				C8DDBBC52B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift in Sources */,
 				C800026B2ABADC3F00E7AFF9 /* GYWTDDetailCell.swift in Sources */,
 				C8A3883F2AE0FDC60022410F /* GYWTDWarnCell.swift in Sources */,
@@ -2032,6 +2080,7 @@
 				C89624252AC287D5005DE286 /* GYWTDDataBaseHeaderView.swift in Sources */,
 				C8BBE11A2A9C46CC00E4CACE /* ZEJRollDownTransitionDelegate.m in Sources */,
 				C89E762F2AA9B62000985EFC /* GYTotalWTDViewController.swift in Sources */,
+				C8C4C1552B43B22300065204 /* TESTViewController.swift in Sources */,
 				C8AA2D992A78DAA9005CBD77 /* GYTabBar.swift in Sources */,
 				C89FE6552AA5882E003BE557 /* NumberExtension.swift in Sources */,
 				C89624232AC27448005DE286 /* GYWTDDataCell.swift in Sources */,
@@ -2042,6 +2091,7 @@
 				C89E13392AB013BD00ECC5AA /* GYTotalWTDTVCell.swift in Sources */,
 				C89FE6532AA5877F003BE557 /* GYCustomFlowLayout.swift in Sources */,
 				C89F6AE72AC11CEE00FE541A /* GYWTDTrendData.swift in Sources */,
+				C8BC3E482B454FDF00B6CD93 /* GYMainFlagData.swift in Sources */,
 				C8DDBBC72B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift in Sources */,
 				C8AB6FF42ADE79B1002EFEB9 /* GYWTDDataBaseBaseCell.swift in Sources */,
 				C874263D2A94983900F2382A /* gobalFunction.swift in Sources */,
@@ -2172,7 +2222,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2226,7 +2276,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2244,20 +2294,120 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 42G3V9J45R;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GY_app_ios",
+					"$(PROJECT_DIR)/GY_app_ios/Resource/include",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AAInfographics/AAInfographics.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BRPickerView/BRPickerView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DGCharts/DGCharts.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FLAnimatedImage/FLAnimatedImage.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FSPagerView/FSPagerView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON/HandyJSON.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JJCollectionViewRoundFlowLayout_Swift/JJCollectionViewRoundFlowLayout_Swift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JJException/JJException.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JXSegmentedView/JXSegmentedView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD/MBProgressHUD.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh/MJRefresh.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PINCache/PINCache.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImageFLPlugin/SDWebImageFLPlugin.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKitExtend/SnapKitExtend.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SpreadsheetView/SpreadsheetView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftPopMenu/SwiftPopMenu.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers\"",
+					"\"$(SRCROOT)/GY_app_ios/Resource/include\"",
+				);
 				INFOPLIST_FILE = GY_app_ios/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "大连国业";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GY_app_ios/Resource",
+				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"swiftCoreGraphics\"",
+					"-framework",
+					"\"AAInfographics\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BRPickerView\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"DGCharts\"",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"FSPagerView\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"HandyJSON\"",
+					"-framework",
+					"\"IQKeyboardManagerSwift\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JJCollectionViewRoundFlowLayout_Swift\"",
+					"-framework",
+					"\"JJException\"",
+					"-framework",
+					"\"JXSegmentedView\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"OpenGLUtils\"",
+					"-framework",
+					"\"PINCache\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageFLPlugin\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SnapKitExtend\"",
+					"-framework",
+					"\"SpreadsheetView\"",
+					"-framework",
+					"\"SwiftPopMenu\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-lstdc++",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DTESTING";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.demo.GY-app-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dlguoye.GY-app-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "GY_app_ios/GY_app_ios-Bridging-Header.h";
@@ -2274,20 +2424,120 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 42G3V9J45R;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GY_app_ios",
+					"$(PROJECT_DIR)/GY_app_ios/Resource/include",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AAInfographics/AAInfographics.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BRPickerView/BRPickerView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DGCharts/DGCharts.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FLAnimatedImage/FLAnimatedImage.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FSPagerView/FSPagerView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON/HandyJSON.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JJCollectionViewRoundFlowLayout_Swift/JJCollectionViewRoundFlowLayout_Swift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JJException/JJException.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JXSegmentedView/JXSegmentedView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD/MBProgressHUD.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh/MJRefresh.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PINCache/PINCache.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImageFLPlugin/SDWebImageFLPlugin.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKitExtend/SnapKitExtend.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SpreadsheetView/SpreadsheetView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftPopMenu/SwiftPopMenu.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers\"",
+					"\"$(SRCROOT)/GY_app_ios/Resource/include\"",
+				);
 				INFOPLIST_FILE = GY_app_ios/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "大连国业";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GY_app_ios/Resource",
+				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"swiftCoreGraphics\"",
+					"-framework",
+					"\"AAInfographics\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BRPickerView\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"DGCharts\"",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"FSPagerView\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"HandyJSON\"",
+					"-framework",
+					"\"IQKeyboardManagerSwift\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JJCollectionViewRoundFlowLayout_Swift\"",
+					"-framework",
+					"\"JJException\"",
+					"-framework",
+					"\"JXSegmentedView\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"OpenGLUtils\"",
+					"-framework",
+					"\"PINCache\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageFLPlugin\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SnapKitExtend\"",
+					"-framework",
+					"\"SpreadsheetView\"",
+					"-framework",
+					"\"SwiftPopMenu\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-lstdc++",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DTESTING";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.demo.GY-app-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dlguoye.GY-app-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "GY_app_ios/GY_app_ios-Bridging-Header.h";

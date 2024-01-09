@@ -3,4 +3,22 @@
    uuid = "7D0E165E-1BA2-4DD4-AD69-A0517AB8C4D8"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E006E63E-5445-4EFE-811A-DDA6E2A362E7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GY_app_ios/Moudles/FurnaceShell&#x3010;&#x7089;&#x58f3;&#x6e29;&#x5ea6;&#x3011;/Graphic&#x3010;&#x56fe;&#x793a;&#x3011;/Radar&#x3010;&#x96f7;&#x8fbe;&#x56fe;&#x3011;/Controller/GYFSGraphicRadarViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
+            landmarkName = "requestlastdata(array:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

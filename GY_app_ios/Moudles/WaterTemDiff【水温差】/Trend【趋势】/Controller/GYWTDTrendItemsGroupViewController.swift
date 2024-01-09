@@ -33,7 +33,7 @@ class GYWTDTrendItemsGroupViewController: ZEJBottomPresentViewController {
         return view
     }()
     
-    private lazy var titleLabel:UILabel = {
+    lazy var titleLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.text = "组别"
@@ -42,7 +42,7 @@ class GYWTDTrendItemsGroupViewController: ZEJBottomPresentViewController {
     
     private lazy var tableView:UITableView = {
         let tableview = UITableView.init(frame: CGRect.zero, style: .plain)
-        tableview.separatorStyle = .singleLine
+        tableview.separatorStyle = .none
         tableview.delegate = self
         tableview.dataSource = self
         return tableview
@@ -66,6 +66,18 @@ class GYWTDTrendItemsGroupViewController: ZEJBottomPresentViewController {
         return btn
     }()
     
+    private lazy var allBtn:UIButton = {
+        let btn = UIButton()
+        btn.setTitle("全选", for: .normal)
+        btn.setTitleColor(UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8"), for: .normal)
+        btn.addTarget(self, action: #selector(allBtnClick), for: .touchUpInside)
+        btn.layer.cornerRadius = 14
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8").cgColor
+        btn.layer.masksToBounds = true
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -84,9 +96,11 @@ extension GYWTDTrendItemsGroupViewController {
     func setupViews() {
         self.view.addSubview(contentView)
         contentView.addSubview(titleLabel)
+//        contentView.addSubview(allBtn)
         contentView.addSubview(tableView)
         contentView.addSubview(cancelBtn)
         contentView.addSubview(sureBtn)
+        
     }
     func addLayout() {
         contentView.snp.makeConstraints { make in
@@ -99,6 +113,8 @@ extension GYWTDTrendItemsGroupViewController {
             make.top.equalTo(17)
             make.height.equalTo(28)
         }
+        
+        
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(15)
@@ -129,7 +145,18 @@ extension GYWTDTrendItemsGroupViewController {
     }
     
     @objc func sureBtnClick() {
+        if tempArray.count > 5 {
+            GYHUD.show("目前不让选中超过五个")
+            return
+        }
+        if let block = ClickBlock {
+            block(tempArray)
+        }
         self.dismiss(animated: true)
+    }
+    
+    @objc func allBtnClick() {
+
     }
 }
 
@@ -149,11 +176,53 @@ extension GYWTDTrendItemsGroupViewController:UITableViewDelegate,UITableViewData
         if cell == nil {
             cell = GYWTDTrendItemsGroupCell(style: .default, reuseIdentifier: GYWTDTrendItemsGroupCell.indentifier)
         }
-        cell?.titleStr = String(format: "C1-%d", indexPath.row)
+        let dic:NSDictionary = dataArray[indexPath.row] as! NSDictionary
         if type == 3 {
-            let dic:NSDictionary = dataArray[indexPath.row] as! NSDictionary
-//            cell?.titleStr = dic["stove_name"]
+            cell?.titleStr = dic["stove_name"] as! String
+        }else {
+            cell?.titleStr = dic["name"] as! String
+        }
+        
+        for temp in tempArray {
+            let tempdic:NSDictionary = temp as! NSDictionary
+            var str = ""
+            if type == 3 {
+                str = tempdic["stove_name"] as! String
+            }else {
+                str = tempdic["name"] as! String
+            }
+            if cell?.titleStr == str {
+                cell?.cellBtn.isSelected = true
+            }
+        }
+        
+        cell?.ClickBlock = {[weak self] isselectbool in
+            guard let weakSelf = self else {
+                return
+            }
+            let dic:NSDictionary = weakSelf.dataArray[indexPath.row] as! NSDictionary
+            if isselectbool {
+                weakSelf.tempArray.add(dic)
+            }else{
+                for item in weakSelf.tempArray {
+                    let tempdic:NSDictionary = item as! NSDictionary
+                    if weakSelf.type == 3 {
+                        if (tempdic["stove_id"] as! Int64) == (dic["stove_id"] as! Int64) {
+                            weakSelf.tempArray.remove(tempdic)
+                        }
+                    }else {
+                        if (tempdic["id"] as! Int64) == (dic["id"] as! Int64) {
+                            weakSelf.tempArray.remove(tempdic)
+                        }
+                    }
+                    
+                }
+            }
         }
         return cell ?? UITableViewCell()
     }
+    
+    
 }
+
+

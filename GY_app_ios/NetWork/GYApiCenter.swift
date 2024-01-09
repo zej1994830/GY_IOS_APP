@@ -26,7 +26,10 @@ struct Api {
     static let getListHistoryData:String = "alarm/ListHistoryData"
     //实时报警
     static let getListTimeData:String = "alarm/ListTimeData"
-    
+    //获取实时报警监控信息
+    static let getMonitorData:String = "alarm/Monitor"
+    //获取首页展示项
+    static let getfunctionflag:String = "group/getfunctionflag"
 }
 
 extension Api {
@@ -40,6 +43,8 @@ extension Api {
     static let getswcdata: String = "wcpandect/getwcgrouptagdatlist"
     //温差 入温 出温 流量 热流趋势
     static let getGroupDataListByPartId: String = "wcdiagram/getGroupDataListByPartId"
+    //水温差_趋势_获取高炉分段详细数据接口
+    static let getswctrenddata: String = "wctrend/getwctrenddata"
     //数据 月日时分
     static let getwctimedata: String = "wctime/getwctimedata"
     //设备巡检 信息接口
@@ -61,6 +66,8 @@ extension Api {
     static let getlkfmtimedata: String = "fmtime/getfmtimedata"
     //获取炉壳测温趋势曲线数据
     static let getlkTrendChartData: String = "FMDiagram/GetTrendChartData"
+    //获取高炉温差分段标签接口 雷达图
+    static let getlkGroupListByPartId: String = "group/getGroupListByPartId"
 }
 
 extension Api {

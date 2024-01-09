@@ -10,6 +10,7 @@ import UIKit
 class GYWTDDeviceAddressViewController: GYViewController {
     var deviceDataArray:NSArray = []
     var dataArray:NSArray = []
+    var function_type:Int = 0
     
     private lazy var headView:UIView = {
         let view = UIView()
@@ -125,7 +126,7 @@ extension GYWTDDeviceAddressViewController {
     
     func request() {
         GYHUD.showGif(view: self.view)
-        let params = ["device_db":GYDeviceData.default.device_db,"function_type":0] as [String:Any]
+        let params = ["device_db":GYDeviceData.default.device_db,"function_type":function_type] as [String:Any]
         GYNetworkManager.share.requestData(.get, api: Api.getdeviceaddresslist, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -144,7 +145,7 @@ extension GYWTDDeviceAddressViewController {
     }
     
     func requestnextdata(dic:NSDictionary) {
-        let params = ["device_db":GYDeviceData.default.device_db,"function_type":0,"deviceAddr":dic["masterAddressNumber"] ?? 0] as [String:Any]
+        let params = ["device_db":GYDeviceData.default.device_db,"function_type":function_type,"deviceAddr":dic["masterAddressNumber"] ?? 0] as [String:Any]
         GYNetworkManager.share.requestData(.get, api: Api.gettaglistbydeviceaddr, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
                 return

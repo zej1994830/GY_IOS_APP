@@ -144,7 +144,7 @@ extension GYFSDeviceAddressViewController {
     }
     
     func requestnextdata(dic:NSDictionary) {
-        let params = ["device_db":GYDeviceData.default.device_db,"function_type":0,"deviceAddr":dic["masterAddressNumber"] ?? 0] as [String:Any]
+        let params = ["device_db":GYDeviceData.default.device_db,"function_type":1,"deviceAddr":dic["masterAddressNumber"] ?? 0] as [String:Any]
         GYNetworkManager.share.requestData(.get, api: Api.gettaglistbydeviceaddr, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
                 return

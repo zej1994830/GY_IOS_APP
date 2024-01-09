@@ -142,6 +142,8 @@ extension GYFurnaceShellMainViewController:UICollectionViewDataSource,UICollecti
         }else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 //趋势
+                let vc = GYFSGraphicTrendViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             }else if indexPath.row == 1 {
                 //柱状图
                 let vc = GYGraphicBarChartViewController()
@@ -149,9 +151,19 @@ extension GYFurnaceShellMainViewController:UICollectionViewDataSource,UICollecti
 
             }else if indexPath.row == 2 {
                 //雷达图
+                let vc = GYFSGraphicRadarViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+
             }
         }else if indexPath.section == 2 {
             //报警
+            let vc = GYWTDWarnViewController()
+            if indexPath.row == 0 {
+                //实时
+                vc.isrealtime = true
+            }
+            vc.function_type = 1
+            self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.section == 3 {
             //数据
             let vc = GYFSDataTimeViewController()

@@ -15,13 +15,7 @@ class GYWTDWarnViewController: GYViewController {
     var function_type:Int = 0
     var isrealtime:Bool = false {
         didSet{
-            if isrealtime {
-                headView.isHidden = true
-                tableView.snp.updateConstraints { make in
-                    make.top.equalTo(topHeight + 5)
-                    make.left.right.bottom.equalTo(0)
-                }
-            }
+            
         }
     }
     private lazy var headView:UIView = {
@@ -33,15 +27,15 @@ class GYWTDWarnViewController: GYViewController {
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
-        btn.setTitle("2023-04-16 14:43 至 04-18 14:43", for: .normal)
+        btn.setTitle("2023-04-16 14:43 至 2023-04-18 14:43", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 120, bottom: 0, right: -50)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -60)
 //        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 355 - APP.WIDTH, bottom: 0, right: 15)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
         return btn
@@ -72,7 +66,15 @@ class GYWTDWarnViewController: GYViewController {
         super.viewDidLoad()
         setupViews()
         addLayout()
+        if isrealtime {
+            headView.isHidden = true
+            tableView.snp.remakeConstraints { make in
+                make.top.equalTo(topHeight + 5)
+                make.left.right.bottom.equalTo(0)
+            }
+        }
         realtimerequest()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -141,7 +143,7 @@ extension GYWTDWarnViewController {
     func historyrequest() {
         GYHUD.showGif(view: self.view)
 
-        let params = ["device_db":GYDeviceData.default.device_db,"function_type":function_type,"start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","number":0] as [String : Any]
+        let params = ["device_db":GYDeviceData.default.device_db,"function_type":function_type,"start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","number":500] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getListHistoryData, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -183,8 +185,8 @@ extension GYWTDWarnViewController:UITableViewDelegate,UITableViewDataSource {
                     guard let weakSelf = self else{
                         return
                     }
-                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
-                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2![startIndex...], for: .normal)
+//                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
+                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
                     weakSelf.historyrequest()

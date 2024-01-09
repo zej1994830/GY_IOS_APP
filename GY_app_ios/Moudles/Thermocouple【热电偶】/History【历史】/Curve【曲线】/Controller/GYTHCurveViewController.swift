@@ -91,7 +91,7 @@ class GYTHCurveViewController: GYViewController {
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
-        btn.setTitle("2023-04-16 14:43 至 04-18 14:43", for: .normal)
+        btn.setTitle("2023-04-16 14:43 至 2023-04-18 14:43", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
@@ -99,7 +99,7 @@ class GYTHCurveViewController: GYViewController {
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
 //        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 325 - APP.WIDTH, bottom: 0, right: 10)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
         return btn
@@ -171,6 +171,15 @@ class GYTHCurveViewController: GYViewController {
     }()
     
     private lazy var showGroupView4:showView = {
+        let view = showView()
+        view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#0182F9")
+        view.label2.text = "C1-4"
+        view.label3.text = "27.98"
+        view.isHidden = true
+        return view
+    }()
+    
+    private lazy var showGroupView5:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#0182F9")
         view.label2.text = "C1-4"
@@ -262,6 +271,7 @@ extension GYTHCurveViewController {
         midView.addSubview(showGroupView2)
         midView.addSubview(showGroupView3)
         midView.addSubview(showGroupView4)
+        midView.addSubview(showGroupView5)
         midView.addSubview(lineView)
         midView.addSubview(collectionV)
         self.view.addSubview(namepickView)
@@ -277,8 +287,8 @@ extension GYTHCurveViewController {
         //当前时间的上一个小时
         let calendar = Calendar.current
         currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
-        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
-        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
     }
     func addLayout() {
         headView.snp.makeConstraints { make in
@@ -353,9 +363,9 @@ extension GYTHCurveViewController {
             make.top.equalTo(20)
         }
         
-        let arr = [showGroupView,showGroupView2,showGroupView3]
+        let arr = [showGroupView,showGroupView2,showGroupView3,showGroupView4,showGroupView5]
 //        arr.snp.distributeViewsAlong(axisType:.horizontal,fixedSpacing: 24,leadSpacing: 24,tailSpacing: 24)
-        arr.snp.distributeViewsAlong(axisType: .horizontal,fixedItemLength: 90,leadSpacing: 24,tailSpacing: 24)
+        arr.snp.distributeViewsAlong(axisType: .horizontal,fixedItemLength: 55,leadSpacing: 24,tailSpacing: 24)
         arr.snp.makeConstraints { make in
             make.top.equalTo(midtimeLabel.snp.bottom).offset(11)
         }
@@ -479,7 +489,7 @@ extension GYTHCurveViewController {
         
         let model = AAChartModel()
             .chartType(.line)
-            .colorsTheme([maincolors[indexrow]])
+            .colorsTheme(maincolors)
             .animationType(.easeOutCubic)
             .animationDuration(1200)
             .zoomType(.x)
@@ -507,8 +517,8 @@ extension GYTHCurveViewController {
                     guard let weakSelf = self else{
                         return
                     }
-                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
-                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2![startIndex...], for: .normal)
+//                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
+                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
                     GYHUD.showGif(view: weakSelf.view)
@@ -520,7 +530,7 @@ extension GYTHCurveViewController {
     }
     
     @objc func groupBtnClick() {
-        let vc = GYSelectGroupViewController()
+        let vc = GYWTDTrendItemsGroupViewController()
         vc.type = 3
         vc.dataArray = NSMutableArray(array: datagroupArray)
         vc.tempArray = NSMutableArray(array: datatempgroupArray)
@@ -640,8 +650,8 @@ extension GYTHCurveViewController:UICollectionViewDelegate,UICollectionViewDataS
         }else if indexPath.row == 10 {
             currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .month, value: -1, to: currentDate)!)
         }
-        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
-        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
         GYHUD.showGif(view: self.view)
         requestlastdata(array: datatempgroupArray)
         collectionView.reloadData()
@@ -668,6 +678,31 @@ extension GYTHCurveViewController:UICollectionViewDelegate,UICollectionViewDataS
             
             """
         )
+        for i in 0..<dataArray.count {
+            let dic = dataArray[i] as! NSDictionary
+            let temparray:NSArray = dic["data"] as! NSArray
+            let tempdic = temparray[clickEventMessage.index!] as! NSDictionary
+            if i == 0 {
+                showGroupView.label2.text = String(format: "%@", dic["stove_name"] as! String)
+                showGroupView.label3.text = String(format: "%.2f", tempdic["value"] as! Double)
+            }
+            if i == 1 {
+                showGroupView2.label2.text = String(format: "%@", dic["stove_name"] as! String)
+                showGroupView2.label3.text = String(format: "%.2f", tempdic["value"] as! Double)
+            }
+            if i == 2 {
+                showGroupView3.label2.text = String(format: "%@", dic["stove_name"] as! String)
+                showGroupView3.label3.text = String(format: "%.2f", tempdic["value"] as! Double)
+            }
+            if i == 3 {
+                showGroupView4.label2.text = String(format: "%@", dic["stove_name"] as! String)
+                showGroupView4.label3.text = String(format: "%.2f", tempdic["value"] as! Double)
+            }
+            if i == 4 {
+                showGroupView5.label2.text = String(format: "%@", dic["stove_name"] as! String)
+                showGroupView5.label3.text = String(format: "%.2f", tempdic["value"] as! Double)
+            }
+        }
         
     }
 }

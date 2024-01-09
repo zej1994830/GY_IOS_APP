@@ -44,7 +44,7 @@ class GYWTDTrendViewController: GYViewController {
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
-        btn.setTitle("2023-04-16 14:43 至 04-18 14:43", for: .normal)
+        btn.setTitle("2023-04-16 14:43 至 2023-04-18 14:43", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
@@ -52,7 +52,7 @@ class GYWTDTrendViewController: GYViewController {
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
 //        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 355 - APP.WIDTH, bottom: 0, right: 15)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
         return btn
@@ -292,8 +292,8 @@ extension GYWTDTrendViewController {
         //当前时间的上一个小时
         let calendar = Calendar.current
         currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
-        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
-        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
     
     }
     func addLayout() {
@@ -422,7 +422,12 @@ extension GYWTDTrendViewController {
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             if let value = dicc["data"] as? NSNull {
                 GYHUD.show("此时间段没有数据，请重新选择时间段！")
+                weakSelf.noDataView.isHidden = false
+                weakSelf.noDataView.snp.remakeConstraints { make in
+                    make.center.size.equalTo(weakSelf.lineView2)
+                }
             }else{
+                weakSelf.noDataView.isHidden = true
                 weakSelf.dataarray = dicc["data"] as! NSArray
                 weakSelf.linedata2()
             }
@@ -431,8 +436,8 @@ extension GYWTDTrendViewController {
     
     func linedata2() {
         var dataEntries = [AASeriesElement]()
-        let labelarray = ["热流","出温","入温","温差","流量"]
-        let labelarray2 = ["reFlow","outTemp","inTemp","tempWc","flow"]
+        let labelarray = ["热流","入温","出温","温差","流量"]
+        let labelarray2 = ["reFlow","inTemp","outTemp","tempWc","flow"]
         var categories = [String]()
         for i in 0..<dataarray.count {
             let dic = dataarray[i] as! NSDictionary
@@ -454,7 +459,7 @@ extension GYWTDTrendViewController {
         
         let chartmodel = AAChartModel()
             .chartType(.line)
-            .colorsTheme(["#0182F9","#BC7DFC","#12B48D","#F5C105","#FF6E66"])
+            .colorsTheme(["#0182F9","#12B48D","#BC7DFC","#F5C105","#FF6E66"])
             .xAxisLabelsStyle(AAStyle(color: AAColor.black,fontSize: 14))
             .dataLabelsEnabled(false)
             .animationType(.bounce)
@@ -476,8 +481,8 @@ extension GYWTDTrendViewController {
                     guard let weakSelf = self else{
                         return
                     }
-                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
-                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2![startIndex...], for: .normal)
+//                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
+                    weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
                     weakSelf.request()
@@ -502,9 +507,9 @@ extension GYWTDTrendViewController {
         for i in 0..<5 {
             let tempbutton:UIButton = self.view.viewWithTag(i + 100)! as! UIButton
             if tempbutton.isSelected  {
-                labelarray.add(["热流","出温","入温","温差","流量"][i])
-                labelarray2.add(["reFlow","outTemp","inTemp","tempWc","flow"][i])
-                colorarray.add(["#0182F9","#BC7DFC","#12B48D","#F5C105","#FF6E66"][i])
+                labelarray.add(["热流","入温","出温","温差","流量"][i])
+                labelarray2.add(["reFlow","inTemp","outTemp","tempWc","flow"][i])
+                colorarray.add(["#0182F9","#12B48D","#BC7DFC","#F5C105","#FF6E66"][i])
             }
         }
         
@@ -636,8 +641,8 @@ extension GYWTDTrendViewController:UICollectionViewDataSource,UICollectionViewDe
         }else if indexPath.row == 10 {
             currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .month, value: -1, to: currentDate)!)
         }
-        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
-        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString[startIndex...], for: .normal)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
         request()
         collectionView.reloadData()
     }
@@ -669,6 +674,7 @@ extension GYWTDTrendViewController:AAChartViewDelegate {
 //        let labelarray = ["热流","出温","入温","温差","流量"]
 //        let labelarray2 = ["reFlow","outTemp","inTemp","tempWc","flow"]
         let dic = dataarray[clickEventMessage.index!] as! NSDictionary
+        midtimeLabel.text = String(format: "时间：%@", dic["dt"] as! String)
         wenchaView.label3.text =  String(format: "%.2f", dic["tempWc"] as! Double)
         ruwenView.label3.text = String(format: "%.2f", dic["inTemp"] as! Double)
         chuwenView.label3.text = String(format: "%.2f", dic["outTemp"] as! Double)
