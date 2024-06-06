@@ -139,7 +139,7 @@ class GYWTDTrendItemsViewController: GYViewController {
     
     private lazy var midtimeLabel:UILabel = {
         let label = UILabel()
-        label.text = "时间：2022-04-19 10:36"
+        label.text = "时间："
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -361,7 +361,7 @@ extension GYWTDTrendItemsViewController {
         
         let arr = [showGroupView,showGroupView2,showGroupView3,showGroupView4,showGroupView5]
 //        arr.snp.distributeViewsAlong(axisType:.horizontal,fixedSpacing: 24,leadSpacing: 24,tailSpacing: 24)
-        arr.snp.distributeViewsAlong(axisType: .horizontal,fixedItemLength: 45,leadSpacing: 24,tailSpacing: 24)
+        arr.snp.distributeViewsAlong(axisType: .horizontal,fixedItemLength: 55,leadSpacing: 20,tailSpacing: 20)
         arr.snp.makeConstraints { make in
             make.top.equalTo(midtimeLabel.snp.bottom).offset(11)
         }
@@ -419,15 +419,15 @@ extension GYWTDTrendItemsViewController {
             guard let weakSelf = self else{
                 return
             }
-            GYHUD.hideHudForView(weakSelf.view)
             let dic:NSDictionary = result as! NSDictionary
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.dataGroupArray = dicc["temperature_list"] as! NSArray
-            weakSelf.requestlastdata(array: NSArray(objects: weakSelf.dataGroupArray.suffix(5)))
+            weakSelf.requestlastdata(array: NSArray(objects: weakSelf.dataGroupArray.subarray(with: NSRange(location: 0, length: 5))))
         }
     }
     
     func requestlastdata(array:NSArray) {
+        cleartext()
         datatempGroupArray = NSMutableArray(array: array)
         var namestr:String = ""
         var stoveidString:String = ""
@@ -475,7 +475,7 @@ extension GYWTDTrendItemsViewController {
             for j in 0..<temparray.count {
                 let tempdic = temparray[j] as! NSDictionary
                 categories.append(tempdic["dt"]! as! String)
-                data.append(tempdic["value"] as Any)
+                data.append(Double(tempdic["value"] as! String))
             }
             let aa = AASeriesElement()
                 .name(labelarray![i])
@@ -501,27 +501,39 @@ extension GYWTDTrendItemsViewController {
     }
     
     @objc func nameBtnClick() {
+        self.view.insertSubview(namepickView, aboveSubview: noDataView)
         namepickView.isHidden = false
         timepickView.isHidden = true
     }
     
     @objc func pinlvBtnClick() {
+        self.view.insertSubview(timepickView, aboveSubview: noDataView)
         timepickView.isHidden = false
         namepickView.isHidden = true
     }
     
     @objc func timeBtnClick() {
-        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
                     weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
+                    weakSelf.selectIndex = IndexPath(row: -1, section: 0)
+                    weakSelf.collectionV.reloadData()
                     weakSelf.requestdata()
                 }
             }))
@@ -530,9 +542,13 @@ extension GYWTDTrendItemsViewController {
     }
     
     @objc func groupBtnClick() {
+        if dataGroupArray.count == 0 {
+            GYHUD.show("当前数据没有组别")
+            return
+        }
         let vc = GYWTDTrendItemsGroupViewController()
         vc.dataArray = dataGroupArray
-        vc.tempArray = datatempGroupArray
+        vc.tempArray = NSMutableArray(array: datatempGroupArray)
         vc.ClickBlock = {[weak self] array in
             guard let weakSelf = self else {
                 return
@@ -578,6 +594,9 @@ extension GYWTDTrendItemsViewController:UIPickerViewDelegate,UIPickerViewDataSou
         pickerView.isHidden = true
         
         if pickerView == namepickView {
+            if dataSectionArray.count == 0 {
+                return
+            }
             requestnextdata(array: [dataSectionArray[row]])
         }else{
             if row == 0 {
@@ -589,6 +608,20 @@ extension GYWTDTrendItemsViewController:UIPickerViewDelegate,UIPickerViewDataSou
             }
             requestdata()
         }
+    }
+    
+    func cleartext() {
+        midtimeLabel.text = "时间："
+        showGroupView.label2.text = ""
+        showGroupView.label3.text = ""
+        showGroupView2.label2.text = ""
+        showGroupView2.label3.text = ""
+        showGroupView3.label2.text = ""
+        showGroupView3.label3.text = ""
+        showGroupView4.label2.text = ""
+        showGroupView4.label3.text = ""
+        showGroupView5.label2.text = ""
+        showGroupView5.label3.text = ""
     }
 }
 
@@ -673,6 +706,16 @@ extension GYWTDTrendItemsViewController:UICollectionViewDelegate,UICollectionVie
             
             """
         )
+        
+        let arr = [showGroupView,showGroupView2,showGroupView3,showGroupView4,showGroupView5]
+        for i in 0..<dataArray.count {
+            let dic = dataArray[i] as! NSDictionary
+            let temparray:NSArray = dic["valueList"] as? NSArray ?? []
+            let dicc = temparray[clickEventMessage.index!] as! NSDictionary
+            arr[i].label2.text = (dic["name"] as! String)
+            arr[i].label3.text = (dicc["value"] as! String)
+            midtimeLabel.text = "时间：\((dicc["dt"] as! String))"
+        }
         
     }
 }

@@ -48,7 +48,7 @@ extension Api {
     //数据 月日时分
     static let getwctimedata: String = "wctime/getwctimedata"
     //设备巡检 信息接口
-    static let getdeviceaddresslist: String = "devicechecker/getdeviceaddresslist"
+    static let getdeviceaddresslist: String = "devicechecker/getdeviceaddresslists"
     //设备巡检 TAGList接口
     static let gettaglistbydeviceaddr: String = "devicechecker/gettaglistbydeviceaddr"
 }
@@ -98,4 +98,20 @@ extension Api {
     static let getqsjhdirectiondataresult: String = "etpandect/getdirectiondataresult"
     //侵蚀立体形貌显示
     static let getqsjhGraph3D: String = "etpandect/getETGraph3D"
+}
+
+extension Api {
+    //获取无线测温总览
+    static let getwxcwzonglan: String = "cwsnpandect/getcwsnindextaglistbypart"
+    //获取历史曲线
+    static let getcwsntaghistroyby:String = "cwsnpandect/getcwsntaghistroybyid"
+    //无线测温 柱状图
+    static let getcwsngrouplistdata = "cwsnpandect/getcwsngrouplistdatabypartid"
+    //获取指定段位的无线测温设备列表信息
+    static let getBFLsTagList = "group/GetBFLsTagList"
+    //无线测温图示趋势
+    static let gettrendchartdata = "cwsndiagram/gettrendchartdata"
+    //无线测温图示柱状图
+    static let getwmchartdata = "cwsndiagram/getchartdata"
+    
 }

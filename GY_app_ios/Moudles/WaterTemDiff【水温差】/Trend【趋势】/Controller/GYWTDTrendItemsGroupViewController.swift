@@ -149,6 +149,12 @@ extension GYWTDTrendItemsGroupViewController {
             GYHUD.show("目前不让选中超过五个")
             return
         }
+        
+        if tempArray.count == 0 {
+            GYHUD.show("必须选一个")
+            return
+        }
+        
         if let block = ClickBlock {
             block(tempArray)
         }
@@ -176,49 +182,55 @@ extension GYWTDTrendItemsGroupViewController:UITableViewDelegate,UITableViewData
         if cell == nil {
             cell = GYWTDTrendItemsGroupCell(style: .default, reuseIdentifier: GYWTDTrendItemsGroupCell.indentifier)
         }
-        let dic:NSDictionary = dataArray[indexPath.row] as! NSDictionary
-        if type == 3 {
-            cell?.titleStr = dic["stove_name"] as! String
-        }else {
-            cell?.titleStr = dic["name"] as! String
-        }
-        
-        for temp in tempArray {
-            let tempdic:NSDictionary = temp as! NSDictionary
-            var str = ""
+        if let dic = dataArray[indexPath.row] as? NSDictionary {
             if type == 3 {
-                str = tempdic["stove_name"] as! String
+                cell?.titleStr = dic["stove_name"] as! String
             }else {
-                str = tempdic["name"] as! String
+                cell?.titleStr = dic["name"] as! String
             }
-            if cell?.titleStr == str {
-                cell?.cellBtn.isSelected = true
+            
+            for temp in tempArray {
+                let tempdic:NSDictionary = temp as! NSDictionary
+                var str = ""
+                if type == 3 {
+                    str = tempdic["stove_name"] as! String
+                }else {
+                    str = tempdic["name"] as! String
+                }
+                
+                if cell?.titleStr == str {
+                    cell?.cellBtn.isSelected = true
+                    break
+                }else {
+                    cell?.cellBtn.isSelected = false
+                }
             }
-        }
-        
-        cell?.ClickBlock = {[weak self] isselectbool in
-            guard let weakSelf = self else {
-                return
-            }
-            let dic:NSDictionary = weakSelf.dataArray[indexPath.row] as! NSDictionary
-            if isselectbool {
-                weakSelf.tempArray.add(dic)
-            }else{
-                for item in weakSelf.tempArray {
-                    let tempdic:NSDictionary = item as! NSDictionary
-                    if weakSelf.type == 3 {
-                        if (tempdic["stove_id"] as! Int64) == (dic["stove_id"] as! Int64) {
-                            weakSelf.tempArray.remove(tempdic)
+            
+            cell?.ClickBlock = {[weak self] isselectbool in
+                guard let weakSelf = self else {
+                    return
+                }
+                let dic:NSDictionary = weakSelf.dataArray[indexPath.row] as! NSDictionary
+                if isselectbool {
+                    weakSelf.tempArray.add(dic)
+                }else{
+                    for item in weakSelf.tempArray {
+                        let tempdic:NSDictionary = item as! NSDictionary
+                        if weakSelf.type == 3 {
+                            if ((tempdic["stove_id"] as! String) == (dic["stove_id"] as! String)) {
+                                weakSelf.tempArray.remove(tempdic)
+                            }
+                        }else {
+                            if (tempdic["id"] as! Int64) == (dic["id"] as! Int64) {
+                                weakSelf.tempArray.remove(tempdic)
+                            }
                         }
-                    }else {
-                        if (tempdic["id"] as! Int64) == (dic["id"] as! Int64) {
-                            weakSelf.tempArray.remove(tempdic)
-                        }
+                        
                     }
-                    
                 }
             }
         }
+        
         return cell ?? UITableViewCell()
     }
     

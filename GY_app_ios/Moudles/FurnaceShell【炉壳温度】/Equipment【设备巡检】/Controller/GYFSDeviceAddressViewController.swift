@@ -8,7 +8,14 @@
 import UIKit
 
 class GYFSDeviceAddressViewController: GYViewController {
-    var deviceDataArray:NSArray = []
+    var deviceDataArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = deviceDataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(collectionV)
+            }
+        }
+    }
     var dataArray:NSArray = []
     
     private lazy var headView:UIView = {
@@ -27,7 +34,7 @@ class GYFSDeviceAddressViewController: GYViewController {
     private lazy var nameBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.setTitle("设备地址43", for: .normal)
+        btn.setTitle("设备地址", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
@@ -158,6 +165,11 @@ extension GYFSDeviceAddressViewController {
     }
     
     @objc func nameBtnClick() {
+        if deviceDataArray.count == 0 {
+            GYHUD.show("没有设备地址")
+            return
+        }
+        self.view.bringSubviewToFront(namepickView)
         namepickView.isHidden = false
     }
 }
@@ -195,9 +207,12 @@ extension GYFSDeviceAddressViewController:UIPickerViewDelegate,UIPickerViewDataS
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        if deviceDataArray.count == 0 {
+            return
+        }
         let dic:NSDictionary = deviceDataArray[row] as! NSDictionary
         requestnextdata(dic: dic)
         nameBtn.setTitle(dic["masterAddress"] as? String, for: .normal)
-        pickerView.isHidden = true
     }
 }

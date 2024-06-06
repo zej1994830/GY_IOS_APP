@@ -16,19 +16,19 @@ class TESTViewController: GYViewController {
         super.viewDidLoad()
         
         
-        let webView = WKWebView(frame: CGRect(x: 0, y: 0, width: APP.WIDTH, height: APP.WIDTH))
-        if let url = URL(string: "http://192.168.102.2:8080/index.html") {
-                    // 创建 URLRequest 对象
-                    let request = URLRequest(url: url)
-                    
-                    // 加载网页
-                    webView.load(request)
-                }
-        self.view.addSubview(webView)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            webView.scrollView.setContentOffset(CGPoint(x: 200, y: 0), animated: true)
-        }
+//        let webView = WKWebView(frame: CGRect(x: 0, y: 0, width: APP.WIDTH, height: APP.WIDTH))
+//        if let url = URL(string: "http://192.168.102.2:8080/index.html") {
+//                    // 创建 URLRequest 对象
+//                    let request = URLRequest(url: url)
+//
+//                    // 加载网页
+//                    webView.load(request)
+//                }
+//        self.view.addSubview(webView)
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            webView.scrollView.setContentOffset(CGPoint(x: 200, y: 0), animated: true)
+//        }
 //        let qrImage = createQRCodeImage(content: "http://36.129.131.242:1880/invoice/invoice.html")
 //            let imageView = UIImageView(image: qrImage)
 //        self.view.addSubview(imageView)
@@ -38,7 +38,9 @@ class TESTViewController: GYViewController {
 //            make.height.equalTo(APP.WIDTH)
 //        }
         
-        
+        let view = SBRadarCharts(frame: CGRect(x: 0, y: 300, width: APP.WIDTH, height: APP.WIDTH))
+        view.backgroundColor = .white
+        self.view.addSubview(view)
     }
     
     

@@ -9,6 +9,8 @@ import UIKit
 
 class GYMyCenterViewController: GYViewController{
     override func viewDidLoad() {
+        NotificationCenter.default.addObserver(self, selector: #selector(locationSuccess(_:)), name: NotificationConstant.locationSuccess, object: nil)
+        
         super.viewDidLoad()
         setupViews()
         addLayout()
@@ -69,6 +71,14 @@ class GYMyCenterViewController: GYViewController{
         return tableview
     }()
     
+    private lazy var logoutBtn:UIButton = {
+        let btn = UIButton()
+        btn.setTitle("退出登录", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
+        btn.addTarget(self, action: #selector(logoutBtnClick), for: .touchUpInside)
+        return btn
+    }()
 }
 
 extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
@@ -79,7 +89,11 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
         self.view.addSubview(companyLabel)
         self.view.addSubview(companyImageV)
         self.view.addSubview(tableView)
+        self.view.addSubview(logoutBtn)
         
+        iconLabel.text = "\(GYUserBaseInfoData.default.user_name.first ?? " ")"
+        nameLabel.text = GYUserBaseInfoData.default.user_name
+        companyLabel.text = GYUserBaseInfoData.default.subordinate_unit
     }
     
     func addLayout(){
@@ -117,6 +131,14 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             make.left.right.equalTo(0)
             make.height.equalTo(250)
         }
+        
+        logoutBtn.snp.makeConstraints { make in
+            make.bottom.equalTo(-48)
+            make.left.equalTo(22.5)
+            make.right.equalTo(-22.5)
+            make.height.equalTo(49)
+        }
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -160,10 +182,8 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             let vc = GYPasswordViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.row == 3{
-            let vc = GYDeviceExpireViewController()
-            self.zej_present(vc, vcTransitionDelegate: ZEJRollDownTransitionDelegate()) {
-                
-            }
+            //版本更新
+            
         }
     }
     
@@ -186,4 +206,17 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
         }
     }
     
+    @objc func logoutBtnClick() {
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        appdelegate.window?.rootViewController = GYLoginViewController()
+    }
+    
+    @objc private func locationSuccess(_ notification: Notification){
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+            self.iconLabel.text = "\(GYUserBaseInfoData.default.user_name.first ?? " ")"
+            self.nameLabel.text = GYUserBaseInfoData.default.user_name
+            self.companyLabel.text = GYUserBaseInfoData.default.subordinate_unit
+        }
+       
+    }
 }

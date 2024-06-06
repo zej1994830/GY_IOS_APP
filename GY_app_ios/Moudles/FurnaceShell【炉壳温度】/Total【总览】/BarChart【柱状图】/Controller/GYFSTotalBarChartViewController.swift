@@ -11,7 +11,14 @@ import AAInfographics
 class GYFSTotalBarChartViewController: GYViewController {
     var dataSectionArray:NSArray = []
     var datatempSectionArray:NSMutableArray = []
-    var dataArray:NSArray = []
+    var dataArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = dataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(barcharView)
+            }
+        }
+    }
     var sectionStr:String = ""
     var nowindex:Int = 0
     
@@ -72,7 +79,7 @@ class GYFSTotalBarChartViewController: GYViewController {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F5C105")
         view.label2.text = "组别"
-        view.label3.text = "00.00"
+        view.label3.text = "0.00"
         view.label3.snp.remakeConstraints { make in
             make.left.equalTo(0)
             make.bottom.equalTo(0)
@@ -197,6 +204,7 @@ extension GYFSTotalBarChartViewController {
     }
     
     @objc func screenBtnClick() {
+        self.view.insertSubview(namepickView, aboveSubview: noDataView)
         namepickView.isHidden = false
     }
     
@@ -448,11 +456,15 @@ extension GYFSTotalBarChartViewController:UIPickerViewDelegate,UIPickerViewDataS
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        if dataSectionArray.count == 0 {
+            return
+        }
         let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
         screenBtn.setTitle((dic["name"] as! String), for: .normal)
         requestnextdata(array: [dataSectionArray[row]])
-
-        pickerView.isHidden = true
+        midshowview.label2.text = "组别"
+        midshowview.label3.text = "0.00"
     }
     
     open func aaChartView(_ aaChartView: AAChartView, clickEventMessage: AAClickEventMessageModel) {

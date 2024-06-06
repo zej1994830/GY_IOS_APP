@@ -11,7 +11,14 @@ import SpreadsheetView
 class GYThermocoupleReadlTimeDataViewController: GYViewController {
     var dataSectionArray:NSArray = []
     var datatempSectionArray:NSArray = []
-    var dataArray:NSArray = []
+    var dataArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = dataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(spreadsheetView)
+            }
+        }
+    }
     var sectionStr:String = ""
     //数据分类（0：分钟，1：小时，2：日，3：月
     var rate:Int = 0
@@ -132,6 +139,7 @@ extension GYThermocoupleReadlTimeDataViewController {
     }
     
     @objc func nameBtnClick() {
+        self.view.insertSubview(namepickView, aboveSubview: noDataView)
         namepickView.isHidden = false
     }
     
@@ -196,13 +204,15 @@ extension GYThermocoupleReadlTimeDataViewController:UIPickerViewDelegate,UIPicke
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == namepickView {
+            pickerView.isHidden = true
+            if dataSectionArray.count == 0 {
+                return
+            }
             let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
             nameBtn.setTitle((dic["name"] as! String), for: .normal)
             datatempSectionArray = [dataSectionArray[row]]
             requestnextdata(array: [dataSectionArray[row]])
         }
-
-        pickerView.isHidden = true
     }
     
 }

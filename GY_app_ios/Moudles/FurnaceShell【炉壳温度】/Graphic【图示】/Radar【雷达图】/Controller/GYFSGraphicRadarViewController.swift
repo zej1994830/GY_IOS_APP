@@ -52,9 +52,9 @@ class GYFSGraphicRadarViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: -30)
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 5)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(nameBtnClick), for: .touchUpInside)
+        btn.contentHorizontalAlignment = .left
         return btn
     }()
     
@@ -78,7 +78,7 @@ class GYFSGraphicRadarViewController: GYViewController {
     private lazy var groupBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.setTitle("C1-1、C1-2、C1-3、C1-4、C1-5", for: .normal)
+        btn.setTitle("请选择组别", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.contentHorizontalAlignment = .left
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
@@ -110,7 +110,7 @@ class GYFSGraphicRadarViewController: GYViewController {
     
     private lazy var midtimeLabel:UILabel = {
         let label = UILabel()
-        label.text = "时间：2022-04-19 10:36"
+        label.text = "时间："
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -118,8 +118,8 @@ class GYFSGraphicRadarViewController: GYViewController {
     private lazy var showGroupView:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#BC7DFC")
-        view.label2.text = "C1-1"
-        view.label3.text = "0.07"
+        view.label2.text = ""
+        view.label3.text = ""
         return view
     }()
     
@@ -280,7 +280,7 @@ extension GYFSGraphicRadarViewController {
     }
     func requestnextdata(array:NSArray){
         var partid:Int32 = 0
-        sectionStr = ""
+        sectionStr = "请选择组别"
         let dic:NSDictionary = array.firstObject as! NSDictionary
         partid = dic["id"] as! Int32
         //段名
@@ -324,6 +324,12 @@ extension GYFSGraphicRadarViewController {
             }
         }
         groupBtn.setTitle(namestr, for: .normal)
+        
+        if array.count == 0 {
+            GYHUD.show("目前没有组别")
+            return
+        }
+        
         let params = ["device_db":GYDeviceData.default.device_db,"start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","idString":stoveidString,"type":2] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getlkgraphicbarorradar, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -382,11 +388,15 @@ extension GYFSGraphicRadarViewController {
     }
     
     @objc func timeBtnClick() {
-        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
@@ -401,6 +411,10 @@ extension GYFSGraphicRadarViewController {
     }
     
     @objc func groupBtnClick() {
+        if dataGroupArray.count == 0 {
+            GYHUD.show("当前数据没有组别")
+            return
+        }
         let vc = GYWTDTrendItemsGroupViewController()
         vc.dataArray = dataGroupArray
         vc.tempArray = datatempGroupArray
@@ -434,6 +448,9 @@ extension GYFSGraphicRadarViewController:UIPickerViewDelegate,UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerView.isHidden = true
+        if dataSectionArray.count == 0 {
+            return
+        }
         requestnextdata(array: [dataSectionArray[row]])
     }
 }

@@ -231,10 +231,12 @@ extension GYGraphicViewController {
     }
     
     @objc func screenBtnClick() {
+        self.view.insertSubview(namepickView, aboveSubview: noDataView)
         namepickView.isHidden = false
     }
     
     @objc func chartBtnClick() {
+        self.view.insertSubview(namepick2View, aboveSubview: noDataView)
         namepick2View.isHidden = false
     }
 }
@@ -340,7 +342,11 @@ extension GYGraphicViewController:UIPickerViewDelegate,UIPickerViewDataSource,AA
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
         if pickerView == namepickView {
+            if dataSectionArray.count == 0 {
+                return
+            }
             let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
             screenBtn.setTitle((dic["name"] as! String), for: .normal)
             requestnextdata(array: [dataSectionArray[row]])
@@ -355,9 +361,6 @@ extension GYGraphicViewController:UIPickerViewDelegate,UIPickerViewDataSource,AA
             }
             
         }
-        
-
-        pickerView.isHidden = true
     }
     
     open func aaChartView(_ aaChartView: AAChartView, clickEventMessage: AAClickEventMessageModel) {
@@ -385,5 +388,7 @@ extension GYGraphicViewController:UIPickerViewDelegate,UIPickerViewDataSource,AA
         midshowview.label2.text = clickEventMessage.category
         midshowview.label3.text = "\(clickEventMessage.y ?? 00)"
     }
+    
+ 
 
 }

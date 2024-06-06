@@ -8,7 +8,14 @@
 import UIKit
 
 class GYWTDDeviceAddressViewController: GYViewController {
-    var deviceDataArray:NSArray = []
+    var deviceDataArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = deviceDataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(collectionV)
+            }
+        }
+    }
     var dataArray:NSArray = []
     var function_type:Int = 0
     
@@ -28,7 +35,7 @@ class GYWTDDeviceAddressViewController: GYViewController {
     private lazy var nameBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.setTitle("设备地址43", for: .normal)
+        btn.setTitle("设备地址", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
@@ -44,12 +51,12 @@ class GYWTDDeviceAddressViewController: GYViewController {
     
     private lazy var collectionV: UICollectionView = {
         let layout = UICollectionViewFlowLayout.init()
-        layout.minimumInteritemSpacing = 15
-        layout.minimumLineSpacing = 15
+        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = 10
         layout.scrollDirection = .vertical
-        layout.estimatedItemSize = rellySizeForiPhoneWidth(165, 60)
+        layout.estimatedItemSize = CGSize(width: APP.WIDTH - 30, height: 60)
         layout.sectionHeadersPinToVisibleBounds = true
-        layout.sectionInset = UIEdgeInsets.init(top: 15, left: 15, bottom: 0, right: 15)
+        layout.sectionInset = UIEdgeInsets.init(top: 10, left: 15, bottom: 0, right: 15)
         
         let collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.delegate = self
@@ -136,6 +143,7 @@ extension GYWTDDeviceAddressViewController {
             weakSelf.deviceDataArray = dicc["temperature_list"] as! NSArray
             weakSelf.namepickView.reloadAllComponents()
             if weakSelf.deviceDataArray.count == 0 {
+                GYHUD.hideHudForView(weakSelf.view)
                 return
             }
             let diccc:NSDictionary = weakSelf.deviceDataArray.firstObject as! NSDictionary
@@ -159,6 +167,11 @@ extension GYWTDDeviceAddressViewController {
     }
     
     @objc func nameBtnClick() {
+        if deviceDataArray.count == 0 {
+            GYHUD.show("没有设备地址")
+            return
+        }
+        self.view.bringSubviewToFront(namepickView)
         namepickView.isHidden = false
     }
 }
@@ -176,7 +189,7 @@ extension GYWTDDeviceAddressViewController:UICollectionViewDelegate,UICollection
         }
         let dic:NSDictionary = dataArray[indexPath.row] as! NSDictionary
         cell?.isException = ((dic["isException"] as? Int) != nil)
-        cell?.titleStr = dic["name"] as! String
+        cell?.titleStr = (dic["name"] as! String)
         return cell!
     }
 }
@@ -196,9 +209,12 @@ extension GYWTDDeviceAddressViewController:UIPickerViewDelegate,UIPickerViewData
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        if deviceDataArray.count == 0 {
+            return
+        }
         let dic:NSDictionary = deviceDataArray[row] as! NSDictionary
         requestnextdata(dic: dic)
         nameBtn.setTitle(dic["masterAddress"] as? String, for: .normal)
-        pickerView.isHidden = true
     }
 }

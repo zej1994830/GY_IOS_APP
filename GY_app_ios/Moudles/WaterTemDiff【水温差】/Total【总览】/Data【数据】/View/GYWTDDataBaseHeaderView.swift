@@ -61,7 +61,8 @@ class GYWTDDataBaseHeaderView: UICollectionReusableView {
     private lazy var titleLabel:UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#EFF4FA")
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
+        label.font = UIFont.systemFont(ofSize: 16 ,weight: .bold)
         label.textAlignment = .center
         return label
     }()

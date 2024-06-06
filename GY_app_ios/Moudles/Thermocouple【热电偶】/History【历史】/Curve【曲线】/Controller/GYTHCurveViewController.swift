@@ -13,7 +13,22 @@ class GYTHCurveViewController: GYViewController {
     var datatempSectionArray:NSArray = []
     var sectionStr:String = ""
     var groupStr:String = ""
-    var dataArray:NSArray = []
+    var dataArray:NSArray = []{
+        didSet{
+            guard let tempp = dataArray.firstObject as? NSDictionary else {
+                return
+            }
+            guard let tempdataarray = tempp["data"] as? NSArray else {
+                noDataView.isHidden = false
+                noDataView.snp.remakeConstraints { make in
+                    make.center.size.equalTo(lineView)
+                }
+                return
+            }
+            
+            noDataView.isHidden = true
+        }
+    }
     var datagroupArray:NSArray = []
     var datatempgroupArray:NSArray = []
     var indexrow:Int = 0
@@ -108,7 +123,7 @@ class GYTHCurveViewController: GYViewController {
     private lazy var groupBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.setTitle("TE1241、TE1242", for: .normal)
+        btn.setTitle("", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.contentHorizontalAlignment = .left
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
@@ -116,9 +131,10 @@ class GYTHCurveViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 285 - APP.WIDTH, bottom: 0, right: 15)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(groupBtnClick), for: .touchUpInside)
+        btn.titleLabel?.lineBreakMode = .byTruncatingTail
+        btn.titleLabel?.numberOfLines = 1
         return btn
     }()
     
@@ -140,7 +156,7 @@ class GYTHCurveViewController: GYViewController {
     
     private lazy var midtimeLabel:UILabel = {
         let label = UILabel()
-        label.text = "时间：2022-04-19 10:36"
+        label.text = "时间："
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -148,24 +164,25 @@ class GYTHCurveViewController: GYViewController {
     private lazy var showGroupView:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#EA173D")
-        view.label2.text = "TE1241"
-        view.label3.text = "0.07"
+        view.label2.text = ""
+        view.label3.text = ""
         return view
     }()
     
     private lazy var showGroupView2:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#A75FF0")
-        view.label2.text = "TE1242"
-        view.label3.text = "0.02"
+        view.label2.text = ""
+        view.label3.text = ""
+        view.isHidden = true
         return view
     }()
     
     private lazy var showGroupView3:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F5C105")
-        view.label2.text = "C1-3"
-        view.label3.text = "41.03"
+        view.label2.text = ""
+        view.label3.text = ""
         view.isHidden = true
         return view
     }()
@@ -173,8 +190,8 @@ class GYTHCurveViewController: GYViewController {
     private lazy var showGroupView4:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#0182F9")
-        view.label2.text = "C1-4"
-        view.label3.text = "27.98"
+        view.label2.text = ""
+        view.label3.text = ""
         view.isHidden = true
         return view
     }()
@@ -182,8 +199,8 @@ class GYTHCurveViewController: GYViewController {
     private lazy var showGroupView5:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#0182F9")
-        view.label2.text = "C1-4"
-        view.label3.text = "27.98"
+        view.label2.text = ""
+        view.label3.text = ""
         view.isHidden = true
         return view
     }()
@@ -365,7 +382,7 @@ extension GYTHCurveViewController {
         
         let arr = [showGroupView,showGroupView2,showGroupView3,showGroupView4,showGroupView5]
 //        arr.snp.distributeViewsAlong(axisType:.horizontal,fixedSpacing: 24,leadSpacing: 24,tailSpacing: 24)
-        arr.snp.distributeViewsAlong(axisType: .horizontal,fixedItemLength: 55,leadSpacing: 24,tailSpacing: 24)
+        arr.snp.distributeViewsAlong(axisType: .horizontal,fixedItemLength: 70,leadSpacing: 24,tailSpacing: 24)
         arr.snp.makeConstraints { make in
             make.top.equalTo(midtimeLabel.snp.bottom).offset(11)
         }
@@ -436,6 +453,17 @@ extension GYTHCurveViewController {
     func requestlastdata(array:NSArray) {
         var partidString:String = ""
         groupStr = ""
+        midtimeLabel.text = "时间："
+        showGroupView.label2.text = ""
+        showGroupView.label3.text = ""
+        showGroupView2.label2.text = ""
+        showGroupView2.label3.text = ""
+        showGroupView3.label2.text = ""
+        showGroupView3.label3.text = ""
+        showGroupView4.label2.text = ""
+        showGroupView4.label3.text = ""
+        showGroupView5.label2.text = ""
+        showGroupView5.label3.text = ""
         for temp in array {
             let dic:NSDictionary = temp as! NSDictionary
             if partidString.count == 0 {
@@ -502,25 +530,35 @@ extension GYTHCurveViewController {
     }
     
     @objc func nameBtnClick() {
+        self.view.insertSubview(namepickView, aboveSubview: noDataView)
         namepickView.isHidden = false
+        timepickView.isHidden = true
     }
     
     @objc func pinlvBtnClick() {
+        self.view.insertSubview(timepickView, aboveSubview: noDataView)
         timepickView.isHidden = false
+        namepickView.isHidden = true
     }
     
     @objc func timeBtnClick() {
-        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
                     weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
+                    weakSelf.selectIndex = IndexPath(row: -1, section: 0)
+                    weakSelf.collectionV.reloadData()
                     GYHUD.showGif(view: weakSelf.view)
                     weakSelf.requestlastdata(array: weakSelf.datatempgroupArray)
                 }
@@ -530,6 +568,12 @@ extension GYTHCurveViewController {
     }
     
     @objc func groupBtnClick() {
+        if datagroupArray.count == 0 {
+            GYHUD.show("当前数据没有组别")
+            return
+        }
+        let arr = [showGroupView,showGroupView2,showGroupView3,showGroupView4,showGroupView5]
+        
         let vc = GYWTDTrendItemsGroupViewController()
         vc.type = 3
         vc.dataArray = NSMutableArray(array: datagroupArray)
@@ -540,6 +584,13 @@ extension GYTHCurveViewController {
                 return
             }
             weakSelf.datatempgroupArray = NSMutableArray(array: array)
+            
+            for i in 0..<5 {
+                arr[i].isHidden = true
+            }
+            for i in 0..<weakSelf.datatempgroupArray.count {
+                arr[i].isHidden = false
+            }
             //拿回来的数组存在顺序错乱，是否排列以后再定
             weakSelf.requestlastdata(array: weakSelf.datatempgroupArray)
         }
@@ -582,8 +633,14 @@ extension GYTHCurveViewController:UIPickerViewDelegate,UIPickerViewDataSource {
         pickerView.isHidden = true
         
         if pickerView == namepickView {
+            if dataSectionArray.count == 0 {
+                return
+            }
             requestnextdata(array: [dataSectionArray[row]])
         }else{
+            if datatempgroupArray.count == 0 {
+                return
+            }
             if row == 0 {
                 rate = 0
                 pinlvBtn.setTitle("分钟", for: .normal)
@@ -591,7 +648,7 @@ extension GYTHCurveViewController:UIPickerViewDelegate,UIPickerViewDataSource {
                 rate = 1
                 pinlvBtn.setTitle("小时", for: .normal)
             }
-            requestdata()
+            requestlastdata(array: datatempgroupArray)
         }
     }
 }
@@ -683,24 +740,25 @@ extension GYTHCurveViewController:UICollectionViewDelegate,UICollectionViewDataS
             let temparray:NSArray = dic["data"] as! NSArray
             let tempdic = temparray[clickEventMessage.index!] as! NSDictionary
             if i == 0 {
+                midtimeLabel.text = String(format: "时间：%@", tempdic["dt"] as! CVarArg)
                 showGroupView.label2.text = String(format: "%@", dic["stove_name"] as! String)
-                showGroupView.label3.text = String(format: "%.2f", tempdic["value"] as! Double)
+                showGroupView.label3.text = String(format: "%@", tempdic["value"] as! CVarArg)
             }
             if i == 1 {
                 showGroupView2.label2.text = String(format: "%@", dic["stove_name"] as! String)
-                showGroupView2.label3.text = String(format: "%.2f", tempdic["value"] as! Double)
+                showGroupView2.label3.text = String(format: "%@", tempdic["value"] as! CVarArg)
             }
             if i == 2 {
                 showGroupView3.label2.text = String(format: "%@", dic["stove_name"] as! String)
-                showGroupView3.label3.text = String(format: "%.2f", tempdic["value"] as! Double)
+                showGroupView3.label3.text = String(format: "%@", tempdic["value"] as! CVarArg)
             }
             if i == 3 {
                 showGroupView4.label2.text = String(format: "%@", dic["stove_name"] as! String)
-                showGroupView4.label3.text = String(format: "%.2f", tempdic["value"] as! Double)
+                showGroupView4.label3.text = String(format: "%@", tempdic["value"] as! CVarArg)
             }
             if i == 4 {
                 showGroupView5.label2.text = String(format: "%@", dic["stove_name"] as! String)
-                showGroupView5.label3.text = String(format: "%.2f", tempdic["value"] as! Double)
+                showGroupView5.label3.text = String(format: "%@", tempdic["value"] as! CVarArg)
             }
         }
         

@@ -22,6 +22,13 @@ class GYSelectGroupViewController: ZEJBottomPresentViewController {
     //缓存
     var tempArray:NSMutableArray = [] {
         didSet{
+            if tempArray.count == dataArray.count {
+                isSelectAll = true
+                selectBtn.setTitle("取消全选", for: .normal)
+            }else {
+                isSelectAll = false
+                selectBtn.setTitle("全选", for: .normal)
+            }
             tableView.reloadData()
         }
     }
@@ -47,7 +54,7 @@ class GYSelectGroupViewController: ZEJBottomPresentViewController {
     
     private lazy var selectBtn:UIButton = {
         let btn = UIButton()
-        btn.setTitle("全选", for: .normal)
+        btn.setTitle("取消全选", for: .normal)
         btn.setTitleColor(UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8"), for: .normal)
         btn.layer.cornerRadius = 14
         btn.layer.borderWidth = 1
@@ -122,7 +129,7 @@ extension GYSelectGroupViewController {
         selectBtn.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
             make.right.equalTo(-20)
-            make.width.equalTo(56)
+            make.width.equalTo(100)
             make.height.equalTo(28)
         }
         
@@ -204,9 +211,9 @@ extension GYSelectGroupViewController {
         isSelectAll = !isSelectAll
         if isSelectAll {
             tempArray = NSMutableArray(array: dataArray)
-            selectBtn.setTitle("全选", for: .normal)
-        }else{
             selectBtn.setTitle("取消全选", for: .normal)
+        }else{
+            selectBtn.setTitle("全选", for: .normal)
             tempArray.removeAllObjects()
         }
         
@@ -218,6 +225,10 @@ extension GYSelectGroupViewController {
     }
     
     @objc func sureBtnClick() {
+        if tempArray.count == 0 {
+            GYHUD.show("必须选一个")
+            return
+        }
         if let block = ClickBlock {
             block(tempArray)
         }
@@ -263,6 +274,14 @@ extension GYSelectGroupViewController {
                     }
                 }
             }
+        }
+        
+        if tempArray.count == dataArray.count {
+            isSelectAll = true
+            selectBtn.setTitle("取消全选", for: .normal)
+        }else {
+            isSelectAll = false
+            selectBtn.setTitle("全选", for: .normal)
         }
         
     }

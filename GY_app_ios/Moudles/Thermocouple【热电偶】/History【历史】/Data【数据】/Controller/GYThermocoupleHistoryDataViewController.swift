@@ -14,7 +14,14 @@ class GYThermocoupleHistoryDataViewController: GYViewController {
     var dataSectionArray:NSArray = []
     var datatempSectionArray:NSArray = []
     var nameStr:String = ""
-    var dataArray:NSArray = []
+    var dataArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = dataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(spreadsheetView)
+            }
+        }
+    }
     var sectionStr:String = ""
     //数据分类（0：分钟，1：小时，2：日，3：月
     var rate:Int = 0
@@ -226,22 +233,28 @@ extension GYThermocoupleHistoryDataViewController {
     }
     
     @objc func nameBtnClick() {
+        self.view.insertSubview(namepickView, aboveSubview: noDataView)
         namepickView.isHidden = false
         namepickView2.isHidden = true
     }
     
     @objc func categoryBtnClick() {
+        self.view.insertSubview(namepickView2, aboveSubview: noDataView)
         namepickView2.isHidden = false
         namepickView.isHidden = true
     }
     
     @objc func timeBtnClick() {
         
-        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
@@ -323,18 +336,23 @@ extension GYThermocoupleHistoryDataViewController:UIPickerViewDelegate,UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
         if pickerView == namepickView {
+            if dataSectionArray.count == 0 {
+                return
+            }
             let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
             nameBtn.setTitle((dic["name"] as! String), for: .normal)
             datatempSectionArray = [dataSectionArray[row]]
             requestnextdata(array: [dataSectionArray[row]])
         }else{
+            if datatempSectionArray.count == 0 {
+                return
+            }
             rate = row
             rateBtn.setTitle(["分","时"][row], for: .normal)
             requestnextdata(array: datatempSectionArray)
         }
-
-        pickerView.isHidden = true
     }
     
 }
@@ -397,8 +415,11 @@ extension GYThermocoupleHistoryDataViewController: SpreadsheetViewDataSource, Sp
             }else{
                 let dic:NSDictionary = dataArray.firstObject as! NSDictionary
                 let dicc = NSMutableDictionary(dictionary: dic)
-                dicc.removeObject(forKey: "time")
-                cell.label.text = (dicc.allKeys[indexPath.column - 1] as! String)
+                if dicc["time"] != nil {
+                    dicc.removeObject(forKey: "time")
+                }
+
+                cell.label.text = (dicc.allKeys[indexPath.column - 2] as! String)
             }
             return cell
         }
@@ -415,7 +436,9 @@ extension GYThermocoupleHistoryDataViewController: SpreadsheetViewDataSource, Sp
             //值
             let dic:NSDictionary = dataArray[indexPath.row - 1] as! NSDictionary
             let dicc = NSMutableDictionary(dictionary: dic)
-            dicc.removeObject(forKey: "time")
+            if dicc["time"] != nil {
+                dicc.removeObject(forKey: "time")
+            }
             cell.label.text = String(format: "%.3f", (dicc.allValues[indexPath.column - 2] as! Double))
         }
         return cell

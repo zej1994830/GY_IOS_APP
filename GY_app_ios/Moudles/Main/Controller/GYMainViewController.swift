@@ -9,7 +9,34 @@ import UIKit
 import FSPagerView
 import SwiftPopMenu
 class GYMainViewController: GYViewController {
-    var mainflag:GYMainFlagData?
+    var mainflag:GYMainFlagData? {
+        didSet {
+            mainStrArray.removeAllObjects()
+            if mainflag?.flagWc == 1 {
+                mainStrArray.add(["main_shuiwen","水温差","#8494FF","#476DFC"])
+            }
+            if mainflag?.flagLk == 1 {
+                mainStrArray.add(["main_luke","炉壳温度","#FF9090","#FF4848"])
+            }
+            if mainflag?.flagLlj == 1 {
+                mainStrArray.add(["main_liuliang","流量计","#03D6A3","#02BE8B"])
+            }
+            if mainflag?.flagQs == 1 {
+                mainStrArray.add(["main_qinshi","侵蚀结厚","#FFB23F","#F9861B"])
+            }
+            if mainflag?.flagRdo == 1 {
+                mainStrArray.add(["main_redian","热电偶","#C082FF","#A75FF0"])
+            }
+            if mainflag?.flagFkt == 1 {
+                mainStrArray.add(["main_fengkou","风口套","#4DD9F8","#12AAFF"])
+            }
+            if mainflag?.flagLs == 1 {
+                mainStrArray.add(["main_wuxiancewen","无线测温","#FFB23F","#F9861B"])
+            }
+            
+            collectionV.reloadData()
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -18,7 +45,8 @@ class GYMainViewController: GYViewController {
     var bannerarray:NSArray = []
     var deviceArray:NSMutableArray = []
     //主页六个cell。默认布局
-    var mainStrArray:NSArray = [["main_shuiwen","水温差","#8494FF","#476DFC"],["main_luke","炉壳温度","#FF9090","#FF4848"],["main_liuliang","流量计","#03D6A3","#02BE8B"],["main_qinshi","侵蚀结厚","#FFB23F","#F9861B"],["main_redian","热电偶","#C082FF","#A75FF0"],["main_fengkou","风口套","#4DD9F8","#12AAFF"],["main_wuxiancewen","无线测温","#FFB23F","#F9861B"]]
+    var mainStrArray:NSMutableArray = []
+//    [["main_shuiwen","水温差","#8494FF","#476DFC"],["main_luke","炉壳温度","#FF9090","#FF4848"],["main_liuliang","流量计","#03D6A3","#02BE8B"],["main_qinshi","侵蚀结厚","#FFB23F","#F9861B"],["main_redian","热电偶","#C082FF","#A75FF0"],["main_fengkou","风口套","#4DD9F8","#12AAFF"],["main_wuxiancewen","无线测温","#FFB23F","#F9861B"]]
     var mainArray:NSMutableArray = []
     
     override func viewDidLoad() {
@@ -125,22 +153,25 @@ extension GYMainViewController {
         
         //延迟一下，否则转圈gif错乱
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
-            GYHUD.showGif(view: self.view)
-            let params = ["user_id": GYUserBaseInfoData.default.user_id]
-            GYNetworkManager.share.requestData(.get, api: Api.getuserinfo,parameters: params) {[weak self] (result) in
-                guard let weakSelf = self else{
-                    return
-                }
-                
-                let rresult = result as! [String:Any]
-                let data: NSDictionary = rresult["data"] as! NSDictionary
-                let userBaseInfo = GYUserBaseInfoData.getUserInfo(data: data)
-                CommonCache.cacheData(userBaseInfo, key: CacheKey.userDataInfoCacheKey)
-                weakSelf.nextrequest(device_db: GYDeviceData.default.device_db)
-                weakSelf.view.addSubview(weakSelf.deviceView)
-                weakSelf.deviceView.dismiss()
-                weakSelf.leftBtn.setTitle(GYDeviceData.default.device_name, for: .normal)
+            
+        }
+        GYHUD.showGif(view: self.view)
+        let params = ["user_id": GYUserBaseInfoData.default.user_id]
+        GYNetworkManager.share.requestData(.get, api: Api.getuserinfo,parameters: params) {[weak self] (result) in
+            guard let weakSelf = self else{
+                return
             }
+            
+            let rresult = result as! [String:Any]
+            let data: NSDictionary = rresult["data"] as! NSDictionary
+            let userBaseInfo = GYUserBaseInfoData.getUserInfo(data: data)
+            CommonCache.cacheData(userBaseInfo, key: CacheKey.userDataInfoCacheKey)
+            CommonCache.share.userDataCache.trim(to: Date().addingTimeInterval( -24 * 60 * 60))
+
+            weakSelf.nextrequest(device_db: GYDeviceData.default.device_db)
+            weakSelf.view.addSubview(weakSelf.deviceView)
+            weakSelf.deviceView.dismiss()
+            weakSelf.leftBtn.setTitle(GYDeviceData.default.device_name, for: .normal)
         }
     }
     
@@ -277,32 +308,35 @@ extension GYMainViewController:UICollectionViewDelegate,UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            //水温差
+        let array:NSArray = mainStrArray[indexPath.row] as! NSArray
+        let str:String = array[1] as! String
+        if str == "水温差" {
             let vc = GYWaterTemDiffViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if indexPath.row == 1 {
-            //炉壳温度
+        }
+        if str == "炉壳温度" {
             let vc = GYFurnaceShellMainViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if indexPath.row == 2 {
-            //流量计
-        }else if indexPath.row == 3 {
-            //侵蚀厚度
+        }
+        if str == "流量计" {
+            let vc = GYWaterTemDiffViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        if str == "侵蚀结厚" {
             let vc = GYErosionThicknessMainViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if indexPath.row == 4 {
-            //热电偶
+        }
+        if str == "热电偶" {
             let vc = GYThermocoupleViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if indexPath.row == 5 {
-            //风口套
-            
-        }else if indexPath.row == 6 {
-            //风口套
+        }
+        if str == "风口套" {
             
         }
-        
+        if str == "无线测温" {
+            let vc = GYWifiMeasureViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
 }

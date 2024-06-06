@@ -25,6 +25,7 @@ class GYWTDDeviceAdressCell: UICollectionViewCell {
     var titleStr: String = "" {
         didSet{
             titleLabel.text = titleStr
+            titleLabel.sizeToFit()
         }
     }
     
@@ -39,12 +40,13 @@ class GYWTDDeviceAdressCell: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         label.text = "J1-S-1-2"
         label.textAlignment = .left
+        label.numberOfLines = 0
         return label
     }()
     
     private lazy var typeLabel:UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.text = "正常"
         label.textAlignment = .left
         return label
@@ -65,7 +67,11 @@ class GYWTDDeviceAdressCell: UICollectionViewCell {
 
 extension GYWTDDeviceAdressCell {
     func setupViews() {
-        self.contentView.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#EEEEEE")
+        self.contentView.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F8F8F8")
+        self.contentView.layer.borderWidth = 0.5
+        self.contentView.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#EEEEEE").cgColor
+        self.contentView.layer.cornerRadius = 2
+        self.contentView.layer.masksToBounds = true
         self.contentView.addSubview(iconImageV)
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(typeLabel)
@@ -73,7 +79,7 @@ extension GYWTDDeviceAdressCell {
     
     func addLayout() {
         iconImageV.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.top.equalTo(10)
             make.left.equalTo(10)
             make.height.width.equalTo(44)
         }
@@ -81,10 +87,13 @@ extension GYWTDDeviceAdressCell {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(iconImageV)
             make.left.equalTo(iconImageV.snp.right).offset(8)
+            make.width.equalTo(APP.WIDTH - 30 - 70)
+            make.right.equalTo(-8)
         }
         
         typeLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(iconImageV).offset(-4)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.bottom.equalTo(-10)
             make.left.equalTo(titleLabel)
         }
     }

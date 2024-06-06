@@ -11,7 +11,14 @@ class GYWTDWarnViewController: GYViewController {
     var currentDateString:String = ""
     var currentLastHourDateString:String = ""
     var rightBarbtn:UIBarButtonItem? = nil
-    var dataArray:NSArray = []
+    var dataArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = dataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(tableView)
+            }
+        }
+    }
     var function_type:Int = 0
     var isrealtime:Bool = false {
         didSet{
@@ -73,6 +80,17 @@ class GYWTDWarnViewController: GYViewController {
                 make.left.right.bottom.equalTo(0)
             }
         }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" // 根据需要设置日期时间格式
+        let currentDate = Date()
+        //当前时间
+        currentDateString = dateFormatter.string(from: currentDate)
+        //当前时间的上一个小时
+        let calendar = Calendar.current
+        currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
+        
         realtimerequest()
         
     }
@@ -156,6 +174,16 @@ extension GYWTDWarnViewController {
     }
     
     @objc func resetBtnClick() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" // 根据需要设置日期时间格式
+        let currentDate = Date()
+        //当前时间
+        currentDateString = dateFormatter.string(from: currentDate)
+        //当前时间的上一个小时
+        let calendar = Calendar.current
+        currentLastHourDateString = dateFormatter.string(from: calendar.date(byAdding: .hour, value: -1, to: currentDate)!)
+//        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
+        timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
         realtimerequest()
     }
 }
@@ -178,11 +206,15 @@ extension GYWTDWarnViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     @objc func timeBtnClick() {
-        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
@@ -195,6 +227,7 @@ extension GYWTDWarnViewController:UITableViewDelegate,UITableViewDataSource {
             
         }
     }
+    
     
     
 }

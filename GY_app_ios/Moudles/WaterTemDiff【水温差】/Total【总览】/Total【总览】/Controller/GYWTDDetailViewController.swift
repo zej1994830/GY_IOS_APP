@@ -15,10 +15,10 @@ class GYWTDDetailViewController: GYViewController {
     var dataArray2:NSArray = []
     var model:GYWTDDataModel = GYWTDDataModel() {
         didSet{
-            titleLable.text = String(format: "【%@】", model.section_name!)
+            titleLable.text = String(format: "【%@】", model.section_name)
             
-            dataArray = [["入水温度(°C)",model.inTagValue],["出水温度(°C)",model.outTagValue],["温差(°C)",model.wcValue],["流量(t/h)",model.flowTagTValue],["冷却壁面积(m²）",model.AREA],["热流(kCal/h/m²)",model.reFlowTagValue]]
-            dataArray2 = [["入水温度",String(format: "主机地址：%@", model.inTagMasterAddress!),String(format: "子机地址：%@", model.inTagTagSlaveAddress!)],["出水温度",String(format: "主机地址：%@", model.outTagMasterAddress!),String(format: "子机地址：%@", model.outTagTagSlaveAddress!)],["温差",String(format: "高报警：%d", model.h_WC!),String(format: "高高报警：%d", model.hH_WC!)],["流量",String(format: "主机地址：%@", model.flowTagMasterAddress!),String(format: "子机地址：%@", model.flowTagSlaveAddress!)],["热流",String(format: "高报警：%d", model.h_RL!),String(format: "高高报警：%d", model.hH_RL!)]]
+            dataArray = [["入水温度(°C)",model.inTagValue],["出水温度(°C)",model.outTagValue],["温差(°C)",model.wcValue],["流量(t/h)",model.flowTagTValue],["冷却壁面积(m²）",Double(model.area)!],["热流(kCal/h/m²)",model.reFlowTagValue]]
+            dataArray2 = [["入水温度",String(format: "主机地址：%@", model.inTagMasterAddress),String(format: "子机地址：%@", model.inTagTagSlaveAddress)],["出水温度",String(format: "主机地址：%@", model.outTagMasterAddress),String(format: "子机地址：%@", model.outTagTagSlaveAddress)],["温差",String(format: "高报警：%d", model.h_WC),String(format: "高高报警：%d", model.hH_WC)],["流量",String(format: "主机地址：%@", model.flowTagMasterAddress),String(format: "子机地址：%@", model.flowTagSlaveAddress)],["热流",String(format: "高报警：%d", model.h_RL),String(format: "高高报警：%d", model.hH_RL)]]
         }
     }
 
@@ -142,7 +142,7 @@ extension GYWTDDetailViewController:UICollectionViewDataSource,UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return 6
+            return dataArray.count
         }else{
             return 5
         }

@@ -159,7 +159,7 @@ class GYWTDTrendViewController: GYViewController {
     
     private lazy var midtimeLabel:UILabel = {
         let label = UILabel()
-        label.text = "时间：2022-04-19 10:36"
+        label.text = "时间："
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -405,8 +405,9 @@ extension GYWTDTrendViewController {
     }
     
     func request() {
+        cleartext()
         GYHUD.showGif(view: self.view)
-        let params = ["start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","rate":rate,"device_db":GYDeviceData.default.device_db,"stove_id":model.id!] as [String : Any]
+        let params = ["start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","rate":rate,"device_db":GYDeviceData.default.device_db,"stove_id":model.id] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getswctrend, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -436,8 +437,8 @@ extension GYWTDTrendViewController {
     
     func linedata2() {
         var dataEntries = [AASeriesElement]()
-        let labelarray = ["热流","入温","出温","温差","流量"]
-        let labelarray2 = ["reFlow","inTemp","outTemp","tempWc","flow"]
+        let labelarray = ["温差","入温","出温","流量","热流"]
+        let labelarray2 = ["tempWc","inTemp","outTemp","flow","reFlow"]
         var categories = [String]()
         for i in 0..<dataarray.count {
             let dic = dataarray[i] as! NSDictionary
@@ -459,7 +460,7 @@ extension GYWTDTrendViewController {
         
         let chartmodel = AAChartModel()
             .chartType(.line)
-            .colorsTheme(["#0182F9","#12B48D","#BC7DFC","#F5C105","#FF6E66"])
+            .colorsTheme(["#BC7DFC","#12B48D","#F5C105","#0182F9","#FF6E66"])
             .xAxisLabelsStyle(AAStyle(color: AAColor.black,fontSize: 14))
             .dataLabelsEnabled(false)
             .animationType(.bounce)
@@ -474,17 +475,23 @@ extension GYWTDTrendViewController {
     }
     
     @objc func timeBtnClick() {
-        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
                     weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
+                    weakSelf.selectIndex = IndexPath(row: -1, section: 0)
+                    weakSelf.collectionV.reloadData()
                     weakSelf.request()
                 }
             }))
@@ -493,6 +500,7 @@ extension GYWTDTrendViewController {
     }
     
     @objc func pinlvBtnClick() {
+        self.view.insertSubview(timepickView, aboveSubview: noDataView)
         timepickView.isHidden = false
     }
     
@@ -507,9 +515,9 @@ extension GYWTDTrendViewController {
         for i in 0..<5 {
             let tempbutton:UIButton = self.view.viewWithTag(i + 100)! as! UIButton
             if tempbutton.isSelected  {
-                labelarray.add(["热流","入温","出温","温差","流量"][i])
-                labelarray2.add(["reFlow","inTemp","outTemp","tempWc","flow"][i])
-                colorarray.add(["#0182F9","#12B48D","#BC7DFC","#F5C105","#FF6E66"][i])
+                labelarray.add(["温差","入温","出温","流量","热流"][i])
+                labelarray2.add(["tempWc","inTemp","outTemp","flow","reFlow"][i])
+                colorarray.add(["#BC7DFC","#12B48D","#F5C105","#0182F9","#FF6E66"][i])
             }
         }
         
@@ -675,13 +683,21 @@ extension GYWTDTrendViewController:AAChartViewDelegate {
 //        let labelarray2 = ["reFlow","outTemp","inTemp","tempWc","flow"]
         let dic = dataarray[clickEventMessage.index!] as! NSDictionary
         midtimeLabel.text = String(format: "时间：%@", dic["dt"] as! String)
-        wenchaView.label3.text =  String(format: "%.2f", dic["tempWc"] as! Double)
+        wenchaView.label3.text = String(format: "%.2f", dic["tempWc"] as! Double)
         ruwenView.label3.text = String(format: "%.2f", dic["inTemp"] as! Double)
         chuwenView.label3.text = String(format: "%.2f", dic["outTemp"] as! Double)
         liuliangView.label3.text = String(format: "%.2f", dic["flow"] as! Double)
         reliuView.label3.text = String(format: "%.0f", dic["reFlow"] as! Double)
     }
     
+    func cleartext() {
+        midtimeLabel.text = "时间："
+        wenchaView.label3.text = ""
+        ruwenView.label3.text = ""
+        chuwenView.label3.text = ""
+        liuliangView.label3.text = ""
+        reliuView.label3.text = ""
+    }
 }
 
 

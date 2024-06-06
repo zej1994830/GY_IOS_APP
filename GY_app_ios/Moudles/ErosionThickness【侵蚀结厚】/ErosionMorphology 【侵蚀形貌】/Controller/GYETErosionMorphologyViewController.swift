@@ -8,14 +8,16 @@
 import UIKit
 
 class GYETErosionMorphologyViewController: GYViewController {
-    var sectionArray:NSArray = [[["ic_wenduchang","温度场"],["ic_qinshijiehou","侵蚀结厚"],["ic_shujujieguo","数据结果"],["ic_litimoxing","立体模型"],["ic_qushi","趋势"],["ic_lishixingmao","历史形貌"]]]
+    var sectionArray:NSArray = [[["ic_qinshijiehou","侵蚀结厚"],["ic_shujujieguo","数据结果"],["ic_qushi","趋势"],["ic_lishixingmao","历史形貌"]]]
+//    [[["ic_wenduchang","温度场"],["ic_qinshijiehou","侵蚀结厚"],["ic_shujujieguo","数据结果"],["ic_litimoxing","立体模型"],["ic_qushi","趋势"],["ic_lishixingmao","历史形貌"]]]
     var currentDateString:String = ""
     var dataArray:NSArray = []
     var stove_id:Int32 = 0
     var imagedatadic:NSDictionary = [:]
-    var morphology_type:Int = 0
+    var morphology_type:Int = 1
     var section_type:Int = 0
     var index = IndexPath(row: 0, column: 0)
+    var timer = Timer()
     
     private lazy var bgView:UIScrollView = {
         let view = UIScrollView()
@@ -241,7 +243,7 @@ class GYETErosionMorphologyViewController: GYViewController {
     
         request()
         request2()
-        
+                
     }
 
 }
@@ -351,7 +353,7 @@ extension GYETErosionMorphologyViewController {
 
         collectionV.snp.makeConstraints { make in
             make.top.left.right.equalTo(0)
-            make.height.equalTo(APP.WIDTH / 2)
+            make.height.equalTo(APP.WIDTH / 4)
         }
 
         iconLabel.snp.makeConstraints { make in
@@ -383,6 +385,7 @@ extension GYETErosionMorphologyViewController {
         circularimageV.snp.makeConstraints { make in
             make.top.equalTo(autoBtn.snp.bottom).offset(10)
             make.left.right.equalTo(0)
+            make.height.equalTo(APP.WIDTH / 4 * 3)
         }
 
         scatterimageV.snp.makeConstraints { make in
@@ -439,6 +442,17 @@ extension GYETErosionMorphologyViewController {
     
     @objc func autoBtnClick(_ button:UIButton){
         button.isSelected = !button.isSelected
+        
+        if button.isSelected {
+            timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [self] timer in
+                // 这里编写需要执行的自动刷新操作
+                request3()
+            }
+            
+        }else{
+            timer.invalidate()
+        }
+        
     }
     
 }
@@ -471,7 +485,12 @@ extension GYETErosionMorphologyViewController {
             weakSelf.frontBtn.setTitle("前界面-\(diccc["stove_name"] ?? "")", for: .normal)
             weakSelf.behindBtn.setTitle("后界面-\(diccc["stove_name"] ?? "")", for: .normal)
             weakSelf.midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(diccc["stove_name"] ?? "")）"
-            weakSelf.stove_id = diccc["stove_id"] as! Int32
+            if let stove_id = diccc["stove_id"] as? Int32 {
+                weakSelf.stove_id = stove_id
+            }else{
+                weakSelf.stove_id = Int32(diccc["stove_id"] as! String)!
+            }
+            
             
             weakSelf.collectionView(weakSelf.collectionV, didSelectItemAt: weakSelf.index)
         }
@@ -495,9 +514,9 @@ extension GYETErosionMorphologyViewController {
     }
     
     func updateImageV() {
-        let cirstr:String = imagedatadic["circularImg"] as! String
-        let scastr:String = imagedatadic["scatterImg"] as! String
-        let hisstr:String = imagedatadic["histogramImg"] as! String
+        let cirstr:String = imagedatadic["circularImg"] as? String ?? ""
+        let scastr:String = imagedatadic["scatterImg"] as? String ?? ""
+        let hisstr:String = imagedatadic["histogramImg"] as? String ?? ""
         circularimageV.image = UIImage(data: Data(base64Encoded: cirstr)!)
         scatterimageV.image = UIImage(data: Data(base64Encoded: scastr)!)
         histogramimageV.image = UIImage(data: Data(base64Encoded: hisstr)!)
@@ -507,7 +526,7 @@ extension GYETErosionMorphologyViewController {
 
 extension GYETErosionMorphologyViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -522,20 +541,30 @@ extension GYETErosionMorphologyViewController:UICollectionViewDelegate,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: index) {
+            cell.backgroundColor = .white
+        }
         if let cell = collectionView.cellForItem(at: indexPath) {
             cell.backgroundColor = UIColor(red: 26/255.0, green: 115/255.0, blue: 232/255.0, alpha: 0.15)
         }
-        if indexPath.row == 0 || indexPath.row == 1 {
-            morphology_type = indexPath.row
+        if indexPath.row == 0 {
+            morphology_type = 1 //以前的温度场是0 侵蚀结厚是1 现在取消了温度场
             index = indexPath
             request3()
-        }else if indexPath.row == 2 {
+        }else if indexPath.row == 1 {
             let vc = GYETDataResultViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if indexPath.row == 3 {
-            let vc = GYETStereoscopicMorphologyViewController()
+        }else if indexPath.row == 2{
+            let vc = GYETTrendViewController()
             self.navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.row == 3 {
+            
         }
+//        else if indexPath.row == 2 {
+//            let vc = GYETStereoscopicMorphologyViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
+        
         
     }
     
@@ -562,6 +591,10 @@ extension GYETErosionMorphologyViewController:UIPickerViewDelegate,UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        if dataArray.count == 0 {
+            return
+        }
         let dic:NSDictionary = dataArray[row] as! NSDictionary
         frontBtn.setTitle("前界面-\(dic["stove_name"] ?? "")", for: .normal)
         behindBtn.setTitle("后界面-\(dic["stove_name"] ?? "")", for: .normal)

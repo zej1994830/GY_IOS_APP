@@ -275,7 +275,7 @@ extension GYTRTRadarDetailTrendViewController {
             make.left.equalTo(midtitleLabel)
             make.bottom.equalTo(midBgView).offset(-7)
             make.top.equalTo(midtitleLabel.snp.bottom).offset(11)
-            make.width.equalTo(80)
+            make.width.equalTo(200)
         }
         
         midshowview2.snp.makeConstraints { make in
@@ -302,11 +302,15 @@ extension GYTRTRadarDetailTrendViewController {
     }
     
     @objc func timeBtnClick() {
-        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
@@ -323,6 +327,8 @@ extension GYTRTRadarDetailTrendViewController {
 
 extension GYTRTRadarDetailTrendViewController {
     func request() {
+        midshowview.label2.text = ""
+        midshowview.label3.text = ""
         GYHUD.showGif(view: self.view)
         let params = ["device_db":GYDeviceData.default.device_db,"start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","rate":rate,"stove_id":Int32(model.id!) as Any] as [String:Any]
         GYNetworkManager.share.requestData(.get, api: Api.getrdorealhistorychartdata, parameters: params) { [weak self] (result) in
@@ -373,6 +379,35 @@ extension GYTRTRadarDetailTrendViewController {
                 .minWidth(3000)
                 .scrollPositionX(1))
         lineView.aa_drawChartWithChartModel(chartmodel)
+    }
+    
+    open func aaChartView(_ aaChartView: AAChartView, clickEventMessage: AAClickEventMessageModel) {
+        print(
+            """
+
+            clicked point series element name: \(clickEventMessage.name ?? "")
+            🖱🖱🖱WARNING!!!!!!!!!!!!!!!!!!!! Click Event Message !!!!!!!!!!!!!!!!!!!! WARNING🖱🖱🖱
+            ==========================================================================================
+            ------------------------------------------------------------------------------------------
+            user finger CLICKED!!!,get the custom click event message: {
+            category = \(String(describing: clickEventMessage.category))
+            index = \(String(describing: clickEventMessage.index))
+            name = \(String(describing: clickEventMessage.name))
+            offset = \(String(describing: clickEventMessage.offset))
+            x = \(String(describing: clickEventMessage.x))
+            y = \(String(describing: clickEventMessage.y))
+            }
+            +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            
+            
+            """
+        )
+        let dic:NSDictionary = dataArray.firstObject as! NSDictionary
+        let array:NSArray = dic["data"] as! NSArray
+        let tempdic = array[clickEventMessage.index!] as! NSDictionary
+        midshowview.label2.text = (tempdic["time"] as! String)
+        midshowview.label3.text = (tempdic["value"]! as! String)
+        
     }
 }
 

@@ -29,16 +29,18 @@ struct GYWTDRadarModel:HandyJSON {
     var section_name:String? = ""
     var stove_list:NSArray = []
 }
-
-struct GYRTRadarModel:HandyJSON {
+ 
+@objc class GYRTRadarModel:NSObject, HandyJSON {
     var r_max:Int64? = 0
     var resultModel:NSArray = []
     var offsetAngle2:Int64? = 0
     var clockwise:Int64? = 0
     var offsetAngle:Int64? = 0
+     
+    required override init() { }
 }
 
-struct GYRTRadarData:HandyJSON {
+@objc class GYRTRadarData:NSObject, HandyJSON {
     var id:String? = ""
     var elevation:String? = ""
     var insertion_angle:String? = ""
@@ -50,5 +52,7 @@ struct GYRTRadarData:HandyJSON {
     var l_T:String? = ""
     var ll_T:String? = ""
     var name:String? = ""
+    
+    required override init() { }
 }
 

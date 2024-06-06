@@ -375,6 +375,10 @@ extension GYSelectWTDViewController {
             typeArray.add("热流")
         }
         
+        if typeArray.count == 0 {
+            GYHUD.show("必须选一个")
+            return
+        }
         if let block = ClickBlock {
             block(typeArray)
         }

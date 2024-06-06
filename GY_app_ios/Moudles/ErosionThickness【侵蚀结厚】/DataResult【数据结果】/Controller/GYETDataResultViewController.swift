@@ -9,7 +9,14 @@ import UIKit
 import SpreadsheetView
 
 class GYETDataResultViewController: GYViewController {
-    var dataArray:NSArray = []
+    var dataArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = dataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(spreadsheetView)
+            }
+        }
+    }
     var strArray:[String] = []
     var dataResultArray:NSMutableArray = []
     var stove_id:Int32 = 0
@@ -134,6 +141,7 @@ extension GYETDataResultViewController {
     }
     
     @objc func platformBtnClick() {
+        self.view.insertSubview(namepickView, aboveSubview: noDataView)
         namepickView.isHidden = false
     }
     
@@ -176,6 +184,7 @@ extension GYETDataResultViewController {
         let endIndex = dataStr.index(index, offsetBy: dataStr.count - 172 - 43, limitedBy: dataStr.endIndex) ?? dataStr.endIndex // 获取结束索引
         let substring = dataStr[index..<endIndex] // 切片获取子字符串
         strArray = substring.components(separatedBy: "\r\n       ")
+        dataResultArray.removeAllObjects()
         for str in strArray {
             dataResultArray.add(str.split(separator: " ").map(String.init))
         }
@@ -276,7 +285,10 @@ extension GYETDataResultViewController: SpreadsheetViewDataSource, SpreadsheetVi
         }
         if indexPath.column != 0 && indexPath.row > 0 {
             let array:NSArray = dataResultArray[indexPath.row - 1] as! NSArray
-            cell.label.text = (array[indexPath.column] as! String)
+            if indexPath.column < array.count {
+                cell.label.text = (array[indexPath.column] as! String)
+            }
+            
         }
         
         return cell
@@ -302,6 +314,9 @@ extension GYETDataResultViewController:UIPickerViewDelegate,UIPickerViewDataSour
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerView.isHidden = true
+        if dataArray.count == 0 {
+            return
+        }
         let dic:NSDictionary = dataArray[row] as! NSDictionary
         platformBtn.setTitle("\(dic["stove_name"] ?? "")", for: .normal)
         stove_id = dic["stove_id"] as! Int32

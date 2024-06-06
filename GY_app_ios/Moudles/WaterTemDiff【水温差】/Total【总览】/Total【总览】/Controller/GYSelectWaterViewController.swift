@@ -20,6 +20,9 @@ class GYSelectWaterViewController: ZEJBottomPresentViewController {
     //缓存
     var tempArray:NSMutableArray = [] {
         didSet{
+            if tempArray.count != dataArray.count {
+                selectBtn.setTitle("全选", for: .normal)
+            }
             tableView.reloadData()
         }
     }
@@ -47,7 +50,7 @@ class GYSelectWaterViewController: ZEJBottomPresentViewController {
     
     private lazy var selectBtn:UIButton = {
         let btn = UIButton()
-        btn.setTitle("全选", for: .normal)
+        btn.setTitle("取消全选", for: .normal)
         btn.setTitleColor(UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8"), for: .normal)
         btn.layer.cornerRadius = 14
         btn.layer.borderWidth = 1
@@ -122,7 +125,7 @@ extension GYSelectWaterViewController {
         selectBtn.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
             make.right.equalTo(-20)
-            make.width.equalTo(56)
+            make.width.equalTo(100)
             make.height.equalTo(28)
         }
         
@@ -164,9 +167,10 @@ extension GYSelectWaterViewController:UITableViewDelegate,UITableViewDataSource 
         if cell == nil {
             cell = GYSelectWaterCell(style: .default, reuseIdentifier: GYSelectWaterCell.indentifier)
         }
-        if dataArray.count != 0 {
-            let dic:NSDictionary = dataArray[indexPath.row] as! NSDictionary
-            cell?.titleStr = dic["name"] as! String
+        let dic:NSDictionary = dataArray[indexPath.row] as! NSDictionary
+        cell?.titleStr = dic["name"] as! String
+        if dataArray.count != 0 && tempArray.count != 0 {
+            
             //判断一下临时和源数组，找出上次的选中状态
             for temp in tempArray {
                 let dicc:NSDictionary = temp as! NSDictionary
@@ -177,6 +181,8 @@ extension GYSelectWaterViewController:UITableViewDelegate,UITableViewDataSource 
                     cell?.iselectAll = false
                 }
             }
+        }else{
+            cell?.iselectAll = false
         }
         
         cell?.ClickBlock = { [weak self] (sectionname,isON) in
@@ -191,12 +197,12 @@ extension GYSelectWaterViewController:UITableViewDelegate,UITableViewDataSource 
 
 extension GYSelectWaterViewController {
     @objc func selectBtnClick() {
-        if selectBtn.titleLabel?.text == "全选" {
-            selectBtn.setTitle("取消全选", for: .normal)
+        if selectBtn.titleLabel?.text == "取消全选" {
+            selectBtn.setTitle("全选", for: .normal)
             isSelectAll = false
             tempArray.removeAllObjects()
         }else{
-            selectBtn.setTitle("全选", for: .normal)
+            selectBtn.setTitle("取消全选", for: .normal)
             isSelectAll = true
             tempArray = NSMutableArray(array: dataArray)
         }
@@ -208,6 +214,11 @@ extension GYSelectWaterViewController {
     }
     
     @objc func sureBtnClick() {
+        if tempArray.count == 0 {
+            GYHUD.show("必须选择一个")
+            return
+        }
+        
         if let block = ClickBlock {
             block(tempArray)
         }
@@ -227,6 +238,10 @@ extension GYSelectWaterViewController {
                     tempArray.add(temp)
                 }
             }
+            if dataArray.count == tempArray.count {
+                selectBtn.setTitle("取消全选", for: .normal)
+                isSelectAll = true
+            }
         }else{
             for temp in dataArray {
                 let dic:NSDictionary = temp as! NSDictionary
@@ -234,6 +249,9 @@ extension GYSelectWaterViewController {
                     tempArray.remove(temp)
                 }
             }
+            
+            selectBtn.setTitle("全选", for: .normal)
+            isSelectAll = false
         }
     }
     

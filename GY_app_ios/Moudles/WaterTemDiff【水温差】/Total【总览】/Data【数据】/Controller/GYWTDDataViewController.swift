@@ -9,7 +9,14 @@ import UIKit
 import JJCollectionViewRoundFlowLayout_Swift
 
 class GYWTDDataViewController: GYViewController {
-    var dataSectionArray:NSArray = []
+    var dataSectionArray:NSArray = []{
+        didSet {
+            noDataView.isHidden = dataSectionArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(collectionV)
+            }
+        }
+    }
     var strArray:NSMutableArray = ["温差","入温","出温","流量","热流"]
     
     private lazy var collectionV: UICollectionView = {

@@ -13,6 +13,12 @@ class GYFSTotalCell: UICollectionViewCell {
     var dataModel:GYFSDataModel? = nil {
         didSet {
             titleLabel.text = dataModel?.name
+            if dataModel?.isException == 0 {
+                bgView.isHidden = true
+            }else{
+                bgView.isHidden = false
+            }
+           
         }
     }
     
@@ -66,7 +72,6 @@ extension GYFSTotalCell {
     func addLayout() {
         bgView.snp.makeConstraints { make in
             make.left.right.top.bottom.equalToSuperview()
-            make.width.equalTo(rellySizeForiPhoneWidth(172.5, 170).width)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -78,6 +83,7 @@ extension GYFSTotalCell {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.left.right.bottom.equalTo(0)
+            make.width.equalTo((APP.WIDTH - 30) / 2)
             make.height.equalTo(27)
         }
     }

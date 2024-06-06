@@ -108,21 +108,34 @@
 		C8BC3E482B454FDF00B6CD93 /* GYMainFlagData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BC3E472B454FDF00B6CD93 /* GYMainFlagData.swift */; };
 		C8BCA2132B0458BB005EE9D6 /* GYGraphicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCA2122B0458BB005EE9D6 /* GYGraphicViewController.swift */; };
 		C8BCA21A2B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCA2192B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift */; };
+		C8BCB39A2C102F2B00952C5D /* GYWMGraphicBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCB3992C102F2B00952C5D /* GYWMGraphicBarChartViewController.swift */; };
+		C8BCB39C2C10310400952C5D /* GYWMGraphicRadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCB39B2C10310400952C5D /* GYWMGraphicRadarViewController.swift */; };
 		C8BD5E7B2B19CC2900F4A50A /* GYFSDataTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BD5E7A2B19CC2900F4A50A /* GYFSDataTimeViewController.swift */; };
 		C8BF8FAB2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FAA2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift */; };
 		C8BF8FAF2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FAE2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift */; };
 		C8BF8FB62B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FB52B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift */; };
 		C8BF8FB82B1D69D900FF9D65 /* GYTHCurveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */; };
 		C8C03E282B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */; };
+		C8C06B252C06E6960041B796 /* GYWifiMeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C06B242C06E6960041B796 /* GYWifiMeasureViewController.swift */; };
+		C8C06B2B2C06EE600041B796 /* GYWMTotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C06B2A2C06EE600041B796 /* GYWMTotalViewController.swift */; };
+		C8C06B2E2C0707250041B796 /* GYWMModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C06B2D2C0707250041B796 /* GYWMModel.swift */; };
+		C8C06B312C07081B0041B796 /* GYWMTotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C06B302C07081B0041B796 /* GYWMTotalCell.swift */; };
 		C8C084E02B27F7DE0095F25B /* GYETDataResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C084DF2B27F7DE0095F25B /* GYETDataResultViewController.swift */; };
+		C8C15E0D2C0EA481004FDBD6 /* GYWMGraphicTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C15E0C2C0EA481004FDBD6 /* GYWMGraphicTrendViewController.swift */; };
 		C8C4C1552B43B22300065204 /* TESTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4C1542B43B22300065204 /* TESTViewController.swift */; };
 		C8C4C1582B43EC1100065204 /* GYFSGraphicRadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4C1572B43EC1100065204 /* GYFSGraphicRadarViewController.swift */; };
 		C8C4D3182A8F4539001297D2 /* GYHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4D3172A8F4539001297D2 /* GYHUD.swift */; };
 		C8C4D31E2A8F4DD9001297D2 /* CommonCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4D31D2A8F4DD9001297D2 /* CommonCache.swift */; };
+		C8C57A282C0D53810091902E /* GYWMTotalTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C57A272C0D53810091902E /* GYWMTotalTrendViewController.swift */; };
+		C8C57A2A2C0D98D90091902E /* GYWMMidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C57A292C0D98D90091902E /* GYWMMidCell.swift */; };
+		C8C57A2E2C0DA4F90091902E /* GYWMTotalBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C57A2D2C0DA4F90091902E /* GYWMTotalBarChartViewController.swift */; };
 		C8C655E12B05BC4400DC4FC6 /* Pods_GY_app_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */; };
 		C8C656EC2B05BFF100DC4FC6 /* SpreadsheetView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C656EB2B05BFF100DC4FC6 /* SpreadsheetView.framework */; };
 		C8C72D612AFC834700E30E9A /* GYFSTotalBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C72D602AFC834700E30E9A /* GYFSTotalBarChartViewController.swift */; };
 		C8C7FA132B0F394800B07063 /* GYTRTRadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C7FA122B0F394800B07063 /* GYTRTRadarViewController.swift */; };
+		C8C863A92C096934004DFBAE /* CollectionViewWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C863A82C096934004DFBAE /* CollectionViewWaterfallLayout.swift */; };
+		C8C863AB2C09A21B004DFBAE /* GYWMTotalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C863AA2C09A21B004DFBAE /* GYWMTotalDetailViewController.swift */; };
+		C8C863AD2C09A9C6004DFBAE /* GYWMDetaiSecCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C863AC2C09A9C6004DFBAE /* GYWMDetaiSecCell.swift */; };
 		C8C950D12A97366F00AC3FEE /* GYMyCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D02A97366F00AC3FEE /* GYMyCenterCell.swift */; };
 		C8C950D32A98490700AC3FEE /* GYDeviceTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D22A98490700AC3FEE /* GYDeviceTimeViewController.swift */; };
 		C8C950D52A98750900AC3FEE /* GYLoginTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D42A98750900AC3FEE /* GYLoginTimeViewController.swift */; };
@@ -135,12 +148,12 @@
 		C8D241E72AF8908F00064574 /* GYFSTotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D241E62AF8908F00064574 /* GYFSTotalViewController.swift */; };
 		C8D241EA2AF8948600064574 /* GYFSTotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D241E92AF8948600064574 /* GYFSTotalCell.swift */; };
 		C8D241ED2AF89A0600064574 /* GYFSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D241EC2AF89A0600064574 /* GYFSModel.swift */; };
+		C8D5091A2B6F6AA70069BBAA /* GYETTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D509192B6F6AA70069BBAA /* GYETTrendViewController.swift */; };
 		C8D63F792B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D63F782B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift */; };
 		C8DD77442A95A177003E184D /* GYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD77432A95A177003E184D /* GYNavigationController.swift */; };
 		C8DD77472A95A246003E184D /* GYImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD77462A95A246003E184D /* GYImageExtension.swift */; };
 		C8DD77482A95A69F003E184D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B39CDB2A6E61AD00532C53 /* LaunchScreen.storyboard */; };
 		C8DD774B2A95CFF4003E184D /* GYLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD774A2A95CFF4003E184D /* GYLoginViewController.swift */; };
-		C8DDBBC32B16E84E008A8ED8 /* GYTRTRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DDBBC22B16E84E008A8ED8 /* GYTRTRadarView.swift */; };
 		C8DDBBC52B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DDBBC42B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift */; };
 		C8DDBBC72B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DDBBC62B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift */; };
 		C8EB0EC52AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EB0EC42AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift */; };
@@ -403,21 +416,34 @@
 		C8BC3E472B454FDF00B6CD93 /* GYMainFlagData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYMainFlagData.swift; sourceTree = "<group>"; };
 		C8BCA2122B0458BB005EE9D6 /* GYGraphicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGraphicViewController.swift; sourceTree = "<group>"; };
 		C8BCA2192B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGraphicBarChartViewController.swift; sourceTree = "<group>"; };
+		C8BCB3992C102F2B00952C5D /* GYWMGraphicBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMGraphicBarChartViewController.swift; sourceTree = "<group>"; };
+		C8BCB39B2C10310400952C5D /* GYWMGraphicRadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMGraphicRadarViewController.swift; sourceTree = "<group>"; };
 		C8BD5E7A2B19CC2900F4A50A /* GYFSDataTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSDataTimeViewController.swift; sourceTree = "<group>"; };
 		C8BF8FAA2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSGraphicTrendViewController.swift; sourceTree = "<group>"; };
 		C8BF8FAE2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSDeviceAddressViewController.swift; sourceTree = "<group>"; };
 		C8BF8FB52B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYThermocoupleReadlTimeDataViewController.swift; sourceTree = "<group>"; };
 		C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTHCurveViewController.swift; sourceTree = "<group>"; };
 		C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETErosionMorphologyViewController.swift; sourceTree = "<group>"; };
+		C8C06B242C06E6960041B796 /* GYWifiMeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWifiMeasureViewController.swift; sourceTree = "<group>"; };
+		C8C06B2A2C06EE600041B796 /* GYWMTotalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalViewController.swift; sourceTree = "<group>"; };
+		C8C06B2D2C0707250041B796 /* GYWMModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMModel.swift; sourceTree = "<group>"; };
+		C8C06B302C07081B0041B796 /* GYWMTotalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalCell.swift; sourceTree = "<group>"; };
 		C8C084DF2B27F7DE0095F25B /* GYETDataResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETDataResultViewController.swift; sourceTree = "<group>"; };
+		C8C15E0C2C0EA481004FDBD6 /* GYWMGraphicTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMGraphicTrendViewController.swift; sourceTree = "<group>"; };
 		C8C4C1542B43B22300065204 /* TESTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TESTViewController.swift; sourceTree = "<group>"; };
 		C8C4C1572B43EC1100065204 /* GYFSGraphicRadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSGraphicRadarViewController.swift; sourceTree = "<group>"; };
 		C8C4D3172A8F4539001297D2 /* GYHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYHUD.swift; sourceTree = "<group>"; };
 		C8C4D31D2A8F4DD9001297D2 /* CommonCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCache.swift; sourceTree = "<group>"; };
+		C8C57A272C0D53810091902E /* GYWMTotalTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalTrendViewController.swift; sourceTree = "<group>"; };
+		C8C57A292C0D98D90091902E /* GYWMMidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMMidCell.swift; sourceTree = "<group>"; };
+		C8C57A2D2C0DA4F90091902E /* GYWMTotalBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalBarChartViewController.swift; sourceTree = "<group>"; };
 		C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GY_app_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8C656EB2B05BFF100DC4FC6 /* SpreadsheetView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SpreadsheetView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8C72D602AFC834700E30E9A /* GYFSTotalBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalBarChartViewController.swift; sourceTree = "<group>"; };
 		C8C7FA122B0F394800B07063 /* GYTRTRadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarViewController.swift; sourceTree = "<group>"; };
+		C8C863A82C096934004DFBAE /* CollectionViewWaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewWaterfallLayout.swift; sourceTree = "<group>"; };
+		C8C863AA2C09A21B004DFBAE /* GYWMTotalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalDetailViewController.swift; sourceTree = "<group>"; };
+		C8C863AC2C09A9C6004DFBAE /* GYWMDetaiSecCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMDetaiSecCell.swift; sourceTree = "<group>"; };
 		C8C950D02A97366F00AC3FEE /* GYMyCenterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYMyCenterCell.swift; sourceTree = "<group>"; };
 		C8C950D22A98490700AC3FEE /* GYDeviceTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYDeviceTimeViewController.swift; sourceTree = "<group>"; };
 		C8C950D42A98750900AC3FEE /* GYLoginTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginTimeViewController.swift; sourceTree = "<group>"; };
@@ -430,11 +456,11 @@
 		C8D241E62AF8908F00064574 /* GYFSTotalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalViewController.swift; sourceTree = "<group>"; };
 		C8D241E92AF8948600064574 /* GYFSTotalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalCell.swift; sourceTree = "<group>"; };
 		C8D241EC2AF89A0600064574 /* GYFSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSModel.swift; sourceTree = "<group>"; };
+		C8D509192B6F6AA70069BBAA /* GYETTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETTrendViewController.swift; sourceTree = "<group>"; };
 		C8D63F782B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYThermocoupleHistoryDataViewController.swift; sourceTree = "<group>"; };
 		C8DD77432A95A177003E184D /* GYNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYNavigationController.swift; sourceTree = "<group>"; };
 		C8DD77462A95A246003E184D /* GYImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYImageExtension.swift; sourceTree = "<group>"; };
 		C8DD774A2A95CFF4003E184D /* GYLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginViewController.swift; sourceTree = "<group>"; };
-		C8DDBBC22B16E84E008A8ED8 /* GYTRTRadarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarView.swift; sourceTree = "<group>"; };
 		C8DDBBC42B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarDetailViewController.swift; sourceTree = "<group>"; };
 		C8DDBBC62B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarDetailTrendViewController.swift; sourceTree = "<group>"; };
 		C8EB0EC42AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTrendItemsViewController.swift; sourceTree = "<group>"; };
@@ -539,6 +565,7 @@
 				C8A2BC2B2AD24C05009BB260 /* FurnaceShell【炉壳温度】 */,
 				C8A2BC342AD25BB4009BB260 /* ErosionThickness【侵蚀结厚】 */,
 				C8A2BC372AD25D54009BB260 /* Thermocouple【热电偶】 */,
+				C8C06B232C06D5350041B796 /* WifiMeasure【无线测温】 */,
 				C87426422A94A1F700F2382A /* MyCenter */,
 				C874263E2A94A10900F2382A /* Main */,
 				C8AC912C2A9346970081DF90 /* Login */,
@@ -690,6 +717,7 @@
 				C8C03E252B22BB94004C77B1 /* ErosionMorphology 【侵蚀形貌】 */,
 				C8C084DD2B27F7970095F25B /* DataResult【数据结果】 */,
 				C8B687C02B293A66000768FC /* StereoscopicMorphology 【立体形貌】 */,
+				C8D509122B6F69370069BBAA /* HistoryCurve【历史曲线】 */,
 			);
 			path = "ErosionThickness【侵蚀结厚】";
 			sourceTree = "<group>";
@@ -1200,8 +1228,6 @@
 				C8BC3B992B47F3E30052A236 /* index.html */,
 				C8BC3B9B2B47F3E70052A236 /* o3dv.min.js */,
 				C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */,
-				C8B33AF92B4694C40011626D /* SBRadarCharts.h */,
-				C8B33AFA2B4694C60011626D /* SBRadarCharts.m */,
 				C8BBE12A2A9C626A00E4CACE /* GY_app_ios-Bridging-Header.h */,
 				C8AA2D952A78D801005CBD77 /* Root */,
 				C8AA2D9B2A78DB05005CBD77 /* Extension */,
@@ -1488,6 +1514,64 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		C8C06B232C06D5350041B796 /* WifiMeasure【无线测温】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C06B242C06E6960041B796 /* GYWifiMeasureViewController.swift */,
+				C8C06B262C06EDE80041B796 /* Total【总览】 */,
+				C8C57A2F2C0DB5F10091902E /* Graphic【图示】 */,
+			);
+			path = "WifiMeasure【无线测温】";
+			sourceTree = "<group>";
+		};
+		C8C06B262C06EDE80041B796 /* Total【总览】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C06B272C06EDF70041B796 /* Total【总览】 */,
+				C8C57A2B2C0DA4BD0091902E /* BarChart【柱状图】 */,
+			);
+			path = "Total【总览】";
+			sourceTree = "<group>";
+		};
+		C8C06B272C06EDF70041B796 /* Total【总览】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C06B2C2C07070C0041B796 /* Model */,
+				C8C06B2F2C0707FE0041B796 /* View */,
+				C8C06B282C06EE0E0041B796 /* Controller */,
+			);
+			path = "Total【总览】";
+			sourceTree = "<group>";
+		};
+		C8C06B282C06EE0E0041B796 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C06B2A2C06EE600041B796 /* GYWMTotalViewController.swift */,
+				C8C863AA2C09A21B004DFBAE /* GYWMTotalDetailViewController.swift */,
+				C8C57A272C0D53810091902E /* GYWMTotalTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C06B2C2C07070C0041B796 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8C06B2D2C0707250041B796 /* GYWMModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8C06B2F2C0707FE0041B796 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8C863A82C096934004DFBAE /* CollectionViewWaterfallLayout.swift */,
+				C8C06B302C07081B0041B796 /* GYWMTotalCell.swift */,
+				C8C863AC2C09A9C6004DFBAE /* GYWMDetaiSecCell.swift */,
+				C8C57A292C0D98D90091902E /* GYWMMidCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C8C084DD2B27F7970095F25B /* DataResult【数据结果】 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1529,6 +1613,64 @@
 				C8C4D31D2A8F4DD9001297D2 /* CommonCache.swift */,
 			);
 			path = CommonUtil;
+			sourceTree = "<group>";
+		};
+		C8C57A2B2C0DA4BD0091902E /* BarChart【柱状图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C57A2C2C0DA4D80091902E /* Controller */,
+			);
+			path = "BarChart【柱状图】";
+			sourceTree = "<group>";
+		};
+		C8C57A2C2C0DA4D80091902E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C57A2D2C0DA4F90091902E /* GYWMTotalBarChartViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C57A2F2C0DB5F10091902E /* Graphic【图示】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C57A302C0DB6170091902E /* Trend【趋势】 */,
+				C8C57A312C0DB61E0091902E /* BarChart【柱状图】 */,
+				C8C57A322C0DB6240091902E /* Radar【雷达图】 */,
+			);
+			path = "Graphic【图示】";
+			sourceTree = "<group>";
+		};
+		C8C57A302C0DB6170091902E /* Trend【趋势】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C57A332C0DB6330091902E /* Controller */,
+			);
+			path = "Trend【趋势】";
+			sourceTree = "<group>";
+		};
+		C8C57A312C0DB61E0091902E /* BarChart【柱状图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCB3992C102F2B00952C5D /* GYWMGraphicBarChartViewController.swift */,
+			);
+			path = "BarChart【柱状图】";
+			sourceTree = "<group>";
+		};
+		C8C57A322C0DB6240091902E /* Radar【雷达图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCB39B2C10310400952C5D /* GYWMGraphicRadarViewController.swift */,
+			);
+			path = "Radar【雷达图】";
+			sourceTree = "<group>";
+		};
+		C8C57A332C0DB6330091902E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C15E0C2C0EA481004FDBD6 /* GYWMGraphicTrendViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		C8C72D5A2AFC7C6000E30E9A /* Total【总览】 */ = {
@@ -1631,6 +1773,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C8D509122B6F69370069BBAA /* HistoryCurve【历史曲线】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8D509132B6F695E0069BBAA /* Controller */,
+			);
+			path = "HistoryCurve【历史曲线】";
+			sourceTree = "<group>";
+		};
+		C8D509132B6F695E0069BBAA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8D509192B6F6AA70069BBAA /* GYETTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C8D63F772B201458003163B8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1651,7 +1809,8 @@
 		C8DDBBC12B16E823008A8ED8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C8DDBBC22B16E84E008A8ED8 /* GYTRTRadarView.swift */,
+				C8B33AF92B4694C40011626D /* SBRadarCharts.h */,
+				C8B33AFA2B4694C60011626D /* SBRadarCharts.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1998,6 +2157,7 @@
 				C8C950D52A98750900AC3FEE /* GYLoginTimeViewController.swift in Sources */,
 				C89624272AC2B7FD005DE286 /* GYWTDDataHeaderView.swift in Sources */,
 				C8C950D72A98777E00AC3FEE /* GYLoginTimeCell.swift in Sources */,
+				C8C06B2E2C0707250041B796 /* GYWMModel.swift in Sources */,
 				C8A7DAC72AAEDA660031F778 /* GYTotalWTDHeaderView.swift in Sources */,
 				C89D8D802A9F1F690013E1B1 /* ZEJRollDownViewController.m in Sources */,
 				C89E762B2AA95FA400985EFC /* GYWaterTimeDiffHeaderView.swift in Sources */,
@@ -2005,6 +2165,7 @@
 				C8AA2D9D2A78DB48005CBD77 /* UIExtension.swift in Sources */,
 				C8C7FA132B0F394800B07063 /* GYTRTRadarViewController.swift in Sources */,
 				C8BBE11C2A9C46CC00E4CACE /* ZEJBottomPresentPresentationController.m in Sources */,
+				C8C57A282C0D53810091902E /* GYWMTotalTrendViewController.swift in Sources */,
 				C8BF8FAB2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift in Sources */,
 				C8C72D612AFC834700E30E9A /* GYFSTotalBarChartViewController.swift in Sources */,
 				C8A388442AE10DC00022410F /* GYWTDWarnDataModel.swift in Sources */,
@@ -2020,10 +2181,12 @@
 				C80528862B4B911900A38D5F /* ViewController.m in Sources */,
 				C8DD77472A95A246003E184D /* GYImageExtension.swift in Sources */,
 				C89F6AE92AC16FA800FE541A /* GYWTDTrendCell.swift in Sources */,
+				C8C06B252C06E6960041B796 /* GYWifiMeasureViewController.swift in Sources */,
 				C8BBE11D2A9C46CC00E4CACE /* ZEJBottomPresentTransitionDelegate.m in Sources */,
 				C8A2BC2F2AD25389009BB260 /* GYFurnaceShellMainViewController.swift in Sources */,
 				C8D63F792B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift in Sources */,
 				C800026D2ABADDB100E7AFF9 /* GYWTDDetaiSecCell.swift in Sources */,
+				C8BCB39A2C102F2B00952C5D /* GYWMGraphicBarChartViewController.swift in Sources */,
 				C8A2BC392AD25D71009BB260 /* GYThermocoupleViewController.swift in Sources */,
 				C8A7BC082AE66B18002882A5 /* GYWTDDeviceAdressCell.swift in Sources */,
 				C8BF8FAF2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift in Sources */,
@@ -2035,6 +2198,7 @@
 				C8BF8FB82B1D69D900FF9D65 /* GYTHCurveViewController.swift in Sources */,
 				C8EB0EC52AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift in Sources */,
 				C8C03E282B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift in Sources */,
+				C8C863A92C096934004DFBAE /* CollectionViewWaterfallLayout.swift in Sources */,
 				C87840072ABC2AD300E67037 /* GYWTDTrendViewController.swift in Sources */,
 				C8BBE1162A9C46CC00E4CACE /* UIViewController+ZEJPresent.m in Sources */,
 				C8AC912E2A9346B00081DF90 /* GYCodingObject.swift in Sources */,
@@ -2045,6 +2209,8 @@
 				C8CF40D22B034D3700DE282A /* GYFSTotalTrendViewController.swift in Sources */,
 				C8D241ED2AF89A0600064574 /* GYFSModel.swift in Sources */,
 				C8BBE1182A9C46CC00E4CACE /* ZEJRollDownAnimatedTransitioning.m in Sources */,
+				C8C06B312C07081B0041B796 /* GYWMTotalCell.swift in Sources */,
+				C8BCB39C2C10310400952C5D /* GYWMGraphicRadarViewController.swift in Sources */,
 				C8AA2D972A78D835005CBD77 /* GYTabbarController.swift in Sources */,
 				C8D241EA2AF8948600064574 /* GYFSTotalCell.swift in Sources */,
 				C8A7BC052AE65D31002882A5 /* GYWTDDeviceAddressViewController.swift in Sources */,
@@ -2063,6 +2229,7 @@
 				C89FE6582AA588BB003BE557 /* GYMainViewCell.swift in Sources */,
 				C8CF40CD2B0341AF00DE282A /* GYFSTotalDetailViewController.swift in Sources */,
 				C89792202A8608E900CDB5A1 /* GYNetworkManager.swift in Sources */,
+				C8C06B2B2C06EE600041B796 /* GYWMTotalViewController.swift in Sources */,
 				C874263B2A9493AC00F2382A /* CacheConstant.swift in Sources */,
 				C8AB6FED2ADE2710002EFEB9 /* GYSelectGroupViewController.swift in Sources */,
 				C89E762D2AA97EAF00985EFC /* GYWaterTimeDiffFooterView.swift in Sources */,
@@ -2074,10 +2241,12 @@
 				C8B30EE32AB2E84C00570901 /* GYSelectWaterViewController.swift in Sources */,
 				C8C950D12A97366F00AC3FEE /* GYMyCenterCell.swift in Sources */,
 				C8A3883C2AE0B23C0022410F /* GYWTDWarnViewController.swift in Sources */,
+				C8C57A2A2C0D98D90091902E /* GYWMMidCell.swift in Sources */,
 				C8BBE12F2A9C87E700E4CACE /* GYApiCenter.swift in Sources */,
 				C8C4D3182A8F4539001297D2 /* GYHUD.swift in Sources */,
 				C8AE7C5E2AA8402D006B9748 /* GYWaterTemDiffViewController.swift in Sources */,
 				C89624252AC287D5005DE286 /* GYWTDDataBaseHeaderView.swift in Sources */,
+				C8C863AD2C09A9C6004DFBAE /* GYWMDetaiSecCell.swift in Sources */,
 				C8BBE11A2A9C46CC00E4CACE /* ZEJRollDownTransitionDelegate.m in Sources */,
 				C89E762F2AA9B62000985EFC /* GYTotalWTDViewController.swift in Sources */,
 				C8C4C1552B43B22300065204 /* TESTViewController.swift in Sources */,
@@ -2098,8 +2267,11 @@
 				C8BBE11F2A9C46CC00E4CACE /* ZEJSlidePresentTransitionDelegate.m in Sources */,
 				C8B30EE52AB2F5DD00570901 /* GYSelectWaterCell.swift in Sources */,
 				C809AB9F2AA0650E002301BE /* GYDeviceExpireViewController.swift in Sources */,
+				C8C863AB2C09A21B004DFBAE /* GYWMTotalDetailViewController.swift in Sources */,
 				C8EB0EC72AD10BE600049C6A /* GYWTDTrendItemsGroupViewController.swift in Sources */,
+				C8C15E0D2C0EA481004FDBD6 /* GYWMGraphicTrendViewController.swift in Sources */,
 				C8FFF8AD2B26B2760067BF16 /* GYETErosionMorphologyCell.swift in Sources */,
+				C8C57A2E2C0DA4F90091902E /* GYWMTotalBarChartViewController.swift in Sources */,
 				C8B687C32B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift in Sources */,
 				C8D241E72AF8908F00064574 /* GYFSTotalViewController.swift in Sources */,
 				C8BBE11E2A9C46CC00E4CACE /* ZEJSlidePresentAnimatedTransitioning.m in Sources */,
@@ -2107,7 +2279,6 @@
 				C8AB6FF22ADE67EA002EFEB9 /* GYWTDData.swift in Sources */,
 				C8AE7C612AA8620D006B9748 /* GYWaterTemDiffCell.swift in Sources */,
 				C8BBE11B2A9C46CC00E4CACE /* ZEJBottomPresentViewController.m in Sources */,
-				C8DDBBC32B16E84E008A8ED8 /* GYTRTRadarView.swift in Sources */,
 				C8BCA21A2B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift in Sources */,
 				C86C35A32A832A3000AC28EC /* GYNoDataView.swift in Sources */,
 				C89D32C92A8DA9AF0032C17B /* NotificationConstant.swift in Sources */,
@@ -2115,6 +2286,7 @@
 				C86C35AC2A83347900AC28EC /* GYUIViewExtension.swift in Sources */,
 				C8B5EF842AFE152A00887C33 /* GYTotalBarChartModel.swift in Sources */,
 				C86C35A72A832F1800AC28EC /* UIColorConstant.swift in Sources */,
+				C8D5091A2B6F6AA70069BBAA /* GYETTrendViewController.swift in Sources */,
 				C8C4D31E2A8F4DD9001297D2 /* CommonCache.swift in Sources */,
 				C8AB60602B01D2710094A2F2 /* GYFSBarChartButton.swift in Sources */,
 			);
@@ -2292,14 +2464,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 42G3V9J45R;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 74XZH4Q8F6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GY_app_ios",
 					"$(PROJECT_DIR)/GY_app_ios/Resource/include",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2328,9 +2503,15 @@
 				);
 				INFOPLIST_FILE = GY_app_ios/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "大连国业";
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "文件权限";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2422,14 +2603,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 42G3V9J45R;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 74XZH4Q8F6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GY_app_ios",
 					"$(PROJECT_DIR)/GY_app_ios/Resource/include",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2458,9 +2642,15 @@
 				);
 				INFOPLIST_FILE = GY_app_ios/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "大连国业";
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "文件权限";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

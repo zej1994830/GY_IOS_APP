@@ -11,9 +11,16 @@ import AAInfographics
 class GYWTDRadarViewController: GYViewController {
     var dataSectionArray:NSArray = []
     var datatempSectionArray:NSMutableArray = []
-    let labelarray = ["热流","出温","入温","温差","流量"]
-    var nameStr:String = "热流"
-    var tempmodel:GYWTDRadarModel = GYWTDRadarModel()
+    let labelarray = ["温差","入温","出温","流量","热流"]
+    var nameStr:String = "温差"
+    var tempmodel:GYWTDRadarModel = GYWTDRadarModel(){
+        didSet {
+            noDataView.isHidden = tempmodel.stove_list.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(radarCharView)
+            }
+        }
+    }
     
     var dataArray:NSArray = []
     var sectionStr:String = ""
@@ -50,7 +57,7 @@ class GYWTDRadarViewController: GYViewController {
     
     private lazy var screenBtn2:UIButton = {
         let btn = UIButton()
-        btn.setTitle("热流", for: .normal)
+        btn.setTitle("温差", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: -30)
@@ -77,8 +84,8 @@ class GYWTDRadarViewController: GYViewController {
         btn.setTitle("C1-1、C1-2、C1-3、C1-4", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 220, bottom: 0, right: -30)
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 255, bottom: 0, right: -30)
+//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
 //        btn.contentEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 20)
         btn.contentHorizontalAlignment = .left
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
@@ -208,6 +215,7 @@ class GYWTDRadarViewController: GYViewController {
         addLayout()
         
         requestdata()
+        
     }
     
 }
@@ -311,30 +319,6 @@ extension GYWTDRadarViewController {
             make.height.equalTo(APP.WIDTH)
         }
         
-//        label180.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
-//            make.bottom.equalTo(-15)
-//            make.height.equalTo(20)
-//        }
-//
-//        label90.snp.makeConstraints { make in
-//            make.centerY.equalToSuperview()
-//            make.right.equalTo(-10)
-//            make.height.equalTo(20)
-//        }
-//
-//        label0.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
-//            make.top.equalTo(10)
-//            make.height.equalTo(20)
-//        }
-//
-//        label270.snp.makeConstraints { make in
-//            make.centerY.equalToSuperview()
-//            make.left.equalTo(5)
-//            make.height.equalTo(20)
-//        }
-        
         namepickView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
@@ -347,6 +331,7 @@ extension GYWTDRadarViewController {
 
 extension GYWTDRadarViewController {
     func requestdata(){
+        
         GYHUD.showGif(view: self.view)
         let params = ["device_db":GYDeviceData.default.device_db,"function_type":0] as [String:Any]
         GYNetworkManager.share.requestData(.get, api: Api.getswclist, parameters: params) { [weak self] (result) in
@@ -398,125 +383,132 @@ extension GYWTDRadarViewController {
         var datanameStr:String = ""
         var chartmodelStr = [String]()
         datatempSectionArray = NSMutableArray.init(array: array)
-        let angle = Int(tempmodel.offsetAngle! + tempmodel.offsetAngle2!) % 360
-        for i in 0..<360  {
-            if tempmodel.clockwise == 1 {
-                if angle == 0 {
-                    if i == angle {
-                        chartmodelStr.append("0°")
-                        continue
-                    }
+        //默认从正北开始0，所以要多加90
+        let angle = Int(tempmodel.offsetAngle! + tempmodel.offsetAngle2! + 90) % 360
+        let radius = self.view.frame.size.width / 2 - 25
+        for i in 0..<4 {
+            let angleInRadians = -CGFloat(angle + 90 * i).truncatingRemainder(dividingBy: 360)
+            let x1 = radius * cos(angleInRadians*Double.pi/180)
+            let y1 = radius * sin(angleInRadians*Double.pi/180)
+            let label = UILabel(frame: CGRect(x: radius + x1, y: radius - y1, width: 35, height: 20))
+
+            label.text = "\(90 * i)°"
+            label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+            label.textAlignment = .center
+            bgView.addSubview(label)
+            
+            let selfWidth = radarCharView.frame.size.width
+            let selfHeight = radarCharView.frame.size.height
+            let labelWidth = label.frame.size.width
+            let labelHeight = label.frame.size.height
+            let view = SBRadarCharts()
+            let  p = view.calcCircleCoordinate(withCenter: radarCharView.center, andWithAngle: CGFloat(angle + 90 * i), andWithRadius: radius)
+            if p.x < selfWidth/2 - labelWidth {
+                var x = p.x - labelWidth/2
+                var y: CGFloat
+                if p.y < (selfHeight/2 - labelHeight) {
+                    y = p.y - labelHeight/2
+                } else {
+                    y = p.y + labelHeight/2
                 }
-                if angle > 0 {
-                    if i + 1 == angle {
-                        chartmodelStr.append("0°")
-                        continue
-                    }
-                }else {
-                    if i == angle + 360 {
-                        chartmodelStr.append("0°")
-                        continue
-                    }
+                label.center = CGPoint(x: x, y: y)
+            } else {
+                var x = p.x + labelWidth/2
+                var y: CGFloat
+                if p.y < (selfHeight/2 - labelHeight) {
+                    y = p.y - labelHeight/2
+                } else {
+                    y = p.y + labelHeight/2
                 }
-                
-                if angle + 90 > 0 {
-                    if i == (angle + 90) % 360 {
-                        chartmodelStr.append("90°")
-                        continue
-                    }
-                    
-                    if angle + 90 == 360 && i == 360{
-                        chartmodelStr.append("90°")
-                        continue
-                    }
-                }else{
-                    if i == (angle + 90 + 360) % 360 {
-                        chartmodelStr.append("90°")
-                        continue
-                    }
+                label.center = CGPoint(x: x, y: y)
+            }
+
+            if (p.y > (selfHeight/2 - labelHeight/2) && p.y < (selfHeight/2 + labelHeight/2)) {
+                if (p.x < selfWidth/2 - labelHeight) {
+                    label.center = CGPoint(x: p.x - labelWidth/2, y: p.y)
+                } else {
+                    label.center = CGPoint(x: p.x + labelWidth/2, y: p.y)
                 }
-                
-                if angle + 180 > 0 {
-                    if i + 1 == (angle + 180) % 360{
-                        chartmodelStr.append("180°")
-                        continue
-                    }
-                    if angle + 180 == 360 && i + 1 == 360{
-                        chartmodelStr.append("180°")
-                        continue
-                    }
-                }else{
-                    if i + 1 == (angle + 180 + 360) % 360 {
-                        chartmodelStr.append("180°")
-                        continue
-                    }
-                }
-                
-                if angle + 270 > 0 {
-                    if i == (angle + 270) % 360{
-                        chartmodelStr.append("270°")
-                        continue
-                    }
-                    if angle + 270 == 360 && i + 1 == 360{
-                        chartmodelStr.append("270°")
-                        continue
-                    }
-                }else{
-                    if i == (angle + 270 + 360) % 360 {
-                        chartmodelStr.append("270°")
-                        continue
-                    }
-                }
-            }else{
-                //逆时针
-                if angle > 0 {
-                    if i == 360 - angle {
-                        chartmodelStr.append("0°")
-                        continue
-                    }
-                }else {
-                    if i == -angle {
-                        chartmodelStr.append("0°")
-                        continue
-                    }
-                }
-                
-                if angle + 90 > 0 {
-                    if i == 360 - (angle + 90) {
-                        chartmodelStr.append("90°")
-                        continue
-                    }
-                }else{
-                    if i == (-90 - angle) % 360 {
-                        chartmodelStr.append("90°")
-                        continue
-                    }
-                }
-                
-                if angle + 180 > 0 {
-                    if i + 1 == 360 - (angle + 180) {
-                        chartmodelStr.append("180°")
-                        continue
-                    }
-                }else{
-                    if i + 1 == (180 - angle) % 360 {
-                        chartmodelStr.append("180°")
-                        continue
-                    }
-                }
-                //没完
-                if angle + 270 > 0 {
-                    if i == 360 - (angle + 270) {
-                        chartmodelStr.append("270°")
-                        continue
-                    }
-                }else{
-                    if i == (270 - angle) % 360 {
-                        chartmodelStr.append("270°")
-                        continue
+            } else {
+                if (p.x > (selfWidth/2 - labelWidth/2) && p.x < (selfWidth/2 + labelWidth/2)) {
+                    if (p.y < selfHeight/2 - labelWidth) {
+                        label.center = CGPoint(x: p.x, y: p.y - labelHeight/2)
+                    } else {
+                        label.center = CGPoint(x: p.x, y: p.y + labelHeight/2)
                     }
                 }
             }
+        }
+        bgView.bringSubviewToFront(namepickView)
+        bgView.bringSubviewToFront(namepickView2)
+        for _ in 0..<360  {
+//            if angle == 0 {
+//                if i == angle {
+//                    chartmodelStr.append("0°")
+//                    continue
+//                }
+//            }
+//            if angle > 0 {
+//                if i + 1 == angle {
+//                    chartmodelStr.append("0°")
+//                    continue
+//                }
+//            }else {
+//                if i == angle + 360 {
+//                    chartmodelStr.append("0°")
+//                    continue
+//                }
+//            }
+//
+//            if angle + 90 > 0 {
+//                if i == (angle + 90) % 360 {
+//                    chartmodelStr.append("90°")
+//                    continue
+//                }
+//
+//                if angle + 90 == 360 && i == 360{
+//                    chartmodelStr.append("90°")
+//                    continue
+//                }
+//            }else{
+//                if i == (angle + 90 + 360) % 360 {
+//                    chartmodelStr.append("90°")
+//                    continue
+//                }
+//            }
+//
+//            if angle + 180 > 0 {
+//                if i + 1 == (angle + 180) % 360{
+//                    chartmodelStr.append("180°")
+//                    continue
+//                }
+//                if angle + 180 == 360 && i + 1 == 360{
+//                    chartmodelStr.append("180°")
+//                    continue
+//                }
+//            }else{
+//                if i + 1 == (angle + 180 + 360) % 360 {
+//                    chartmodelStr.append("180°")
+//                    continue
+//                }
+//            }
+//
+//            if angle + 270 > 0 {
+//                if i == (angle + 270) % 360{
+//                    chartmodelStr.append("270°")
+//                    continue
+//                }
+//                if angle + 270 == 360 && i + 1 == 360{
+//                    chartmodelStr.append("270°")
+//                    continue
+//                }
+//            }else{
+//                if i == (angle + 270 + 360) % 360 {
+//                    chartmodelStr.append("270°")
+//                    continue
+//                }
+//            }
+
             chartmodelStr.append("")
         }
         for i in 0..<array.count {
@@ -556,9 +548,9 @@ extension GYWTDRadarViewController {
                 datanameStr = datanameStr + "，" + (dataModel?.stove_number)!
             }
         }
-        
+        data.append([0,0.1])
         data.append([359,0])
-        data.append([0,0])
+        
         groupBtn.setTitle(datanameStr, for: .normal)
         
         let gradientColor = AAGradientColor.linearGradient(
@@ -568,7 +560,7 @@ extension GYWTDRadarViewController {
         )
     
         let aa = AASeriesElement()
-            .name("原点")
+            .name("定位点")
             .data(data)
             .color(gradientColor)
             
@@ -609,7 +601,7 @@ extension GYWTDRadarViewController {
         let dic:NSDictionary = dataArray[0] as! NSDictionary
         let tempmodel:GYWTDBaseModel = GYWTDBaseModel.deserialize(from: dic)!
         vc.dataArray = NSMutableArray(array: tempmodel.stove_list)
-        vc.tempArray = datatempSectionArray
+        vc.tempArray = NSMutableArray(array: datatempSectionArray)
         vc.titleLabel.text = "组别"
         vc.ClickBlock = { [weak self] array in
             guard let weakSelf = self else {
@@ -704,16 +696,23 @@ extension GYWTDRadarViewController:UIPickerViewDelegate,UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        midshowview.label2.text = "组别"
+        midshowview.label3.text = "0.00"
         if pickerView == namepickView {
+            if dataSectionArray.count == 0 {
+                return
+            }
             let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
             screenBtn.setTitle((dic["name"] as! String), for: .normal)
             requestnextdata(array: [dataSectionArray[row]])
         }else{
+            if datatempSectionArray.count == 0 {
+                return
+            }
             nameStr = labelarray[row]
             screenBtn2.setTitle(nameStr, for: .normal)
             radarCharData(array: datatempSectionArray)
         }
-
-        pickerView.isHidden = true
     }
 }

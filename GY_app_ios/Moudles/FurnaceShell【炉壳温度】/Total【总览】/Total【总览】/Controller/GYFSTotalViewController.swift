@@ -56,7 +56,7 @@ class GYFSTotalViewController: GYViewController {
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
         layout.scrollDirection = .vertical
-        layout.estimatedItemSize = rellySizeForiPhoneWidth(172.5, 75)
+        layout.estimatedItemSize = CGSize(width: (APP.WIDTH - 30) / 2, height: 75)
         layout.sectionHeadersPinToVisibleBounds = true
         layout.sectionInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 10)
         
@@ -203,7 +203,7 @@ extension GYFSTotalViewController {
     @objc func selectClick(){
         let vc = GYSelectWaterViewController()
         vc.dataArray = NSMutableArray(array: dataSectionArray)
-        vc.tempArray = datatempSectionArray
+        vc.tempArray = NSMutableArray(array: datatempSectionArray)
         vc.ClickBlock = { [weak self] array in
             guard let weakSelf = self else {
                 return

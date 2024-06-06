@@ -13,7 +13,14 @@ class GYFSGraphicTrendViewController: GYViewController {
     var datatempSectionArray:NSArray = []
     var sectionStr:String = ""
     var dataArray:NSArray = []
-    var dataGroupArray:NSArray = []
+    var dataGroupArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = dataGroupArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(lineView)
+            }
+        }
+    }
     var datatempGroupArray:NSMutableArray = []
     var currentDateString:String = ""
     var currentLastHourDateString:String = ""
@@ -105,7 +112,7 @@ class GYFSGraphicTrendViewController: GYViewController {
     private lazy var groupBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.setTitle("C1-1、C1-2、C1-3、C1-4、C1-5", for: .normal)
+        btn.setTitle("请选择组别", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.contentHorizontalAlignment = .left
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
@@ -137,7 +144,7 @@ class GYFSGraphicTrendViewController: GYViewController {
     
     private lazy var midtimeLabel:UILabel = {
         let label = UILabel()
-        label.text = "时间：2022-04-19 10:36"
+        label.text = "时间："
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -145,40 +152,40 @@ class GYFSGraphicTrendViewController: GYViewController {
     private lazy var showGroupView:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#BC7DFC")
-        view.label2.text = "C1-1"
-        view.label3.text = "0.07"
+        view.label2.text = ""
+        view.label3.text = ""
         return view
     }()
     
     private lazy var showGroupView2:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#12B48D")
-        view.label2.text = "C1-2"
-        view.label3.text = "40.97"
+        view.label2.text = ""
+        view.label3.text = ""
         return view
     }()
     
     private lazy var showGroupView3:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F5C105")
-        view.label2.text = "C1-3"
-        view.label3.text = "41.03"
+        view.label2.text = ""
+        view.label3.text = ""
         return view
     }()
     
     private lazy var showGroupView4:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#0182F9")
-        view.label2.text = "C1-4"
-        view.label3.text = "27.98"
+        view.label2.text = ""
+        view.label3.text = ""
         return view
     }()
     
     private lazy var showGroupView5:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#FF6E66")
-        view.label2.text = "C1-5"
-        view.label3.text = "5"
+        view.label2.text = ""
+        view.label3.text = ""
         return view
     }()
     
@@ -424,11 +431,12 @@ extension GYFSGraphicTrendViewController {
     
     func requestlastdata(array:NSArray) {
         datatempGroupArray = NSMutableArray(array: array)
-        var namestr:String = ""
+        var namestr:String = "请选择组别"
         var stoveidString:String = ""
         
         for temp in array {
             guard let tempp = temp as? NSDictionary else {
+                groupBtn.setTitle(namestr, for: .normal)
                 return
             }
             
@@ -497,19 +505,27 @@ extension GYFSGraphicTrendViewController {
     }
     
     @objc func nameBtnClick() {
+        self.view.insertSubview(namepickView, aboveSubview: noDataView)
         namepickView.isHidden = false
+        timepickView.isHidden = true
     }
     
     @objc func pinlvBtnClick() {
+        self.view.insertSubview(timepickView, aboveSubview: noDataView)
         timepickView.isHidden = false
+        namepickView.isHidden = true
     }
     
     @objc func timeBtnClick() {
-        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
@@ -524,9 +540,14 @@ extension GYFSGraphicTrendViewController {
     }
     
     @objc func groupBtnClick() {
+        if dataGroupArray.count == 0 {
+            GYHUD.show("当前数据没有组别")
+            return
+        }
+        
         let vc = GYWTDTrendItemsGroupViewController()
-        vc.dataArray = dataGroupArray
-        vc.tempArray = datatempGroupArray
+        vc.dataArray = NSMutableArray(array: dataGroupArray)
+        vc.tempArray = NSMutableArray(array: datatempGroupArray)
         vc.ClickBlock = {[weak self] array in
             guard let weakSelf = self else {
                 return
@@ -572,6 +593,9 @@ extension GYFSGraphicTrendViewController:UIPickerViewDelegate,UIPickerViewDataSo
         pickerView.isHidden = true
         
         if pickerView == namepickView {
+            if dataSectionArray.count == 0 {
+                return
+            }
             requestnextdata(array: [dataSectionArray[row]])
         }else{
             if row == 0 {

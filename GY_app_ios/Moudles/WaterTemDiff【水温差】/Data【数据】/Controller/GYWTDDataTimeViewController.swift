@@ -15,7 +15,14 @@ class GYWTDDataTimeViewController: GYViewController {
     var datatempSectionArray:NSArray = []
     let labelarray = ["温差","入温","出温","流量","热流"]
     var nameStr:String = "热流"
-    var dataArray:NSArray = []
+    var dataArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = dataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(spreadsheetView)
+            }
+        }
+    }
     var sectionStr:String = ""
     //数据分类（0：分钟，1：小时，2：日，3：月
     var rate:Int = 0
@@ -164,6 +171,21 @@ extension GYWTDDataTimeViewController {
 //        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
         timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
         
+        //处理时间，必须ymdhms格式才可以
+        if rate == 0 {
+            currentDateString = currentDateString + ":00"
+            currentLastHourDateString = currentLastHourDateString + ":00"
+        }else if rate == 1 {
+            currentDateString = currentDateString + ":00:00"
+            currentLastHourDateString = currentLastHourDateString + ":00:00"
+        }else if rate == 2 {
+            currentDateString = currentDateString + " 00:00:00"
+            currentLastHourDateString = currentLastHourDateString + " 00:00:00"
+        }else if rate == 3 {
+            currentDateString = currentDateString + "-01 00:00:00"
+            currentLastHourDateString = currentLastHourDateString + "-01 00:00:00"
+        }
+        
         self.view.addSubview(headView)
         headView.addSubview(screenLabel)
         headView.addSubview(categoryBtn)
@@ -236,11 +258,15 @@ extension GYWTDDataTimeViewController {
     }
     
     @objc func nameBtnClick() {
+        self.view.bringSubviewToFront(namepickView)
+        self.view.bringSubviewToFront(namepickView2)
         namepickView.isHidden = false
         namepickView2.isHidden = true
     }
     
     @objc func categoryBtnClick() {
+        self.view.bringSubviewToFront(namepickView)
+        self.view.bringSubviewToFront(namepickView2)
         namepickView2.isHidden = false
         namepickView.isHidden = true
     }
@@ -258,17 +284,35 @@ extension GYWTDDataTimeViewController {
             timemodel = .YM
         }
         
-        BRDatePickerView.showDatePicker(with: timemodel, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: timemodel, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: timemodel, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: timemodel, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
                     weakSelf.timeBtn.setTitle(weakSelf.currentLastHourDateString + " 至 " + weakSelf.currentDateString, for: .normal)
+                    //处理时间，必须ymdhms格式才可以
+                    if weakSelf.rate == 0 {
+                        weakSelf.currentDateString = weakSelf.currentDateString + ":00"
+                        weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + ":00"
+                    }else if weakSelf.rate == 1 {
+                        weakSelf.currentDateString = weakSelf.currentDateString + ":00:00"
+                        weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + ":00:00"
+                    }else if weakSelf.rate == 2 {
+                        weakSelf.currentDateString = weakSelf.currentDateString + " 00:00:00"
+                        weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + " 00:00:00"
+                    }else if weakSelf.rate == 3 {
+                        weakSelf.currentDateString = weakSelf.currentDateString + "-00 00:00:00"
+                        weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + "-00 00:00:00"
+                    }
                     weakSelf.requestnextdata(array: weakSelf.datatempSectionArray )
                 }
             }))
@@ -303,20 +347,7 @@ extension GYWTDDataTimeViewController {
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
         nameBtn.setTitle(sectionStr, for: .normal)
-        //处理时间，必须ymdhms格式才可以
-        if rate == 0 {
-            currentDateString = currentDateString + ":00"
-            currentLastHourDateString = currentLastHourDateString + ":00"
-        }else if rate == 1 {
-            currentDateString = currentDateString + ":00:00"
-            currentLastHourDateString = currentLastHourDateString + ":00:00"
-        }else if rate == 2 {
-            currentDateString = currentDateString + " 00:00:00"
-            currentLastHourDateString = currentLastHourDateString + "00:00:00"
-        }else if rate == 3 {
-            currentDateString = currentDateString + "-00 00:00:00"
-            currentLastHourDateString = currentLastHourDateString + "-00 00:00:00"
-        }
+        
         let params = ["device_db":GYDeviceData.default.device_db,"partId":partidString,"start_time":currentLastHourDateString,"end_time":currentDateString,"rate":rate,"type":type] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getwctimedata, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -360,19 +391,24 @@ extension GYWTDDataTimeViewController:UIPickerViewDelegate,UIPickerViewDataSourc
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
         if pickerView == namepickView {
+            if dataSectionArray.count == 0 {
+                return
+            }
             let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
             nameBtn.setTitle((dic["name"] as! String), for: .normal)
             datatempSectionArray = [dataSectionArray[row]]
             requestnextdata(array: [dataSectionArray[row]])
         }else{
+            if datatempSectionArray.count == 0 {
+                return
+            }
             nameStr = labelarray[row]
             categoryBtn.setTitle(nameStr, for: .normal)
             type = row
             requestnextdata(array: datatempSectionArray)
         }
-
-        pickerView.isHidden = true
     }
     
 }
@@ -435,7 +471,9 @@ extension GYWTDDataTimeViewController: SpreadsheetViewDataSource, SpreadsheetVie
             }else{
                 let dic:NSDictionary = dataArray.firstObject as! NSDictionary
                 let dicc = NSMutableDictionary(dictionary: dic)
-                dicc.removeObject(forKey: "时间")
+                if dicc["时间"] != nil {
+                    dicc.removeObject(forKey: "时间")
+                }
                 cell.label.text = (dicc.allKeys[indexPath.column - 2] as! String)
             }
             return cell
@@ -453,8 +491,10 @@ extension GYWTDDataTimeViewController: SpreadsheetViewDataSource, SpreadsheetVie
             //值
             let dic:NSDictionary = dataArray[indexPath.row - 1] as! NSDictionary
             let dicc = NSMutableDictionary(dictionary: dic)
-            dicc.removeObject(forKey: "时间")
-            cell.label.text = String(format: "%.3f", (dicc.allValues[indexPath.column - 2] as! Double))
+            if dicc["时间"] != nil {
+                dicc.removeObject(forKey: "时间")
+            }
+            cell.label.text = String(format: "%.3f", (dicc.allValues[indexPath.column - 2]) as? Double ?? 0.00)
         }
         return cell
     }

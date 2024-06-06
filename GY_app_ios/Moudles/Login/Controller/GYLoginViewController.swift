@@ -200,9 +200,16 @@ extension GYLoginViewController {
                     UserDefaults.standard.set(weakSelf.phoneTextfield.text!, forKey: "user_account")
                     UserDefaults.standard.set(weakSelf.passwordTextfield.text!, forKey: "password")
                     UserDefaults.standard.synchronize()
+                    
+                    let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                    appdelegate.window?.rootViewController = GYTabbarController.share
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(500)) {
+                        NotificationCenter.default.post(name: NotificationConstant.locationSuccess, object: nil,userInfo: nil)
+
+                    }
                     //通知
-                    NotificationCenter.default.post(name: NotificationConstant.locationSuccess, object: nil,userInfo: nil)
-                    weakSelf.dismiss(animated: true)
+//                    weakSelf.dismiss(animated: true)
+                   
                 }
                 
             }

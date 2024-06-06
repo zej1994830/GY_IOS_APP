@@ -10,12 +10,13 @@ import JJCollectionViewRoundFlowLayout_Swift
 
 class GYErosionThicknessMainViewController: GYViewController {
     var headdataArray:NSArray = ["当前","历史"]
-    var dataArray:NSArray = [[["ic_qsxm","侵蚀形貌"],["ic_shuju","数据结果"],["ic_qsltxm","侵蚀立体形貌"]],[["ic_lsqx","历史曲线"]]]
+//    ["ic_qsltxm","侵蚀立体形貌"]
+    var dataArray:NSArray = [[["ic_qsxm","侵蚀形貌"],["ic_shuju","数据结果"]],[["ic_lsqx","历史曲线"]]]
     
     private lazy var collectionView: UICollectionView = {
         let layout = JJCollectionViewRoundFlowLayout_Swift.init()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 30.rellyWidthNumber, bottom: 0, right: 30.rellyWidthNumber)
-        layout.itemSize = rellySizeForiPhoneWidth(49, 80)
+        layout.itemSize = CGSize(width: 49, height: 80)
         layout.minimumLineSpacing = 13.25
         layout.minimumInteritemSpacing = 31.5
         layout.scrollDirection = .vertical
@@ -42,6 +43,10 @@ class GYErosionThicknessMainViewController: GYViewController {
         
         setupViews()
         addLayout()
+        
+        //开启本地服务器，用来加载fbx文件
+//        let vc = ViewController()
+//        vc.startLocalServer()
     }
 }
 
@@ -90,7 +95,7 @@ extension GYErosionThicknessMainViewController:UICollectionViewDataSource,UIColl
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 3
+            return 2
         default:
             return 1
         }
@@ -133,7 +138,12 @@ extension GYErosionThicknessMainViewController:UICollectionViewDataSource,UIColl
                 let vc = GYETStereoscopicMorphologyViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            
+        }else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                //历史曲线
+                let vc = GYETTrendViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
 }

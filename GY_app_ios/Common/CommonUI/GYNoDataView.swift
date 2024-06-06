@@ -97,7 +97,7 @@ class GYNoDataView: UIView {
 }
 extension GYNoDataView {
     private func setupViews(){
-//        self.backgroundColor = UIColorConstant.mainBackground
+        self.backgroundColor = .white
         self.addSubview(nodataImageV)
         self.addSubview(titleLabel)
 //        self.addSubview(refreshButton)

@@ -157,6 +157,12 @@ extension GYWTDDataHeaderView {
             str.add("热流")
         }
         
+        if str.count == 0 {
+            GYHUD.show("必须选一个")
+            button.isSelected = true
+            return
+        }
+        
         if let block = ClickBlock{
             block(str)
         }

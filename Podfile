@@ -29,6 +29,7 @@ target 'GY_app_ios' do
   pod 'SpreadsheetView'
   pod 'OpenGLUtils', :path => '../openGL'
   pod "GCDWebServer", "~> 3.5.4"
+#  pod 'CGXPageCollectionViewOC'
   
   target 'GY_app_iosTests' do
     inherit! :search_paths

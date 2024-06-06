@@ -15,7 +15,7 @@ class GYFurnaceShellMainViewController: GYViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = JJCollectionViewRoundFlowLayout_Swift.init()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 30.rellyWidthNumber, bottom: 0, right: 30.rellyWidthNumber)
-        layout.itemSize = rellySizeForiPhoneWidth(49, 80)
+        layout.itemSize = CGSize(width: 49, height: 80)
         layout.minimumLineSpacing = 13.25
         layout.minimumInteritemSpacing = 31.5
         layout.scrollDirection = .vertical

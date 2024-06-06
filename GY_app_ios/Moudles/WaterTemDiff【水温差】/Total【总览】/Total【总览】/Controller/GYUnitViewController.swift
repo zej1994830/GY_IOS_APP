@@ -215,6 +215,7 @@ extension GYUnitViewController {
     }
     
     @objc func btnClick(){
+        bgView.alpha = 0
         self.dismiss(animated: true)
     }
     

@@ -9,6 +9,7 @@ import UIKit
 
 class GYMainViewCell: UICollectionViewCell {
     static let indentifier: String = "GYMainViewCell"
+    let caGradientLayer:CAGradientLayer = CAGradientLayer()
     
     var dataarray:NSArray = []{
         didSet{
@@ -43,6 +44,7 @@ class GYMainViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupViews()
         addLayout()
     }
@@ -57,6 +59,10 @@ extension GYMainViewCell {
         self.contentView.addSubview(midView)
         midView.addSubview(titleLabel)
         midView.addSubview(imageV)
+        
+        self.contentView.layer.insertSublayer(caGradientLayer, at: 0)
+        self.contentView.layer.cornerRadius = 5
+        self.contentView.layer.masksToBounds = true
     }
     
     private func addLayout(){
@@ -85,14 +91,10 @@ extension GYMainViewCell {
     }
     
     func colorlayer(color1:String , color2:String){
-        let caGradientLayer:CAGradientLayer = CAGradientLayer()
         caGradientLayer.colors = [UIColor.UIColorFromHexvalue(color_vaule: color1).cgColor,UIColor.UIColorFromHexvalue(color_vaule: color2).cgColor]
         caGradientLayer.locations = [0, 1]
         caGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         caGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         caGradientLayer.frame = CGRect(x: 0, y: 0, width: rellySizeForiPhoneWidth(167.5, 95).width, height: rellySizeForiPhoneWidth(167.5, 95).height)
-        self.layer.insertSublayer(caGradientLayer, at: 0)
-        self.layer.cornerRadius = 5
-        self.layer.masksToBounds = true
     }
 }

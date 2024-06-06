@@ -13,7 +13,14 @@ class GYFSDataTimeViewController: GYViewController {
     var currentLastHourDateString:String = ""
     var dataSectionArray:NSArray = []
     var datatempSectionArray:NSArray = []
-    var dataArray:NSArray = []
+    var dataArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = dataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(spreadsheetView)
+            }
+        }
+    }
     var sectionStr:String = ""
     //数据分类（0：分钟，1：小时，2：日，3：月
     var rate:Int = 0
@@ -47,7 +54,7 @@ class GYFSDataTimeViewController: GYViewController {
         btn.layer.cornerRadius = 2
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: -25)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 120, bottom: 0, right: -25)
 //        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 5)
         btn.contentHorizontalAlignment = .left
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -133,6 +140,21 @@ extension GYFSDataTimeViewController {
 //        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
         timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
         
+        //处理时间，必须ymdhms格式才可以
+        if rate == 0 {
+            currentDateString = currentDateString + ":00"
+            currentLastHourDateString = currentLastHourDateString + ":00"
+        }else if rate == 1 {
+            currentDateString = currentDateString + ":00:00"
+            currentLastHourDateString = currentLastHourDateString + ":00:00"
+        }else if rate == 2 {
+            currentDateString = currentDateString + " 00:00:00"
+            currentLastHourDateString = currentLastHourDateString + " 00:00:00"
+        }else if rate == 3 {
+            currentDateString = currentDateString + "-01 00:00:00"
+            currentLastHourDateString = currentLastHourDateString + "-01 00:00:00"
+        }
+        
         self.view.addSubview(headView)
         headView.addSubview(screenLabel)
         headView.addSubview(nameBtn)
@@ -159,7 +181,7 @@ extension GYFSDataTimeViewController {
             make.left.equalTo(screenLabel.snp.right)
             make.centerY.equalTo(screenLabel)
             make.height.equalTo(40)
-            make.width.equalTo(100)
+            make.width.equalTo(140)
         }
         
         
@@ -194,6 +216,7 @@ extension GYFSDataTimeViewController {
     }
     
     @objc func nameBtnClick() {
+        self.view.insertSubview(namepickView, aboveSubview: noDataView)
         namepickView.isHidden = false
     }
     
@@ -212,11 +235,15 @@ extension GYFSDataTimeViewController {
             timemodel = .YM
         }
         
-        BRDatePickerView.showDatePicker(with: timemodel, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: timemodel, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: timemodel, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: timemodel, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
@@ -224,6 +251,20 @@ extension GYFSDataTimeViewController {
                     weakSelf.currentLastHourDateString = str!
                     weakSelf.timeBtn.setTitle(weakSelf.currentLastHourDateString + " 至 " + weakSelf.currentDateString, for: .normal)
                     GYHUD.showGif(view: weakSelf.view)
+                    //处理时间，必须ymdhms格式才可以
+                    if weakSelf.rate == 0 {
+                        weakSelf.currentDateString = weakSelf.currentDateString + ":00"
+                        weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + ":00"
+                    }else if weakSelf.rate == 1 {
+                        weakSelf.currentDateString = weakSelf.currentDateString + ":00:00"
+                        weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + ":00:00"
+                    }else if weakSelf.rate == 2 {
+                        weakSelf.currentDateString = weakSelf.currentDateString + " 00:00:00"
+                        weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + " 00:00:00"
+                    }else if weakSelf.rate == 3 {
+                        weakSelf.currentDateString = weakSelf.currentDateString + "-00 00:00:00"
+                        weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + "-00 00:00:00"
+                    }
                     weakSelf.requestnextdata(array: weakSelf.datatempSectionArray )
                 }
             }))
@@ -257,20 +298,7 @@ extension GYFSDataTimeViewController {
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
         nameBtn.setTitle(sectionStr, for: .normal)
-        //处理时间，必须ymdhms格式才可以
-        if rate == 0 {
-            currentDateString = currentDateString + ":00"
-            currentLastHourDateString = currentLastHourDateString + ":00"
-        }else if rate == 1 {
-            currentDateString = currentDateString + ":00:00"
-            currentLastHourDateString = currentLastHourDateString + ":00:00"
-        }else if rate == 2 {
-            currentDateString = currentDateString + " 00:00:00"
-            currentLastHourDateString = currentLastHourDateString + "00:00:00"
-        }else if rate == 3 {
-            currentDateString = currentDateString + "-00 00:00:00"
-            currentLastHourDateString = currentLastHourDateString + "-00 00:00:00"
-        }
+        
         let params = ["device_db":GYDeviceData.default.device_db,"partId":partidString,"start_time":currentLastHourDateString,"end_time":currentDateString,"rate":rate] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getlkfmtimedata, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -305,13 +333,15 @@ extension GYFSDataTimeViewController:UIPickerViewDelegate,UIPickerViewDataSource
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == namepickView {
+            pickerView.isHidden = true
+            if dataSectionArray.count == 0 {
+                return
+            }
             let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
             nameBtn.setTitle((dic["name"] as! String), for: .normal)
             datatempSectionArray = [dataSectionArray[row]]
             requestnextdata(array: [dataSectionArray[row]])
         }
-
-        pickerView.isHidden = true
     }
     
 }
@@ -374,7 +404,9 @@ extension GYFSDataTimeViewController: SpreadsheetViewDataSource, SpreadsheetView
             }else{
                 let dic:NSDictionary = dataArray.firstObject as! NSDictionary
                 let dicc = NSMutableDictionary(dictionary: dic)
-                dicc.removeObject(forKey: "时间")
+                if dicc["时间"] != nil {
+                    dicc.removeObject(forKey: "时间")
+                }
                 cell.label.text = (dicc.allKeys[indexPath.column - 2] as! String)
             }
             return cell
@@ -392,8 +424,10 @@ extension GYFSDataTimeViewController: SpreadsheetViewDataSource, SpreadsheetView
             //值
             let dic:NSDictionary = dataArray[indexPath.row - 1] as! NSDictionary
             let dicc = NSMutableDictionary(dictionary: dic)
-            dicc.removeObject(forKey: "时间")
-            cell.label.text = String(format: "%.3f", (dicc.allValues[indexPath.column - 2] as! Double))
+            if dicc["时间"] != nil {
+                dicc.removeObject(forKey: "时间")
+            }
+            cell.label.text = String(format: "%.3f", (dicc.allValues[indexPath.column - 2] as? Double ?? 0.00))
         }
         return cell
     }

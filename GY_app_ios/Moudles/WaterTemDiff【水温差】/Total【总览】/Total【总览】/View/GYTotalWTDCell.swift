@@ -38,18 +38,11 @@ class GYTotalWTDCell: UICollectionViewCell {
             titleLabel.text = dataModel?.name
             tableView.reloadData()
             
-            tableView.snp.remakeConstraints { make in
-                make.top.equalTo(titleLabel.snp.bottom).offset(4)
-                make.left.right.bottom.equalTo(0)
-                make.height.equalTo(27 * dataArray.count)
-            }
-            
-            
             tableView.beginUpdates()
             tableView.endUpdates()
+//
             
-            
-            if dataModel?.flagFlowMeter == nil {
+            if dataModel?.flagFlowMeter == 0 {
                 bgView.isHidden = true
             }else{
                 bgView.isHidden = false
@@ -118,7 +111,6 @@ extension GYTotalWTDCell {
     func addLayout(){
         bgView.snp.makeConstraints { make in
             make.left.right.top.bottom.equalToSuperview()
-            make.width.equalTo(rellySizeForiPhoneWidth(172.5, 170).width)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -129,8 +121,9 @@ extension GYTotalWTDCell {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
-            make.left.right.bottom.equalTo(0)
-            make.height.equalTo(27 * dataArray.count)
+            make.width.equalTo((APP.WIDTH - 30) / 2)
+            make.left.right.equalTo(0)
+            make.bottom.equalTo(-10)
         }
     }
     
@@ -140,7 +133,7 @@ extension GYTotalWTDCell {
         caGradientLayer.locations = [0, 1]
         caGradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         caGradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-        caGradientLayer.frame = CGRect(x: 0, y: 0, width: rellySizeForiPhoneWidth(200, 170).width, height: rellySizeForiPhoneWidth(200, 170).height)
+        caGradientLayer.frame = CGRect(x: 0, y: 0, width: rellySizeForiPhoneWidth(200, 170).width, height: rellySizeForiPhoneWidth(200, 180).height)
         self.contentView.layer.insertSublayer(caGradientLayer, at: 0)
         self.contentView.layer.cornerRadius = 5
         self.contentView.layer.borderWidth = 1

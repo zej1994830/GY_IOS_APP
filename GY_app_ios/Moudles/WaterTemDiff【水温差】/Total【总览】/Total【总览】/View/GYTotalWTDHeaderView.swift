@@ -35,6 +35,12 @@ class GYTotalWTDHeaderView: UICollectionReusableView {
         }
     }
     
+    var dataWMModel:GYWTDBaseModel? = nil {
+        didSet{
+            titleLabel.text = dataWMModel?.section_name
+        }
+    }
+    
     private lazy var bgView:UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")

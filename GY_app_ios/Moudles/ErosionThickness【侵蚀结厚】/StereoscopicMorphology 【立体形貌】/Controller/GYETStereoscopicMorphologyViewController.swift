@@ -152,7 +152,7 @@ class GYETStereoscopicMorphologyViewController: GYViewController {
     
     private lazy var webView:WKWebView = {
         let webView = WKWebView()
-        if let url = URL(string: "http://192.168.102.2:8080/index.html") {
+        if let url = URL(string: "http://192.168.102.50:8080/index.html") {
                     // 创建 URLRequest 对象
                     let request = URLRequest(url: url)
                     

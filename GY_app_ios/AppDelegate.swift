@@ -7,6 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import JJException
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,15 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
         self.window = UIWindow.init(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = GYTabbarController.share
+//        self.window?.rootViewController = GYTabbarController.share
+        self.window?.rootViewController = GYLoginViewController()
         
         self.window?.makeKeyAndVisible()
         
 //        if (GYUserBaseInfoData.default.user_id == 0){
             let loginVC = GYLoginViewController()
 //            let loginVC = TESTViewController()
-            loginVC.modalPresentationStyle = .fullScreen
-            Global_TopViewController!.present(loginVC, animated: true, completion: nil)
+//            loginVC.modalPresentationStyle = .fullScreen
+//            Global_TopViewController!.present(loginVC, animated: true, completion: nil)
             CommonCache.share.userDataCache.removeObject(forKey: CacheKey.userDataInfoCacheKey)
             CommonCache.share.userDataCache.removeAllObjects()
 //        }
@@ -37,11 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navBar.shadowImage = UIImage()
         navBar.barTintColor = UIColor.white
         
-        //开启本地服务器，用来加载fbx文件
-        let vc = ViewController()
-        vc.startLocalServer()
-        
         networkReachability()
+        
+        //防止崩溃
+        JJException.configExceptionCategory(.all)
+        JJException.startGuard()
         
         return true
     }

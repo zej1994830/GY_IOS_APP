@@ -28,6 +28,8 @@ struct GYFSDataModel:HandyJSON {
     /***/
     var partName:String? = ""
     /** */
+    var section_name:String? = ""
+    /** */
     var slaveAddress:Int64? = 0
     var stove_id:Int64? = 0
     var stove_name:String? = ""

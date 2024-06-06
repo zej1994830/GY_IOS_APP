@@ -14,11 +14,18 @@ class GYTotalWTDViewController: GYViewController {
     var dataSectionArray:NSArray = []
     var datatempSectionArray:NSMutableArray = []
     
+    
     var dataArray:NSArray = []{
         didSet {
             noDataView.isHidden = dataArray.count != 0
             noDataView.snp.remakeConstraints { make in
                 make.center.size.equalTo(collectionV)
+            }
+            
+            if dataArray.count != 0 {
+                let dic:NSDictionary = dataArray.firstObject as! NSDictionary
+                timeLabel.text = "最后更新时间：\(dic["searchDate"] as! String)"
+                
             }
         }
     }
@@ -64,7 +71,8 @@ class GYTotalWTDViewController: GYViewController {
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
         layout.scrollDirection = .vertical
-        layout.estimatedItemSize = rellySizeForiPhoneWidth(172.5, 170)
+//        layout.estimatedItemSize = rellySizeForiPhoneWidth(172.5, 170)
+        layout.estimatedItemSize = CGSize(width: (APP.WIDTH - 30) / 2, height: 180)
         layout.sectionHeadersPinToVisibleBounds = true
         layout.sectionInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 10)
         
@@ -81,6 +89,12 @@ class GYTotalWTDViewController: GYViewController {
         return collectionView
     }()
 
+    private lazy var timeLabel:UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "水温差总览"
@@ -99,6 +113,7 @@ extension GYTotalWTDViewController {
         topView.addSubview(contentLabel)
         topView.addSubview(selectBtn)
         self.view.addSubview(collectionV)
+        self.view.addSubview(timeLabel)
         
         let button = UIButton.init(type: .system)
         button.frame = CGRect.init(x: 0, y: 0, width: 25, height: 25)
@@ -143,6 +158,13 @@ extension GYTotalWTDViewController {
         collectionV.snp.makeConstraints { make in
             make.left.bottom.right.equalTo(0)
             make.top.equalTo(topView.snp.bottom).offset(0)
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(-48)
+            make.left.equalTo(20)
+            make.height.equalTo(22.5)
+//            make.width.equalTo(200)
         }
     }
     
@@ -214,7 +236,7 @@ extension GYTotalWTDViewController {
     @objc func selectClick(){
         let vc = GYSelectWaterViewController()
         vc.dataArray = NSMutableArray(array: dataSectionArray)
-        vc.tempArray = datatempSectionArray
+        vc.tempArray = NSMutableArray(array: datatempSectionArray)
         vc.ClickBlock = { [weak self] array in
             guard let weakSelf = self else {
                 return
@@ -306,5 +328,10 @@ extension GYTotalWTDViewController:UICollectionViewDelegate,UICollectionViewData
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let diccc:NSDictionary = dataArray[indexPath.section] as! NSDictionary
+        let tempArray:NSMutableArray = showDic[diccc["section_name"]] as? NSMutableArray ?? []
+        return CGSize(width: (APP.WIDTH - 30) / 2, height: Double(tempArray.count * 27 + 35 + 10) )
+    }
 }
 

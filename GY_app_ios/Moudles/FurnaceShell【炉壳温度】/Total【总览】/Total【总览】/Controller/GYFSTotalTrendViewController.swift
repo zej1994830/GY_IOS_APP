@@ -12,7 +12,14 @@ class GYFSTotalTrendViewController: GYViewController {
     var currentDateString:String = ""
     var currentLastHourDateString:String = ""
     var model:GYFSDataModel = GYFSDataModel()
-    var dataarray:NSArray = []
+    var dataarray:NSArray = []{
+        didSet{
+            noDataView.isHidden = dataarray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(lineView2)
+            }
+        }
+    }
     var timeArray:[String] = ["5分钟","15分钟","30分钟","1小时","2小时","8小时","16小时","1天","7天","15天","1个月"]
     var rate:Int32 = 0
     var selectIndex:IndexPath = IndexPath(row: -1, section: 0)
@@ -86,7 +93,7 @@ class GYFSTotalTrendViewController: GYViewController {
     
     private lazy var midtimeLabel:UILabel = {
         let label = UILabel()
-        label.text = "时间：2022-04-19 10:36"
+        label.text = "时间："
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -143,6 +150,7 @@ class GYFSTotalTrendViewController: GYViewController {
         addLayout()
         
         request()
+        
     }
     
 }
@@ -276,6 +284,10 @@ extension GYFSTotalTrendViewController {
                 let array2:NSArray = diccc["data"] as! NSArray
                 if array2.count == 0 {
                     GYHUD.show("此时间段没有数据，请重新选择时间段！")
+                    weakSelf.noDataView.isHidden = array2.count != 0
+                    weakSelf.noDataView.snp.remakeConstraints { make in
+                        make.center.size.equalTo(weakSelf.lineView2)
+                    }
                 }else{
                     weakSelf.dataarray = array2
                     weakSelf.linedata2(strname: diccc["stove_name"] as! String)
@@ -317,17 +329,25 @@ extension GYFSTotalTrendViewController {
     }
     
     @objc func timeBtnClick() {
-        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
                     weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
+                    weakSelf.selectIndex = IndexPath(row: -1, section: 0)
+                    weakSelf.collectionV.reloadData()
+                    weakSelf.midtimeLabel.text = "时间："
+                    weakSelf.wenduView.label3.text =  "0.00"
                     weakSelf.request()
                 }
             }))
@@ -336,6 +356,7 @@ extension GYFSTotalTrendViewController {
     }
     
     @objc func pinlvBtnClick() {
+        self.view.insertSubview(timepickView, aboveSubview: noDataView)
         timepickView.isHidden = false
     }
 }

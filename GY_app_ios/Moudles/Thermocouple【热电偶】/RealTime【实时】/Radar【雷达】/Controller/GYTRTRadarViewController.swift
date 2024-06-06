@@ -7,16 +7,27 @@
 
 import UIKit
 import AAInfographics
+import SpreadsheetView
 
-class GYTRTRadarViewController: GYViewController {
+@objc class GYTRTRadarViewController: GYViewController {
     var dataSectionArray:NSArray = []
     var sectionStr:String = ""
-    var dataArray:NSArray = []
+    var dataArray:NSArray = []{
+        didSet{
+            noDataView.isHidden = dataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(spreadsheetView)
+            }
+        }
+    }
     var tempmodel:GYRTRadarModel = GYRTRadarModel()
     
-    private lazy var bgView:UIView = {
-        let view = UIView()
+    private lazy var bgView:UIScrollView = {
+        let view = UIScrollView()
         view.backgroundColor = .white
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        view.bounces = false
         return view
     }()
     
@@ -64,6 +75,35 @@ class GYTRTRadarViewController: GYViewController {
         return view
     }()
     
+    private lazy var scrollView:UIScrollView = {
+        let view = UIScrollView()
+        view.contentSize = CGSize(width: APP.WIDTH * 2, height: APP.WIDTH * 2 - 100)
+        view.minimumZoomScale = 1.0
+        view.maximumZoomScale = 1.0
+        view.backgroundColor = .white
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        view.bounces = false
+        view.delegate = self
+        return view
+    }()
+    
+    private lazy var radarView:SBRadarCharts = {
+        let view = SBRadarCharts()
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    private lazy var spreadsheetView:SpreadsheetView = {
+        let view = SpreadsheetView()
+        view.delegate = self
+        view.dataSource = self
+        view.gridStyle = .solid(width: 1, color: UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD"))
+        view.register(ScheduleCell.self, forCellWithReuseIdentifier: String(describing: ScheduleCell.self))
+        view.bounces = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "雷达图"
@@ -72,8 +112,16 @@ class GYTRTRadarViewController: GYViewController {
         addLayout()
         
         request()
+        
+        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.width / 2) - 300)
     }
     
+}
+
+extension GYTRTRadarViewController:UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return radarView
+    }
 }
 
 extension GYTRTRadarViewController {
@@ -81,7 +129,9 @@ extension GYTRTRadarViewController {
         self.view.addSubview(bgView)
         bgView.addSubview(screenLabel)
         bgView.addSubview(screenBtn)
-        bgView.addSubview(barcharView)
+        bgView.addSubview(scrollView)
+        scrollView.addSubview(radarView)
+        bgView.addSubview(spreadsheetView)
         bgView.addSubview(namepickView)
     }
     
@@ -105,10 +155,26 @@ extension GYTRTRadarViewController {
             make.width.equalTo(130)
         }
         
-        barcharView.snp.makeConstraints { make in
-            make.top.equalTo(screenBtn.snp.bottom).offset(90)
+        scrollView.snp.makeConstraints { make in
             make.left.right.equalTo(0)
+            make.top.equalTo(screenBtn.snp.bottom)
             make.height.equalTo(APP.WIDTH)
+        }
+        
+        radarView.snp.makeConstraints { make in
+            make.height.equalTo(APP.WIDTH - 60)
+            make.width.equalTo(APP.WIDTH - 60)
+            make.centerX.equalTo(scrollView.contentSize.width / 2)
+            make.centerY.equalTo(scrollView.contentSize.width / 2)
+        }
+        
+        spreadsheetView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.bottom).offset(20)
+            make.left.equalTo(15)
+            make.right.equalTo(-15)
+            make.width.equalTo(APP.WIDTH - 30)
+            make.height.equalTo(100)
+            make.bottom.equalTo(-30)
         }
         
         namepickView.snp.makeConstraints { make in
@@ -117,6 +183,7 @@ extension GYTRTRadarViewController {
     }
     
     @objc func screenBtnClick() {
+        bgView.bringSubviewToFront(namepickView)
         namepickView.isHidden = false
     }
     
@@ -154,202 +221,47 @@ extension GYTRTRadarViewController {
             let diccc:NSDictionary = dicc["data"] as! NSDictionary
             weakSelf.dataArray = diccc["resultModel"] as! NSArray
             weakSelf.tempmodel = GYRTRadarModel.deserialize(from: diccc)!
-            weakSelf.radarCharData(array: weakSelf.tempmodel.resultModel)
+            weakSelf.radarCharData(array: weakSelf.tempmodel.resultModel,dic:diccc)
         }
     }
     
-    func radarCharData(array:NSArray) {
-        var dataEntries = [AASeriesElement]()
-        var data = [Any]()
-        var data2 = [Any]()
-        var chartmodelStr = [String]()
-        let angle = Int(tempmodel.offsetAngle! + tempmodel.offsetAngle2!) % 360
-        for i in 0..<360  {
-            if tempmodel.clockwise == 1 {
-                if angle == 0 {
-                    if i == angle {
-                        chartmodelStr.append("0°")
-                        continue
-                    }
-                }
-                if angle > 0 {
-                    if i + 1 == angle {
-                        chartmodelStr.append("0°")
-                        continue
-                    }
-                }else {
-                    if i == angle + 360 {
-                        chartmodelStr.append("0°")
-                        continue
-                    }
-                }
-
-                if angle + 90 > 0 {
-                    if i == (angle + 90) % 360 {
-                        chartmodelStr.append("90°")
-                        continue
-                    }
-
-                    if angle + 90 == 360 && i == 360{
-                        chartmodelStr.append("90°")
-                        continue
-                    }
-                }else{
-                    if i == (angle + 90 + 360) % 360 {
-                        chartmodelStr.append("90°")
-                        continue
-                    }
-                }
-
-                if angle + 180 > 0 {
-                    if i + 1 == (angle + 180) % 360{
-                        chartmodelStr.append("180°")
-                        continue
-                    }
-                    if angle + 180 == 360 && i + 1 == 360{
-                        chartmodelStr.append("180°")
-                        continue
-                    }
-                }else{
-                    if i + 1 == (angle + 180 + 360) % 360 {
-                        chartmodelStr.append("180°")
-                        continue
-                    }
-                }
-
-                if angle + 270 > 0 {
-                    if i == (angle + 270) % 360{
-                        chartmodelStr.append("270°")
-                        continue
-                    }
-                    if angle + 270 == 360 && i + 1 == 360{
-                        chartmodelStr.append("270°")
-                        continue
-                    }
-                }else{
-                    if i == (angle + 270 + 360) % 360 {
-                        chartmodelStr.append("270°")
-                        continue
-                    }
-                }
-            }else{
-                //逆时针
-                if angle > 0 {
-                    if i == 360 - angle {
-                        chartmodelStr.append("0°")
-                        continue
-                    }
-                }else {
-                    if i == -angle {
-                        chartmodelStr.append("0°")
-                        continue
-                    }
-                }
-
-                if angle + 90 > 0 {
-                    if i == 360 - (angle + 90) {
-                        chartmodelStr.append("90°")
-                        continue
-                    }
-                }else{
-                    if i == (-90 - angle) % 360 {
-                        chartmodelStr.append("90°")
-                        continue
-                    }
-                }
-
-                if angle + 180 > 0 {
-                    if i == 360 - (angle + 180) {
-                        chartmodelStr.append("180°")
-                        continue
-                    }
-                }else{
-                    if i + 1 == (180 - angle) % 360 {
-                        chartmodelStr.append("180°")
-                        continue
-                    }
-                }
-                //没完
-                if angle + 270 > 0 {
-                    if i == 360 - (angle + 270) {
-                        chartmodelStr.append("270°")
-                        continue
-                    }
-                }else{
-                    if i == (270 - angle) % 360 {
-                        chartmodelStr.append("270°")
-                        continue
-                    }
-                }
-            }
-            chartmodelStr.append("")
-        }
-        for i in 0..<array.count {
-            let dataModel = GYRTRadarData.deserialize(from: array[i] as? NSDictionary)
-            var angle:Int = Int((dataModel?.insertion_angle)!)!
-            if tempmodel.clockwise == 1 {
-                print("当前为顺时针")
-                //顺时针
-                if angle > 360 {
-                    angle = angle - 360
-                }else if angle < 0 {
-                    angle = angle + 360
-                }
-            }else{
-                print("当前为逆时针")
-                angle = 360 - angle
-                if angle > 360 {
-                    angle = angle - 360
-                }else if angle < 0 {
-                    angle = angle + 360
-                }
-            }
-            data2.append([angle,Double((dataModel?.temperature)!)] as [Any])
-        }
-
-        data.append([359,0])
-        data.append([0,0])
-
-        let gradientColor = AAGradientColor.linearGradient(
-            direction: .toLeft,
-            startColor: "#ADC6FF",
-            endColor: "#ADC6FF"
-        )
-
-        let aa = AASeriesElement()
-            .name("原点")
-            .data(data)
-            .color(gradientColor)
-
-
-        let aa2 = AASeriesElement()
-            .data(data2)
-        aa2.fillColor = "rgba(0, 0, 0, 0)"
-        aa2.lineWidth = 0
-        aa2.tooltip?.shared(true)
+    func radarCharData(array:NSArray,dic:NSDictionary) {
+        radarView.dataDic = dic as! [AnyHashable : Any]
         
-        dataEntries.append(aa)
-        dataEntries.append(aa2)
-
-        let chartmodel = AAChartModel()
-            .chartType(.area)
-            .polar(true)
-            .dataLabelsEnabled(true)
-            .xAxisVisible(true)
-            .xAxisGridLineWidth(0.5)
-            .yAxisVisible(true)
-//            .yAxisLineWidth(1)
-            .yAxisLabelsEnabled(false)
-            .markerSymbol(.circle)
-            .markerSymbolStyle(.borderBlank)
-            .legendEnabled(false)
-            .categories(chartmodelStr)
-//            .margin(right: 30,left: 50)
-            .series(dataEntries)
-            .zoomType(.xy)
-            
-        barcharView.aa_drawChartWithChartModel(chartmodel)
+        radarView.themColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
+//        radarView.currentSelf = self
+        radarView.block = { [weak self] (value) in
+            guard let weakSelf = self else {
+                return
+            }
+            let dataModel = GYRTRadarData.deserialize(from: weakSelf.tempmodel.resultModel[value] as? NSDictionary)
+            let vc = GYTRTRadarDetailViewController()
+            vc.model = dataModel!
+            weakSelf.navigationController?.pushViewController(vc, animated: true)
+        }
         
+        radarView.block2 = { [weak self] (value) in
+            guard let weakSelf = self else {
+                return
+            }
+            let dataModel = GYRTRadarData.deserialize(from: weakSelf.tempmodel.resultModel[value] as? NSDictionary)
+            let vc = GYTRTRadarDetailViewController()
+            vc.model = dataModel!
+            weakSelf.navigationController?.pushViewController(vc, animated: true)
+        }
+        radarView.setNeedsDisplay()
+        spreadsheetView.reloadData()
+        spreadsheetView.snp.remakeConstraints { make in
+            make.top.equalTo(scrollView.snp.bottom).offset(20)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.width.equalTo(APP.WIDTH - 20)
+            make.height.equalTo((dataArray.count + 1) * 39)
+            make.bottom.equalTo(-30)
+        }
+        
+        return
+
     }
 }
 
@@ -368,18 +280,129 @@ extension GYTRTRadarViewController:UIPickerViewDelegate,UIPickerViewDataSource,A
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        if dataSectionArray.count == 0 {
+            return
+        }
         let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
         screenBtn.setTitle((dic["name"] as! String), for: .normal)
         requestnextdata(array: [dataSectionArray[row]])
-
-        pickerView.isHidden = true
     }
     
-    open func aaChartView(_ aaChartView: AAChartView, clickEventMessage: AAClickEventMessageModel) {
-        let dataModel = GYRTRadarData.deserialize(from: tempmodel.resultModel[clickEventMessage.index!] as? NSDictionary)
-        let vc = GYTRTRadarDetailViewController()
-        vc.model = dataModel!
-        self.navigationController?.pushViewController(vc, animated: true)
+//    open func aaChartView(_ aaChartView: AAChartView, clickEventMessage: AAClickEventMessageModel) {
+//        let dataModel = GYRTRadarData.deserialize(from: tempmodel.resultModel[clickEventMessage.index!] as? NSDictionary)
+//        let vc = GYTRTRadarDetailViewController()
+//        vc.model = dataModel!
+//        self.navigationController?.pushViewController(vc, animated: true)
+//
+//    }
+    
+   
+}
+
+extension GYTRTRadarViewController: SpreadsheetViewDataSource, SpreadsheetViewDelegate{
+    func spreadsheetView(_ spreadsheetView: SpreadsheetView, heightForRow column: Int) -> CGFloat {
+        return 37
+    }
+    
+    func spreadsheetView(_ spreadsheetView: SpreadsheetView, widthForColumn column: Int) -> CGFloat {
+        if column == 0 {
+            return 38
+        }else if column == 1 {
+            return (APP.WIDTH - 20 - 45 - 64 * 3)
+        }else{
+            return 64
+        }
+    }
+    
+    func numberOfColumns(in spreadsheetView: SpreadsheetView) -> Int {
+        //列
+        if dataArray.count > 0 {
+            return 5
+        }
         
+        return 1
+    }
+    
+    func numberOfRows(in spreadsheetView: SpreadsheetView) -> Int {
+        //行
+        return dataArray.count + 1
+    }
+    
+    func frozenColumns(in spreadsheetView: SpreadsheetView) -> Int {
+        //列
+        return 1
+    }
+
+    func frozenRows(in spreadsheetView: SpreadsheetView) -> Int {
+        //行
+        return 1
+    }
+    
+    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
+        let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+        cell.label.textAlignment = .center
+        cell.label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        cell.color = .white
+        
+        
+        if indexPath.row == 0 {
+            cell.color = UIColor.UIColorFromHexvalue(color_vaule: "#EFF4FA")
+            cell.label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            if indexPath.column == 0{
+                cell.label.text = ""
+            }else if indexPath.column == 1 {
+                cell.label.text = "热电偶"
+            }else if indexPath.column == 2 {
+                cell.label.text = "角度"
+            }else if indexPath.column == 3 {
+                cell.label.text = "插深"
+            }else if indexPath.column == 4 {
+                cell.label.text = "温度"
+            }
+            return cell
+        }
+        if indexPath.column == 0 {
+            //序号
+            cell.label.text = "\(indexPath.row)"
+            return cell
+        }else {
+            let dic:NSDictionary = dataArray[indexPath.row - 1] as! NSDictionary
+            let model:GYRTRadarData = GYRTRadarData.deserialize(from: dic)!
+            if indexPath.column == 1 {
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = .left // 设置文本的对齐方式为左对齐
+                
+                let attrString = NSMutableAttributedString(string: "  " + model.name!)
+                cell.label.numberOfLines = 0
+                let attr: [NSAttributedString.Key : Any] = [.foregroundColor: UIColor(red: 0.1, green: 0.45, blue: 0.91, alpha: 1), .underlineStyle: NSUnderlineStyle.single.rawValue, .underlineColor: UIColor(red: 0.1, green: 0.45, blue: 0.91, alpha: 1),.paragraphStyle:paragraphStyle]
+                attrString.addAttributes(attr, range: NSRange(location: 0, length: attrString.length))
+                cell.label.attributedText = attrString
+            }else if indexPath.column == 2 {
+                //
+                cell.label.text = model.insertion_angle
+            }else if indexPath.column == 3 {
+                //
+                cell.label.text = model.insertion_height
+            }else if indexPath.column == 4 {
+                //
+                if let floatValue = Float(model.temperature!) {
+                    cell.label.text = "\(Int(floatValue.rounded()))"
+                }
+                
+            }
+        }
+        return cell
+    }
+    
+    func spreadsheetView(_ spreadsheetView: SpreadsheetView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.column == 1 {
+            if indexPath.row  != 0 {
+                let dataModel = GYRTRadarData.deserialize(from: tempmodel.resultModel[indexPath.row - 1] as? NSDictionary)
+                let vc = GYTRTRadarDetailViewController()
+                vc.model = dataModel!
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
 }

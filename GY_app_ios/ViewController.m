@@ -12,7 +12,6 @@
 #import "GCDWebServerURLEncodedFormRequest.h"
 #import <ifaddrs.h>
 #import <arpa/inet.h>
-#import "TESTViewController.h"
 
 @interface ViewController ()<GCDWebServerDelegate> {
   GCDWebServer* _localServer;
@@ -127,6 +126,7 @@
 - (void)webServerDidStart:(GCDWebServer *)server{
     NSLog(@"本地服务启动成功");
     NSLog(@"%@",[self deviceIPAdress]);
+    
 }
 
 

@@ -13,7 +13,15 @@ class GYGraphicBarChartViewController: GYViewController {
     var currentLastHourDateString:String = ""
     var dataSectionArray:NSArray = []
     var datatempSectionArray:NSMutableArray = []
-    var dataArray:NSArray = []
+    var nowrow:Int = 0
+    var dataArray:NSArray = []{
+        didSet {
+            noDataView.isHidden = dataArray.count != 0
+            noDataView.snp.remakeConstraints { make in
+                make.center.size.equalTo(barcharView)
+            }
+        }
+    }
     var sectionStr:String = ""
     var nowindex:Int = 0
     
@@ -248,21 +256,26 @@ extension GYGraphicBarChartViewController {
     }
     
     @objc func screenBtnClick() {
+        self.view.insertSubview(namepickView, aboveSubview: noDataView)
         namepickView.isHidden = false
     }
     @objc func timeBtnClick() {
-        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date,str) in
+        BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { (date1,str) in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date,str2) in
+                BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
                     guard let weakSelf = self else{
+                        return
+                    }
+                    if date1! > date2! {
+                        GYHUD.show("开始时间不能大于结束时间")
                         return
                     }
 //                    let startIndex = str2!.index(str2!.startIndex, offsetBy: 5)
                     weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
-                    weakSelf.request()
+                    weakSelf.requestnextdata(array: [weakSelf.dataSectionArray[weakSelf.nowrow]])
                 }
             }))
             
@@ -306,7 +319,9 @@ extension GYGraphicBarChartViewController {
             let dic:NSDictionary = result as! NSDictionary
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.dataArray = dicc["data"] as! NSArray
-            weakSelf.radarCharData(array: weakSelf.dataArray)
+            if weakSelf.dataArray.count > 0 {
+                weakSelf.radarCharData(array: weakSelf.dataArray)
+            }
         }
     }
     
@@ -490,11 +505,15 @@ extension GYGraphicBarChartViewController:UIPickerViewDelegate,UIPickerViewDataS
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        if dataSectionArray.count == 0 {
+            return
+        }
+        nowrow = row
         let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
         screenBtn.setTitle((dic["name"] as! String), for: .normal)
         requestnextdata(array: [dataSectionArray[row]])
 
-        pickerView.isHidden = true
     }
     
     open func aaChartView(_ aaChartView: AAChartView, clickEventMessage: AAClickEventMessageModel) {
