@@ -102,7 +102,7 @@ class GYFSGraphicTrendViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 325 - APP.WIDTH, bottom: 0, right: 10)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -532,6 +532,8 @@ extension GYFSGraphicTrendViewController {
                     weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
+                    weakSelf.selectIndex = IndexPath(row: -1, section: 0)
+                    weakSelf.collectionV.reloadData()
                     weakSelf.requestlastdata(array: weakSelf.datatempGroupArray)
                 }
             }))

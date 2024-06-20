@@ -212,7 +212,7 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
     }
     
     @objc private func locationSuccess(_ notification: Notification){
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(300)) {
             self.iconLabel.text = "\(GYUserBaseInfoData.default.user_name.first ?? " ")"
             self.nameLabel.text = GYUserBaseInfoData.default.user_name
             self.companyLabel.text = GYUserBaseInfoData.default.subordinate_unit

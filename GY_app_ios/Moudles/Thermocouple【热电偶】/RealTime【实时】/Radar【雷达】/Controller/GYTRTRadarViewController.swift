@@ -10,6 +10,7 @@ import AAInfographics
 import SpreadsheetView
 
 @objc class GYTRTRadarViewController: GYViewController {
+    var oricontentoffset:CGPoint = CGPoint(x: 0, y: 0)
     var dataSectionArray:NSArray = []
     var sectionStr:String = ""
     var dataArray:NSArray = []{
@@ -43,7 +44,7 @@ import SpreadsheetView
         btn.setTitle("标高10.602米", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 110, bottom: 0, right: -30)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 130, bottom: 0, right: -30)
 //        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 5)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
@@ -77,14 +78,14 @@ import SpreadsheetView
     
     private lazy var scrollView:UIScrollView = {
         let view = UIScrollView()
-        view.contentSize = CGSize(width: APP.WIDTH * 2, height: APP.WIDTH * 2 - 100)
-        view.minimumZoomScale = 1.0
-        view.maximumZoomScale = 1.0
+        view.contentSize = CGSize(width: APP.WIDTH * 2, height: APP.WIDTH * 3)
         view.backgroundColor = .white
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
         view.bounces = false
         view.delegate = self
+        view.minimumZoomScale = 1.0
+        view.maximumZoomScale = 4.0
         return view
     }()
     
@@ -113,7 +114,7 @@ import SpreadsheetView
         
         request()
         
-        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.width / 2) - 300)
+        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
     }
     
 }
@@ -122,6 +123,34 @@ extension GYTRTRadarViewController:UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return radarView
     }
+     
+    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        oricontentoffset = scrollView.contentOffset
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if (!decelerate){
+            oricontentoffset = scrollView.contentOffset
+        }
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        
+        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
+
+//        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
+        scrollView.contentOffset = oricontentoffset
+        radarView.snp.remakeConstraints { make in
+            make.height.equalTo(APP.WIDTH - 60)
+            make.width.equalTo(APP.WIDTH - 60)
+            make.centerX.equalTo(scrollView.contentSize.width / 2)
+            make.centerY.equalTo(scrollView.contentSize.height / 2)
+        }
+        
+//        scrollView.contentOffset = CGPoint(x: oricontentoffset.x * scrollView.zoomScale , y: oricontentoffset.y * scrollView.zoomScale)
+    }
+    
+    
 }
 
 extension GYTRTRadarViewController {
@@ -152,20 +181,20 @@ extension GYTRTRadarViewController {
             make.centerY.equalTo(screenLabel)
             make.left.equalTo(screenLabel.snp.right)
             make.height.equalTo(40)
-            make.width.equalTo(130)
+            make.width.equalTo(150)
         }
         
         scrollView.snp.makeConstraints { make in
             make.left.right.equalTo(0)
             make.top.equalTo(screenBtn.snp.bottom)
-            make.height.equalTo(APP.WIDTH)
+            make.height.equalTo(APP.WIDTH * 1.4)
         }
         
         radarView.snp.makeConstraints { make in
             make.height.equalTo(APP.WIDTH - 60)
             make.width.equalTo(APP.WIDTH - 60)
             make.centerX.equalTo(scrollView.contentSize.width / 2)
-            make.centerY.equalTo(scrollView.contentSize.width / 2)
+            make.centerY.equalTo(scrollView.contentSize.height / 2)
         }
         
         spreadsheetView.snp.makeConstraints { make in
@@ -284,6 +313,9 @@ extension GYTRTRadarViewController:UIPickerViewDelegate,UIPickerViewDataSource,A
         if dataSectionArray.count == 0 {
             return
         }
+        scrollView.zoomScale = 1.0
+        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
+        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
         let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
         screenBtn.setTitle((dic["name"] as! String), for: .normal)
         requestnextdata(array: [dataSectionArray[row]])
@@ -296,6 +328,7 @@ extension GYTRTRadarViewController:UIPickerViewDelegate,UIPickerViewDataSource,A
 //        self.navigationController?.pushViewController(vc, animated: true)
 //
 //    }
+    
     
    
 }

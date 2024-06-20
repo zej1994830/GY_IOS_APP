@@ -162,7 +162,7 @@ extension GYWifiMeasureViewController:UICollectionViewDataSource,UICollectionVie
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.section == 3 {
             //数据
-            let vc = GYFSDataTimeViewController()
+            let vc = GYWMDataTimeViewController()
             vc.rate = indexPath.row
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.section == 4 {

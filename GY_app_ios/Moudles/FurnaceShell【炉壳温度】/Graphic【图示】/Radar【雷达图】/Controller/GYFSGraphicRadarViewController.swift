@@ -68,7 +68,7 @@ class GYFSGraphicRadarViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 325 - APP.WIDTH, bottom: 0, right: 10)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -295,7 +295,7 @@ extension GYFSGraphicRadarViewController {
             let dic:NSDictionary = result as! NSDictionary
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.dataGroupArray = dicc["temperature_list"] as! NSArray
-            weakSelf.requestlastdata(array: NSArray(objects: weakSelf.dataGroupArray.suffix(5)))
+            weakSelf.requestlastdata(array: NSArray(objects: weakSelf.dataGroupArray.subarray(with: NSRange(location: 0, length: 5))))
         }
     }
     
@@ -360,7 +360,9 @@ extension GYFSGraphicRadarViewController {
         }
         
         let model = AAChartModel()
-            .chartType(.area)
+            .chartType(.polygon)
+            .polar(true)
+            
             .colorsTheme(["#EA173D"])
             .animationType(.easeOutCubic)
             .animationDuration(1200)
@@ -371,8 +373,8 @@ extension GYFSGraphicRadarViewController {
                     .data(data as! [Any])
                     .allowPointSelect(true)
                     .states(AAStates()
-                        .select(AASelect()
-                            .color("#BB1231")))
+                    .select(AASelect()
+                    .color("#BB1231")))
                     
             ])
             .categories(categories as! [String])

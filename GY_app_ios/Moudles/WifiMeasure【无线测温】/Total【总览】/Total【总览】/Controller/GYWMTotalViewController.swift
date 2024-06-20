@@ -86,6 +86,10 @@ class GYWMTotalViewController: GYViewController {
         addLayout()
         requestdata()
         
+        let timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [self] timer in
+             // 这里编写需要执行的自动刷新操作
+             requestnextdata(array: datatempSectionArray)
+        }
     }
 }
 

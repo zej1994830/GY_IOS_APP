@@ -202,10 +202,11 @@ extension GYLoginViewController {
                     UserDefaults.standard.synchronize()
                     
                     let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                    GYTabbarController.share.selectedIndex = 0
                     appdelegate.window?.rootViewController = GYTabbarController.share
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(500)) {
+//                    appdelegate.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameViewController")
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(300)) {
                         NotificationCenter.default.post(name: NotificationConstant.locationSuccess, object: nil,userInfo: nil)
-
                     }
                     //通知
 //                    weakSelf.dismiss(animated: true)

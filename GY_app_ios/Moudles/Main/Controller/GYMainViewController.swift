@@ -74,7 +74,7 @@ class GYMainViewController: GYViewController {
     private lazy var leftBtn:UIButton = {
         let btn = UIButton()
         btn.setTitleColor(.black, for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 18 ,weight: .bold)
         btn.addTarget(self, action: #selector(leftbtnClick), for: .touchUpInside)
         return btn
     }()
@@ -152,7 +152,7 @@ extension GYMainViewController {
     @objc private func locationSuccess(_ notification: Notification){
         
         //延迟一下，否则转圈gif错乱
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(300)) {
             
         }
         GYHUD.showGif(view: self.view)
@@ -173,6 +173,7 @@ extension GYMainViewController {
             weakSelf.deviceView.dismiss()
             weakSelf.leftBtn.setTitle(GYDeviceData.default.device_name, for: .normal)
         }
+        
     }
     
     func nextrequest(device_db: String) {

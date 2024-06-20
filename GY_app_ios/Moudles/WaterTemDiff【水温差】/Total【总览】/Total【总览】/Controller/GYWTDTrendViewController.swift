@@ -51,7 +51,7 @@ class GYWTDTrendViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 355 - APP.WIDTH, bottom: 0, right: 15)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -74,7 +74,29 @@ class GYWTDTrendViewController: GYViewController {
         return btn
     }()
     
-//    ic_select_nor
+    private lazy var pinlvBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "分钟"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
+    }()
+    
     
     private lazy var wenchaBtn:UIButton = {
         let btn = UIButton()
@@ -228,8 +250,7 @@ class GYWTDTrendViewController: GYViewController {
         return collectionView
     }()
     
-    
-    private lazy var timepickView:UIPickerView = {
+    private lazy var timepickView:UIPickerView = { //废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -262,7 +283,8 @@ extension GYWTDTrendViewController {
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         headView.addSubview(pinlvLabel)
-        headView.addSubview(pinlvBtn)
+//        headView.addSubview(pinlvBtn)
+        headView.addSubview(pinlvBtnMenu)
         headView.addSubview(optionLabel)
         headView.addSubview(wenchaBtn)
         headView.addSubview(ruwenBtn)
@@ -320,7 +342,7 @@ extension GYWTDTrendViewController {
             make.left.height.equalTo(timeLabel)
         }
         
-        pinlvBtn.snp.makeConstraints { make in
+        pinlvBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(pinlvLabel)
             make.left.equalTo(timeBtn)
             make.height.equalTo(40)
@@ -698,6 +720,33 @@ extension GYWTDTrendViewController:AAChartViewDelegate {
         liuliangView.label3.text = ""
         reliuView.label3.text = ""
     }
+}
+
+extension GYWTDTrendViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return 2
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        return ["分钟","小时"][Int(index)]
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+        if index == 0 {
+//            return "分钟"
+            rate = 0
+        }else{
+//            return "小时"
+            rate = 1
+        }
+        
+        request()
+    }
+    
 }
 
 

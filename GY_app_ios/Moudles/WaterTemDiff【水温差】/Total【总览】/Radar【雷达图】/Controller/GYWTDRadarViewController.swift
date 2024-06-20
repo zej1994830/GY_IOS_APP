@@ -43,7 +43,7 @@ class GYWTDRadarViewController: GYViewController {
         btn.setTitle("七进七出", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: -30)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 150, bottom: 0, right: -30)
 //        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 5)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
@@ -70,6 +70,52 @@ class GYWTDRadarViewController: GYViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(screenBtn2Click), for: .touchUpInside)
         return btn
+    }()
+    
+    private lazy var screenBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
+    }()
+    
+    private lazy var wenchaBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "温差"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
     }()
     
     private lazy var groupLabel:UILabel = {
@@ -138,17 +184,6 @@ class GYWTDRadarViewController: GYViewController {
         return view
     }()
     
-//    private lazy var radarCharView:RadarChartView = {
-//        let view = RadarChartView()
-//
-////        view.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["0°","90°","180","270°"])
-//        view.yAxis.drawLabelsEnabled = false
-//        view.webLineWidth = 0.2
-//        view.rotationEnabled = false
-//        view.rotationWithTwoFingers = false
-//        return view
-//    }()
-    
     private lazy var radarCharView:AAChartView = {
         let view = AAChartView()
         view.delegate = self as AAChartViewDelegate
@@ -184,7 +219,7 @@ class GYWTDRadarViewController: GYViewController {
         return label
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -197,7 +232,7 @@ class GYWTDRadarViewController: GYViewController {
         return view
     }()
     
-    private lazy var  namepickView2:UIPickerView = {
+    private lazy var  namepickView2:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -227,8 +262,8 @@ extension GYWTDRadarViewController {
         
         self.view.addSubview(bgView)
         bgView.addSubview(screenLabel)
-        bgView.addSubview(screenBtn)
-        bgView.addSubview(screenBtn2)
+        bgView.addSubview(screenBtnMenu)
+        bgView.addSubview(wenchaBtnMenu)
         bgView.addSubview(groupLabel)
         bgView.addSubview(groupBtn)
         bgView.addSubview(queryBtn)
@@ -261,17 +296,18 @@ extension GYWTDRadarViewController {
             make.width.equalTo(50)
         }
         
-        screenBtn.snp.makeConstraints { make in
+        screenBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(screenLabel)
             make.left.equalTo(screenLabel.snp.right)
             make.height.equalTo(40)
-            make.width.equalTo(70)
+            make.width.equalTo(170)
         }
         
-        screenBtn2.snp.makeConstraints { make in
+        wenchaBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(screenLabel)
-            make.left.equalTo(screenBtn.snp.right).offset(10)
+            make.left.equalTo(screenBtnMenu.snp.right).offset(10)
             make.height.equalTo(40)
+            make.width.equalTo(80)
         }
         
         groupLabel.snp.makeConstraints { make in
@@ -281,7 +317,7 @@ extension GYWTDRadarViewController {
         }
         
         groupBtn.snp.makeConstraints { make in
-            make.left.height.equalTo(screenBtn)
+            make.left.height.equalTo(screenBtnMenu)
             make.centerY.equalTo(groupLabel)
             make.right.equalTo(queryBtn.snp.left).offset(-15)
         }
@@ -355,7 +391,7 @@ extension GYWTDRadarViewController {
         partidString = String(format: "%d", dic["id"] as! Int64)
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        screenBtn.setTitle(sectionStr, for: .normal)
+        screenBtnMenu.title = sectionStr
         let params = ["device_db":GYDeviceData.default.device_db,"partidString":partidString,"rate":"1","typeString":"[0,1,2,3,4]"] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getswcdata, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -441,74 +477,8 @@ extension GYWTDRadarViewController {
         }
         bgView.bringSubviewToFront(namepickView)
         bgView.bringSubviewToFront(namepickView2)
+        
         for _ in 0..<360  {
-//            if angle == 0 {
-//                if i == angle {
-//                    chartmodelStr.append("0°")
-//                    continue
-//                }
-//            }
-//            if angle > 0 {
-//                if i + 1 == angle {
-//                    chartmodelStr.append("0°")
-//                    continue
-//                }
-//            }else {
-//                if i == angle + 360 {
-//                    chartmodelStr.append("0°")
-//                    continue
-//                }
-//            }
-//
-//            if angle + 90 > 0 {
-//                if i == (angle + 90) % 360 {
-//                    chartmodelStr.append("90°")
-//                    continue
-//                }
-//
-//                if angle + 90 == 360 && i == 360{
-//                    chartmodelStr.append("90°")
-//                    continue
-//                }
-//            }else{
-//                if i == (angle + 90 + 360) % 360 {
-//                    chartmodelStr.append("90°")
-//                    continue
-//                }
-//            }
-//
-//            if angle + 180 > 0 {
-//                if i + 1 == (angle + 180) % 360{
-//                    chartmodelStr.append("180°")
-//                    continue
-//                }
-//                if angle + 180 == 360 && i + 1 == 360{
-//                    chartmodelStr.append("180°")
-//                    continue
-//                }
-//            }else{
-//                if i + 1 == (angle + 180 + 360) % 360 {
-//                    chartmodelStr.append("180°")
-//                    continue
-//                }
-//            }
-//
-//            if angle + 270 > 0 {
-//                if i == (angle + 270) % 360{
-//                    chartmodelStr.append("270°")
-//                    continue
-//                }
-//                if angle + 270 == 360 && i + 1 == 360{
-//                    chartmodelStr.append("270°")
-//                    continue
-//                }
-//            }else{
-//                if i == (angle + 270 + 360) % 360 {
-//                    chartmodelStr.append("270°")
-//                    continue
-//                }
-//            }
-
             chartmodelStr.append("")
         }
         for i in 0..<array.count {
@@ -580,20 +550,15 @@ extension GYWTDRadarViewController {
             .xAxisVisible(true)
             .xAxisGridLineWidth(0.5)
             .yAxisVisible(true)
-//            .yAxisLineWidth(1)
             .yAxisLabelsEnabled(false)
             .markerSymbol(.circle)
             .markerSymbolStyle(.borderBlank)
             .legendEnabled(false)
             .categories(chartmodelStr)
-//            .margin(right: 30,left: 50)
             .series(dataEntries)
             .zoomType(.xy)
         
         radarCharView.aa_drawChartWithChartModel(chartmodel)
-        
-       
-       
     }
     
     @objc func groupBtnClick() {
@@ -715,4 +680,47 @@ extension GYWTDRadarViewController:UIPickerViewDelegate,UIPickerViewDataSource {
             radarCharData(array: datatempSectionArray)
         }
     }
+}
+
+extension GYWTDRadarViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        if menu == screenBtnMenu {
+            return UInt(dataSectionArray.count)
+        }else{
+            return 5
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        if menu == screenBtnMenu {
+            let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+            return (dic["name"] as! String)
+        }else{
+            
+            return labelarray[Int(index)]
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+        midshowview.label2.text = "组别"
+        midshowview.label3.text = "0.00"
+        if menu == screenBtnMenu {
+            if dataSectionArray.count == 0 {
+                return
+            }
+            let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+            requestnextdata(array: [dataSectionArray[Int(index)]])
+        }else{
+            if datatempSectionArray.count == 0 {
+                return
+            }
+            nameStr = labelarray[Int(index)]
+            radarCharData(array: datatempSectionArray)
+        }
+    }
+    
 }

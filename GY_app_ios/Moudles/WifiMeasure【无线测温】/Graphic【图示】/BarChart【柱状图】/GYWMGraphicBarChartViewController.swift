@@ -33,7 +33,7 @@ class GYWMGraphicBarChartViewController: GYViewController {
     
     private lazy var screenLabel:UILabel = {
         let label = UILabel()
-        label.text = "筛选："
+        label.text = "场所："
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -43,7 +43,7 @@ class GYWMGraphicBarChartViewController: GYViewController {
         btn.setTitle("一段", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 120, bottom: 0, right: -30)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 140, bottom: 0, right: -30)
 //        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 5)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
@@ -71,7 +71,7 @@ class GYWMGraphicBarChartViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 355 - APP.WIDTH, bottom: 0, right: 15)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -103,8 +103,8 @@ class GYWMGraphicBarChartViewController: GYViewController {
     private lazy var midshowview:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F5C105")
-        view.label2.text = "组别"
-        view.label3.text = "00.00"
+        view.label2.text = ""
+        view.label3.text = ""
         view.label3.snp.remakeConstraints { make in
             make.left.equalTo(0)
             make.bottom.equalTo(0)
@@ -196,7 +196,7 @@ extension GYWMGraphicBarChartViewController {
             make.centerY.equalTo(screenLabel)
             make.left.equalTo(screenLabel.snp.right)
             make.height.equalTo(40)
-            make.width.equalTo(140)
+            make.width.equalTo(160)
         }
         
         timeLabel.snp.makeConstraints { make in
@@ -235,7 +235,7 @@ extension GYWMGraphicBarChartViewController {
             make.left.equalTo(midtitleLabel)
             make.bottom.equalTo(midBgView).offset(-7)
             make.top.equalTo(midtitleLabel.snp.bottom).offset(11)
-            make.width.equalTo(80)
+            make.width.equalTo(200)
         }
         
         barcharView.snp.makeConstraints { make in
@@ -327,7 +327,7 @@ extension GYWMGraphicBarChartViewController {
             }
             
             data.add(tempp["value"] ?? 0)
-            categories.add(tempp["stove_name"])
+            categories.add(tempp["name"])
         }
         
         let model = AAChartModel()
@@ -528,6 +528,12 @@ extension GYWMGraphicBarChartViewController:UIPickerViewDelegate,UIPickerViewDat
             """
         )
         
+        midshowview.label2.textAlignment = .left
+        midshowview.label2.snp.remakeConstraints { make in
+            make.left.equalTo(midshowview.label1.snp.right).offset(15)
+            make.right.equalTo(0)
+            make.height.equalTo(20)
+        }
         midshowview.label2.text = clickEventMessage.category
         midshowview.label3.text = "\(clickEventMessage.y ?? 00)"
     }

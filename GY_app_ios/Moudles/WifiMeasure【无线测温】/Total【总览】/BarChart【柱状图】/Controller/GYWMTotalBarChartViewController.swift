@@ -256,8 +256,7 @@ extension GYWMTotalBarChartViewController {
                 return
             }
             
-//            data.add(tempp["value"] ?? 0)
-            data.add(arc4random_uniform(100))
+            data.add(tempp["value"] ?? 0)
             categories.add(tempp["name"] ?? "")
         }
         
@@ -459,7 +458,12 @@ extension GYWMTotalBarChartViewController:UIPickerViewDelegate,UIPickerViewDataS
         )
         let dic:NSDictionary = dataArray[clickEventMessage.index!] as! NSDictionary
         midshowview.label2.text = dic["name"] as! String
-        midshowview.label3.text = String(dic["value"] as! Int64)
+        midshowview.label2.snp.remakeConstraints { make in
+            make.left.equalTo(midshowview.label1.snp.right).offset(15)
+            make.right.equalTo(0)
+            make.height.equalTo(20)
+        }
+        midshowview.label3.text = String(dic["value"] as! Double)
     }
 
 }

@@ -83,8 +83,8 @@ extension GYWMMidCell {
         valueLabel.snp.makeConstraints { make in
             make.left.right.equalTo(titleLabel)
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
-            make.bottom.equalTo(0)
-            make.height.equalTo(35)
+            make.bottom.equalTo(-10)
+            make.height.equalTo(25)
         }
     }
 }

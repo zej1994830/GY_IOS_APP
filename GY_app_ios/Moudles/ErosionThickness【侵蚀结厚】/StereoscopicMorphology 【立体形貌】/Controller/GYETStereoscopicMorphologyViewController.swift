@@ -10,7 +10,10 @@ import SceneKit
 import WebKit
 
 class GYETStereoscopicMorphologyViewController: GYViewController {
-
+    var displayLink: CADisplayLink? //定时器
+    var xuanzhuanNode = SCNNode()
+    var qiuNode = SCNNode()
+    var mainscene = SCNScene()
     private lazy var headView:UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -122,29 +125,64 @@ class GYETStereoscopicMorphologyViewController: GYViewController {
     }()
     
     private lazy var fbxView:SCNView = {
-
+        let sceneURL = Bundle.main.url(forResource: "test", withExtension: "dae")
+            
         // 创建一个场景
-        let scene = SCNScene(named: "CaiJiHe_LED.obj")
-        
-        // 遍历场景中的节点
-        for node in scene!.rootNode.childNodes {
-            // 检查节点是否包含几何体
-            if let geometry = node.geometry {
-                // 创建一个材质对象
-                let material = SCNMaterial()
-                
-                // 设置材质的漫反射颜色贴图（diffuse.contents）
-                material.diffuse.contents = UIImage(named: "1281702515263.jpg")
-                
-                // 将材质应用到几何体上的所有表面
-                geometry.materials = [material]
+        var scene:SCNScene = SCNScene()
+        do {
+            
+            // 创建物理场
+            let gravityField = SCNPhysicsField.linearGravity()
+            gravityField.strength = 9.8
+            
+            
+            // 创建一个物理刚体并添加到场景中
+                    let sphereGeometry = SCNSphere(radius: 2.0)
+                    let sphereNode = SCNNode(geometry: sphereGeometry)
+                    sphereNode.position = SCNVector3(x: 0, y: 1, z: 0)
+                    sphereNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+                    scene.rootNode.addChildNode(sphereNode)
+            
+            scene = try SCNScene(url: (sceneURL)!)
+            scene.physicsWorld.contactDelegate = self
+            // 遍历场景中的节点
+            for node in scene.rootNode.childNodes {
+                if node.name == "Box001" {
+                    xuanzhuanNode = node
+                    node.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
+                }
+                if node.name == "qiu" {
+                    node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+                    qiuNode = node.clone()
+                }
+                    
+                if node.name == "Plane001" {
+                    node.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
+                }
+                // 检查节点是否包含几何体
+                if let geometry = node.geometry {
+                    // 创建一个材质对象
+                    let material = SCNMaterial()
+                    
+                    // 设置材质的漫反射颜色贴图（diffuse.contents）
+                    material.diffuse.contents = UIImage(named: "炉壳传感器UVa.jpg")
+                    
+                    let material2 = SCNMaterial()
+                    
+                    // 设置材质的漫反射颜色贴图（diffuse.contents）
+                    material2.diffuse.contents = UIImage(named: "CustomUVChecker_byValle_2K.png")
+                    // 将材质应用到几何体上的所有表面
+                    geometry.materials = [material2]
+                }
             }
+        }catch {
+            
         }
-
         // 创建一个视图来显示场景
         let view = SCNView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         view.scene = scene
         view.allowsCameraControl = true
+        view.showsStatistics = true
         
         return view
     }()
@@ -152,7 +190,7 @@ class GYETStereoscopicMorphologyViewController: GYViewController {
     
     private lazy var webView:WKWebView = {
         let webView = WKWebView()
-        if let url = URL(string: "http://192.168.102.50:8080/index.html") {
+        if let url = URL(string: "http://192.168.102.9:8080/index.html") {
                     // 创建 URLRequest 对象
                     let request = URLRequest(url: url)
                     
@@ -168,9 +206,26 @@ class GYETStereoscopicMorphologyViewController: GYViewController {
         setupViews()
         addLayout()
 //        request()
-        
+        // 配置 DisplayLink
+        displayLink = CADisplayLink(target: self, selector: #selector(update))
+        displayLink?.preferredFramesPerSecond = 10 // 设置每秒调用一次
+        displayLink?.add(to: .current, forMode: .default)
     }
     
+    @objc func update() {
+        // 抓取模型边上的一个点
+        let edgePoint = xuanzhuanNode.presentation.simdTransform * simd_float4(0.5, 0.5, 0.5, 1.0)
+        
+        let wallNode = qiuNode.clone()
+        wallNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        wallNode.position = SCNVector3(0, 33, -0)
+        fbxView.scene!.rootNode.addChildNode(wallNode)
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { _ in
+            wallNode.removeFromParentNode()
+        }
+        
+//        print("Edge Point: \(edgePoint)")
+    }
 }
 
 extension GYETStereoscopicMorphologyViewController {
@@ -189,14 +244,14 @@ extension GYETStereoscopicMorphologyViewController {
         headView.addSubview(frontviewBtn)
         headView.addSubview(sideviewBtn)
         self.view.addSubview(midView)
-//        midView.addSubview(fbxView)
-        midView.addSubview(webView)
+        midView.addSubview(fbxView)
+//        midView.addSubview(webView)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [ weak self] in
             guard let weakSelf = self else{
                 return
             }
-            weakSelf.webView.scrollView.setContentOffset(CGPoint(x: 200, y: 0), animated: true)
+//            weakSelf.webView.scrollView.setContentOffset(CGPoint(x: 200, y: 0), animated: true)
         }
     }
     
@@ -273,7 +328,7 @@ extension GYETStereoscopicMorphologyViewController {
             make.bottom.equalTo(0)
         }
         
-        webView.snp.makeConstraints { make in
+        fbxView.snp.makeConstraints { make in
             make.top.equalTo(20)
             make.left.right.equalTo(0)
             make.height.equalTo(APP.WIDTH)
@@ -323,4 +378,8 @@ extension GYETStereoscopicMorphologyViewController {
             
         }
     }
+}
+
+extension GYETStereoscopicMorphologyViewController:SCNPhysicsContactDelegate {
+    
 }

@@ -37,7 +37,7 @@ class GYGraphicViewController: GYViewController {
         btn.setTitle("一段", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: -30)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 150, bottom: 0, right: -30)
 //        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 5)
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         btn.layer.cornerRadius = 2
@@ -64,6 +64,52 @@ class GYGraphicViewController: GYViewController {
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(chartBtnClick), for: .touchUpInside)
         return btn
+    }()
+    
+    private lazy var screenBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
+    }()
+    
+    private lazy var chartBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "柱状图"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
     }()
     
     private lazy var midView:UIView = {
@@ -102,7 +148,7 @@ class GYGraphicViewController: GYViewController {
         return view
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -115,7 +161,7 @@ class GYGraphicViewController: GYViewController {
         return view
     }()
     
-    private lazy var namepick2View:UIPickerView = {
+    private lazy var namepick2View:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -151,8 +197,8 @@ extension GYGraphicViewController {
         self.title = ["温差","入水","出水","流量","热流"][indexrow]
         self.view.addSubview(bgView)
         bgView.addSubview(screenLabel)
-        bgView.addSubview(screenBtn)
-        bgView.addSubview(chartBtn)
+        bgView.addSubview(screenBtnMenu)
+        bgView.addSubview(chartBtnMenu)
         self.view.addSubview(midView)
         midView.addSubview(midBgView)
         midView.addSubview(midtitleLabel)
@@ -177,16 +223,16 @@ extension GYGraphicViewController {
             make.bottom.equalTo(-19)
         }
         
-        screenBtn.snp.makeConstraints { make in
+        screenBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(screenLabel)
             make.left.equalTo(screenLabel.snp.right)
             make.height.equalTo(40)
-            make.width.equalTo(70)
+            make.width.equalTo(170)
         }
         
-        chartBtn.snp.makeConstraints { make in
+        chartBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(screenLabel)
-            make.left.equalTo(screenBtn.snp.right).offset(15)
+            make.left.equalTo(screenBtnMenu.snp.right).offset(15)
             make.height.equalTo(40)
             make.width.equalTo(85)
         }
@@ -266,7 +312,7 @@ extension GYGraphicViewController {
         partid = dic["id"] as! Int32
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        screenBtn.setTitle(sectionStr, for: .normal)
+        screenBtnMenu.title = sectionStr
         let params = ["device_db":GYDeviceData.default.device_db,"partId":partid,"type":indexrow] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getGroupDataListByPartId, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -391,4 +437,49 @@ extension GYGraphicViewController:UIPickerViewDelegate,UIPickerViewDataSource,AA
     
  
 
+}
+
+extension GYGraphicViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        if menu == screenBtnMenu {
+            return UInt(dataSectionArray.count)
+        }else{
+            return 2
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        if menu == screenBtnMenu {
+            let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+            return (dic["name"] as! String)
+        }else {
+            return ["柱状图","折线图"][Int(index)]
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+        midshowview.label2.text = "组别"
+        midshowview.label3.text = "0.00"
+        if menu == screenBtnMenu {
+            if dataSectionArray.count == 0 {
+                return
+            }
+            let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+            requestnextdata(array: [dataSectionArray[Int(index)]])
+        }else{
+            if index == 0 && chartype != .column{
+                chartype = .column
+                radarCharData(array: dataArray)
+            }else if index == 1 && chartype != .line {
+                chartype = .line
+                radarCharData(array: dataArray)
+            }
+            
+        }
+    }
+    
 }

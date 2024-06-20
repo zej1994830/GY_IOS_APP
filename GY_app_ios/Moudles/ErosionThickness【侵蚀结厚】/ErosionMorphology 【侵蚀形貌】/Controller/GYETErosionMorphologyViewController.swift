@@ -12,12 +12,14 @@ class GYETErosionMorphologyViewController: GYViewController {
 //    [[["ic_wenduchang","温度场"],["ic_qinshijiehou","侵蚀结厚"],["ic_shujujieguo","数据结果"],["ic_litimoxing","立体模型"],["ic_qushi","趋势"],["ic_lishixingmao","历史形貌"]]]
     var currentDateString:String = ""
     var dataArray:NSArray = []
+    var histroydataArray:NSArray = []
     var stove_id:Int32 = 0
     var imagedatadic:NSDictionary = [:]
     var morphology_type:Int = 1
     var section_type:Int = 0
     var index = IndexPath(row: 0, column: 0)
     var timer = Timer()
+    var inttimecount:Int = 0
     
     private lazy var bgView:UIScrollView = {
         let view = UIScrollView()
@@ -143,18 +145,18 @@ class GYETErosionMorphologyViewController: GYViewController {
         return view
     }()
     
-//    private lazy var behindpickView:UIPickerView = {
-//        let view = UIPickerView()
-//        view.delegate = self
-//        view.dataSource = self
-//        view.backgroundColor = .white
-//        view.isHidden = true
-//        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
-//        view.layer.borderWidth = 1
-//        view.layer.cornerRadius = 6
-//        view.layer.masksToBounds = true
-//        return view
-//    }()
+    private lazy var behindpickView:UIPickerView = {
+        let view = UIPickerView()
+        view.delegate = self
+        view.dataSource = self
+        view.backgroundColor = .white
+        view.isHidden = true
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        return view
+    }()
     
     private lazy var midView:UIView = {
         let view = UIView()
@@ -243,7 +245,7 @@ class GYETErosionMorphologyViewController: GYViewController {
     
         request()
         request2()
-                
+        
     }
 
 }
@@ -274,7 +276,7 @@ extension GYETErosionMorphologyViewController {
         midView.addSubview(histogramimageV)
         
         self.view.addSubview(frontpickView)
-//        self.view.addSubview(behindpickView)
+        self.view.addSubview(behindpickView)
     }
     func addLayout() {
         bgView.snp.makeConstraints { make in
@@ -403,6 +405,10 @@ extension GYETErosionMorphologyViewController {
             make.center.equalToSuperview()
         }
         
+        behindpickView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
     }
 
     @objc func modelBtnClick(_ button:UIButton){
@@ -418,6 +424,7 @@ extension GYETErosionMorphologyViewController {
             button.isSelected = true
             hengjiemianBtn.isSelected = false
             section_type = 0
+            inttimecount = 0
             request2()
         }
     }
@@ -427,6 +434,7 @@ extension GYETErosionMorphologyViewController {
             button.isSelected = true
             zhoujiemianBtn.isSelected = false
             section_type = 1
+            inttimecount = 0
             request2()
         }
     }
@@ -444,11 +452,17 @@ extension GYETErosionMorphologyViewController {
         button.isSelected = !button.isSelected
         
         if button.isSelected {
-            timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [self] timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [self] timer in
                 // 这里编写需要执行的自动刷新操作
+                inttimecount += 1
+                let dd = inttimecount % dataArray.count
+                let dic:NSDictionary = dataArray[dd] as! NSDictionary
+                frontBtn.setTitle("前界面-\(dic["stove_name"] ?? "")", for: .normal)
+                behindBtn.setTitle("后界面-\(dic["stove_name"] ?? "")", for: .normal)
+                midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(dic["stove_name"] ?? "")）"
+                stove_id = dic["stove_id"] as! Int32
                 request3()
             }
-            
         }else{
             timer.invalidate()
         }
@@ -464,8 +478,10 @@ extension GYETErosionMorphologyViewController {
             guard let weakSelf = self else{
                 return
             }
-            
-            
+            let dic:NSDictionary = result as! NSDictionary
+            let dicc:NSDictionary = dic["data"] as! NSDictionary
+            weakSelf.histroydataArray = dicc["data"] as! NSArray
+            weakSelf.behindpickView.reloadAllComponents()
         }
     }
     
@@ -558,13 +574,10 @@ extension GYETErosionMorphologyViewController:UICollectionViewDelegate,UICollect
             let vc = GYETTrendViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.row == 3 {
-            
-        }
-//        else if indexPath.row == 2 {
 //            let vc = GYETStereoscopicMorphologyViewController()
 //            self.navigationController?.pushViewController(vc, animated: true)
-//        }
-        
+            behindpickView.isHidden = false
+        }
         
     }
     
@@ -581,26 +594,48 @@ extension GYETErosionMorphologyViewController:UIPickerViewDelegate,UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return dataArray.count
+        if pickerView == frontpickView {
+            return dataArray.count
+        }else {
+            return histroydataArray.count
+        }
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let dic:NSDictionary = dataArray[row] as! NSDictionary
+        if pickerView == frontpickView {
+            let dic:NSDictionary = dataArray[row] as! NSDictionary
+            
+            return (dic["stove_name"] as! String)
+        }else{
+            let dic:NSDictionary = histroydataArray[row] as! NSDictionary
+            
+            return (dic["date"] as! String)
+        }
         
-        return (dic["stove_name"] as! String)
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerView.isHidden = true
-        if dataArray.count == 0 {
-            return
+        
+        if pickerView == frontpickView {
+            if dataArray.count == 0 {
+                return
+            }
+            inttimecount = row
+            let dic:NSDictionary = dataArray[row] as! NSDictionary
+            frontBtn.setTitle("前界面-\(dic["stove_name"] ?? "")", for: .normal)
+            behindBtn.setTitle("后界面-\(dic["stove_name"] ?? "")", for: .normal)
+            midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(dic["stove_name"] ?? "")）"
+            stove_id = dic["stove_id"] as! Int32
+            request3()
+        }else{
+            let dic:NSDictionary = histroydataArray[row] as! NSDictionary
+            
+            currentDateString = (dic["date"] as! String)
+            request3()
         }
-        let dic:NSDictionary = dataArray[row] as! NSDictionary
-        frontBtn.setTitle("前界面-\(dic["stove_name"] ?? "")", for: .normal)
-        behindBtn.setTitle("后界面-\(dic["stove_name"] ?? "")", for: .normal)
-        midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(dic["stove_name"] ?? "")）"
-        stove_id = dic["stove_id"] as! Int32
-        request3()
+        
     }
     
 }

@@ -11,6 +11,8 @@ class GYWTDTrendItemsGroupViewController: ZEJBottomPresentViewController {
 
     var ClickBlock: ((NSMutableArray)->())? = nil
 
+    //无线测温可以随便加
+    var iswmbool:Bool = false
     //3:GYTHCurveViewController
     var type:Int = 0
     //源数组
@@ -145,10 +147,6 @@ extension GYWTDTrendItemsGroupViewController {
     }
     
     @objc func sureBtnClick() {
-        if tempArray.count > 5 {
-            GYHUD.show("目前不让选中超过五个")
-            return
-        }
         
         if tempArray.count == 0 {
             GYHUD.show("必须选一个")
@@ -212,6 +210,10 @@ extension GYWTDTrendItemsGroupViewController:UITableViewDelegate,UITableViewData
                 }
                 let dic:NSDictionary = weakSelf.dataArray[indexPath.row] as! NSDictionary
                 if isselectbool {
+                    if weakSelf.tempArray.count > 4 && !weakSelf.iswmbool{
+                        GYHUD.show("目前不让选中超过五个")
+                        return
+                    }
                     weakSelf.tempArray.add(dic)
                 }else{
                     for item in weakSelf.tempArray {

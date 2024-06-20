@@ -1,5 +1,5 @@
 PODS:
-  - AAInfographics (7.3.0)
+  - AAInfographics (9.0.0)
   - Alamofire (5.1.0)
   - BRPickerView (2.8.1):
     - BRPickerView/AddressPickerView (= 2.8.1)
@@ -43,6 +43,7 @@ PODS:
     - JJException/Swizzle
   - JJException/Swizzle (0.2.13)
   - JXSegmentedView (1.2.7)
+  - LMJDropdownMenu (3.0.4)
   - MBProgressHUD (1.2.0)
   - MJRefresh (3.7.5)
   - OpenGLUtils (0.0.2)
@@ -72,6 +73,7 @@ DEPENDENCIES:
   - JJCollectionViewRoundFlowLayout_Swift
   - JJException
   - JXSegmentedView (~> 1.2.7)
+  - LMJDropdownMenu
   - MBProgressHUD
   - MJRefresh
   - OpenGLUtils (from `../openGL`)
@@ -97,6 +99,7 @@ SPEC REPOS:
     - JJCollectionViewRoundFlowLayout_Swift
     - JJException
     - JXSegmentedView
+    - LMJDropdownMenu
     - MBProgressHUD
     - MJRefresh
     - PINCache
@@ -116,11 +119,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AAInfographics:
-    :commit: 30f36c21323cfe188dbed2d9e1b7b01fbea6e445
+    :commit: 222b74aa37f06b8dd68a8b178264b4fae34d8d5a
     :git: https://github.com/AAChartModel/AAChartKit-Swift.git
 
 SPEC CHECKSUMS:
-  AAInfographics: ee2a7959acdd0a00243b7f5a3f03a1fa2bdf0781
+  AAInfographics: 31fd2891509a97e34693aeaf681daa7b2b4d8c0f
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   BRPickerView: 2531a2d4d0fea0b57a1c738de215af0f88863a2f
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
@@ -132,6 +135,7 @@ SPEC CHECKSUMS:
   JJCollectionViewRoundFlowLayout_Swift: 88caa983c8b5a07bc63abd79ff9f267eab436e41
   JJException: fce490b5c046078709283d38de73fe2f624bc14c
   JXSegmentedView: eb1cad21f57c2543c00c3e08b8fd3c7ca54f5acd
+  LMJDropdownMenu: 50c74e9d50a480c290fec47eb575826861d0823b
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   OpenGLUtils: af967be364e96fbf9569d7b9c15602ac63d2807d
@@ -144,6 +148,6 @@ SPEC CHECKSUMS:
   SwiftPopMenu: e8ad0724497781abec06c16e158d08d741c794cd
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: bd5dbf1128db0a081160fe454b01413cc78b5f35
+PODFILE CHECKSUM: d098287459b68292e9bb5647c6eb81352340a112
 
 COCOAPODS: 1.11.3

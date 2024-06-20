@@ -24,8 +24,10 @@ target 'GY_app_ios' do
   pod 'JJCollectionViewRoundFlowLayout_Swift'
   pod 'DGCharts'
   pod 'BRPickerView'
-#  pod 'AAChartKit', :git => 'https://github.com/AAChartModel/AAChartKit.git'
+#  pod 'AAChartKit', :git => 'https://github.com/AAChartModel/AAChartKit.git' //一个oc，一个Swift
   pod 'AAInfographics', :git => 'https://github.com/AAChartModel/AAChartKit-Swift.git'
+  pod 'LMJDropdownMenu'
+  
   pod 'SpreadsheetView'
   pod 'OpenGLUtils', :path => '../openGL'
   pod "GCDWebServer", "~> 3.5.4"

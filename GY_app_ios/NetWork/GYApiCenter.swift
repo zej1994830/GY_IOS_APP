@@ -50,7 +50,7 @@ extension Api {
     //设备巡检 信息接口
     static let getdeviceaddresslist: String = "devicechecker/getdeviceaddresslists"
     //设备巡检 TAGList接口
-    static let gettaglistbydeviceaddr: String = "devicechecker/gettaglistbydeviceaddr"
+    static let gettaglistbydeviceaddr: String = "devicechecker/gettaglistbydeviceaddrs"
 }
 
 extension Api {
@@ -113,5 +113,6 @@ extension Api {
     static let gettrendchartdata = "cwsndiagram/gettrendchartdata"
     //无线测温图示柱状图
     static let getwmchartdata = "cwsndiagram/getchartdata"
-    
+    //无线测温_分时数据接口
+    static let getcwsntimedata: String = "cwsntime/getcwsntimedata"
 }

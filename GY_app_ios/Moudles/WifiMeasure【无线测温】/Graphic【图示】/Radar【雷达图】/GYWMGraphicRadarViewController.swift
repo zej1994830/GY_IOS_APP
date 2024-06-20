@@ -58,7 +58,7 @@ class GYWMGraphicRadarViewController: GYViewController {
         btn.layer.cornerRadius = 2
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 120, bottom: 0, right: -30)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 140, bottom: 0, right: -30)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(nameBtnClick), for: .touchUpInside)
         btn.contentHorizontalAlignment = .left
@@ -75,7 +75,7 @@ class GYWMGraphicRadarViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 325 - APP.WIDTH, bottom: 0, right: 10)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -117,7 +117,7 @@ class GYWMGraphicRadarViewController: GYViewController {
     
     private lazy var midtimeLabel:UILabel = {
         let label = UILabel()
-        label.text = "时间："
+        label.text = "已选中点"
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -203,7 +203,7 @@ extension GYWMGraphicRadarViewController {
         
         nameBtn.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
-            make.width.equalTo(140)
+            make.width.equalTo(160)
             make.left.equalTo(nameLabel.snp_rightMargin).offset(10)
             make.height.equalTo(40)
         }
@@ -251,8 +251,9 @@ extension GYWMGraphicRadarViewController {
         
         showGroupView.snp.makeConstraints { make in
             make.left.equalTo(midtimeLabel)
-            make.width.equalTo(60)
+            make.width.equalTo(200)
             make.top.equalTo(midtimeLabel.snp.bottom).offset(11)
+            make.bottom.equalTo(bgView).offset(-7)
         }
         
         lineView.snp.makeConstraints { make in
@@ -302,11 +303,14 @@ extension GYWMGraphicRadarViewController {
             let dic:NSDictionary = result as! NSDictionary
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.dataGroupArray = dicc["temperature_list"] as! NSArray
-            weakSelf.requestlastdata(array: NSArray(objects: weakSelf.dataGroupArray.suffix(5)))
+            weakSelf.requestlastdata(array: NSArray(objects: weakSelf.dataGroupArray.subarray(with: NSRange(location: 0, length: 5))))
         }
     }
     
     func requestlastdata(array:NSArray) {
+        showGroupView.label2.text = ""
+        showGroupView.label3.text = ""
+        
         datatempGroupArray = NSMutableArray(array: array)
         var namestr:String = ""
         var stoveidString:String = ""
@@ -354,38 +358,117 @@ extension GYWMGraphicRadarViewController {
         if array.count == 0 {
             return
         }
-        let dic:NSDictionary = array.firstObject as! NSDictionary
-        let firstmodel = GYFSDataModel.deserialize(from: dic)!
-        let data:NSMutableArray = []
-        let categories:NSMutableArray = []
+        
+        var dataEntries = [AASeriesElement]()
+        
+        var datanameStr = [String]()
+        
+        
+        //默认从正北开始0，所以要多加90
+        let angle = 90
+        let radius = self.view.frame.size.width / 2 - 25
+        for i in 0..<4 {
+            let angleInRadians = -CGFloat(angle + 90 * i).truncatingRemainder(dividingBy: 360)
+            let x1 = radius * cos(angleInRadians*Double.pi/180)
+            let y1 = radius * sin(angleInRadians*Double.pi/180)
+            let label = UILabel(frame: CGRect(x: radius + x1, y: radius - y1, width: 35, height: 20))
+
+            label.text = "\(90 * i)°"
+            label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+            label.textAlignment = .center
+            bgView.addSubview(label)
+            
+            let selfWidth = lineView.frame.size.width
+            let selfHeight = lineView.frame.size.height
+            let labelWidth = label.frame.size.width
+            let labelHeight = label.frame.size.height
+            let view = SBRadarCharts()
+            let  p = view.calcCircleCoordinate(withCenter: lineView.center, andWithAngle: CGFloat(angle + 90 * i), andWithRadius: radius)
+            if p.x < selfWidth/2 - labelWidth {
+                var x = p.x - labelWidth/2
+                var y: CGFloat
+                if p.y < (selfHeight/2 - labelHeight) {
+                    y = p.y - labelHeight/2
+                } else {
+                    y = p.y + labelHeight/2
+                }
+                label.center = CGPoint(x: x, y: y)
+            } else {
+                var x = p.x + labelWidth/2
+                var y: CGFloat
+                if p.y < (selfHeight/2 - labelHeight) {
+                    y = p.y - labelHeight/2
+                } else {
+                    y = p.y + labelHeight/2
+                }
+                label.center = CGPoint(x: x, y: y)
+            }
+
+            if (p.y > (selfHeight/2 - labelHeight/2) && p.y < (selfHeight/2 + labelHeight/2)) {
+                if (p.x < selfWidth/2 - labelHeight) {
+                    label.center = CGPoint(x: p.x - labelWidth/2, y: p.y)
+                } else {
+                    label.center = CGPoint(x: p.x + labelWidth/2, y: p.y)
+                }
+            } else {
+                if (p.x > (selfWidth/2 - labelWidth/2) && p.x < (selfWidth/2 + labelWidth/2)) {
+                    if (p.y < selfHeight/2 - labelWidth) {
+                        label.center = CGPoint(x: p.x, y: p.y - labelHeight/2)
+                    } else {
+                        label.center = CGPoint(x: p.x, y: p.y + labelHeight/2)
+                    }
+                }
+            }
+        }
+        bgView.bringSubviewToFront(namepickView)
+        var data = [Any]()
+        var data2 = [Any]()
         
         for temp in array {
             guard let tempp = temp as? NSDictionary else {
                 return
             }
             
-            data.add(tempp["value"] ?? 0)
-            categories.add(tempp["stove_name"])
+            
+            datanameStr.append(tempp["name"] as! String)
+            data2.append(tempp["value"] as! Double )
+            
+            
         }
         
+        let gradientColor = AAGradientColor.linearGradient(
+            direction: .toLeft,
+            startColor: "#ADC6FF",
+            endColor: "#ADC6FF"
+        )
+        
+        
+        let aa2 = AASeriesElement()
+            .name("温度")
+            .data(data2)
+            .color(gradientColor)
+        
+        dataEntries.append(aa2)
+        
         let model = AAChartModel()
-            .chartType(.area)
-            .colorsTheme(["#EA173D"])
-            .animationType(.easeOutCubic)
-            .animationDuration(1200)
-            .zoomType(.x)
+            .polar(true)
+            .dataLabelsEnabled(false)
+            .categories(datanameStr)
+            .margin(right: 30, left: 50)
             .series([
                 AASeriesElement()
-                    .name(firstmodel.partName!)
-                    .data(data as! [Any])
-                    .allowPointSelect(true)
-                    .states(AAStates()
-                        .select(AASelect()
-                            .color("#BB1231")))
-                    
+                    .name(sectionStr)
+                    .data(data2)
+                    .colorByPoint(true)
             ])
-            .categories(categories as! [String])
-            .tooltipEnabled(true)
+            .chartType(.area)
+            
+            .tooltipValueSuffix("°C")
+//
+//            .markerSymbol(.circle)
+//            .markerSymbolStyle(.borderBlank)
+//            .categories(datanameStr)
+            .zoomType(.xy)
         
         lineView.aa_drawChartWithChartModel(model)
         
@@ -418,6 +501,7 @@ extension GYWMGraphicRadarViewController {
         let vc = GYWTDTrendItemsGroupViewController()
         vc.dataArray = dataGroupArray
         vc.tempArray = datatempGroupArray
+        vc.iswmbool = true
         vc.ClickBlock = {[weak self] array in
             guard let weakSelf = self else {
                 return
@@ -479,8 +563,18 @@ extension GYWMGraphicRadarViewController:AAChartViewDelegate {
             """
         )
         
-        showGroupView.label2.text = String(describing: clickEventMessage.name)
-        showGroupView.label3.text = String(describing: clickEventMessage.x)
+        guard let tempp = dataArray[clickEventMessage.index!] as? NSDictionary else {
+            return
+        }
+        
+        showGroupView.label2.textAlignment = .left
+        showGroupView.label2.snp.remakeConstraints { make in
+            make.left.equalTo(showGroupView.label1.snp.right).offset(15)
+            make.right.equalTo(0)
+            make.height.equalTo(20)
+        }
+        showGroupView.label2.text = (tempp["name"] as! String)
+        showGroupView.label3.text = String(format: "%.3f", tempp["value"] as! Double)
         
     }
 }

@@ -47,7 +47,7 @@ class GYWMTotalTrendViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 355 - APP.WIDTH, bottom: 0, right: 15)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -98,7 +98,7 @@ class GYWMTotalTrendViewController: GYViewController {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = rellySizeForiPhoneWidth(120, 85)
+        layout.itemSize = CGSize.init(width: 147, height: 80)
         layout.sectionInset = UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 6.5)
         
         let collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
@@ -420,7 +420,7 @@ extension GYWMTotalTrendViewController:UICollectionViewDataSource,UICollectionVi
         if collectionView == collectionV {
             return timeArray.count
         }else{
-            return randomColorarray.count
+            return middataarray.count
         }
         
     }

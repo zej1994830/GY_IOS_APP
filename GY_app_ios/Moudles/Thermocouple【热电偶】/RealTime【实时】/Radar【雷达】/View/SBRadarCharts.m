@@ -36,7 +36,7 @@
     _dioWdith = 8;
     _dioBoderWdith = 8;
 
-    _labelWidth = 32;
+    _labelWidth = 20;
     _labelHeight = 22.5;
     
     _labelWidth2 = 65;
@@ -76,8 +76,8 @@
     layerarray = [[NSMutableArray alloc]init];
     _radius = self.frame.size.width/2.0;
 
-    _radiusmax = [_dataDic[@"r_max"] doubleValue];
-    _radiusnor = [_dataDic[@"r_radius"] doubleValue];
+    _radiusmax = [_dataDic[@"max_radius"] doubleValue];
+    _radiusnor = [_dataDic[@"min_radius"] doubleValue];
     
     
     
@@ -151,17 +151,22 @@
     
     NSMutableArray *pointArray = [NSMutableArray array];//大图层的顶点位置
     NSMutableArray *pointArraysmall = [NSMutableArray array];//小涂层的顶点位置
-    
+    NSMutableArray *pointslidesmall = [NSMutableArray array];//圆边的顶点位置
     //提取出大小图层的point
     for (int i = 0; i<resultModelArray.count; i++) {
         NSDictionary * tempdic = resultModelArray[i];
         CGFloat insertion_angle = [tempdic[@"insertion_angle"] floatValue];
         
         NSValue *value = [NSValue valueWithCGPoint:[self calcCircleCoordinateWithCenter:CGPointMake(_radius, _radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:((_radiusmax - [_values[i] floatValue] * 1000) / _radiusmax) * _radius]];
+        
         [pointArray addObject:value];
         
         NSValue *valuesmall = [NSValue valueWithCGPoint:[self calcCircleCoordinateWithCenter:CGPointMake(_radius, _radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:((_radiusmax - [_values[i] floatValue] * 1000) / _radiusmax) * _radius]];
         [pointArraysmall addObject:valuesmall];
+        
+        NSValue *valueslide = [NSValue valueWithCGPoint:[self calcCircleCoordinateWithCenter:CGPointMake(_radius, _radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius]];
+        [pointslidesmall addObject:valueslide];
+        
     }
     
     for (int i = 0; i<pointArray.count; i++) {
@@ -219,7 +224,7 @@
         int roundedIntValue = (int)round(doubleValue);
         UIButton *label = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _labelWidth, _labelHeight)];
         [label setTitle:[NSString stringWithFormat:@"%d",roundedIntValue] forState:UIControlStateNormal];
-        label.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
+        label.titleLabel.font = [UIFont systemFontOfSize:5 weight:UIFontWeightMedium];
         [label setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         label.tag = 100 + i;
@@ -227,7 +232,7 @@
         
         UIButton *label2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _labelWidth2, _labelHeight2)];
         [label2 setTitle:[_titles[i] componentsSeparatedByString:@","].lastObject forState:UIControlStateNormal];
-        label2.titleLabel.font = [UIFont systemFontOfSize:14];
+        label2.titleLabel.font = [UIFont systemFontOfSize:5];
         [label2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         label2.tag = 1000 + i;
         [label2 addTarget:self action:@selector(buttonClick2:) forControlEvents:UIControlEventTouchUpInside];
@@ -293,55 +298,51 @@
         [label sizeToFit];
         [label2 sizeToFit];
         
-        if (p.x < _radius && p.y >= _radius) {
-            
-            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 175].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius].y, label.frame.size.width, label.frame.size.height);
-            label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
-            
-            while ([self hitView:label] || [self hitView:label2]) {
-                label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y + 30, label.frame.size.width, label.frame.size.height);
-                label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
-            }
-            
-
-        }else if (p.x > _radius && p.y >= _radius) {
-            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 20].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 20].y, label.frame.size.width, label.frame.size.height);
-            label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
-            
-            while ([self hitView:label] || [self hitView:label2]) {
-                label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y + 30, label.frame.size.width, label.frame.size.height);
-                label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
-            }
-            
-        }else if (label.frame.origin.x > _radius && label.frame.origin.y <= _radius) {
-            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 150].y, label.frame.size.width, label.frame.size.height);
-            label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
-            
-            while ([self hitView:label] || [self hitView:label2]) {
-                label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y + 30, label.frame.size.width, label.frame.size.height);
-                label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
-            }
-            
-        }else if (label.frame.origin.x < _radius && label.frame.origin.y <= _radius) {
-            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 150].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 100].y, label.frame.size.width, label.frame.size.height);
-            label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
-            
-            while ([self hitView:label] || [self hitView:label2]) {
-                label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y + 30, label.frame.size.width, label.frame.size.height);
-                label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
-            }
-            
-            
-        }
-        label.titleLabel.font = [UIFont systemFontOfSize:12];
-        label2.titleLabel.font = [UIFont systemFontOfSize:12];
-        NSLog(@"insertion_angle:%f----%@",insertion_angle,label.titleLabel.text);
+        label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width - 15, 5);
+        label2.frame = CGRectMake(label2.frame.origin.x, label2.frame.origin.y, label2.frame.size.width - 5, 5);
         
-        UIBezierPath *path4 = [UIBezierPath bezierPath];
-        [path4 moveToPoint:p];
-         [path4 addLineToPoint:CGPointMake(label.frame.origin.x, label.frame.origin.y + label.frame.size.height / 2)];
-//        [path4 setLineWidth:0.5];
-//        [[UIColor blueColor] setStroke];
+        UIBezierPath *path4 = [UIBezierPath bezierPath];//线条指向的坐标记录
+//        [path4 moveToPoint:p];
+        CGPoint slidesmall = [pointslidesmall[i] CGPointValue];
+        [path4 moveToPoint:slidesmall];
+        if (p.x <= _radius && p.y >= _radius) {//左下
+            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 100].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].y, label.frame.size.width, label.frame.size.height);
+            label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
+            
+            while ([self hitView:label] || [self hitView:label2]) {
+                label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y + 5, label.frame.size.width, label.frame.size.height);
+                label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
+            }
+            [path4 addLineToPoint:CGPointMake(label2.frame.origin.x + label2.frame.size.width, label.frame.origin.y + label.frame.size.height / 2)];
+        }else if (p.x > _radius && p.y >= _radius) {//右下
+            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 100].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].y, label.frame.size.width, label.frame.size.height);
+            label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
+
+            while ([self hitView:label] || [self hitView:label2]) {
+                label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y + 5, label.frame.size.width, label.frame.size.height);
+                label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
+            }
+            [path4 addLineToPoint:CGPointMake(label.frame.origin.x, label.frame.origin.y + label.frame.size.height / 2)];
+        }else if (p.x > _radius && p.y <= _radius) {//右上
+            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 100].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].y, label.frame.size.width, label.frame.size.height);
+            label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
+
+            while ([self hitView:label] || [self hitView:label2]) {
+                label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y - 5, label.frame.size.width, label.frame.size.height);
+                label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
+            }
+            [path4 addLineToPoint:CGPointMake(label.frame.origin.x, label.frame.origin.y + label.frame.size.height / 2)];
+        }else if (p.x < _radius && p.y <= _radius) {//左上
+            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 100].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].y, label.frame.size.width, label.frame.size.height);
+            label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
+
+            while ([self hitView:label] || [self hitView:label2]) {
+                label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y - 5, label.frame.size.width, label.frame.size.height);
+                label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
+            }
+            [path4 addLineToPoint:CGPointMake(label2.frame.origin.x + label2.frame.size.width, label.frame.origin.y + label.frame.size.height / 2)];
+        }        
+        
         // 创建 CAShapeLayer
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         shapeLayer.path = path4.CGPath;
@@ -368,7 +369,7 @@
         CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"strokeEnd"];
         animation.fromValue=[NSNumber numberWithFloat:0.0f];
         animation.toValue=[NSNumber numberWithFloat:1.0f];
-        animation.duration=2.0;
+        animation.duration=5.0;
         animation.fillMode=kCAFillModeForwards;
         animation.removedOnCompletion=NO;
         animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];

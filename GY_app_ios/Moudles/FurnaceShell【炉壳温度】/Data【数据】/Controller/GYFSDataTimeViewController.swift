@@ -72,7 +72,7 @@ class GYFSDataTimeViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 120, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 340 - APP.WIDTH, bottom: 0, right: 10)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -262,8 +262,8 @@ extension GYFSDataTimeViewController {
                         weakSelf.currentDateString = weakSelf.currentDateString + " 00:00:00"
                         weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + " 00:00:00"
                     }else if weakSelf.rate == 3 {
-                        weakSelf.currentDateString = weakSelf.currentDateString + "-00 00:00:00"
-                        weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + "-00 00:00:00"
+                        weakSelf.currentDateString = weakSelf.currentDateString + "-01 00:00:00"
+                        weakSelf.currentLastHourDateString = weakSelf.currentLastHourDateString + "-01 00:00:00"
                     }
                     weakSelf.requestnextdata(array: weakSelf.datatempSectionArray )
                 }

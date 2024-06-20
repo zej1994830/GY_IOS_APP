@@ -41,7 +41,7 @@ class GYWTDDeviceAddressViewController: GYViewController {
         btn.layer.cornerRadius = 2
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 105, bottom: 0, right: -25)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 250, bottom: 0, right: -25)
 //        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 5)
         btn.contentHorizontalAlignment = .left
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -117,7 +117,7 @@ extension GYWTDDeviceAddressViewController {
         nameBtn.snp.makeConstraints { make in
             make.left.equalTo(titleLabel.snp.right).offset(5)
             make.height.equalTo(40)
-            make.width.equalTo(125)
+            make.width.equalTo(270)
             make.centerY.equalToSuperview()
         }
      

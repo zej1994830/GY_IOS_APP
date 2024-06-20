@@ -94,12 +94,20 @@ public class AAMarker: AAObject {
     }
 }
 
+
 public class AAMarkerStates: AAObject {
     public var hover: AAMarkerHover?
+    public var select: AAMarkerSelect?
     
     @discardableResult
     public func hover(_ prop: AAMarkerHover) -> AAMarkerStates {
         hover = prop
+        return self
+    }
+
+    @discardableResult
+    public func select(_ prop: AAMarkerSelect) -> AAMarkerStates {
+        select = prop
         return self
     }
     
@@ -108,12 +116,15 @@ public class AAMarkerStates: AAObject {
     }
 }
 
+
 public class AAMarkerHover: AAObject {
     public var enabled: Bool?
     public var fillColor: String?
     public var lineColor: String?
     public var lineWidth: Float?
+    public var lineWidthPlus: Float?
     public var radius: Float?
+    public var radiusPlus: Float?
     
     @discardableResult
     public func enabled(_ prop: Bool) -> AAMarkerHover {
@@ -138,14 +149,70 @@ public class AAMarkerHover: AAObject {
         lineWidth = prop
         return self
     }
+
+    @discardableResult
+    public func lineWidthPlus(_ prop: Float) -> AAMarkerHover {
+        lineWidthPlus = prop
+        return self
+    }
     
     @discardableResult
     public func radius(_ prop: Float) -> AAMarkerHover {
         radius = prop
         return self
     }
+
+    @discardableResult
+    public func radiusPlus(_ prop: Float) -> AAMarkerHover {
+        radiusPlus = prop
+        return self
+    }
     
     public override init() {
         
+    }
+}
+
+
+public class AAMarkerSelect: AAObject {
+    public var enabled: Bool?
+    public var fillColor: String?
+    public var lineColor: String?
+    public var lineWidth: Float?
+    public var radius: Float?
+
+    @discardableResult
+    public func enabled(_ prop: Bool) -> AAMarkerSelect {
+        enabled = prop
+        return self
+    }
+
+    @discardableResult
+    public func fillColor(_ prop: String) -> AAMarkerSelect {
+        fillColor = prop
+        return self
+    }
+
+    @discardableResult
+    public func lineColor(_ prop: String) -> AAMarkerSelect {
+        lineColor = prop
+        return self
+    }
+
+    @discardableResult
+    public func lineWidth(_ prop: Float) -> AAMarkerSelect {
+        lineWidth = prop
+        return self
+    }
+
+    @discardableResult
+    public func radius(_ prop: Float) -> AAMarkerSelect {
+        radius = prop
+        return self
+    }
+
+
+    public override init() {
+
     }
 }

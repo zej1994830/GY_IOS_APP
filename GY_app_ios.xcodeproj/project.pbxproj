@@ -92,6 +92,14 @@
 		C8B687C32B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B687C22B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift */; };
 		C8B687C62B2989BF000768FC /* armadillo.obj in Resources */ = {isa = PBXBuildFile; fileRef = C8B687C52B2989BF000768FC /* armadillo.obj */; };
 		C8B687CB2B2992E7000768FC /* CaiJiHe_LED.fbx in Resources */ = {isa = PBXBuildFile; fileRef = C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */; };
+		C8B9F81A2C19650200A90C91 /* test.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8122C19650200A90C91 /* test.dae */; };
+		C8B9F81B2C19650200A90C91 /* 高炉主体003.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8132C19650200A90C91 /* 高炉主体003.dae */; };
+		C8B9F81C2C19650200A90C91 /* 高炉主体002.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8142C19650200A90C91 /* 高炉主体002.dae */; };
+		C8B9F81D2C19650200A90C91 /* 水温差002.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8152C19650200A90C91 /* 水温差002.dae */; };
+		C8B9F81E2C19650200A90C91 /* 水温差001.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8162C19650200A90C91 /* 水温差001.dae */; };
+		C8B9F81F2C19650200A90C91 /* 地面001.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8172C19650200A90C91 /* 地面001.dae */; };
+		C8B9F8202C19650200A90C91 /* 炉壳001.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8182C19650200A90C91 /* 炉壳001.dae */; };
+		C8B9F8212C19650200A90C91 /* 热电偶001.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8192C19650200A90C91 /* 热电偶001.dae */; };
 		C8BBE1162A9C46CC00E4CACE /* UIViewController+ZEJPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE0FE2A9C46CC00E4CACE /* UIViewController+ZEJPresent.m */; };
 		C8BBE1172A9C46CC00E4CACE /* ZEJRollDownPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1022A9C46CC00E4CACE /* ZEJRollDownPresentationController.m */; };
 		C8BBE1182A9C46CC00E4CACE /* ZEJRollDownAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1032A9C46CC00E4CACE /* ZEJRollDownAnimatedTransitioning.m */; };
@@ -115,6 +123,14 @@
 		C8BF8FAF2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FAE2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift */; };
 		C8BF8FB62B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FB52B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift */; };
 		C8BF8FB82B1D69D900FF9D65 /* GYTHCurveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */; };
+		C8C01B5A2C18152800BFD866 /* ball_can.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B532C18152700BFD866 /* ball_can.aiff */; };
+		C8C01B5B2C18152800BFD866 /* can_floor.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B542C18152700BFD866 /* can_floor.aiff */; };
+		C8C01B5C2C18152800BFD866 /* whoosh.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B552C18152700BFD866 /* whoosh.aiff */; };
+		C8C01B5D2C18152800BFD866 /* ball_floor.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B562C18152700BFD866 /* ball_floor.aiff */; };
+		C8C01B5E2C18152800BFD866 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C01B572C18152700BFD866 /* GameViewController.swift */; };
+		C8C01B5F2C18152800BFD866 /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C01B582C18152700BFD866 /* GameHelper.swift */; };
+		C8C01B602C18152800BFD866 /* resources.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B592C18152800BFD866 /* resources.scnassets */; };
+		C8C01B622C18153000BFD866 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B612C18153000BFD866 /* Main.storyboard */; };
 		C8C03E282B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */; };
 		C8C06B252C06E6960041B796 /* GYWifiMeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C06B242C06E6960041B796 /* GYWifiMeasureViewController.swift */; };
 		C8C06B2B2C06EE600041B796 /* GYWMTotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C06B2A2C06EE600041B796 /* GYWMTotalViewController.swift */; };
@@ -141,6 +157,11 @@
 		C8C950D52A98750900AC3FEE /* GYLoginTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D42A98750900AC3FEE /* GYLoginTimeViewController.swift */; };
 		C8C950D72A98777E00AC3FEE /* GYLoginTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D62A98777E00AC3FEE /* GYLoginTimeCell.swift */; };
 		C8C950D92A988EF200AC3FEE /* GYPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D82A988EF200AC3FEE /* GYPasswordViewController.swift */; };
+		C8CD5C112C196EA900E2BA52 /* 炉壳传感器UVa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C8CD5C102C196EA800E2BA52 /* 炉壳传感器UVa.jpg */; };
+		C8CD5C132C196EAD00E2BA52 /* CustomUVChecker_byValle_2K.png in Resources */ = {isa = PBXBuildFile; fileRef = C8CD5C122C196EAD00E2BA52 /* CustomUVChecker_byValle_2K.png */; };
+		C8CD5C152C19726F00E2BA52 /* Ball.scn in Resources */ = {isa = PBXBuildFile; fileRef = C8CD5C142C19726F00E2BA52 /* Ball.scn */; };
+		C8CD5C172C19729400E2BA52 /* Ball_Diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = C8CD5C162C19729400E2BA52 /* Ball_Diffuse.png */; };
+		C8CD5C192C19729E00E2BA52 /* Ball_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = C8CD5C182C19729E00E2BA52 /* Ball_Normal.png */; };
 		C8CF40CD2B0341AF00DE282A /* GYFSTotalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CF40CC2B0341AE00DE282A /* GYFSTotalDetailViewController.swift */; };
 		C8CF40D22B034D3700DE282A /* GYFSTotalTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CF40D12B034D3700DE282A /* GYFSTotalTrendViewController.swift */; };
 		C8D1D6A12B2A89F7008994B3 /* 1281702515263.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C8D1D6A02B2A89F7008994B3 /* 1281702515263.jpg */; };
@@ -150,6 +171,7 @@
 		C8D241ED2AF89A0600064574 /* GYFSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D241EC2AF89A0600064574 /* GYFSModel.swift */; };
 		C8D5091A2B6F6AA70069BBAA /* GYETTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D509192B6F6AA70069BBAA /* GYETTrendViewController.swift */; };
 		C8D63F792B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D63F782B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift */; };
+		C8DAA1F12C11983900EF2641 /* GYWMDataTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DAA1F02C11983900EF2641 /* GYWMDataTimeViewController.swift */; };
 		C8DD77442A95A177003E184D /* GYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD77432A95A177003E184D /* GYNavigationController.swift */; };
 		C8DD77472A95A246003E184D /* GYImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD77462A95A246003E184D /* GYImageExtension.swift */; };
 		C8DD77482A95A69F003E184D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B39CDB2A6E61AD00532C53 /* LaunchScreen.storyboard */; };
@@ -390,6 +412,14 @@
 		C8B687C22B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETStereoscopicMorphologyViewController.swift; sourceTree = "<group>"; };
 		C8B687C52B2989BF000768FC /* armadillo.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = armadillo.obj; sourceTree = "<group>"; };
 		C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = CaiJiHe_LED.fbx; sourceTree = "<group>"; };
+		C8B9F8122C19650200A90C91 /* test.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = test.dae; sourceTree = "<group>"; };
+		C8B9F8132C19650200A90C91 /* 高炉主体003.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "高炉主体003.dae"; sourceTree = "<group>"; };
+		C8B9F8142C19650200A90C91 /* 高炉主体002.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "高炉主体002.dae"; sourceTree = "<group>"; };
+		C8B9F8152C19650200A90C91 /* 水温差002.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "水温差002.dae"; sourceTree = "<group>"; };
+		C8B9F8162C19650200A90C91 /* 水温差001.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "水温差001.dae"; sourceTree = "<group>"; };
+		C8B9F8172C19650200A90C91 /* 地面001.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "地面001.dae"; sourceTree = "<group>"; };
+		C8B9F8182C19650200A90C91 /* 炉壳001.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "炉壳001.dae"; sourceTree = "<group>"; };
+		C8B9F8192C19650200A90C91 /* 热电偶001.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "热电偶001.dae"; sourceTree = "<group>"; };
 		C8BBE0FE2A9C46CC00E4CACE /* UIViewController+ZEJPresent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ZEJPresent.m"; sourceTree = "<group>"; };
 		C8BBE0FF2A9C46CC00E4CACE /* UIViewController+ZEJPresent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ZEJPresent.h"; sourceTree = "<group>"; };
 		C8BBE1022A9C46CC00E4CACE /* ZEJRollDownPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZEJRollDownPresentationController.m; sourceTree = "<group>"; };
@@ -423,6 +453,14 @@
 		C8BF8FAE2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSDeviceAddressViewController.swift; sourceTree = "<group>"; };
 		C8BF8FB52B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYThermocoupleReadlTimeDataViewController.swift; sourceTree = "<group>"; };
 		C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTHCurveViewController.swift; sourceTree = "<group>"; };
+		C8C01B532C18152700BFD866 /* ball_can.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ball_can.aiff; sourceTree = "<group>"; };
+		C8C01B542C18152700BFD866 /* can_floor.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = can_floor.aiff; sourceTree = "<group>"; };
+		C8C01B552C18152700BFD866 /* whoosh.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = whoosh.aiff; sourceTree = "<group>"; };
+		C8C01B562C18152700BFD866 /* ball_floor.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ball_floor.aiff; sourceTree = "<group>"; };
+		C8C01B572C18152700BFD866 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		C8C01B582C18152700BFD866 /* GameHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
+		C8C01B592C18152800BFD866 /* resources.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = resources.scnassets; sourceTree = "<group>"; };
+		C8C01B612C18153000BFD866 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETErosionMorphologyViewController.swift; sourceTree = "<group>"; };
 		C8C06B242C06E6960041B796 /* GYWifiMeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWifiMeasureViewController.swift; sourceTree = "<group>"; };
 		C8C06B2A2C06EE600041B796 /* GYWMTotalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalViewController.swift; sourceTree = "<group>"; };
@@ -449,8 +487,14 @@
 		C8C950D42A98750900AC3FEE /* GYLoginTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginTimeViewController.swift; sourceTree = "<group>"; };
 		C8C950D62A98777E00AC3FEE /* GYLoginTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginTimeCell.swift; sourceTree = "<group>"; };
 		C8C950D82A988EF200AC3FEE /* GYPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYPasswordViewController.swift; sourceTree = "<group>"; };
+		C8CD5C102C196EA800E2BA52 /* 炉壳传感器UVa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "炉壳传感器UVa.jpg"; sourceTree = "<group>"; };
+		C8CD5C122C196EAD00E2BA52 /* CustomUVChecker_byValle_2K.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CustomUVChecker_byValle_2K.png; sourceTree = "<group>"; };
+		C8CD5C142C19726F00E2BA52 /* Ball.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Ball.scn; sourceTree = "<group>"; };
+		C8CD5C162C19729400E2BA52 /* Ball_Diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Diffuse.png; sourceTree = "<group>"; };
+		C8CD5C182C19729E00E2BA52 /* Ball_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Normal.png; sourceTree = "<group>"; };
 		C8CF40CC2B0341AE00DE282A /* GYFSTotalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalDetailViewController.swift; sourceTree = "<group>"; };
 		C8CF40D12B034D3700DE282A /* GYFSTotalTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalTrendViewController.swift; sourceTree = "<group>"; };
+		C8D0DEA32C2286A700A91695 /* AAInfographics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AAInfographics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8D1D6A02B2A89F7008994B3 /* 1281702515263.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1281702515263.jpg; sourceTree = "<group>"; };
 		C8D1D6A22B2A8A05008994B3 /* CaiJiHe_LED.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CaiJiHe_LED.obj; sourceTree = "<group>"; };
 		C8D241E62AF8908F00064574 /* GYFSTotalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalViewController.swift; sourceTree = "<group>"; };
@@ -458,6 +502,7 @@
 		C8D241EC2AF89A0600064574 /* GYFSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSModel.swift; sourceTree = "<group>"; };
 		C8D509192B6F6AA70069BBAA /* GYETTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETTrendViewController.swift; sourceTree = "<group>"; };
 		C8D63F782B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYThermocoupleHistoryDataViewController.swift; sourceTree = "<group>"; };
+		C8DAA1F02C11983900EF2641 /* GYWMDataTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMDataTimeViewController.swift; sourceTree = "<group>"; };
 		C8DD77432A95A177003E184D /* GYNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYNavigationController.swift; sourceTree = "<group>"; };
 		C8DD77462A95A246003E184D /* GYImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYImageExtension.swift; sourceTree = "<group>"; };
 		C8DD774A2A95CFF4003E184D /* GYLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginViewController.swift; sourceTree = "<group>"; };
@@ -501,6 +546,7 @@
 		301D7CBE22A177CDCCAD3D21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C8D0DEA32C2286A700A91695 /* AAInfographics.framework */,
 				C821FA552B2C2223004F98AD /* libassimp.a */,
 				C8C656EB2B05BFF100DC4FC6 /* SpreadsheetView.framework */,
 				C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */,
@@ -1221,7 +1267,13 @@
 		C8B39CCF2A6E61AC00532C53 /* GY_app_ios */ = {
 			isa = PBXGroup;
 			children = (
+				C8B9F8112C19650200A90C91 /* dae_moder */,
 				C8B39CD02A6E61AC00532C53 /* AppDelegate.swift */,
+				C8C01B582C18152700BFD866 /* GameHelper.swift */,
+				C8C01B572C18152700BFD866 /* GameViewController.swift */,
+				C8C01B612C18153000BFD866 /* Main.storyboard */,
+				C8C01B592C18152800BFD866 /* resources.scnassets */,
+				C8C01B522C18152700BFD866 /* sounds */,
 				C8C4C1542B43B22300065204 /* TESTViewController.swift */,
 				C80528842B4B911900A38D5F /* ViewController.h */,
 				C80528852B4B911900A38D5F /* ViewController.m */,
@@ -1282,6 +1334,27 @@
 				C8B687C22B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8B9F8112C19650200A90C91 /* dae_moder */ = {
+			isa = PBXGroup;
+			children = (
+				C8CD5C142C19726F00E2BA52 /* Ball.scn */,
+				C8CD5C162C19729400E2BA52 /* Ball_Diffuse.png */,
+				C8CD5C182C19729E00E2BA52 /* Ball_Normal.png */,
+				C8CD5C122C196EAD00E2BA52 /* CustomUVChecker_byValle_2K.png */,
+				C8CD5C102C196EA800E2BA52 /* 炉壳传感器UVa.jpg */,
+				C8B9F8122C19650200A90C91 /* test.dae */,
+				C8B9F8132C19650200A90C91 /* 高炉主体003.dae */,
+				C8B9F8142C19650200A90C91 /* 高炉主体002.dae */,
+				C8B9F8152C19650200A90C91 /* 水温差002.dae */,
+				C8B9F8162C19650200A90C91 /* 水温差001.dae */,
+				C8B9F8172C19650200A90C91 /* 地面001.dae */,
+				C8B9F8182C19650200A90C91 /* 炉壳001.dae */,
+				C8B9F8192C19650200A90C91 /* 热电偶001.dae */,
+			);
+			name = dae_moder;
+			path = ../../dae_moder;
 			sourceTree = "<group>";
 		};
 		C8BBE0FD2A9C46CC00E4CACE /* Present */ = {
@@ -1497,6 +1570,18 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		C8C01B522C18152700BFD866 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				C8C01B532C18152700BFD866 /* ball_can.aiff */,
+				C8C01B542C18152700BFD866 /* can_floor.aiff */,
+				C8C01B552C18152700BFD866 /* whoosh.aiff */,
+				C8C01B562C18152700BFD866 /* ball_floor.aiff */,
+			);
+			name = sounds;
+			path = "../../../Downloads/Blog_DEMO-master/Beer Can Bully Final/Beer Can Bully/sounds";
+			sourceTree = "<group>";
+		};
 		C8C03E252B22BB94004C77B1 /* ErosionMorphology 【侵蚀形貌】 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1520,6 +1605,7 @@
 				C8C06B242C06E6960041B796 /* GYWifiMeasureViewController.swift */,
 				C8C06B262C06EDE80041B796 /* Total【总览】 */,
 				C8C57A2F2C0DB5F10091902E /* Graphic【图示】 */,
+				C8DAA1EE2C11980D00EF2641 /* Data【数据】 */,
 			);
 			path = "WifiMeasure【无线测温】";
 			sourceTree = "<group>";
@@ -1797,6 +1883,22 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		C8DAA1EE2C11980D00EF2641 /* Data【数据】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8DAA1EF2C11981E00EF2641 /* Controller */,
+			);
+			path = "Data【数据】";
+			sourceTree = "<group>";
+		};
+		C8DAA1EF2C11981E00EF2641 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8DAA1F02C11983900EF2641 /* GYWMDataTimeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C8DD77492A95CFDF003E184D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -2017,14 +2119,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				C89D8D7D2A9F09E10013E1B1 /* loading.gif in Resources */,
+				C8B9F81B2C19650200A90C91 /* 高炉主体003.dae in Resources */,
+				C8CD5C112C196EA900E2BA52 /* 炉壳传感器UVa.jpg in Resources */,
+				C8C01B5A2C18152800BFD866 /* ball_can.aiff in Resources */,
 				C8D1D6A12B2A89F7008994B3 /* 1281702515263.jpg in Resources */,
+				C8B9F8202C19650200A90C91 /* 炉壳001.dae in Resources */,
+				C8B9F81A2C19650200A90C91 /* test.dae in Resources */,
+				C8CD5C152C19726F00E2BA52 /* Ball.scn in Resources */,
 				C8DD77482A95A69F003E184D /* LaunchScreen.storyboard in Resources */,
 				C8D1D6A32B2A8A05008994B3 /* CaiJiHe_LED.obj in Resources */,
 				C8B39CDA2A6E61AD00532C53 /* Assets.xcassets in Resources */,
+				C8CD5C172C19729400E2BA52 /* Ball_Diffuse.png in Resources */,
+				C8C01B622C18153000BFD866 /* Main.storyboard in Resources */,
+				C8CD5C192C19729E00E2BA52 /* Ball_Normal.png in Resources */,
+				C8B9F8212C19650200A90C91 /* 热电偶001.dae in Resources */,
+				C8C01B5B2C18152800BFD866 /* can_floor.aiff in Resources */,
+				C8C01B5C2C18152800BFD866 /* whoosh.aiff in Resources */,
+				C8B9F81D2C19650200A90C91 /* 水温差002.dae in Resources */,
+				C8C01B5D2C18152800BFD866 /* ball_floor.aiff in Resources */,
 				C8BC3B9A2B47F3E30052A236 /* index.html in Resources */,
+				C8B9F81E2C19650200A90C91 /* 水温差001.dae in Resources */,
 				C8BC3B9C2B47F3E70052A236 /* o3dv.min.js in Resources */,
+				C8C01B602C18152800BFD866 /* resources.scnassets in Resources */,
 				C8B687CB2B2992E7000768FC /* CaiJiHe_LED.fbx in Resources */,
+				C8B9F81C2C19650200A90C91 /* 高炉主体002.dae in Resources */,
+				C8CD5C132C196EAD00E2BA52 /* CustomUVChecker_byValle_2K.png in Resources */,
 				C8B687C62B2989BF000768FC /* armadillo.obj in Resources */,
+				C8B9F81F2C19650200A90C91 /* 地面001.dae in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2157,6 +2278,7 @@
 				C8C950D52A98750900AC3FEE /* GYLoginTimeViewController.swift in Sources */,
 				C89624272AC2B7FD005DE286 /* GYWTDDataHeaderView.swift in Sources */,
 				C8C950D72A98777E00AC3FEE /* GYLoginTimeCell.swift in Sources */,
+				C8C01B5F2C18152800BFD866 /* GameHelper.swift in Sources */,
 				C8C06B2E2C0707250041B796 /* GYWMModel.swift in Sources */,
 				C8A7DAC72AAEDA660031F778 /* GYTotalWTDHeaderView.swift in Sources */,
 				C89D8D802A9F1F690013E1B1 /* ZEJRollDownViewController.m in Sources */,
@@ -2199,6 +2321,7 @@
 				C8EB0EC52AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift in Sources */,
 				C8C03E282B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift in Sources */,
 				C8C863A92C096934004DFBAE /* CollectionViewWaterfallLayout.swift in Sources */,
+				C8C01B5E2C18152800BFD866 /* GameViewController.swift in Sources */,
 				C87840072ABC2AD300E67037 /* GYWTDTrendViewController.swift in Sources */,
 				C8BBE1162A9C46CC00E4CACE /* UIViewController+ZEJPresent.m in Sources */,
 				C8AC912E2A9346B00081DF90 /* GYCodingObject.swift in Sources */,
@@ -2232,6 +2355,7 @@
 				C8C06B2B2C06EE600041B796 /* GYWMTotalViewController.swift in Sources */,
 				C874263B2A9493AC00F2382A /* CacheConstant.swift in Sources */,
 				C8AB6FED2ADE2710002EFEB9 /* GYSelectGroupViewController.swift in Sources */,
+				C8DAA1F12C11983900EF2641 /* GYWMDataTimeViewController.swift in Sources */,
 				C89E762D2AA97EAF00985EFC /* GYWaterTimeDiffFooterView.swift in Sources */,
 				C8B30EE02AB2D3F800570901 /* UIButton+Extension.swift in Sources */,
 				C87426392A94932D00F2382A /* GYUserBaseInfoData.swift in Sources */,
@@ -2466,7 +2590,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2.04.1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 74XZH4Q8F6;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2521,7 +2645,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GY_app_ios/Resource",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.04;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"swiftCoreGraphics\"",
@@ -2605,7 +2729,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2.04.1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 74XZH4Q8F6;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2660,7 +2784,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GY_app_ios/Resource",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.04;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"swiftCoreGraphics\"",

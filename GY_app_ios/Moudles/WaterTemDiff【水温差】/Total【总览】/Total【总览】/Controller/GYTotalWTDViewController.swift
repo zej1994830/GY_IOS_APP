@@ -91,7 +91,7 @@ class GYTotalWTDViewController: GYViewController {
 
     private lazy var timeLabel:UILabel = {
         let label = UILabel()
-        
+        label.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#FFFFFF",alpha: 0.4)
         return label
     }()
     
@@ -103,6 +103,10 @@ class GYTotalWTDViewController: GYViewController {
         addLayout()
         requestdata()
         
+       let timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [self] timer in
+            // 这里编写需要执行的自动刷新操作
+            requestautodata(array: datatempSectionArray)
+       }
     }
 }
 
@@ -161,9 +165,9 @@ extension GYTotalWTDViewController {
         }
         
         timeLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(-48)
-            make.left.equalTo(20)
-            make.height.equalTo(22.5)
+            make.bottom.equalTo(0)
+            make.left.right.equalTo(0)
+            make.height.equalTo(22.5 + 48)
 //            make.width.equalTo(200)
         }
     }
@@ -203,6 +207,37 @@ extension GYTotalWTDViewController {
             
             //每个section对应五个状态 dic = [name:[]]
             showDic.setObject(NSMutableArray(array: ["温差","热流","入温","出温","流量"]), forKey: dic["name"] as! NSCopying)
+        }
+        
+        contentLabel.text = sectionStr
+        let params = ["device_db":GYDeviceData.default.device_db,"partidString":partidString] as [String : Any]
+        GYNetworkManager.share.requestData(.get, api: Api.getswczonglan, parameters: params) {[weak self] (result) in
+            guard let weakSelf = self else{
+                return
+            }
+            GYHUD.hideHudForView(weakSelf.view)
+            let dic:NSDictionary = result as! NSDictionary
+            let dicc:NSDictionary = dic["data"] as! NSDictionary
+            weakSelf.dataArray = dicc["temperature_list"] as! NSArray
+            weakSelf.collectionV.reloadData()
+        }
+    }
+    
+    func requestautodata(array:NSArray){
+        //显示项。这里认为只要重新筛选，那么默认全部显示数据
+        var partidString:String = ""
+        sectionStr = ""
+        for temp in array {
+            let dic:NSDictionary = temp as! NSDictionary
+            if partidString.count == 0 {
+                //筛选状态
+                partidString = String(format: "%d", dic["id"] as! Int64)
+                //段名
+                sectionStr = String(format: "%@", dic["name"] as! String)
+            }else{
+                partidString = String(format: "%@,%d", partidString,(dic["id"] as! Int64))
+                sectionStr = String(format: "%@,%@", sectionStr,(dic["name"] as! String))
+            }
         }
         
         contentLabel.text = sectionStr

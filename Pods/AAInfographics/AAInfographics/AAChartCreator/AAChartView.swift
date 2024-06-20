@@ -48,6 +48,10 @@ public class AAEventMessageModel: NSObject {
     public var category: String?
     public var offset: [String: Any]?
     public var index: Int?
+
+    required override init() {
+        
+    }
 }
 
 @available(iOS 10.0, macCatalyst 13.1, macOS 10.13, *)
@@ -208,21 +212,19 @@ public class AAChartView: WKWebView {
                 let errorInfo =
                 """
                 
-                ☠️☠️💀☠️☠️WARNING!!!!!!!!!!!!!!!!!!!! FBI WARNING !!!!!!!!!!!!!!!!!!!!WARNING☠️☠️💀☠️☠️
-                ==========================================================================================
+                ☠️☠️💀☠️☠️WARNING!!!!!!!!!!!!!!!!!!!! JS WARNING !!!!!!!!!!!!!!!!!!!!WARNING☠️☠️💀☠️☠️
                 ------------------------------------------------------------------------------------------
                 code = \(objcError.code);
                 domain = \(objcError.domain);
-                userInfo =     {
-                NSLocalizedDescription = "A JavaScript exception occurred";
-                WKJavaScriptExceptionColumnNumber = \(errorUserInfo["WKJavaScriptExceptionColumnNumber"] ?? "");
-                WKJavaScriptExceptionLineNumber = \(errorUserInfo["WKJavaScriptExceptionLineNumber"]  ?? "");
-                WKJavaScriptExceptionMessage = \(errorUserInfo["WKJavaScriptExceptionMessage"] ?? "");
-                WKJavaScriptExceptionSourceURL = \(errorUserInfo["WKJavaScriptExceptionSourceURL"] ?? "");
+                userInfo = {
+                    NSLocalizedDescription = "A JavaScript exception occurred";
+                    WKJavaScriptExceptionColumnNumber = \(errorUserInfo["WKJavaScriptExceptionColumnNumber"] ?? "");
+                    WKJavaScriptExceptionLineNumber = \(errorUserInfo["WKJavaScriptExceptionLineNumber"]  ?? "");
+                    WKJavaScriptExceptionMessage = \(errorUserInfo["WKJavaScriptExceptionMessage"] ?? "");
+                    WKJavaScriptExceptionSourceURL = \(errorUserInfo["WKJavaScriptExceptionSourceURL"] ?? "");
                 }
                 ------------------------------------------------------------------------------------------
-                ==========================================================================================
-                ☠️☠️💀☠️☠️WARNING!!!!!!!!!!!!!!!!!!!! FBI WARNING !!!!!!!!!!!!!!!!!!!!WARNING☠️☠️💀☠️☠️
+                ☠️☠️💀☠️☠️WARNING!!!!!!!!!!!!!!!!!!!! JS WARNING !!!!!!!!!!!!!!!!!!!!WARNING☠️☠️💀☠️☠️
                 
                 """
                 print(errorInfo)
@@ -383,7 +385,7 @@ extension AAChartView {
     }
 }
 
-// MARK: - Addtional update Chart View Content methods
+// MARK: - Additional update Chart View Content methods
 @available(iOS 10.0, macCatalyst 13.1, macOS 10.13, *)
 extension AAChartView {
     /// A common chart update function
@@ -412,7 +414,7 @@ extension AAChartView {
             
             classNameStr = classNameStr.replacingOccurrences(of: "AA", with: "")
             
-            //convert fisrt character to be lowercase string
+            //convert first character to be lowercase string
             let firstChar = classNameStr.prefix(1)
             let lowercaseFirstChar = firstChar.lowercased()
             let index = classNameStr.index(classNameStr.startIndex, offsetBy: 1)
@@ -614,35 +616,48 @@ extension AAChartView: WKUIDelegate {
         completionHandler: @escaping () -> Void
     ) {
         #if os(iOS)
-        let alertController = UIAlertController(
-            title: "FBI WARNING",
-            message: message,
-            preferredStyle: .alert
-        )
-        alertController.addAction(UIAlertAction(
-            title: "Okay",
-            style: .default,
-            handler: { _ in
+        let alertController = UIAlertController(title: "JS WARNING", message: message, preferredStyle: .alert)
+        
+        let okayAction = UIAlertAction(title: "Okay", style: .default) { _ in
             completionHandler()
-        }))
-
-        let alertHelperController = UIViewController()
-        addSubview(alertHelperController.view)
-
-        alertHelperController.present(
-            alertController,
-            animated: true,
-            completion: nil
-        )
+        }
+        alertController.addAction(okayAction)
+        
+        guard let presentingViewController = self.nextUIViewController() else {
+            print("Unable to present UIAlertController from AAChartView. Completing JavaScript alert handler.")
+            completionHandler()
+            return
+        }
+        
+        presentingViewController.present(alertController, animated: true, completion: nil)
+        
         #elseif os(macOS)
         let alert = NSAlert()
         alert.alertStyle = .warning
-        alert.messageText = "FBI WARNING"
+        alert.messageText = "JS WARNING"
         alert.informativeText = message
         alert.addButton(withTitle: "Okay")
-        _ = alert.runModal() == .alertFirstButtonReturn
+        
+        alert.beginSheetModal(for: NSApplication.shared.mainWindow!) { (response) in
+            if response == NSApplication.ModalResponse.alertFirstButtonReturn {
+                completionHandler()
+            }
+        }
         #endif
     }
+    
+    #if os(iOS)
+    private func nextUIViewController() -> UIViewController? {
+        var responder: UIResponder? = self
+        while responder != nil {
+            if let viewController = responder as? UIViewController {
+                return viewController
+            }
+            responder = responder?.next
+        }
+        return nil
+    }
+    #endif
 }
 
 // MARK: - WKNavigationDelegate
@@ -660,70 +675,38 @@ extension AAChartView: WKScriptMessageHandler {
     open func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == kUserContentMessageNameClick {
             let messageBody = message.body as! [String: Any]
-            let eventMessageModel = getClickEventMessageModel(messageBody: messageBody)
-            delegate?.aaChartView?(self, clickEventMessage: eventMessageModel )
+            let clickEventMessageModel = getEventMessageModel(messageBody: messageBody, eventType: AAClickEventMessageModel.self)
+            delegate?.aaChartView?(self, clickEventMessage: clickEventMessageModel)
         } else if message.name == kUserContentMessageNameMouseOver {
             let messageBody = message.body as! [String: Any]
-            let eventMessageModel = getMoveOverEventMessageModel(messageBody: messageBody)
-            delegate?.aaChartView?(self, moveOverEventMessage: eventMessageModel)
+            let moveOverEventMessageModel = getEventMessageModel(messageBody: messageBody, eventType: AAMoveOverEventMessageModel.self)
+            delegate?.aaChartView?(self, moveOverEventMessage: moveOverEventMessageModel)
         }
     }
 }
 
 @available(iOS 10.0, macCatalyst 13.1, macOS 10.13, *)
 extension AAChartView {
-    private func getClickEventMessageModel(messageBody: [String: Any]) -> AAClickEventMessageModel {
-        let eventMessageModel = getEventMessageModel(messageBody: messageBody)
-        let clickMessageModel = AAClickEventMessageModel()
-        clickMessageModel.name = eventMessageModel.name
-        clickMessageModel.x = eventMessageModel.x
-        clickMessageModel.y = eventMessageModel.y
-        clickMessageModel.category = eventMessageModel.category
-        clickMessageModel.offset = eventMessageModel.offset
-        clickMessageModel.index = eventMessageModel.index
-        return clickMessageModel
-    }
-    
-    private func getMoveOverEventMessageModel(messageBody: [String: Any]) -> AAMoveOverEventMessageModel {
-        let eventMessageModel = getEventMessageModel(messageBody: messageBody)
-        let moveOverMessageModel = AAMoveOverEventMessageModel()
-        moveOverMessageModel.name = eventMessageModel.name
-        moveOverMessageModel.x = eventMessageModel.x
-        moveOverMessageModel.y = eventMessageModel.y
-        moveOverMessageModel.category = eventMessageModel.category
-        moveOverMessageModel.offset = eventMessageModel.offset
-        moveOverMessageModel.index = eventMessageModel.index
-        return moveOverMessageModel
-    }
-    
-    private func getEventMessageModel(messageBody: [String: Any]) -> AAEventMessageModel {
-        let eventMessageModel = AAEventMessageModel()
+    private func getEventMessageModel<T: AAEventMessageModel>(messageBody: [String: Any], eventType: T.Type) -> T {
+        let eventMessageModel = T()
         eventMessageModel.name = messageBody["name"] as? String
-        let x = messageBody["x"]
-        if x is String {
-            eventMessageModel.x = Float(x as! String)
-        } else if x is Int {
-            eventMessageModel.x = Float(x as! Int)
-        } else if x is Float {
-            eventMessageModel.x = (x as! Float)
-        } else if x is Double {
-            eventMessageModel.x = Float(x as! Double)
-        }
-        
-        let y = messageBody["y"]
-        if y is String {
-            eventMessageModel.y = Float(y as! String)
-        } else if y is Int {
-            eventMessageModel.y = Float(y as! Int)
-        } else if y is Float {
-            eventMessageModel.y = (y as! Float)
-        } else if y is Double {
-            eventMessageModel.y = Float(y as! Double)
-        }
+        eventMessageModel.x = getFloatValue(messageBody["x"])
+        eventMessageModel.y = getFloatValue(messageBody["y"])
         eventMessageModel.category = messageBody["category"] as? String
         eventMessageModel.offset = messageBody["offset"] as? [String: Any]
         eventMessageModel.index = messageBody["index"] as? Int
         return eventMessageModel
+    }
+
+    private func getFloatValue<T>(_ value: T?) -> Float? {
+        switch value {
+        case let value as Float: return value
+        case let value as Int: return Float(value)
+        case let value as Double: return Float(value)
+        case let value as String: return Float(value)
+        default:
+            return nil
+        }
     }
 }
 

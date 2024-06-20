@@ -64,7 +64,7 @@ class GYWTDTrendItemsViewController: GYViewController {
         btn.layer.cornerRadius = 2
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: -30)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 120, bottom: 0, right: -20)
         btn.contentHorizontalAlignment = .left
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(nameBtnClick), for: .touchUpInside)
@@ -87,6 +87,52 @@ class GYWTDTrendItemsViewController: GYViewController {
         return btn
     }()
     
+    private lazy var nameBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
+    }()
+    
+    private lazy var pinlvBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "分钟"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
+    }()
+    
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
@@ -97,7 +143,7 @@ class GYWTDTrendItemsViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 325 - APP.WIDTH, bottom: 0, right: 10)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -252,9 +298,9 @@ extension GYWTDTrendItemsViewController {
         self.title = ["温差","入水","出水","流量","热流"][indexrow]
         self.view.addSubview(headView)
         headView.addSubview(nameLabel)
-        headView.addSubview(nameBtn)
+        headView.addSubview(nameBtnMenu)
         headView.addSubview(pinlvLabel)
-        headView.addSubview(pinlvBtn)
+        headView.addSubview(pinlvBtnMenu)
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         headView.addSubview(groupLabel)
@@ -298,20 +344,20 @@ extension GYWTDTrendItemsViewController {
             make.height.equalTo(21)
         }
         
-        nameBtn.snp.makeConstraints { make in
+        nameBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
-            make.width.equalTo(105)
+            make.width.equalTo(145)
             make.left.equalTo(nameLabel.snp_rightMargin).offset(10)
             make.height.equalTo(40)
         }
         
         pinlvLabel.snp.makeConstraints { make in
-            make.left.equalTo(nameBtn.snp.right).offset(49)
+            make.left.equalTo(nameBtnMenu.snp.right).offset(29)
             make.top.equalTo(21)
             make.height.equalTo(21)
         }
         
-        pinlvBtn.snp.makeConstraints { make in
+        pinlvBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
             make.width.equalTo(70)
             make.left.equalTo(pinlvLabel.snp_rightMargin).offset(10)
@@ -413,7 +459,7 @@ extension GYWTDTrendItemsViewController {
         partid = dic["id"] as! Int32
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        nameBtn.setTitle(sectionStr, for: .normal)
+        nameBtnMenu.title = sectionStr
         let params = ["device_db":GYDeviceData.default.device_db,"partId":partid,"type":indexrow] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getGroupDataListByPartId, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -720,3 +766,42 @@ extension GYWTDTrendItemsViewController:UICollectionViewDelegate,UICollectionVie
     }
 }
 
+extension GYWTDTrendItemsViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        if menu == nameBtnMenu {
+            return UInt(dataSectionArray.count)
+        }else{
+            return 2
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        if menu == nameBtnMenu {
+            let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+            return (dic["name"] as! String)
+        }else {
+            return ["分钟","小时"][Int(index)]
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+        if menu == nameBtnMenu {
+            if dataSectionArray.count == 0 {
+                return
+            }
+            requestnextdata(array: [dataSectionArray[Int(index)]])
+        }else{
+            if index == 0 {
+                rate = 0
+            }else{
+                rate = 1
+            }
+            requestdata()
+        }
+    }
+    
+}

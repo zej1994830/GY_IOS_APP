@@ -30,6 +30,18 @@
  
  */
 
+public enum AAChartZoneAxisType: String {
+    case x
+    case y
+}
+
+public enum AAChartLineStepType: String {
+    case left
+    case center
+    case right
+}
+
+//https://api.highcharts.com/highcharts/series
 public class AASeriesElement: AAObject {
     public var type: String?               //A chart type series. If the type option is not specified, it is inherited from `chart.type`.
     public var name: String?               //The name of the series as shown in the legend, tooltip etc.
@@ -39,7 +51,7 @@ public class AASeriesElement: AAObject {
     public var lineWidth: Float?           //The line width, It is only valid for line, spline, area, areaspline, arearange and arearangespline chart types
     public var borderColor: String?        //The border color, It is only valid for column, bar, pie, columnrange, pyramid and funnel chart types
     public var borderWidth: Float?         //The border width, It is only valid for column, bar, pie, columnrange, pyramid and funnel chart types
-    public var borderRadius: Float?        //The corner radius of the border surrounding each column or bar.
+    public var borderRadius: Any?          //The corner radius of the border surrounding each column or bar.
     public var borderRadiusTopLeft: Any?
     public var borderRadiusTopRight: Any?
     public var borderRadiusBottomLeft: Any?
@@ -116,6 +128,18 @@ public class AASeriesElement: AAObject {
         
     @discardableResult
     public func borderRadius(_ prop: Float) -> AASeriesElement {
+        borderRadius = prop
+        return self
+    }
+    
+    @discardableResult
+    public func borderRadius(_ prop: String) -> AASeriesElement {
+        borderRadius = prop
+        return self
+    }
+    
+    @discardableResult
+    public func borderRadius(_ prop: Any) -> AASeriesElement {
         borderRadius = prop
         return self
     }
@@ -223,6 +247,12 @@ public class AASeriesElement: AAObject {
     }
     
     @discardableResult
+    public func step(_ prop: AAChartLineStepType) -> AASeriesElement {
+        step = prop.rawValue
+        return self
+    }
+    
+    @discardableResult
     public func states(_ prop: AAStates) -> AASeriesElement {
         states = prop
         return self
@@ -285,6 +315,12 @@ public class AASeriesElement: AAObject {
     @discardableResult
     public func zoneAxis(_ prop: String) -> AASeriesElement {
         zoneAxis = prop
+        return self
+    }
+    
+    @discardableResult
+    public func zoneAxis(_ prop: AAChartZoneAxisType) -> AASeriesElement {
+        zoneAxis = prop.rawValue
         return self
     }
     
@@ -355,9 +391,11 @@ public class AASeriesElement: AAObject {
     }
     
     public  override init() {
+        
     }
 }
 
+//https://api.highcharts.com/highcharts/series.area.data
 public class AADataElement: AAObject {
     public var name: String?
     public var x: Float?
@@ -365,6 +403,7 @@ public class AADataElement: AAObject {
     public var color: Any?
     public var dataLabels: AADataLabels?
     public var marker: AAMarker?
+    public var selected: Bool?
     
     @discardableResult
     public func name(_ prop: String) -> AADataElement {
@@ -401,12 +440,19 @@ public class AADataElement: AAObject {
         marker = prop
         return self
     }
+
+    @discardableResult
+    public func selected(_ prop: Bool) -> AADataElement {
+        selected = prop
+        return self
+    }
     
     public override init() {
         
     }
 }
 
+//https://api.highcharts.com/highcharts/series.area.shadow
 public class AAShadow: AAObject {
     public var color: String?
     public var offsetX: Float?
@@ -449,6 +495,7 @@ public class AAShadow: AAObject {
     }
 }
 
+//https://api.highcharts.com/highcharts/series.area.zones
 public class AAZonesElement: AAObject {
     public var value: Double?
     public var color: Any?
@@ -484,6 +531,7 @@ public class AAZonesElement: AAObject {
     }
 }
 
+//https://api.highcharts.com/highcharts/series.column.dataSorting
 public class AADataSorting: AAObject {
     public var enabled: Bool?
     public var matchByName: Bool?
