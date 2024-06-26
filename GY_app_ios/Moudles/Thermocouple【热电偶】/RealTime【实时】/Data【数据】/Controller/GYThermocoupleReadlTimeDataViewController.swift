@@ -52,6 +52,30 @@ class GYThermocoupleReadlTimeDataViewController: GYViewController {
         return btn
     }()
     
+    private lazy var nameBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
     private lazy var midView:UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -68,7 +92,7 @@ class GYThermocoupleReadlTimeDataViewController: GYViewController {
         return view
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -96,7 +120,7 @@ extension GYThermocoupleReadlTimeDataViewController {
       
         self.view.addSubview(headView)
         headView.addSubview(screenLabel)
-        headView.addSubview(nameBtn)
+        headView.addSubview(nameBtnMenu)
         self.view.addSubview(midView)
         midView.addSubview(spreadsheetView)
         self.view.addSubview(namepickView)
@@ -115,7 +139,7 @@ extension GYThermocoupleReadlTimeDataViewController {
             make.bottom.equalTo(-22.5)
         }
         
-        nameBtn.snp.makeConstraints { make in
+        nameBtnMenu.snp.makeConstraints { make in
             make.left.equalTo(screenLabel.snp.right)
             make.centerY.equalTo(screenLabel)
             make.height.equalTo(40)
@@ -167,7 +191,7 @@ extension GYThermocoupleReadlTimeDataViewController {
         partidString = String(format: "%d", dic["id"] as! Int64)
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        nameBtn.setTitle(sectionStr, for: .normal)
+        nameBtnMenu.title = sectionStr
 
         let params = ["device_db":GYDeviceData.default.device_db,"id":partidString] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getrdorealdata, parameters: params) {[weak self] (result) in
@@ -304,6 +328,31 @@ extension GYThermocoupleReadlTimeDataViewController: SpreadsheetViewDataSource, 
             }
         }
         return cell
+    }
+    
+}
+
+extension GYThermocoupleReadlTimeDataViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return UInt(dataSectionArray.count)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+        return (dic["name"] as! String)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if dataSectionArray.count == 0 {
+            return
+        }
+        datatempSectionArray = [dataSectionArray[Int(index)]]
+        requestnextdata(array: [dataSectionArray[Int(index)]])
     }
     
 }

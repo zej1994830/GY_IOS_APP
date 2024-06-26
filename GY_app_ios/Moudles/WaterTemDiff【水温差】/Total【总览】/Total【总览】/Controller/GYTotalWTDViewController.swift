@@ -24,7 +24,7 @@ class GYTotalWTDViewController: GYViewController {
             
             if dataArray.count != 0 {
                 let dic:NSDictionary = dataArray.firstObject as! NSDictionary
-                timeLabel.text = "最后更新时间：\(dic["searchDate"] as! String)"
+                timeLabel.text = "      最后更新时间：\(dic["searchDate"] as! String)"
                 
             }
         }
@@ -91,7 +91,8 @@ class GYTotalWTDViewController: GYViewController {
 
     private lazy var timeLabel:UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#FFFFFF",alpha: 0.4)
+        label.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#FFFFFF",alpha: 0.85)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
@@ -107,6 +108,7 @@ class GYTotalWTDViewController: GYViewController {
             // 这里编写需要执行的自动刷新操作
             requestautodata(array: datatempSectionArray)
        }
+    
     }
 }
 

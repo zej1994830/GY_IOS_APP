@@ -62,6 +62,30 @@ class GYWMDataTimeViewController: GYViewController {
         return btn
     }()
     
+    private lazy var nameBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
@@ -95,7 +119,7 @@ class GYWMDataTimeViewController: GYViewController {
         return view
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -157,7 +181,7 @@ extension GYWMDataTimeViewController {
         
         self.view.addSubview(headView)
         headView.addSubview(screenLabel)
-        headView.addSubview(nameBtn)
+        headView.addSubview(nameBtnMenu)
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         self.view.addSubview(midView)
@@ -177,7 +201,7 @@ extension GYWMDataTimeViewController {
             make.width.equalTo(60)
         }
         
-        nameBtn.snp.makeConstraints { make in
+        nameBtnMenu.snp.makeConstraints { make in
             make.left.equalTo(screenLabel.snp.right)
             make.centerY.equalTo(screenLabel)
             make.height.equalTo(40)
@@ -193,7 +217,7 @@ extension GYWMDataTimeViewController {
         }
         
         timeBtn.snp.makeConstraints { make in
-            make.left.equalTo(nameBtn)
+            make.left.equalTo(nameBtnMenu)
             make.centerY.equalTo(timeLabel)
             make.height.equalTo(40)
             make.right.equalTo(-15)
@@ -298,7 +322,7 @@ extension GYWMDataTimeViewController {
         partidString = String(format: "%d", dic["id"] as! Int64)
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        nameBtn.setTitle(sectionStr, for: .normal)
+        nameBtnMenu.title = sectionStr
         
         let params = ["device_db":GYDeviceData.default.device_db,"partId":partidString,"start_time":currentLastHourDateString,"end_time":currentDateString,"rate":rate] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getcwsntimedata, parameters: params) {[weak self] (result) in
@@ -434,3 +458,24 @@ extension GYWMDataTimeViewController: SpreadsheetViewDataSource, SpreadsheetView
     
 }
 
+
+extension GYWMDataTimeViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return UInt(dataSectionArray.count)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+        return (dic["name"] as! String)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+        datatempSectionArray = [dataSectionArray[Int(index)]]
+        requestnextdata(array: [dataSectionArray[Int(index)]])
+    }
+    
+}

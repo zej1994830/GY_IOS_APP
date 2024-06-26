@@ -49,6 +49,30 @@ class GYWTDDeviceAddressViewController: GYViewController {
         return btn
     }()
     
+    private lazy var nameBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "设备地址"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
     private lazy var collectionV: UICollectionView = {
         let layout = UICollectionViewFlowLayout.init()
         layout.minimumInteritemSpacing = 10
@@ -69,7 +93,7 @@ class GYWTDDeviceAddressViewController: GYViewController {
         return collectionView
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -97,7 +121,7 @@ extension GYWTDDeviceAddressViewController {
         
         self.view.addSubview(headView)
         headView.addSubview(titleLabel)
-        headView.addSubview(nameBtn)
+        headView.addSubview(nameBtnMenu)
         self.view.addSubview(collectionV)
         self.view.addSubview(namepickView)
     }
@@ -114,7 +138,7 @@ extension GYWTDDeviceAddressViewController {
             make.left.equalTo(15)
         }
         
-        nameBtn.snp.makeConstraints { make in
+        nameBtnMenu.snp.makeConstraints { make in
             make.left.equalTo(titleLabel.snp.right).offset(5)
             make.height.equalTo(40)
             make.width.equalTo(270)
@@ -147,7 +171,7 @@ extension GYWTDDeviceAddressViewController {
                 return
             }
             let diccc:NSDictionary = weakSelf.deviceDataArray.firstObject as! NSDictionary
-            weakSelf.nameBtn.setTitle(diccc["masterAddress"] as? String, for: .normal)
+            weakSelf.nameBtnMenu.title = (diccc["masterAddress"] as? String)!
             weakSelf.requestnextdata(dic: diccc)
         }
     }
@@ -217,4 +241,29 @@ extension GYWTDDeviceAddressViewController:UIPickerViewDelegate,UIPickerViewData
         requestnextdata(dic: dic)
         nameBtn.setTitle(dic["masterAddress"] as? String, for: .normal)
     }
+}
+
+extension GYWTDDeviceAddressViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return UInt(deviceDataArray.count)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        let dic:NSDictionary = deviceDataArray[Int(index)] as! NSDictionary
+        return (dic["masterAddress"] as? String)!
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if deviceDataArray.count == 0 {
+            return
+        }
+        let dic:NSDictionary = deviceDataArray[Int(index)] as! NSDictionary
+        requestnextdata(dic: dic)
+    }
+    
 }

@@ -80,6 +80,53 @@ class GYWTDDataTimeViewController: GYViewController {
         return btn
     }()
     
+    private lazy var categoryBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "温差"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
+    }()
+    
+    private lazy var nameBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
@@ -113,7 +160,7 @@ class GYWTDDataTimeViewController: GYViewController {
         return view
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -126,7 +173,7 @@ class GYWTDDataTimeViewController: GYViewController {
         return view
     }()
     
-    private lazy var  namepickView2:UIPickerView = {
+    private lazy var  namepickView2:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -188,8 +235,8 @@ extension GYWTDDataTimeViewController {
         
         self.view.addSubview(headView)
         headView.addSubview(screenLabel)
-        headView.addSubview(categoryBtn)
-        headView.addSubview(nameBtn)
+        headView.addSubview(categoryBtnMenu)
+        headView.addSubview(nameBtnMenu)
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         self.view.addSubview(midView)
@@ -210,18 +257,18 @@ extension GYWTDDataTimeViewController {
             make.width.equalTo(60)
         }
         
-        categoryBtn.snp.makeConstraints { make in
+        categoryBtnMenu.snp.makeConstraints { make in
             make.left.equalTo(screenLabel.snp.right)
             make.centerY.equalTo(screenLabel)
             make.height.equalTo(40)
             make.width.equalTo(70)
         }
         
-        nameBtn.snp.makeConstraints { make in
-            make.left.equalTo(categoryBtn.snp.right).offset(15)
-            make.centerY.equalTo(categoryBtn)
+        nameBtnMenu.snp.makeConstraints { make in
+            make.left.equalTo(categoryBtnMenu.snp.right).offset(15)
+            make.centerY.equalTo(categoryBtnMenu)
             make.height.equalTo(40)
-            make.width.equalTo(100)
+            make.width.equalTo(150)
         }
         
         timeLabel.snp.makeConstraints { make in
@@ -232,7 +279,7 @@ extension GYWTDDataTimeViewController {
         }
         
         timeBtn.snp.makeConstraints { make in
-            make.left.equalTo(categoryBtn)
+            make.left.equalTo(categoryBtnMenu)
             make.centerY.equalTo(timeLabel)
             make.height.equalTo(40)
             make.right.equalTo(-15)
@@ -346,7 +393,7 @@ extension GYWTDDataTimeViewController {
         partidString = String(format: "%d", dic["id"] as! Int64)
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        nameBtn.setTitle(sectionStr, for: .normal)
+        nameBtnMenu.title = sectionStr
         
         let params = ["device_db":GYDeviceData.default.device_db,"partId":partidString,"start_time":currentLastHourDateString,"end_time":currentDateString,"rate":rate,"type":type] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getwctimedata, parameters: params) {[weak self] (result) in
@@ -497,6 +544,51 @@ extension GYWTDDataTimeViewController: SpreadsheetViewDataSource, SpreadsheetVie
             cell.label.text = String(format: "%.3f", (dicc.allValues[indexPath.column - 2]) as? Double ?? 0.00)
         }
         return cell
+    }
+    
+}
+
+extension GYWTDDataTimeViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        if menu == nameBtnMenu {
+            return UInt(dataSectionArray.count)
+        }else{
+            return 5
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        if menu == nameBtnMenu {
+            let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+            return (dic["name"] as! String)
+        }else {
+            return labelarray[Int(index)]
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if menu == nameBtnMenu {
+            if dataSectionArray.count == 0 {
+                return
+            }
+            let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+            nameBtn.setTitle((dic["name"] as! String), for: .normal)
+            datatempSectionArray = [dataSectionArray[Int(index)]]
+            requestnextdata(array: [dataSectionArray[Int(index)]])
+        }else{
+            if datatempSectionArray.count == 0 {
+                return
+            }
+            nameStr = labelarray[Int(index)]
+            categoryBtn.setTitle(nameStr, for: .normal)
+            type = Int(index)
+            requestnextdata(array: datatempSectionArray)
+        }
     }
     
 }

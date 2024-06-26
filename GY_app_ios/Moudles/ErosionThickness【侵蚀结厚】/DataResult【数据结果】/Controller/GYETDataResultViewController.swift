@@ -51,6 +51,30 @@ class GYETDataResultViewController: GYViewController {
         return btn
     }()
     
+    private lazy var platformBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "设备地址"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
     private lazy var midView:UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -69,7 +93,7 @@ class GYETDataResultViewController: GYViewController {
         return view
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -98,7 +122,7 @@ extension GYETDataResultViewController {
         self.title = "数据结果"
         self.view.addSubview(headView)
         headView.addSubview(titleLabel)
-        headView.addSubview(platformBtn)
+        headView.addSubview(platformBtnMenu)
         self.view.addSubview(midView)
         midView.addSubview(spreadsheetView)
         self.view.addSubview(namepickView)
@@ -116,7 +140,7 @@ extension GYETDataResultViewController {
             make.bottom.equalTo(-21)
         }
         
-        platformBtn.snp.makeConstraints { make in
+        platformBtnMenu.snp.makeConstraints { make in
             make.left.equalTo(titleLabel.snp.right)
             make.centerY.equalTo(titleLabel)
             make.height.equalTo(40)
@@ -157,7 +181,7 @@ extension GYETDataResultViewController {
             weakSelf.dataArray = dicc["data"] as! NSArray
             weakSelf.namepickView.reloadAllComponents()
             let diccc:NSDictionary = weakSelf.dataArray.firstObject as! NSDictionary
-            weakSelf.platformBtn.setTitle("\(diccc["stove_name"] ?? "")", for: .normal)
+            weakSelf.platformBtnMenu.title = "\(diccc["stove_name"] ?? "")"
             weakSelf.stove_id = diccc["stove_id"] as! Int32
             weakSelf.requestnextdata()
         }
@@ -287,6 +311,8 @@ extension GYETDataResultViewController: SpreadsheetViewDataSource, SpreadsheetVi
             let array:NSArray = dataResultArray[indexPath.row - 1] as! NSArray
             if indexPath.column < array.count {
                 cell.label.text = (array[indexPath.column] as! String)
+            }else {
+                cell.label.text = ""
             }
             
         }
@@ -319,6 +345,32 @@ extension GYETDataResultViewController:UIPickerViewDelegate,UIPickerViewDataSour
         }
         let dic:NSDictionary = dataArray[row] as! NSDictionary
         platformBtn.setTitle("\(dic["stove_name"] ?? "")", for: .normal)
+        stove_id = dic["stove_id"] as! Int32
+        requestnextdata()
+    }
+    
+}
+
+extension GYETDataResultViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return UInt(dataArray.count)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        let dic:NSDictionary = dataArray[Int(index)] as! NSDictionary
+        return (dic["stove_name"] as! String)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if dataArray.count == 0 {
+            return
+        }
+        let dic:NSDictionary = dataArray[Int(index)] as! NSDictionary
         stove_id = dic["stove_id"] as! Int32
         requestnextdata()
     }

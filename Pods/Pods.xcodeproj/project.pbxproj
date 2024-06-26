@@ -1524,7 +1524,7 @@
 		5FDD516681DB6FD1710DC1F263E37A97 /* MBProgressHUD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MBProgressHUD.debug.xcconfig; sourceTree = "<group>"; };
 		5FF2D545BC2E9A1F156FCCB5DBD4DDED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		6160DD094F4F62A674E93E79FA3A112A /* GCDWebServerDataResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerDataResponse.h; path = GCDWebServer/Responses/GCDWebServerDataResponse.h; sourceTree = "<group>"; };
-		61627840D71C31A9AED12307ED71774A /* OpenGLUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = OpenGLUtils.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		61627840D71C31A9AED12307ED71774A /* OpenGLUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = OpenGLUtils.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		621B8789BBAC38C921A9B02FFCDEE5A1 /* SDImageLoader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageLoader.h; path = SDWebImage/SDImageLoader.h; sourceTree = "<group>"; };
 		62E21F361B0099F0422C8A719B6E022E /* Pods-GY_app_ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GY_app_ios.release.xcconfig"; sourceTree = "<group>"; };
 		6320170E5A5A268B11CAE15D4EF6A9E3 /* PINCache */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PINCache; path = PINCache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1732,7 +1732,7 @@
 		9D226F78A48D1F92E939D2FAAF8A36CF /* JJCollectionViewRoundFlowLayout_Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JJCollectionViewRoundFlowLayout_Swift-umbrella.h"; sourceTree = "<group>"; };
 		9D6459B67EA4F7EB43784A8423816838 /* AACrosshair.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AACrosshair.swift; path = AAInfographics/AAOptionsModel/AACrosshair.swift; sourceTree = "<group>"; };
 		9D65842D11C8CBF86C1153E7D072019A /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloaderOperation.m; path = SDWebImage/SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DD5E5769CB44686209F24A087F1173C /* BuiltInBridgeType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BuiltInBridgeType.swift; path = Source/BuiltInBridgeType.swift; sourceTree = "<group>"; };
 		9E07BB710740B38CBCCA15EBE100A170 /* Platform+Gestures.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Platform+Gestures.swift"; path = "Source/Charts/Utils/Platform+Gestures.swift"; sourceTree = "<group>"; };
 		9EE17EE785C933FDCE1D2E092B90394D /* UIImage+GIF.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+GIF.m"; path = "SDWebImage/UIImage+GIF.m"; sourceTree = "<group>"; };
@@ -1885,7 +1885,7 @@
 		CC1B3AE54CEDAF642AD5EC784839E401 /* MoveViewJob.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MoveViewJob.swift; path = Source/Charts/Jobs/MoveViewJob.swift; sourceTree = "<group>"; };
 		CC1EF86E389822A43D91A374D0FCDE03 /* Pods-GY_app_iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GY_app_iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CC8B949773DD6588D98C12DB1A4C4CE7 /* SnapKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.release.xcconfig; sourceTree = "<group>"; };
-		CD54121DDA84872534168702B5F92950 /* HandyJSON */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HandyJSON; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD54121DDA84872534168702B5F92950 /* HandyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7E577681E2E8EB82422668CAF0FD31 /* FLAnimatedImage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FLAnimatedImage.modulemap; sourceTree = "<group>"; };
 		CD81696980D4F90287FC9B3DA135A66A /* NSString+StringHook.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+StringHook.h"; path = "JJException/Source/ARC/NSString+StringHook.h"; sourceTree = "<group>"; };
 		CE2D1AE38E2113B25A8EB597113B0927 /* Pods-GY_app_iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GY_app_iosTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -2353,7 +2353,6 @@
 				7BE501574887BF647E5509EF387FB1D0 /* IQUIViewController+Additions.swift */,
 				98A08261A3FD76D1252C305AF2EEBFF5 /* Support Files */,
 			);
-			name = IQKeyboardManagerSwift;
 			path = IQKeyboardManagerSwift;
 			sourceTree = "<group>";
 		};
@@ -2458,7 +2457,6 @@
 				5F557D91DC51EA2D962F07E20D8BC436 /* Validation.swift */,
 				3294943156DB6DF953D8F3340D7F573B /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -2595,7 +2593,6 @@
 				4BB29CC5106D60E8A94C5F6B08F533E1 /* ConstraintArrayDSL.swift */,
 				A01291EF37AF587E60CCDB9093D88057 /* Support Files */,
 			);
-			name = SnapKitExtend;
 			path = SnapKitExtend;
 			sourceTree = "<group>";
 		};
@@ -2778,7 +2775,6 @@
 				6D721B0BB4D55BA5EFD65743613776F4 /* URLTransform.swift */,
 				BBD654DAB4A1FAD479F1DF0216A65244 /* Support Files */,
 			);
-			name = HandyJSON;
 			path = HandyJSON;
 			sourceTree = "<group>";
 		};
@@ -2792,7 +2788,7 @@
 				FAA5F2D71B90788C908800A94534AA92 /* FLAnimatedImage */,
 				0F47FB5E28EE8C8342B1776D813D1A4C /* FSPagerView */,
 				B68C1052A3B51DBCF7D960F898AAFA95 /* GCDWebServer */,
-				CD54121DDA84872534168702B5F92950 /* HandyJSON */,
+				CD54121DDA84872534168702B5F92950 /* HandyJSON.framework */,
 				A8E950A16D00F649C54FFB30F81D7842 /* IQKeyboardManagerSwift */,
 				3112CE375563D89BCF14440B4EEACF84 /* JJCollectionViewRoundFlowLayout_Swift */,
 				EAD41F9BF8DF31595D25FE7CA59B0E3B /* JJException */,
@@ -2854,7 +2850,6 @@
 				3D75D3C573564B07ADAEF7C5739E6DC3 /* Core */,
 				0A03811C333CF4AE991F80597E3FF0B4 /* Support Files */,
 			);
-			name = SDWebImage;
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
@@ -2898,7 +2893,6 @@
 				92DE57121CFCFCE2A9630225F28D0334 /* SDWebImageFLPlugin.h */,
 				9498F221B02FF0A55BA3C66D7281CE75 /* Support Files */,
 			);
-			name = SDWebImageFLPlugin;
 			path = SDWebImageFLPlugin;
 			sourceTree = "<group>";
 		};
@@ -2950,7 +2944,6 @@
 				824EEC680F5FE0466F7A584EEFDDE9B5 /* JXSegmentedViewTool.swift */,
 				29A5D61EDDA3549F62127E91377C4D9F /* Support Files */,
 			);
-			name = JXSegmentedView;
 			path = JXSegmentedView;
 			sourceTree = "<group>";
 		};
@@ -2960,7 +2953,6 @@
 				D80BEA923CA3F6C6CEFB0CD44B9A1CD7 /* Core */,
 				D30EBE7343F55CE24AF66FE3CADCBAF7 /* Support Files */,
 			);
-			name = DGCharts;
 			path = DGCharts;
 			sourceTree = "<group>";
 		};
@@ -3011,7 +3003,6 @@
 				4A1ED01C6FCC439179901D682765D464 /* Resources */,
 				FE80268544DA6288197A248E0F0E1881 /* Support Files */,
 			);
-			name = AAInfographics;
 			path = AAInfographics;
 			sourceTree = "<group>";
 		};
@@ -3070,7 +3061,6 @@
 				A7A7C7403FCA30314BB3AA42ED27C6BC /* StringPickerView */,
 				FBF4CCDE67EE73B2195131F44F45EE44 /* Support Files */,
 			);
-			name = BRPickerView;
 			path = BRPickerView;
 			sourceTree = "<group>";
 		};
@@ -3088,7 +3078,6 @@
 				DE09888D9C2981F247A9543066DED49B /* FSPageViewTransformer.swift */,
 				079FEF023A2479CC952917D576523D85 /* Support Files */,
 			);
-			name = FSPagerView;
 			path = FSPagerView;
 			sourceTree = "<group>";
 		};
@@ -3158,7 +3147,6 @@
 				DCD538770B3C189266CA805FF176A8C7 /* PINMemoryCache.m */,
 				80E63F3BCBC65413EF38C9DD742FF989 /* Support Files */,
 			);
-			name = PINCache;
 			path = PINCache;
 			sourceTree = "<group>";
 		};
@@ -3249,7 +3237,6 @@
 				A1E293628A32419F3A5827E69A069FC9 /* SpreadsheetViewDelegate.swift */,
 				ECAFE6F17625FAD8B4C90DF8565370D8 /* Support Files */,
 			);
-			name = SpreadsheetView;
 			path = SpreadsheetView;
 			sourceTree = "<group>";
 		};
@@ -3335,7 +3322,6 @@
 				94506C70E33FEBE7822083D2E2243029 /* MBProgressHUD.m */,
 				75219BAE8675E791640F1A3F4CC8E15B /* Support Files */,
 			);
-			name = MBProgressHUD;
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
@@ -3349,7 +3335,6 @@
 				3C3B321231F9C75CECBB61D9F90667F3 /* JJCollectionViewRoundFlowLayout_Swift.swift */,
 				9E62AE38B2F3D1D14DF0D9CD2BE9FA2E /* Support Files */,
 			);
-			name = JJCollectionViewRoundFlowLayout_Swift;
 			path = JJCollectionViewRoundFlowLayout_Swift;
 			sourceTree = "<group>";
 		};
@@ -3389,7 +3374,6 @@
 				F3069007B62BDB3147F597B16813C00F /* Core */,
 				9B1338CEDB795954E6CF6183BFC5457D /* Support Files */,
 			);
-			name = GCDWebServer;
 			path = GCDWebServer;
 			sourceTree = "<group>";
 		};
@@ -3399,7 +3383,6 @@
 				B15572026236B086C9E4507C68F67912 /* SwiftyJSON.swift */,
 				BB91185429738BD3A9B8F2CE977F7CA0 /* Support Files */,
 			);
-			name = SwiftyJSON;
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
@@ -3444,7 +3427,6 @@
 				6411C610D70609B67211726D714052A6 /* UILayoutSupport+Extensions.swift */,
 				33514FA4A475A46FE15EE1F9C383C68D /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -3492,7 +3474,6 @@
 				34C74016CC92E1A1833791E3306E0894 /* LMJDropdownMenu.m */,
 				622C7E015CDCD0F6DE3154FC05A86EF0 /* Support Files */,
 			);
-			name = LMJDropdownMenu;
 			path = LMJDropdownMenu;
 			sourceTree = "<group>";
 		};
@@ -3517,7 +3498,6 @@
 				BA4DCC974D61989C0A8BB510234EB149 /* SwiftPopMenu.swift */,
 				963A50533A043169E50A4A5468C5F9DD /* Support Files */,
 			);
-			name = SwiftPopMenu;
 			path = SwiftPopMenu;
 			sourceTree = "<group>";
 		};
@@ -3704,7 +3684,6 @@
 				22C6D69FC441343691224B87F52BCEEB /* FLAnimatedImageView.m */,
 				12BA0E9DCE8A3B9E2803A538CB03194F /* Support Files */,
 			);
-			name = FLAnimatedImage;
 			path = FLAnimatedImage;
 			sourceTree = "<group>";
 		};
@@ -3733,7 +3712,6 @@
 				18410D5504D8D3348DF70FE55FE47109 /* Support Files */,
 				AB879902D8C281D1CD78EBCA1FDB1AA6 /* Swizzle */,
 			);
-			name = JJException;
 			path = JJException;
 			sourceTree = "<group>";
 		};
@@ -3808,7 +3786,6 @@
 				F17B4B89283A87F7B132C071CF81DE67 /* Resources */,
 				57251FCF937205C901048D72C694086F /* Support Files */,
 			);
-			name = MJRefresh;
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
@@ -4284,7 +4261,7 @@
 			);
 			name = HandyJSON;
 			productName = HandyJSON;
-			productReference = CD54121DDA84872534168702B5F92950 /* HandyJSON */;
+			productReference = CD54121DDA84872534168702B5F92950 /* HandyJSON.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */ = {
@@ -7416,6 +7393,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_COMPILATION_MODE = singlefile;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

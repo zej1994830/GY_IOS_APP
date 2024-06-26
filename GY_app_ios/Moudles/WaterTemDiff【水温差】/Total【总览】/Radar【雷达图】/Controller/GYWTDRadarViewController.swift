@@ -92,6 +92,7 @@ class GYWTDRadarViewController: GYViewController {
         view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
         view.optionTextColor = .black
         view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
         return view
     }()
     
@@ -131,7 +132,7 @@ class GYWTDRadarViewController: GYViewController {
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 255, bottom: 0, right: -30)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
 //        btn.contentEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 20)
         btn.contentHorizontalAlignment = .left
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
@@ -271,12 +272,12 @@ extension GYWTDRadarViewController {
         bgView.addSubview(midtitleLabel)
         bgView.addSubview(midshowview)
         bgView.addSubview(radarCharView)
-        
-        radarCharView.addSubview(label0)
-        radarCharView.addSubview(label90)
-        radarCharView.addSubview(label180)
-        radarCharView.addSubview(label270)
-        
+//        
+//        radarCharView.addSubview(label0)
+//        radarCharView.addSubview(label90)
+//        radarCharView.addSubview(label180)
+//        radarCharView.addSubview(label270)
+//        
         bgView.addSubview(namepickView)
         bgView.addSubview(namepickView2)
     }
@@ -426,54 +427,26 @@ extension GYWTDRadarViewController {
             let angleInRadians = -CGFloat(angle + 90 * i).truncatingRemainder(dividingBy: 360)
             let x1 = radius * cos(angleInRadians*Double.pi/180)
             let y1 = radius * sin(angleInRadians*Double.pi/180)
-            let label = UILabel(frame: CGRect(x: radius + x1, y: radius - y1, width: 35, height: 20))
-
+            var label:UILabel = UILabel()
+            if let label2 = bgView.viewWithTag(1000 + i) as? UILabel{
+                label = label2
+            }else{
+                label = UILabel(frame: CGRect(x: radius + x1, y: radius - y1, width: 35, height: 20))
+            }
+            
             label.text = "\(90 * i)°"
             label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
             label.textAlignment = .center
+            label.tag = 1000 + i
             bgView.addSubview(label)
             
-            let selfWidth = radarCharView.frame.size.width
-            let selfHeight = radarCharView.frame.size.height
+            let selfWidth = radarCharView.frame.size.width - 40
+            let selfHeight = radarCharView.frame.size.height - 40
             let labelWidth = label.frame.size.width
             let labelHeight = label.frame.size.height
             let view = SBRadarCharts()
-            let  p = view.calcCircleCoordinate(withCenter: radarCharView.center, andWithAngle: CGFloat(angle + 90 * i), andWithRadius: radius)
-            if p.x < selfWidth/2 - labelWidth {
-                var x = p.x - labelWidth/2
-                var y: CGFloat
-                if p.y < (selfHeight/2 - labelHeight) {
-                    y = p.y - labelHeight/2
-                } else {
-                    y = p.y + labelHeight/2
-                }
-                label.center = CGPoint(x: x, y: y)
-            } else {
-                var x = p.x + labelWidth/2
-                var y: CGFloat
-                if p.y < (selfHeight/2 - labelHeight) {
-                    y = p.y - labelHeight/2
-                } else {
-                    y = p.y + labelHeight/2
-                }
-                label.center = CGPoint(x: x, y: y)
-            }
-
-            if (p.y > (selfHeight/2 - labelHeight/2) && p.y < (selfHeight/2 + labelHeight/2)) {
-                if (p.x < selfWidth/2 - labelHeight) {
-                    label.center = CGPoint(x: p.x - labelWidth/2, y: p.y)
-                } else {
-                    label.center = CGPoint(x: p.x + labelWidth/2, y: p.y)
-                }
-            } else {
-                if (p.x > (selfWidth/2 - labelWidth/2) && p.x < (selfWidth/2 + labelWidth/2)) {
-                    if (p.y < selfHeight/2 - labelWidth) {
-                        label.center = CGPoint(x: p.x, y: p.y - labelHeight/2)
-                    } else {
-                        label.center = CGPoint(x: p.x, y: p.y + labelHeight/2)
-                    }
-                }
-            }
+            let  p = view.calcCircleCoordinate(withCenter: radarCharView.center, andWithAngle: CGFloat(angle + 90 * i), andWithRadius: radius - 5)
+            label.center = p
         }
         bgView.bringSubviewToFront(namepickView)
         bgView.bringSubviewToFront(namepickView2)
@@ -557,7 +530,6 @@ extension GYWTDRadarViewController {
             .categories(chartmodelStr)
             .series(dataEntries)
             .zoomType(.xy)
-        
         radarCharView.aa_drawChartWithChartModel(chartmodel)
     }
     

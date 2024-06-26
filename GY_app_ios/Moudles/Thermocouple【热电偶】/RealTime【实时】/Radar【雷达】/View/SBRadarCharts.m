@@ -74,7 +74,7 @@
     _titles = [[NSMutableArray alloc]init];
     labelarray = [[NSMutableArray alloc]init];
     layerarray = [[NSMutableArray alloc]init];
-    _radius = self.frame.size.width/2.0;
+    _radius = (self.frame.size.width - 2)/2.0;
 
     _radiusmax = [_dataDic[@"max_radius"] doubleValue];
     _radiusnor = [_dataDic[@"min_radius"] doubleValue];
@@ -104,7 +104,7 @@
     CGFloat _headerimageR = _imgWidth/2.0;//头像的半径
     
     //最外面的一个圆  这里微调了下为了好看，理论上y为0
-    UIBezierPath* aPath_yuanhuan = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 1,self.frame.size.width - 2, self.frame.size.width - 2)];
+    UIBezierPath* aPath_yuanhuan = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(1, 1,(self.frame.size.width - 2), (self.frame.size.width - 2))];
     aPath_yuanhuan.lineWidth = 1;
     [_cirlColor set];
     aPath_yuanhuan.lineCapStyle = kCGLineCapRound; //线条拐角
@@ -112,8 +112,8 @@
     [aPath_yuanhuan stroke];
     
     //内环
-    CGFloat radius2 = (_radiusnor / _radiusmax) * ((self.frame.size.width) / 2);
-    UIBezierPath* aPath_yuanhuan2 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width / 2, self.frame.size.width / 2) radius:radius2 startAngle:0 endAngle:(M_PI * 2) clockwise:true];
+    CGFloat radius2 = (_radiusnor / _radiusmax) * (((self.frame.size.width - 2)) / 2);
+    UIBezierPath* aPath_yuanhuan2 = [UIBezierPath bezierPathWithArcCenter:CGPointMake((self.frame.size.width - 2) / 2, (self.frame.size.width - 2) / 2) radius:radius2 startAngle:0 endAngle:(M_PI * 2) clockwise:true];
     aPath_yuanhuan2.lineWidth = 0.5;
     [_cirlColor setStroke];
     aPath_yuanhuan2.lineCapStyle = kCGLineCapRound; //线条拐角
@@ -130,7 +130,7 @@
     [aPath_yuanhuan2 fill];
     
     //内环
-    UIBezierPath* aPath_yuanhuan3 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width / 2, self.frame.size.width / 2) radius:radius2 startAngle:0 endAngle:(M_PI * 2) clockwise:true];
+    UIBezierPath* aPath_yuanhuan3 = [UIBezierPath bezierPathWithArcCenter:CGPointMake((self.frame.size.width - 2) / 2, (self.frame.size.width - 2) / 2) radius:radius2 startAngle:0 endAngle:(M_PI * 2) clockwise:true];
     aPath_yuanhuan3.lineWidth = 0.5;
     [_cirlColor set];
     aPath_yuanhuan3.lineCapStyle = kCGLineCapRound; //线条拐角
@@ -185,7 +185,7 @@
         CGPoint psmall = [pointArraysmall[i] CGPointValue];
         
         CGFloat pointradius = ((_radiusmax - [_values[i] floatValue] * 1000) / _radiusmax) * _radius;
-        UIBezierPath* aPath_yuanhuan = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width / 2, self.frame.size.width / 2) radius:pointradius startAngle:0 endAngle:(M_PI * 2) clockwise:true];
+        UIBezierPath* aPath_yuanhuan = [UIBezierPath bezierPathWithArcCenter:CGPointMake((self.frame.size.width - 2) / 2, (self.frame.size.width - 2) / 2) radius:pointradius startAngle:0 endAngle:(M_PI * 2) clockwise:true];
         [aPath_yuanhuan setLineDash:dashPattern count:2 phase:1];
         aPath_yuanhuan.lineWidth = lineWidth;
         [[self colorWithHexString:@"#165DFF" alpha:0.35] set];
@@ -306,7 +306,7 @@
         CGPoint slidesmall = [pointslidesmall[i] CGPointValue];
         [path4 moveToPoint:slidesmall];
         if (p.x <= _radius && p.y >= _radius) {//左下
-            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 100].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].y, label.frame.size.width, label.frame.size.height);
+            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 15].y, label.frame.size.width, label.frame.size.height);
             label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
             
             while ([self hitView:label] || [self hitView:label2]) {
@@ -315,7 +315,7 @@
             }
             [path4 addLineToPoint:CGPointMake(label2.frame.origin.x + label2.frame.size.width, label.frame.origin.y + label.frame.size.height / 2)];
         }else if (p.x > _radius && p.y >= _radius) {//右下
-            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 100].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].y, label.frame.size.width, label.frame.size.height);
+            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 5].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 5].y, label.frame.size.width, label.frame.size.height);
             label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
 
             while ([self hitView:label] || [self hitView:label2]) {
@@ -324,7 +324,7 @@
             }
             [path4 addLineToPoint:CGPointMake(label.frame.origin.x, label.frame.origin.y + label.frame.size.height / 2)];
         }else if (p.x > _radius && p.y <= _radius) {//右上
-            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 100].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].y, label.frame.size.width, label.frame.size.height);
+            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 5].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 5].y, label.frame.size.width, label.frame.size.height);
             label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
 
             while ([self hitView:label] || [self hitView:label2]) {
@@ -333,7 +333,7 @@
             }
             [path4 addLineToPoint:CGPointMake(label.frame.origin.x, label.frame.origin.y + label.frame.size.height / 2)];
         }else if (p.x < _radius && p.y <= _radius) {//左上
-            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 100].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].y, label.frame.size.width, label.frame.size.height);
+            label.frame = CGRectMake([self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 50].x, [self calcCircleCoordinateWithCenter:CGPointMake(_radius,_radius) andWithAngle:insertion_angle + offsetAngle + offsetAngle2 andWithRadius:_radius + 15].y, label.frame.size.width, label.frame.size.height);
             label2.frame = CGRectMake(label.frame.origin.x + label.frame.size.width, label.frame.origin.y, label2.frame.size.width, label2.frame.size.height);
 
             while ([self hitView:label] || [self hitView:label2]) {
@@ -356,7 +356,8 @@
                                                green:(CGFloat)(153.0/255.0)
                                                 blue:(CGFloat)(153.0/255.0)
                                                alpha:1].CGColor; // 填充颜色
-        [[super layer] addSublayer:shapeLayer];
+//        [[super layer] addSublayer:shapeLayer];
+        
 
 //        [path4 stroke];//直线
         
@@ -375,9 +376,10 @@
         animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
         [shapeLayer addAnimation:animation forKey:@"animation"];
         
-        //绘制方向定位坐标
-        [self showDirectionalcoordinates];
+        
     }
+    //绘制方向定位坐标
+    [self showDirectionalcoordinates];
 }
 
 //超出当前self的范围也可点击
@@ -446,7 +448,7 @@
         [[self colorWithHexString:@"#CCCCCC" alpha:1] setStroke];
         [path3 stroke];//直线
         
-        CGFloat selfWidth = self.frame.size.width;
+        CGFloat selfWidth = (self.frame.size.width - 2);
         CGFloat selfHeight = self.frame.size.height;
         CGFloat labelWidth = label.frame.size.width;
         CGFloat labelHeight = label.frame.size.height;

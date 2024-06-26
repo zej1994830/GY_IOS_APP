@@ -70,6 +70,29 @@ class GYWMTotalTrendViewController: GYViewController {
         return btn
     }()
     
+    private lazy var pinlvBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "分钟"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
+    }()
+    
     //MARK: - 中视图
     private lazy var midView:UIView = {
         let view = UIView()
@@ -136,7 +159,7 @@ class GYWMTotalTrendViewController: GYViewController {
     }()
     
     
-    private lazy var timepickView:UIPickerView = {
+    private lazy var timepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -168,7 +191,7 @@ extension GYWMTotalTrendViewController {
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         headView.addSubview(pinlvLabel)
-        headView.addSubview(pinlvBtn)
+        headView.addSubview(pinlvBtnMenu)
         
         self.view.addSubview(midView)
         midView.addSubview(bgView)
@@ -217,7 +240,7 @@ extension GYWMTotalTrendViewController {
             make.bottom.equalTo( -21)
         }
         
-        pinlvBtn.snp.makeConstraints { make in
+        pinlvBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(pinlvLabel)
             make.left.equalTo(timeBtn)
             make.height.equalTo(40)
@@ -531,6 +554,27 @@ extension GYWMTotalTrendViewController:AAChartViewDelegate {
     }
 
 }
+
+extension GYWMTotalTrendViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return 2
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        ["分钟","小时"][Int(index)]
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+        rate = Int32(index)
+        request()
+    }
+    
+}
+
 
 // 生成随机的十六进制颜色字符串
 func randomHexColor() -> String {

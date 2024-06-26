@@ -92,6 +92,54 @@ class GYETTrendViewController: GYViewController {
         return btn
     }()
     
+    private lazy var positionBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "方位｜方位1"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
+    private lazy var numberBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "编号｜1"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
     //MARK: - 中视图
     private lazy var midView:UIView = {
         let view = UIView()
@@ -140,7 +188,7 @@ class GYETTrendViewController: GYViewController {
         return view
     }()
     
-    private lazy var positionpickView:UIPickerView = {
+    private lazy var positionpickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -153,7 +201,7 @@ class GYETTrendViewController: GYViewController {
         return view
     }()
     
-    private lazy var numberpickView:UIPickerView = {
+    private lazy var numberpickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -182,8 +230,8 @@ extension GYETTrendViewController {
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         headView.addSubview(positionLabel)
-        headView.addSubview(positionBtn)
-        headView.addSubview(numberBtn)
+        headView.addSubview(positionBtnMenu)
+        headView.addSubview(numberBtnMenu)
         
         bgView.addSubview(midView)
         midView.addSubview(bgmidView)
@@ -236,7 +284,7 @@ extension GYETTrendViewController {
             make.top.equalTo(timeLabel.snp.bottom).offset(36.5)
         }
         
-        positionBtn.snp.makeConstraints { make in
+        positionBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(positionLabel)
             make.height.equalTo(40)
             make.bottom.equalTo(-12.5)
@@ -244,10 +292,10 @@ extension GYETTrendViewController {
             make.width.equalTo(150)
         }
         
-        numberBtn.snp.makeConstraints { make in
+        numberBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(positionLabel)
             make.height.equalTo(40)
-            make.left.equalTo(positionBtn.snp_rightMargin).offset(20)
+            make.left.equalTo(positionBtnMenu.snp_rightMargin).offset(20)
             make.width.equalTo(100)
         }
         
@@ -504,4 +552,54 @@ extension GYETTrendViewController:UIPickerViewDelegate,UIPickerViewDataSource {
         pickerView.isHidden = true
         requestlastdata()
     }
+}
+
+extension GYETTrendViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        if menu == positionBtnMenu {
+            return UInt(datapositionArray.count)
+        }else{
+            return UInt(datanumberArray.count)
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        if menu == positionBtnMenu  {
+            if let dic:NSDictionary = datapositionArray[Int(index)] as? NSDictionary {
+                return (dic["stove_name"] as! String)
+            }
+        }else{
+            if let dic:NSDictionary = datanumberArray[Int(index)] as? NSDictionary {
+                return (dic["stove_name"] as! String)
+            }
+        }
+        return ""
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if menu == positionBtnMenu {
+            if datapositionArray.count == 0 {
+                return
+            }
+            if let dic:NSDictionary = datapositionArray[Int(index)] as? NSDictionary {
+                position = dic["stove_id"] as! Int64
+                positionBtnMenu.title = NSString(format: "方位｜%@", dic["stove_name"] as! CVarArg) as String
+            }
+        }else{
+            if datanumberArray.count == 0 {
+                return
+            }
+            if let dic:NSDictionary = datanumberArray[Int(index)] as? NSDictionary {
+                number = dic["stove_id"] as! Int64
+                numberBtnMenu.title = NSString(format: "编号｜%@", dic["stove_name"] as! CVarArg) as String
+            }
+        }
+        requestlastdata()
+    }
+    
 }

@@ -103,6 +103,53 @@ class GYTHCurveViewController: GYViewController {
         return btn
     }()
     
+    private lazy var nameBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
+    private lazy var pinlvBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "分钟"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
+    }()
+    
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
@@ -230,7 +277,7 @@ class GYTHCurveViewController: GYViewController {
         return collectionView
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -244,7 +291,7 @@ class GYTHCurveViewController: GYViewController {
     }()
     
     
-    private lazy var timepickView:UIPickerView = {
+    private lazy var timepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -273,9 +320,9 @@ extension GYTHCurveViewController {
         self.title = "历史曲线"
         self.view.addSubview(headView)
         headView.addSubview(nameLabel)
-        headView.addSubview(nameBtn)
+        headView.addSubview(nameBtnMenu)
         headView.addSubview(pinlvLabel)
-        headView.addSubview(pinlvBtn)
+        headView.addSubview(pinlvBtnMenu)
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         headView.addSubview(groupLabel)
@@ -319,7 +366,7 @@ extension GYTHCurveViewController {
             make.height.equalTo(21)
         }
         
-        nameBtn.snp.makeConstraints { make in
+        nameBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
             make.width.equalTo(130)
             make.left.equalTo(nameLabel.snp_rightMargin).offset(10)
@@ -327,12 +374,12 @@ extension GYTHCurveViewController {
         }
         
         pinlvLabel.snp.makeConstraints { make in
-            make.left.equalTo(nameBtn.snp.right).offset(24)
+            make.left.equalTo(nameBtnMenu.snp.right).offset(24)
             make.top.equalTo(21)
             make.height.equalTo(21)
         }
         
-        pinlvBtn.snp.makeConstraints { make in
+        pinlvBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
             make.width.equalTo(70)
             make.left.equalTo(pinlvLabel.snp_rightMargin).offset(10)
@@ -434,7 +481,7 @@ extension GYTHCurveViewController {
         partid = dic["id"] as! Int64
 
         sectionStr = String(format: "%@", dic["name"] as! String)
-        nameBtn.setTitle(sectionStr, for: .normal)
+        nameBtnMenu.title = sectionStr
         let params = ["device_db":GYDeviceData.default.device_db,"id":partid] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getrdobiaogaoduanwei, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -600,59 +647,6 @@ extension GYTHCurveViewController {
     }
 }
 
-extension GYTHCurveViewController:UIPickerViewDelegate,UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == namepickView {
-            return dataSectionArray.count
-        }else{
-            return 2
-        }
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == namepickView {
-            let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
-            return (dic["name"] as! String)
-        }else{
-            if row == 0 {
-                return "分钟"
-            }else{
-                return "小时"
-            }
-        }
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pickerView.isHidden = true
-        
-        if pickerView == namepickView {
-            if dataSectionArray.count == 0 {
-                return
-            }
-            requestnextdata(array: [dataSectionArray[row]])
-        }else{
-            if datatempgroupArray.count == 0 {
-                return
-            }
-            if row == 0 {
-                rate = 0
-                pinlvBtn.setTitle("分钟", for: .normal)
-            }else{
-                rate = 1
-                pinlvBtn.setTitle("小时", for: .normal)
-            }
-            requestlastdata(array: datatempgroupArray)
-        }
-    }
-}
-
 extension GYTHCurveViewController:UICollectionViewDelegate,UICollectionViewDataSource,AAChartViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return timeArray.count
@@ -765,3 +759,103 @@ extension GYTHCurveViewController:UICollectionViewDelegate,UICollectionViewDataS
     }
 }
 
+extension GYTHCurveViewController:UIPickerViewDelegate,UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == namepickView {
+            return dataSectionArray.count
+        }else{
+            return 2
+        }
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == namepickView {
+            let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
+            return (dic["name"] as! String)
+        }else{
+            if row == 0 {
+                return "分钟"
+            }else{
+                return "小时"
+            }
+        }
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        
+        if pickerView == namepickView {
+            if dataSectionArray.count == 0 {
+                return
+            }
+            requestnextdata(array: [dataSectionArray[row]])
+        }else{
+            if datatempgroupArray.count == 0 {
+                return
+            }
+            if row == 0 {
+                rate = 0
+                pinlvBtn.setTitle("分钟", for: .normal)
+            }else{
+                rate = 1
+                pinlvBtn.setTitle("小时", for: .normal)
+            }
+            requestlastdata(array: datatempgroupArray)
+        }
+    }
+}
+
+extension GYTHCurveViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        if menu == nameBtnMenu {
+            return UInt(dataSectionArray.count)
+        }else{
+            return 2
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        if menu == nameBtnMenu  {
+            let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+            return (dic["name"] as! String)
+        }else{
+            if index == 0 {
+                return "分钟"
+            }else{
+                return "小时"
+            }
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if menu == nameBtnMenu {
+            if dataSectionArray.count == 0 {
+                return
+            }
+            requestnextdata(array: [dataSectionArray[Int(index)]])
+        }else{
+            if datatempgroupArray.count == 0 {
+                return
+            }
+            if index == 0 {
+                rate = 0
+            }else{
+                rate = 1
+            }
+            requestlastdata(array: datatempgroupArray)
+        }
+    }
+    
+}

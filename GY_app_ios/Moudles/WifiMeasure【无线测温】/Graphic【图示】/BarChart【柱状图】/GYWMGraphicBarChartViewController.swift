@@ -55,6 +55,30 @@ class GYWMGraphicBarChartViewController: GYViewController {
         return btn
     }()
     
+    private lazy var screenBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
     private lazy var timeLabel:UILabel = {
         let label = UILabel()
         label.text = "时间："
@@ -71,7 +95,7 @@ class GYWMGraphicBarChartViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -119,7 +143,7 @@ class GYWMGraphicBarChartViewController: GYViewController {
         return view
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -153,7 +177,7 @@ extension GYWMGraphicBarChartViewController {
         self.title = "柱状图"
         self.view.addSubview(bgView)
         bgView.addSubview(screenLabel)
-        bgView.addSubview(screenBtn)
+        bgView.addSubview(screenBtnMenu)
         bgView.addSubview(timeLabel)
         bgView.addSubview(timeBtn)
         
@@ -192,7 +216,7 @@ extension GYWMGraphicBarChartViewController {
             make.width.equalTo(50)
         }
         
-        screenBtn.snp.makeConstraints { make in
+        screenBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(screenLabel)
             make.left.equalTo(screenLabel.snp.right)
             make.height.equalTo(40)
@@ -300,7 +324,7 @@ extension GYWMGraphicBarChartViewController {
         partid = dic["id"] as! Int32
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        screenBtn.setTitle(sectionStr, for: .normal)
+        screenBtnMenu.title = sectionStr
         let params = ["end_time":currentDateString + ":00","device_db":GYDeviceData.default.device_db,"idString":partid,"type":1] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getwmchartdata, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -538,4 +562,31 @@ extension GYWMGraphicBarChartViewController:UIPickerViewDelegate,UIPickerViewDat
         midshowview.label3.text = "\(clickEventMessage.y ?? 00)"
     }
 
+}
+
+extension GYWMGraphicBarChartViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return UInt(dataSectionArray.count)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+        return (dic["name"] as! String)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if dataSectionArray.count == 0 {
+            return
+        }
+        nowrow = Int(index)
+        requestnextdata(array: [dataSectionArray[Int(index)]])
+        midshowview.label2.text = ""
+        midshowview.label3.text = ""
+    }
+    
 }

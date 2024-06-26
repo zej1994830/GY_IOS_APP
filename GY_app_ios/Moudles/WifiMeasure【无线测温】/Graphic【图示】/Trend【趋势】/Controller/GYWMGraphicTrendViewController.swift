@@ -94,6 +94,53 @@ class GYWMGraphicTrendViewController: GYViewController {
         return btn
     }()
     
+    private lazy var nameBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
+    private lazy var pinlvBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "分钟"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
+    }()
+    
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
@@ -103,8 +150,8 @@ class GYWMGraphicTrendViewController: GYViewController {
         btn.layer.cornerRadius = 2
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 100, bottom: 0, right: -30)
+//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -121,8 +168,8 @@ class GYWMGraphicTrendViewController: GYViewController {
         btn.layer.cornerRadius = 2
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 285 - APP.WIDTH, bottom: 0, right: 15)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 100, bottom: 0, right: -30)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(groupBtnClick), for: .touchUpInside)
         return btn
@@ -194,7 +241,7 @@ class GYWMGraphicTrendViewController: GYViewController {
         return collectionView
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -208,7 +255,7 @@ class GYWMGraphicTrendViewController: GYViewController {
     }()
     
     
-    private lazy var timepickView:UIPickerView = {
+    private lazy var timepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -237,9 +284,9 @@ extension GYWMGraphicTrendViewController {
         self.title = "趋势"
         self.view.addSubview(headView)
         headView.addSubview(nameLabel)
-        headView.addSubview(nameBtn)
+        headView.addSubview(nameBtnMenu)
         headView.addSubview(pinlvLabel)
-        headView.addSubview(pinlvBtn)
+        headView.addSubview(pinlvBtnMenu)
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         headView.addSubview(groupLabel)
@@ -277,14 +324,14 @@ extension GYWMGraphicTrendViewController {
             make.height.equalTo(21)
         }
         
-        nameBtn.snp.makeConstraints { make in
+        nameBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
             make.width.equalTo(155)
             make.left.equalTo(nameLabel.snp_rightMargin).offset(10)
             make.height.equalTo(40)
         }
         
-        pinlvBtn.snp.makeConstraints { make in
+        pinlvBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
             make.width.equalTo(70)
             make.right.equalTo(-15)
@@ -292,7 +339,7 @@ extension GYWMGraphicTrendViewController {
         }
         
         pinlvLabel.snp.makeConstraints { make in
-            make.right.equalTo(pinlvBtn.snp.left)
+            make.right.equalTo(pinlvBtnMenu.snp.left)
             make.top.equalTo(21)
             make.height.equalTo(21)
         }
@@ -391,7 +438,7 @@ extension GYWMGraphicTrendViewController {
         partid = dic["id"] as! Int32
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        nameBtn.setTitle(sectionStr, for: .normal)
+        nameBtnMenu.title = sectionStr
         let params = ["device_db":GYDeviceData.default.device_db,"id":partid] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getBFLsTagList, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -553,56 +600,6 @@ extension GYWMGraphicTrendViewController {
     }
 }
 
-extension GYWMGraphicTrendViewController:UIPickerViewDelegate,UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == namepickView {
-            return dataSectionArray.count
-        }else{
-            return 2
-        }
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == namepickView {
-            let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
-            return (dic["name"] as! String)
-        }else{
-            if row == 0 {
-                return "分钟"
-            }else{
-                return "小时"
-            }
-        }
-        
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pickerView.isHidden = true
-        
-        if pickerView == namepickView {
-            if dataSectionArray.count == 0 {
-                return
-            }
-            requestnextdata(array: [dataSectionArray[row]])
-        }else{
-            if row == 0 {
-                rate = 0
-                pinlvBtn.setTitle("分钟", for: .normal)
-            }else{
-                rate = 1
-                pinlvBtn.setTitle("小时", for: .normal)
-            }
-            requestdata()
-        }
-    }
-}
-
 extension GYWMGraphicTrendViewController:UICollectionViewDelegate,UICollectionViewDataSource,AAChartViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == collectionV {
@@ -718,3 +715,100 @@ extension GYWMGraphicTrendViewController:UICollectionViewDelegate,UICollectionVi
     }
 }
 
+extension GYWMGraphicTrendViewController:UIPickerViewDelegate,UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == namepickView {
+            return dataSectionArray.count
+        }else{
+            return 2
+        }
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == namepickView {
+            let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
+            return (dic["name"] as! String)
+        }else{
+            if row == 0 {
+                return "分钟"
+            }else{
+                return "小时"
+            }
+        }
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        
+        if pickerView == namepickView {
+            if dataSectionArray.count == 0 {
+                return
+            }
+            requestnextdata(array: [dataSectionArray[row]])
+        }else{
+            if row == 0 {
+                rate = 0
+                pinlvBtn.setTitle("分钟", for: .normal)
+            }else{
+                rate = 1
+                pinlvBtn.setTitle("小时", for: .normal)
+            }
+            requestdata()
+        }
+    }
+}
+
+extension GYWMGraphicTrendViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        if menu == nameBtnMenu {
+            return UInt(dataSectionArray.count)
+        }else{
+            return 2
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        if menu == nameBtnMenu  {
+            let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+            return (dic["name"] as! String)
+        }else{
+            if index == 0 {
+                return "分钟"
+            }else{
+                return "小时"
+            }
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if menu == nameBtnMenu {
+            if dataSectionArray.count == 0 {
+                return
+            }
+            requestnextdata(array: [dataSectionArray[Int(index)]])
+        }else{
+            if datatempSectionArray.count == 0 {
+                return
+            }
+            if index == 0 {
+                rate = 0
+            }else{
+                rate = 1
+            }
+            requestdata()
+        }
+    }
+    
+}

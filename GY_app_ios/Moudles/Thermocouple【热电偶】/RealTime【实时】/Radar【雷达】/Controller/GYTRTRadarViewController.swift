@@ -56,7 +56,31 @@ import SpreadsheetView
         return btn
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var screenBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -115,6 +139,7 @@ import SpreadsheetView
         request()
         
         scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
+        oricontentoffset = scrollView.contentOffset
     }
     
 }
@@ -124,30 +149,26 @@ extension GYTRTRadarViewController:UIScrollViewDelegate {
         return radarView
     }
      
-    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-        oricontentoffset = scrollView.contentOffset
-    }
-    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if (!decelerate){
-            oricontentoffset = scrollView.contentOffset
-        }
+        oricontentoffset = CGPointMake(scrollView.contentOffset.x / scrollView.zoomScale, scrollView.contentOffset.y / scrollView.zoomScale)
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         
         scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
-
+        scrollView.contentOffset = CGPoint(x: oricontentoffset.x * scrollView.zoomScale, y: oricontentoffset.y * scrollView.zoomScale)
 //        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
-        scrollView.contentOffset = oricontentoffset
-        radarView.snp.remakeConstraints { make in
-            make.height.equalTo(APP.WIDTH - 60)
-            make.width.equalTo(APP.WIDTH - 60)
-            make.centerX.equalTo(scrollView.contentSize.width / 2)
-            make.centerY.equalTo(scrollView.contentSize.height / 2)
-        }
         
-//        scrollView.contentOffset = CGPoint(x: oricontentoffset.x * scrollView.zoomScale , y: oricontentoffset.y * scrollView.zoomScale)
+//        radarView.snp.remakeConstraints { make in
+//            make.height.equalTo(APP.WIDTH - 60)
+//            make.width.equalTo(APP.WIDTH - 60)
+//            make.centerX.equalTo(scrollView.contentSize.width / 2)
+//            make.centerY.equalTo(scrollView.contentSize.height / 2)
+//        }
+//        scrollView.contentOffset = CGPoint(x: radarView.center.x - (APP.WIDTH / 2), y: radarView.center.y - (scrollView.frame.width / 2))
+//
+        print("scrollView.contentOffset === %ld",scrollView.contentOffset)
+        print("oricontentoffset -----%ld",oricontentoffset)
     }
     
     
@@ -157,7 +178,7 @@ extension GYTRTRadarViewController {
     func setupViews() {
         self.view.addSubview(bgView)
         bgView.addSubview(screenLabel)
-        bgView.addSubview(screenBtn)
+        bgView.addSubview(screenBtnMenu)
         bgView.addSubview(scrollView)
         scrollView.addSubview(radarView)
         bgView.addSubview(spreadsheetView)
@@ -177,7 +198,7 @@ extension GYTRTRadarViewController {
             make.width.equalTo(50)
         }
         
-        screenBtn.snp.makeConstraints { make in
+        screenBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(screenLabel)
             make.left.equalTo(screenLabel.snp.right)
             make.height.equalTo(40)
@@ -186,7 +207,7 @@ extension GYTRTRadarViewController {
         
         scrollView.snp.makeConstraints { make in
             make.left.right.equalTo(0)
-            make.top.equalTo(screenBtn.snp.bottom)
+            make.top.equalTo(screenBtnMenu.snp.bottom)
             make.height.equalTo(APP.WIDTH * 1.4)
         }
         
@@ -238,7 +259,7 @@ extension GYTRTRadarViewController {
         partid = dic["id"] as! Int32
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        screenBtn.setTitle(sectionStr, for: .normal)
+        screenBtnMenu.title = sectionStr
         let params = ["device_db":GYDeviceData.default.device_db,"id":partid] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getrdorealdata, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -292,45 +313,6 @@ extension GYTRTRadarViewController {
         return
 
     }
-}
-
-extension GYTRTRadarViewController:UIPickerViewDelegate,UIPickerViewDataSource,AAChartViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return dataSectionArray.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
-        return (dic["name"] as! String)
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pickerView.isHidden = true
-        if dataSectionArray.count == 0 {
-            return
-        }
-        scrollView.zoomScale = 1.0
-        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
-        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
-        let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
-        screenBtn.setTitle((dic["name"] as! String), for: .normal)
-        requestnextdata(array: [dataSectionArray[row]])
-    }
-    
-//    open func aaChartView(_ aaChartView: AAChartView, clickEventMessage: AAClickEventMessageModel) {
-//        let dataModel = GYRTRadarData.deserialize(from: tempmodel.resultModel[clickEventMessage.index!] as? NSDictionary)
-//        let vc = GYTRTRadarDetailViewController()
-//        vc.model = dataModel!
-//        self.navigationController?.pushViewController(vc, animated: true)
-//
-//    }
-    
-    
-   
 }
 
 extension GYTRTRadarViewController: SpreadsheetViewDataSource, SpreadsheetViewDelegate{
@@ -438,4 +420,60 @@ extension GYTRTRadarViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
             }
         }
     }
+}
+
+extension GYTRTRadarViewController:UIPickerViewDelegate,UIPickerViewDataSource,AAChartViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return dataSectionArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
+        return (dic["name"] as! String)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerView.isHidden = true
+        if dataSectionArray.count == 0 {
+            return
+        }
+        scrollView.zoomScale = 1.0
+        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
+        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
+        let dic:NSDictionary = dataSectionArray[row] as! NSDictionary
+        screenBtn.setTitle((dic["name"] as! String), for: .normal)
+        requestnextdata(array: [dataSectionArray[row]])
+    }
+   
+}
+
+extension GYTRTRadarViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return UInt(dataSectionArray.count)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+        return (dic["name"] as! String)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if dataSectionArray.count == 0 {
+            return
+        }
+        scrollView.zoomScale = 1.0
+        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
+        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
+        requestnextdata(array: [dataSectionArray[Int(index)]])
+    }
+    
 }

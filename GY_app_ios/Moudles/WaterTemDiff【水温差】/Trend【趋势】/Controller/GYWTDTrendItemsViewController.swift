@@ -107,6 +107,7 @@ class GYWTDTrendItemsViewController: GYViewController {
         view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
         view.optionTextColor = .black
         view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
         return view
     }()
     
@@ -161,7 +162,7 @@ class GYWTDTrendItemsViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 285 - APP.WIDTH, bottom: 0, right: 15)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(groupBtnClick), for: .touchUpInside)
         return btn
@@ -255,7 +256,7 @@ class GYWTDTrendItemsViewController: GYViewController {
         return collectionView
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -269,7 +270,7 @@ class GYWTDTrendItemsViewController: GYViewController {
     }()
     
     
-    private lazy var timepickView:UIPickerView = {
+    private lazy var timepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self

@@ -53,6 +53,30 @@ class GYWMTotalBarChartViewController: GYViewController {
         return btn
     }()
     
+    private lazy var screenBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
     private lazy var midView:UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -94,7 +118,7 @@ class GYWMTotalBarChartViewController: GYViewController {
         return view
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -129,7 +153,7 @@ extension GYWMTotalBarChartViewController {
         self.title = "柱状图"
         self.view.addSubview(bgView)
         bgView.addSubview(screenLabel)
-        bgView.addSubview(screenBtn)
+        bgView.addSubview(screenBtnMenu)
         self.view.addSubview(midView)
         midView.addSubview(midBgView)
         midView.addSubview(midtitleLabel)
@@ -154,7 +178,7 @@ extension GYWMTotalBarChartViewController {
             make.bottom.equalTo(-19)
         }
         
-        screenBtn.snp.makeConstraints { make in
+        screenBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(screenLabel)
             make.left.equalTo(screenLabel.snp.right)
             make.height.equalTo(40)
@@ -234,7 +258,7 @@ extension GYWMTotalBarChartViewController {
         partid = dic["id"] as! Int32
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        screenBtn.setTitle(sectionStr, for: .normal)
+        screenBtnMenu.title = sectionStr
         let params = ["device_db":GYDeviceData.default.device_db,"partId":partid,"type":1] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getcwsngrouplistdata, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -466,4 +490,30 @@ extension GYWMTotalBarChartViewController:UIPickerViewDelegate,UIPickerViewDataS
         midshowview.label3.text = String(dic["value"] as! Double)
     }
 
+}
+
+extension GYWMTotalBarChartViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return UInt(dataSectionArray.count)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+        return (dic["name"] as! String)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if dataSectionArray.count == 0 {
+            return
+        }
+        requestnextdata(array: [dataSectionArray[Int(index)]])
+        midshowview.label2.text = ""
+        midshowview.label3.text = ""
+    }
+    
 }

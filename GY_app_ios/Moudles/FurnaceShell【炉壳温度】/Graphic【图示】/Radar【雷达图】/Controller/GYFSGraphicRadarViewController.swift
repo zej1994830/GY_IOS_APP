@@ -58,6 +58,30 @@ class GYFSGraphicRadarViewController: GYViewController {
         return btn
     }()
     
+    private lazy var nameBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
@@ -86,7 +110,7 @@ class GYFSGraphicRadarViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 285 - APP.WIDTH, bottom: 0, right: 15)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(groupBtnClick), for: .touchUpInside)
         return btn
@@ -130,7 +154,7 @@ class GYFSGraphicRadarViewController: GYViewController {
         return view
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -158,7 +182,7 @@ extension GYFSGraphicRadarViewController {
         self.title = "雷达图"
         self.view.addSubview(headView)
         headView.addSubview(nameLabel)
-        headView.addSubview(nameBtn)
+        headView.addSubview(nameBtnMenu)
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         headView.addSubview(groupLabel)
@@ -194,7 +218,7 @@ extension GYFSGraphicRadarViewController {
             make.height.equalTo(21)
         }
         
-        nameBtn.snp.makeConstraints { make in
+        nameBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
             make.width.equalTo(105)
             make.left.equalTo(nameLabel.snp_rightMargin).offset(10)
@@ -285,7 +309,7 @@ extension GYFSGraphicRadarViewController {
         partid = dic["id"] as! Int32
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        nameBtn.setTitle(sectionStr, for: .normal)
+        nameBtnMenu.title = sectionStr
         let params = ["device_db":GYDeviceData.default.device_db,"partId":partid] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getlkGroupListByPartId, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -485,4 +509,28 @@ extension GYFSGraphicRadarViewController:AAChartViewDelegate {
         showGroupView.label3.text = String(describing: clickEventMessage.x)
         
     }
+}
+
+extension GYFSGraphicRadarViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return UInt(dataSectionArray.count)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+        return (dic["name"] as! String)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if dataSectionArray.count == 0 {
+            return
+        }
+        requestnextdata(array: [dataSectionArray[Int(index)]])
+    }
+    
 }

@@ -8,6 +8,11 @@
 import UIKit
 
 class GYMyCenterViewController: GYViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.isHiddenNavigationBar = true
+    }
+    
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(locationSuccess(_:)), name: NotificationConstant.locationSuccess, object: nil)
         
@@ -22,10 +27,23 @@ class GYMyCenterViewController: GYViewController{
     
     var is_invalid:Int64 = 1
     
+    private lazy var bgmainView:UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
+        return view
+    }()
+    
     private lazy var bgView:UIImageView = {
         let imageV = UIImageView()
         imageV.image = UIImage(named: "my_bg_mine")
         return imageV
+    }()
+    
+    private lazy var rightBtn:UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "my_baojing"), for: .normal)
+        btn.addTarget(self, action: #selector(rightBtnClick), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var iconLabel:UILabel = {
@@ -60,6 +78,11 @@ class GYMyCenterViewController: GYViewController{
         return imageV
     }()
     
+    private lazy var companyView:UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     private lazy var tableView:UITableView = {
         let tableview = UITableView.init(frame: CGRect.zero, style: .plain)
         tableview.separatorStyle = .none
@@ -83,11 +106,14 @@ class GYMyCenterViewController: GYViewController{
 
 extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
     func setupViews(){
+        self.view.addSubview(bgmainView)
         self.view.addSubview(bgView)
+        self.view.addSubview(rightBtn)
         self.view.addSubview(iconLabel)
         self.view.addSubview(nameLabel)
-        self.view.addSubview(companyLabel)
-        self.view.addSubview(companyImageV)
+        self.view.addSubview(companyView)
+        companyView.addSubview(companyLabel)
+        companyView.addSubview(companyImageV)
         self.view.addSubview(tableView)
         self.view.addSubview(logoutBtn)
         
@@ -97,9 +123,20 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
     }
     
     func addLayout(){
+        bgmainView.snp.makeConstraints { make in
+            make.left.top.right.bottom.equalTo(0)
+        }
+        
         bgView.snp.makeConstraints { make in
             make.left.top.right.equalTo(0)
             make.height.equalTo(410)
+        }
+        
+        rightBtn.snp.makeConstraints { make in
+            make.right.equalTo(-25)
+            make.width.equalTo(16)
+            make.height.equalTo(17)
+            make.top.equalTo(topHeight - 35)
         }
         
         iconLabel.snp.makeConstraints { make in
@@ -114,16 +151,22 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             make.height.equalTo(28)
         }
         
-        companyLabel.snp.makeConstraints { make in
+        companyView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.height.equalTo(21)
             make.top.equalTo(nameLabel.snp.bottom).offset(7.5)
+        }
+        
+        companyLabel.snp.makeConstraints { make in
+            make.height.equalTo(21)
+            make.top.right.equalTo(0)
+            make.bottom.equalTo(0)
         }
         
         companyImageV.snp.makeConstraints { make in
             make.right.equalTo(companyLabel.snp.left).offset(-6)
             make.height.width.equalTo(16)
             make.centerY.equalTo(companyLabel)
+            make.left.equalTo(0)
         }
         
         tableView.snp.makeConstraints { make in
@@ -218,5 +261,11 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             self.companyLabel.text = GYUserBaseInfoData.default.subordinate_unit
         }
        
+    }
+    
+    @objc func rightBtnClick() {
+        let vc = GYWTDWarnViewController()
+        vc.function_type = 4
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

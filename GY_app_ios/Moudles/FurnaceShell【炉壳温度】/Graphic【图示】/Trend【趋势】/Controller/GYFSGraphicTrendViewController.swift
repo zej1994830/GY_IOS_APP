@@ -92,6 +92,53 @@ class GYFSGraphicTrendViewController: GYViewController {
         return btn
     }()
     
+    private lazy var nameBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = ""
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
+    private lazy var pinlvBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "分钟"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        return view
+    }()
+    
     private lazy var timeBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_rili"), for: .normal)
@@ -112,7 +159,7 @@ class GYFSGraphicTrendViewController: GYViewController {
     private lazy var groupBtn:UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
-        btn.setTitle("请选择组别", for: .normal)
+        btn.setTitle("", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.contentHorizontalAlignment = .left
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
@@ -120,7 +167,7 @@ class GYFSGraphicTrendViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-//        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 285 - APP.WIDTH, bottom: 0, right: 15)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(groupBtnClick), for: .touchUpInside)
         return btn
@@ -214,7 +261,7 @@ class GYFSGraphicTrendViewController: GYViewController {
         return collectionView
     }()
     
-    private lazy var namepickView:UIPickerView = {
+    private lazy var namepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -228,7 +275,7 @@ class GYFSGraphicTrendViewController: GYViewController {
     }()
     
     
-    private lazy var timepickView:UIPickerView = {
+    private lazy var timepickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -257,9 +304,9 @@ extension GYFSGraphicTrendViewController {
         self.title = "趋势"
         self.view.addSubview(headView)
         headView.addSubview(nameLabel)
-        headView.addSubview(nameBtn)
+        headView.addSubview(nameBtnMenu)
         headView.addSubview(pinlvLabel)
-        headView.addSubview(pinlvBtn)
+        headView.addSubview(pinlvBtnMenu)
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         headView.addSubview(groupLabel)
@@ -301,7 +348,7 @@ extension GYFSGraphicTrendViewController {
             make.height.equalTo(21)
         }
         
-        nameBtn.snp.makeConstraints { make in
+        nameBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
             make.width.equalTo(105)
             make.left.equalTo(nameLabel.snp_rightMargin).offset(10)
@@ -309,12 +356,12 @@ extension GYFSGraphicTrendViewController {
         }
         
         pinlvLabel.snp.makeConstraints { make in
-            make.left.equalTo(nameBtn.snp.right).offset(49)
+            make.left.equalTo(nameBtnMenu.snp.right).offset(49)
             make.top.equalTo(21)
             make.height.equalTo(21)
         }
         
-        pinlvBtn.snp.makeConstraints { make in
+        pinlvBtnMenu.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
             make.width.equalTo(70)
             make.left.equalTo(pinlvLabel.snp_rightMargin).offset(10)
@@ -415,7 +462,7 @@ extension GYFSGraphicTrendViewController {
         partid = dic["id"] as! Int32
         //段名
         sectionStr = String(format: "%@", dic["name"] as! String)
-        nameBtn.setTitle(sectionStr, for: .normal)
+        nameBtnMenu.title = sectionStr
         let params = ["device_db":GYDeviceData.default.device_db,"partId":partid] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getlkGroupListByPartId, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
@@ -431,7 +478,7 @@ extension GYFSGraphicTrendViewController {
     
     func requestlastdata(array:NSArray) {
         datatempGroupArray = NSMutableArray(array: array)
-        var namestr:String = "请选择组别"
+        var namestr:String = ""
         var stoveidString:String = ""
         
         for temp in array {
@@ -723,3 +770,47 @@ extension GYFSGraphicTrendViewController:UICollectionViewDelegate,UICollectionVi
     }
 }
 
+extension GYFSGraphicTrendViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        if menu == nameBtnMenu {
+            return UInt(dataSectionArray.count)
+        }else{
+            return 2
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        if menu == nameBtnMenu {
+            let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
+            return (dic["name"] as! String)
+        }else{
+            if index == 0 {
+                return "分钟"
+            }else{
+                return "小时"
+            }
+        }
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if menu == nameBtnMenu {
+            if dataSectionArray.count == 0 {
+                return
+            }
+            requestnextdata(array: [dataSectionArray[Int(index)]])
+        }else{
+            if index == 0 {
+                rate = 0
+            }else{
+                rate = 1
+            }
+            requestdata()
+        }
+    }
+    
+}

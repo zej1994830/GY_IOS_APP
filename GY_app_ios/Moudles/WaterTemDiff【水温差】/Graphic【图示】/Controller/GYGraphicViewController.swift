@@ -86,6 +86,7 @@ class GYGraphicViewController: GYViewController {
         view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
         view.optionTextColor = .black
         view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
         return view
     }()
     
@@ -434,6 +435,7 @@ extension GYGraphicViewController:UIPickerViewDelegate,UIPickerViewDataSource,AA
         midshowview.label2.text = clickEventMessage.category
         midshowview.label3.text = "\(clickEventMessage.y ?? 00)"
     }
+    
     
  
 

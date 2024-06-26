@@ -132,7 +132,55 @@ class GYETErosionMorphologyViewController: GYViewController {
         return btn
     }()
     
-    private lazy var frontpickView:UIPickerView = {
+    private lazy var frontBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "前界面-方位3"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
+    private lazy var behindBtnMenu:LMJDropdownMenu = {
+        let view = LMJDropdownMenu()
+        view.delegate = self
+        view.dataSource = self
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 6
+        view.layer.masksToBounds = true
+        
+        view.title = "后界面-方位28"
+        view.titleColor = .black
+        view.titleBgColor = .white
+        view.rotateIcon = UIImage(named: "ic_arrow_blue")!
+        view.rotateIconSize = CGSize(width: 10, height: 7)
+        view.titleFont = UIFont.systemFont(ofSize: 15)
+        view.optionFont = view.titleFont
+        view.optionBgColor = .white
+        view.optionLineColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        view.optionTextColor = .black
+        view.showsVerticalScrollIndicatorOfOptionsList = false
+        view.optionsListLimitHeight = 200
+        return view
+    }()
+    
+    private lazy var frontpickView:UIPickerView = {//废弃
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -145,7 +193,7 @@ class GYETErosionMorphologyViewController: GYViewController {
         return view
     }()
     
-    private lazy var behindpickView:UIPickerView = {
+    private lazy var behindpickView:UIPickerView = {//没废弃！！！
         let view = UIPickerView()
         view.delegate = self
         view.dataSource = self
@@ -262,8 +310,8 @@ extension GYETErosionMorphologyViewController {
         headView.addSubview(zhoujiemianBtn)
         headView.addSubview(hengjiemianBtn)
         headView.addSubview(sectionorientationLabel)
-        headView.addSubview(frontBtn)
-        headView.addSubview(behindBtn)
+        headView.addSubview(frontBtnMenu)
+        headView.addSubview(behindBtnMenu)
         
         bgView.addSubview(midView)
         midView.addSubview(collectionV)
@@ -332,18 +380,18 @@ extension GYETErosionMorphologyViewController {
             make.height.equalTo(21)
         }
         
-        frontBtn.snp.makeConstraints { make in
+        frontBtnMenu.snp.makeConstraints { make in
             make.left.equalTo(modelBtn)
             make.top.equalTo(sectionorientationLabel)
             make.height.equalTo(40)
-            make.width.equalTo(150)
+            make.width.equalTo(200)
         }
         
-        behindBtn.snp.makeConstraints { make in
-            make.left.equalTo(frontBtn)
-            make.top.equalTo(frontBtn.snp.bottom).offset(10)
+        behindBtnMenu.snp.makeConstraints { make in
+            make.left.equalTo(frontBtnMenu)
+            make.top.equalTo(frontBtnMenu.snp.bottom).offset(10)
             make.height.equalTo(40)
-            make.width.equalTo(150)
+            make.width.equalTo(200)
             make.bottom.equalTo(-10)
         }
         
@@ -498,8 +546,8 @@ extension GYETErosionMorphologyViewController {
             weakSelf.dataArray = dicc["data"] as! NSArray
             weakSelf.frontpickView.reloadAllComponents()
             let diccc:NSDictionary = weakSelf.dataArray.firstObject as! NSDictionary
-            weakSelf.frontBtn.setTitle("前界面-\(diccc["stove_name"] ?? "")", for: .normal)
-            weakSelf.behindBtn.setTitle("后界面-\(diccc["stove_name"] ?? "")", for: .normal)
+            weakSelf.frontBtnMenu.title = "前界面-\(diccc["stove_name"] ?? "")"
+            weakSelf.behindBtnMenu.title = "后界面-\(diccc["stove_name"] ?? "")"
             weakSelf.midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(diccc["stove_name"] ?? "")）"
             if let stove_id = diccc["stove_id"] as? Int32 {
                 weakSelf.stove_id = stove_id
@@ -576,6 +624,10 @@ extension GYETErosionMorphologyViewController:UICollectionViewDelegate,UICollect
         }else if indexPath.row == 3 {
 //            let vc = GYETStereoscopicMorphologyViewController()
 //            self.navigationController?.pushViewController(vc, animated: true)
+            if histroydataArray.count == 0 {
+                GYHUD.show("目前没有历史数据")
+                return
+            }
             behindpickView.isHidden = false
         }
         
@@ -636,6 +688,37 @@ extension GYETErosionMorphologyViewController:UIPickerViewDelegate,UIPickerViewD
             request3()
         }
         
+    }
+    
+}
+
+extension GYETErosionMorphologyViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
+    func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
+        return UInt(dataArray.count)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, heightForOptionAt index: UInt) -> CGFloat {
+        return 44
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, titleForOptionAt index: UInt) -> String {
+        let dic:NSDictionary = dataArray[Int(index)] as! NSDictionary
+        return (dic["stove_name"] as! String)
+    }
+    
+    func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
+
+        if dataArray.count == 0 {
+            return
+        }
+        
+        inttimecount = Int(index)
+        let dic:NSDictionary = dataArray[Int(index)] as! NSDictionary
+        frontBtnMenu.title = "前界面-\(dic["stove_name"] ?? "")"
+        behindBtnMenu.title = "后界面-\(dic["stove_name"] ?? "")"
+        midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(dic["stove_name"] ?? "")）"
+        stove_id = dic["stove_id"] as! Int32
+        request3()
     }
     
 }
