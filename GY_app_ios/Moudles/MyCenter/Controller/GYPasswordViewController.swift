@@ -13,7 +13,6 @@ class GYPasswordViewController: GYViewController {
         super.viewDidLoad()
 
         self.title = "修改密码"
-        self.view.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
         
         setupViews()
         addLayout()
@@ -93,13 +92,16 @@ extension GYPasswordViewController {
     
     @objc func btnClick() {
         if newsureTF.text == newTF.text && newTF.text != "" && oldTF.text != "" && newTF.text!.count >= 6 && newTF.text!.count <= 20{
-            let params = ["user_id":GYUserBaseInfoData.default.user_id,"password_old":String( oldTF.text!),"password_new":String(newTF.text!)] as [String : Any]
-            GYNetworkManager.share.requestData(.post, api: String.init(format: "%@?user_id=%d&password_old=%@&password_new=%@",Api.posteditpassword,GYUserBaseInfoData.default.user_id,oldTF.text!,newTF.text!), parameters: ["":""]) { [weak self] (result) in
+            let passwordold = String(format: oldTF.text!).data(using: .utf8)
+            let passwordnew = String(format: newTF.text!).data(using: .utf8)
+            
+            let params = ["user_id":GYUserBaseInfoData.default.user_id,"password_old":passwordold!.base64EncodedString(),"password_new":passwordnew!.base64EncodedString()] as [String : Any]
+            GYNetworkManager.share.requestData(.post, api: Api.posteditpassword, parameters: params) { [weak self] (result) in
                 guard let weakSelf = self else{
                     return
                 }
                 let rresult = result as! [String:Any]
-                if rresult["message"] as! String == "成功" {
+                if rresult["code"] as! Int64 == 200 {
                     GYHUD.show("修改成功")
                     weakSelf.navigationController?.popViewController(animated: true)
                 }else{

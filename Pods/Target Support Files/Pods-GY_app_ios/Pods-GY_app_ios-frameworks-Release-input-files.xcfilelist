@@ -1,17 +1,25 @@
 ${PODS_ROOT}/Target Support Files/Pods-GY_app_ios/Pods-GY_app_ios-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AAInfographics/AAInfographics.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/BRPickerView/BRPickerView.framework
+${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework
 ${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework
 ${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework
+${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework
 ${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
 ${BUILT_PRODUCTS_DIR}/JJCollectionViewRoundFlowLayout_Swift/JJCollectionViewRoundFlowLayout_Swift.framework
 ${BUILT_PRODUCTS_DIR}/JJException/JJException.framework
 ${BUILT_PRODUCTS_DIR}/JXSegmentedView/JXSegmentedView.framework
+${BUILT_PRODUCTS_DIR}/LMJDropdownMenu/LMJDropdownMenu.framework
 ${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework
+${BUILT_PRODUCTS_DIR}/OpenGLUtils/OpenGLUtils.framework
 ${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImageFLPlugin/SDWebImageFLPlugin.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
+${BUILT_PRODUCTS_DIR}/SnapKitExtend/SnapKitExtend.framework
+${BUILT_PRODUCTS_DIR}/SpreadsheetView/SpreadsheetView.framework
 ${BUILT_PRODUCTS_DIR}/SwiftPopMenu/SwiftPopMenu.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework

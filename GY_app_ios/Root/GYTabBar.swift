@@ -24,12 +24,12 @@ class GYTabBar: UITabBar {
 }
 
 extension GYTabBar {
-    override var traitCollection: UITraitCollection {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return UITraitCollection(horizontalSizeClass: .compact)
-        }
-        return super.traitCollection
-    }
+//    override var traitCollection: UITraitCollection {
+//        if UIDevice.current.userInterfaceIdiom == .pad {
+//            return UITraitCollection(horizontalSizeClass: .compact)
+//        }
+//        return super.traitCollection
+//    }
     
     private func setupViews() {
         shadowImage = UIImage.init()

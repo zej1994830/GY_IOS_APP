@@ -14,7 +14,7 @@ class GYLoginViewController: GYViewController {
         setupViews()
         addLayout()
         
-        
+        self.isHiddenBgView = true
     }
     
     private lazy var titleImageView: UIImageView = {
@@ -51,6 +51,7 @@ class GYLoginViewController: GYViewController {
         let tf = UITextField()
         tf.placeholder = "手机号/账号"
         tf.font = UIFont.systemFont(ofSize: 16.0)
+        tf.text = UserDefaults.standard.object(forKey: "user_account") as? String
         return tf
     }()
     
@@ -74,6 +75,7 @@ class GYLoginViewController: GYViewController {
         tf.placeholder = "密码"
         tf.font = UIFont.systemFont(ofSize: 16.0)
         tf.isSecureTextEntry = true
+        tf.text = UserDefaults.standard.object(forKey: "password")  as? String
         return tf
     }()
     
@@ -85,6 +87,7 @@ class GYLoginViewController: GYViewController {
         btn.addTarget(self, action: #selector(submitClick), for: .touchUpInside)
         return btn
     }()
+    
     
     
     
@@ -101,6 +104,21 @@ extension GYLoginViewController {
         passwordView.addSubview(passwordImageV)
         passwordView.addSubview(passwordTextfield)
         self.view.addSubview(submitBtn)
+        
+        //径向渐变的效果尝试
+//        let view = UIView(frame: CGRect(x: 0, y: 100, width: 200, height: 200))
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.frame = view.frame
+//        gradientLayer.colors = [UIColor.white.cgColor,UIColor.yellow.cgColor]
+//        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
+//        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+//        gradientLayer.type = .radial
+//        gradientLayer.locations = [0.3,1]
+//        gradientLayer.cornerRadius = 100
+//        gradientLayer.masksToBounds = true
+//        view.layer.addSublayer(gradientLayer)
+//
+//        self.view.addSubview(view)
     }
     
     func addLayout(){
@@ -162,7 +180,10 @@ extension GYLoginViewController {
         
         GYHUD.showGif()
         
-        let params = ["user_account":phoneTextfield.text!,"password":String(format: passwordTextfield.text!)] as [String : Any]
+        let password = String(format: passwordTextfield.text!).data(using: .utf8)
+            
+        let params = ["user_account":phoneTextfield.text!,"password":password!.base64EncodedString()] as [String : Any]
+        
         GYNetworkManager.share.requestData(.get, api: Api.getlogin,parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -170,13 +191,28 @@ extension GYLoginViewController {
             GYHUD.hideHudForView()
             let rresult = result as! [String:Any]
             if rresult["message"] as! String == "操作成功" {
-                let data: NSDictionary = rresult["data"] as! NSDictionary
-                //存储
-                let userBaseInfo = GYUserBaseInfoData.init(signData: data)
-                CommonCache.cacheData(userBaseInfo, key: CacheKey.userDataInfoCacheKey)
-                //通知
-                NotificationCenter.default.post(name: NotificationConstant.locationSuccess, object: nil,userInfo: nil)
-                weakSelf.dismiss(animated: true)
+                if let data: NSDictionary = rresult["data"] as? NSDictionary {
+                    //存储
+                    let userBaseInfo = GYUserBaseInfoData.init(signData: data)
+                    CommonCache.cacheData(userBaseInfo, key: CacheKey.userDataInfoCacheKey)
+                    
+                    //本地存储
+                    UserDefaults.standard.set(weakSelf.phoneTextfield.text!, forKey: "user_account")
+                    UserDefaults.standard.set(weakSelf.passwordTextfield.text!, forKey: "password")
+                    UserDefaults.standard.synchronize()
+                    
+                    let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                    GYTabbarController.share.selectedIndex = 0
+                    appdelegate.window?.rootViewController = GYTabbarController.share
+//                    appdelegate.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameViewController")
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(300)) {
+                        NotificationCenter.default.post(name: NotificationConstant.locationSuccess, object: nil,userInfo: nil)
+                    }
+                    //通知
+//                    weakSelf.dismiss(animated: true)
+                   
+                }
+                
             }
         }
     }

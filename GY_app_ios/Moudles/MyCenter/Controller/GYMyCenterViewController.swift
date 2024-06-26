@@ -8,7 +8,14 @@
 import UIKit
 
 class GYMyCenterViewController: GYViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.isHiddenNavigationBar = true
+    }
+    
     override func viewDidLoad() {
+        NotificationCenter.default.addObserver(self, selector: #selector(locationSuccess(_:)), name: NotificationConstant.locationSuccess, object: nil)
+        
         super.viewDidLoad()
         setupViews()
         addLayout()
@@ -20,10 +27,23 @@ class GYMyCenterViewController: GYViewController{
     
     var is_invalid:Int64 = 1
     
+    private lazy var bgmainView:UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
+        return view
+    }()
+    
     private lazy var bgView:UIImageView = {
         let imageV = UIImageView()
         imageV.image = UIImage(named: "my_bg_mine")
         return imageV
+    }()
+    
+    private lazy var rightBtn:UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "my_baojing"), for: .normal)
+        btn.addTarget(self, action: #selector(rightBtnClick), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var iconLabel:UILabel = {
@@ -58,6 +78,11 @@ class GYMyCenterViewController: GYViewController{
         return imageV
     }()
     
+    private lazy var companyView:UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     private lazy var tableView:UITableView = {
         let tableview = UITableView.init(frame: CGRect.zero, style: .plain)
         tableview.separatorStyle = .none
@@ -69,23 +94,49 @@ class GYMyCenterViewController: GYViewController{
         return tableview
     }()
     
+    private lazy var logoutBtn:UIButton = {
+        let btn = UIButton()
+        btn.setTitle("退出登录", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
+        btn.addTarget(self, action: #selector(logoutBtnClick), for: .touchUpInside)
+        return btn
+    }()
 }
 
 extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
     func setupViews(){
+        self.view.addSubview(bgmainView)
         self.view.addSubview(bgView)
+        self.view.addSubview(rightBtn)
         self.view.addSubview(iconLabel)
         self.view.addSubview(nameLabel)
-        self.view.addSubview(companyLabel)
-        self.view.addSubview(companyImageV)
+        self.view.addSubview(companyView)
+        companyView.addSubview(companyLabel)
+        companyView.addSubview(companyImageV)
         self.view.addSubview(tableView)
+        self.view.addSubview(logoutBtn)
         
+        iconLabel.text = "\(GYUserBaseInfoData.default.user_name.first ?? " ")"
+        nameLabel.text = GYUserBaseInfoData.default.user_name
+        companyLabel.text = GYUserBaseInfoData.default.subordinate_unit
     }
     
     func addLayout(){
+        bgmainView.snp.makeConstraints { make in
+            make.left.top.right.bottom.equalTo(0)
+        }
+        
         bgView.snp.makeConstraints { make in
             make.left.top.right.equalTo(0)
             make.height.equalTo(410)
+        }
+        
+        rightBtn.snp.makeConstraints { make in
+            make.right.equalTo(-25)
+            make.width.equalTo(16)
+            make.height.equalTo(17)
+            make.top.equalTo(topHeight - 35)
         }
         
         iconLabel.snp.makeConstraints { make in
@@ -100,16 +151,22 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             make.height.equalTo(28)
         }
         
-        companyLabel.snp.makeConstraints { make in
+        companyView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.height.equalTo(21)
             make.top.equalTo(nameLabel.snp.bottom).offset(7.5)
+        }
+        
+        companyLabel.snp.makeConstraints { make in
+            make.height.equalTo(21)
+            make.top.right.equalTo(0)
+            make.bottom.equalTo(0)
         }
         
         companyImageV.snp.makeConstraints { make in
             make.right.equalTo(companyLabel.snp.left).offset(-6)
             make.height.width.equalTo(16)
             make.centerY.equalTo(companyLabel)
+            make.left.equalTo(0)
         }
         
         tableView.snp.makeConstraints { make in
@@ -117,6 +174,14 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             make.left.right.equalTo(0)
             make.height.equalTo(250)
         }
+        
+        logoutBtn.snp.makeConstraints { make in
+            make.bottom.equalTo(-48)
+            make.left.equalTo(22.5)
+            make.right.equalTo(-22.5)
+            make.height.equalTo(49)
+        }
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -160,15 +225,13 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             let vc = GYPasswordViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.row == 3{
-            let vc = GYDeviceExpireViewController()
-            self.zej_present(vc, vcTransitionDelegate: ZEJRollDownTransitionDelegate()) {
-                
-            }
+            //版本更新
+            
         }
     }
     
     func request() {
-        let params = ["user_id":GYUserBaseInfoData.default.user_id,"device_db":GYDeviceData.default.device_db,"device_id":GYDeviceData.default.id] as [String : Any]
+        let params = ["user_id":GYUserBaseInfoData.default.user_id,"device_id":GYDeviceData.default.id] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getdevicetime, parameters: params) { [weak self]result in
             guard let weakSelf = self else{
                 return
@@ -176,8 +239,8 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             let rresult = result as! [String:Any]
             if rresult["message"] as! String == "操作成功" {
                 let rrresult = rresult["data"] as! [String:Any]
-                let rrrresult = rrresult["result"] as! [String:Any]
-                let is_invalid = rrrresult["is_invalid"] as! Int64
+                let rrrresult = rrresult["result"] as! Int64
+                let is_invalid = rrresult["is_invalid"] as! Int64
                 weakSelf.is_invalid = is_invalid
             }else{
                 
@@ -186,4 +249,23 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
         }
     }
     
+    @objc func logoutBtnClick() {
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        appdelegate.window?.rootViewController = GYLoginViewController()
+    }
+    
+    @objc private func locationSuccess(_ notification: Notification){
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(300)) {
+            self.iconLabel.text = "\(GYUserBaseInfoData.default.user_name.first ?? " ")"
+            self.nameLabel.text = GYUserBaseInfoData.default.user_name
+            self.companyLabel.text = GYUserBaseInfoData.default.subordinate_unit
+        }
+       
+    }
+    
+    @objc func rightBtnClick() {
+        let vc = GYWTDWarnViewController()
+        vc.function_type = 4
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

@@ -8,7 +8,9 @@
 import UIKit
 import JXSegmentedView
 import SnapKit
+import SnapKitExtend
 import Alamofire
+import HandyJSON
 
 class GYViewController: UIViewController,UIGestureRecognizerDelegate {
     lazy var noDataView: GYNoDataView = {
@@ -20,9 +22,21 @@ class GYViewController: UIViewController,UIGestureRecognizerDelegate {
         return view
     }()
     
+    lazy var bgBaseView:UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
+        return view
+    }()
+    
     var isHiddenNavigationBar: Bool = false{
         didSet{
             self.navigationController?.setNavigationBarHidden(isHiddenNavigationBar, animated: true)
+        }
+    }
+    
+    var isHiddenBgView: Bool = false {
+        didSet{
+            bgBaseView.isHidden = isHiddenBgView
         }
     }
     
@@ -48,6 +62,7 @@ class GYViewController: UIViewController,UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColorConstant.mainBackground
+        self.view.addSubview(bgBaseView)
         self.view.addSubview(noDataView)
         setNavigationBarBackButton()
         setRightButton("my_baojing", target: self, action: #selector(warn), for: .touchUpInside)
@@ -58,7 +73,14 @@ class GYViewController: UIViewController,UIGestureRecognizerDelegate {
         
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 20, weight: .medium)]
+        
+        bgBaseView.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(0)
+            make.top.equalTo(topHeight)
+        }
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -128,7 +150,8 @@ extension GYViewController {
     }
     
     @objc func warn() {
-        
+        let vc = GYWTDWarnViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -141,6 +164,7 @@ extension GYViewController {
 extension GYViewController {
     
     @objc func refresh(){
+        
         
         /// 子类复写
     }

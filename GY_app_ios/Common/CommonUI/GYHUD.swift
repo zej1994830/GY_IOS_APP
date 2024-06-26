@@ -52,6 +52,7 @@ class GYHUD: NSObject {
         hud.graceTime = 0.5
         hud.minShowTime = 0.25
         hud.removeFromSuperViewOnHide = true
+        hud.hide(animated: true, afterDelay: 10)
     }
     
     class func showSuccess(_ success: String, icon: String = "success_hud_icon", view: UIView? = nil){

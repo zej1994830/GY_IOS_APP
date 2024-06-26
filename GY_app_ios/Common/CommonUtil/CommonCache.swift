@@ -16,7 +16,6 @@ class CommonCache: NSObject {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 //        let cache = PINCache.shared()
         let cache = PINCache.init(name: "UserData", rootPath: path)
-
         return cache
     }()
     
@@ -50,7 +49,7 @@ class CommonCache: NSObject {
     
     /// 缓存数据
     class func cacheData(_ data: NSCoding, key: String) {
-    
         CommonCache.share.userDataCache.setObject(data, forKey: key)
+        CommonCache.share.userDataCache.memoryCache.removeAllObjectsOnEnteringBackground = false
     }
 }

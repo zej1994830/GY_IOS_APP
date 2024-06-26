@@ -7,6 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import JJException
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,14 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
         self.window = UIWindow.init(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = GYTabbarController.share
+//        self.window?.rootViewController = GYTabbarController.share
+        self.window?.rootViewController = GYLoginViewController()
         
         self.window?.makeKeyAndVisible()
         
 //        if (GYUserBaseInfoData.default.user_id == 0){
             let loginVC = GYLoginViewController()
-            loginVC.modalPresentationStyle = .fullScreen
-            Global_TopViewController!.present(loginVC, animated: true, completion: nil)
+//            let loginVC = TESTViewController()
+//            loginVC.modalPresentationStyle = .fullScreen
+//            Global_TopViewController!.present(loginVC, animated: true, completion: nil)
             CommonCache.share.userDataCache.removeObject(forKey: CacheKey.userDataInfoCacheKey)
             CommonCache.share.userDataCache.removeAllObjects()
 //        }
@@ -35,6 +38,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navBar.setBackgroundImage(UIImage(), for: .bottom, barMetrics: .default)
         navBar.shadowImage = UIImage()
         navBar.barTintColor = UIColor.white
+        
+        networkReachability()
+        
+        //防止崩溃
+        JJException.configExceptionCategory(.all)
+        JJException.startGuard()
         
         return true
     }
@@ -72,5 +81,12 @@ extension UIDevice {
         let inputNumber = NSNumber.init(value: inputRotation)
         
         UIDevice.current.setValue(inputNumber, forKey: "orientation")
+    }
+}
+//MARK: - 网络监听
+extension AppDelegate {
+    
+    private func networkReachability(){
+        GYNetworkManager.share.startListeningNetWorking()
     }
 }

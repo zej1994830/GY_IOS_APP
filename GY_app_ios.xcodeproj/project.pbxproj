@@ -12,6 +12,7 @@
 		C80002692ABA877D00E7AFF9 /* GYWTDDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80002682ABA877D00E7AFF9 /* GYWTDDetailViewController.swift */; };
 		C800026B2ABADC3F00E7AFF9 /* GYWTDDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800026A2ABADC3F00E7AFF9 /* GYWTDDetailCell.swift */; };
 		C800026D2ABADDB100E7AFF9 /* GYWTDDetaiSecCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800026C2ABADDB100E7AFF9 /* GYWTDDetaiSecCell.swift */; };
+		C80528862B4B911900A38D5F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C80528852B4B911900A38D5F /* ViewController.m */; };
 		C809AB9F2AA0650E002301BE /* GYDeviceExpireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C809AB9E2AA0650E002301BE /* GYDeviceExpireViewController.swift */; };
 		C814A2C52AB40BF500FF1E87 /* GYWTDTotalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C814A2C42AB40BF500FF1E87 /* GYWTDTotalData.swift */; };
 		C81A26442A8C8F3D00E40516 /* GYDefaultNetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81A26432A8C8F3D00E40516 /* GYDefaultNetworkLogger.swift */; };
@@ -28,6 +29,12 @@
 		C874263D2A94983900F2382A /* gobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874263C2A94983900F2382A /* gobalFunction.swift */; };
 		C87426412A94A13400F2382A /* GYMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87426402A94A13400F2382A /* GYMainViewController.swift */; };
 		C87426472A94A26D00F2382A /* GYMyCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87426462A94A26D00F2382A /* GYMyCenterViewController.swift */; };
+		C87840072ABC2AD300E67037 /* GYWTDTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87840062ABC2AD300E67037 /* GYWTDTrendViewController.swift */; };
+		C89624202AC26BA1005DE286 /* GYWTDDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C896241F2AC26BA1005DE286 /* GYWTDDataViewController.swift */; };
+		C89624232AC27448005DE286 /* GYWTDDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89624222AC27448005DE286 /* GYWTDDataCell.swift */; };
+		C89624252AC287D5005DE286 /* GYWTDDataBaseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89624242AC287D5005DE286 /* GYWTDDataBaseHeaderView.swift */; };
+		C89624272AC2B7FD005DE286 /* GYWTDDataHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89624262AC2B7FD005DE286 /* GYWTDDataHeaderView.swift */; };
+		C89624292AC2B84A005DE286 /* GYWTDDataBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89624282AC2B84A005DE286 /* GYWTDDataBaseCell.swift */; };
 		C89792202A8608E900CDB5A1 /* GYNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897921F2A8608E900CDB5A1 /* GYNetworkManager.swift */; };
 		C89D32C92A8DA9AF0032C17B /* NotificationConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89D32C82A8DA9AF0032C17B /* NotificationConstant.swift */; };
 		C89D8D7D2A9F09E10013E1B1 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = C89D8D7C2A9F09E10013E1B1 /* loading.gif */; };
@@ -37,9 +44,23 @@
 		C89E762B2AA95FA400985EFC /* GYWaterTimeDiffHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89E762A2AA95FA300985EFC /* GYWaterTimeDiffHeaderView.swift */; };
 		C89E762D2AA97EAF00985EFC /* GYWaterTimeDiffFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89E762C2AA97EAF00985EFC /* GYWaterTimeDiffFooterView.swift */; };
 		C89E762F2AA9B62000985EFC /* GYTotalWTDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89E762E2AA9B62000985EFC /* GYTotalWTDViewController.swift */; };
+		C89EE8462AC3B0680097D1DE /* GYWTDRadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89EE8452AC3B0680097D1DE /* GYWTDRadarViewController.swift */; };
+		C89F6AE72AC11CEE00FE541A /* GYWTDTrendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89F6AE62AC11CEE00FE541A /* GYWTDTrendData.swift */; };
+		C89F6AE92AC16FA800FE541A /* GYWTDTrendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89F6AE82AC16FA800FE541A /* GYWTDTrendCell.swift */; };
 		C89FE6532AA5877F003BE557 /* GYCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89FE6522AA5877F003BE557 /* GYCustomFlowLayout.swift */; };
 		C89FE6552AA5882E003BE557 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89FE6542AA5882E003BE557 /* NumberExtension.swift */; };
 		C89FE6582AA588BB003BE557 /* GYMainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89FE6572AA588BB003BE557 /* GYMainViewCell.swift */; };
+		C8A2BC2F2AD25389009BB260 /* GYFurnaceShellMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A2BC2E2AD25389009BB260 /* GYFurnaceShellMainViewController.swift */; };
+		C8A2BC362AD25BD2009BB260 /* GYErosionThicknessMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A2BC352AD25BD2009BB260 /* GYErosionThicknessMainViewController.swift */; };
+		C8A2BC392AD25D71009BB260 /* GYThermocoupleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A2BC382AD25D71009BB260 /* GYThermocoupleViewController.swift */; };
+		C8A3883C2AE0B23C0022410F /* GYWTDWarnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3883B2AE0B23C0022410F /* GYWTDWarnViewController.swift */; };
+		C8A3883F2AE0FDC60022410F /* GYWTDWarnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3883E2AE0FDC60022410F /* GYWTDWarnCell.swift */; };
+		C8A388442AE10DC00022410F /* GYWTDWarnDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A388432AE10DC00022410F /* GYWTDWarnDataModel.swift */; };
+		C8A559C32AE222E900446837 /* GYWTDDataTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A559C22AE222E900446837 /* GYWTDDataTimeViewController.swift */; };
+		C8A658212AE7AF44003CA4AB /* GYWTDRadarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A658202AE7AF44003CA4AB /* GYWTDRadarModel.swift */; };
+		C8A7BC022AE63F65002882A5 /* SpreadsheetViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7BC012AE63F65002882A5 /* SpreadsheetViewCells.swift */; };
+		C8A7BC052AE65D31002882A5 /* GYWTDDeviceAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7BC042AE65D31002882A5 /* GYWTDDeviceAddressViewController.swift */; };
+		C8A7BC082AE66B18002882A5 /* GYWTDDeviceAdressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7BC072AE66B18002882A5 /* GYWTDDeviceAdressCell.swift */; };
 		C8A7DAC72AAEDA660031F778 /* GYTotalWTDHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7DAC62AAEDA660031F778 /* GYTotalWTDHeaderView.swift */; };
 		C8A84A712AB14B63009A4083 /* GYUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A84A702AB14B63009A4083 /* GYUnitViewController.swift */; };
 		C8AA2D972A78D835005CBD77 /* GYTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AA2D962A78D835005CBD77 /* GYTabbarController.swift */; };
@@ -48,6 +69,11 @@
 		C8AA2DA02A78DBAC005CBD77 /* GYAppDeviceConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AA2D9F2A78DBAC005CBD77 /* GYAppDeviceConstant.swift */; };
 		C8AA2DA52A78DC91005CBD77 /* UIViewFrameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AA2DA42A78DC91005CBD77 /* UIViewFrameExtension.swift */; };
 		C8AA2DA72A78E059005CBD77 /* GYViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AA2DA62A78E059005CBD77 /* GYViewController.swift */; };
+		C8AB60602B01D2710094A2F2 /* GYFSBarChartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB605F2B01D2710094A2F2 /* GYFSBarChartButton.swift */; };
+		C8AB6FED2ADE2710002EFEB9 /* GYSelectGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB6FEC2ADE2710002EFEB9 /* GYSelectGroupViewController.swift */; };
+		C8AB6FEF2ADE29BE002EFEB9 /* GYSelectGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB6FEE2ADE29BE002EFEB9 /* GYSelectGroupCell.swift */; };
+		C8AB6FF22ADE67EA002EFEB9 /* GYWTDData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB6FF12ADE67EA002EFEB9 /* GYWTDData.swift */; };
+		C8AB6FF42ADE79B1002EFEB9 /* GYWTDDataBaseBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AB6FF32ADE79B1002EFEB9 /* GYWTDDataBaseBaseCell.swift */; };
 		C8AC912E2A9346B00081DF90 /* GYCodingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AC912D2A9346B00081DF90 /* GYCodingObject.swift */; };
 		C8AD079C2AAB0A6D00526DCB /* GYTotalWTDCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AD079B2AAB0A6D00526DCB /* GYTotalWTDCell.swift */; };
 		C8AE7C5E2AA8402D006B9748 /* GYWaterTemDiffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AE7C5D2AA8402D006B9748 /* GYWaterTemDiffViewController.swift */; };
@@ -56,11 +82,24 @@
 		C8B30EE02AB2D3F800570901 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B30EDF2AB2D3F800570901 /* UIButton+Extension.swift */; };
 		C8B30EE32AB2E84C00570901 /* GYSelectWaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B30EE22AB2E84C00570901 /* GYSelectWaterViewController.swift */; };
 		C8B30EE52AB2F5DD00570901 /* GYSelectWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B30EE42AB2F5DD00570901 /* GYSelectWaterCell.swift */; };
+		C8B33AFB2B4694C60011626D /* SBRadarCharts.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B33AFA2B4694C60011626D /* SBRadarCharts.m */; };
 		C8B39CD12A6E61AC00532C53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B39CD02A6E61AC00532C53 /* AppDelegate.swift */; };
 		C8B39CDA2A6E61AD00532C53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8B39CD92A6E61AD00532C53 /* Assets.xcassets */; };
 		C8B39CE82A6E61AE00532C53 /* GY_app_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B39CE72A6E61AE00532C53 /* GY_app_iosTests.swift */; };
 		C8B39CF22A6E61AE00532C53 /* GY_app_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B39CF12A6E61AE00532C53 /* GY_app_iosUITests.swift */; };
 		C8B39CF42A6E61AE00532C53 /* GY_app_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B39CF32A6E61AE00532C53 /* GY_app_iosUITestsLaunchTests.swift */; };
+		C8B5EF842AFE152A00887C33 /* GYTotalBarChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B5EF832AFE152A00887C33 /* GYTotalBarChartModel.swift */; };
+		C8B687C32B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B687C22B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift */; };
+		C8B687C62B2989BF000768FC /* armadillo.obj in Resources */ = {isa = PBXBuildFile; fileRef = C8B687C52B2989BF000768FC /* armadillo.obj */; };
+		C8B687CB2B2992E7000768FC /* CaiJiHe_LED.fbx in Resources */ = {isa = PBXBuildFile; fileRef = C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */; };
+		C8B9F81A2C19650200A90C91 /* test.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8122C19650200A90C91 /* test.dae */; };
+		C8B9F81B2C19650200A90C91 /* 高炉主体003.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8132C19650200A90C91 /* 高炉主体003.dae */; };
+		C8B9F81C2C19650200A90C91 /* 高炉主体002.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8142C19650200A90C91 /* 高炉主体002.dae */; };
+		C8B9F81D2C19650200A90C91 /* 水温差002.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8152C19650200A90C91 /* 水温差002.dae */; };
+		C8B9F81E2C19650200A90C91 /* 水温差001.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8162C19650200A90C91 /* 水温差001.dae */; };
+		C8B9F81F2C19650200A90C91 /* 地面001.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8172C19650200A90C91 /* 地面001.dae */; };
+		C8B9F8202C19650200A90C91 /* 炉壳001.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8182C19650200A90C91 /* 炉壳001.dae */; };
+		C8B9F8212C19650200A90C91 /* 热电偶001.dae in Resources */ = {isa = PBXBuildFile; fileRef = C8B9F8192C19650200A90C91 /* 热电偶001.dae */; };
 		C8BBE1162A9C46CC00E4CACE /* UIViewController+ZEJPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE0FE2A9C46CC00E4CACE /* UIViewController+ZEJPresent.m */; };
 		C8BBE1172A9C46CC00E4CACE /* ZEJRollDownPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1022A9C46CC00E4CACE /* ZEJRollDownPresentationController.m */; };
 		C8BBE1182A9C46CC00E4CACE /* ZEJRollDownAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1032A9C46CC00E4CACE /* ZEJRollDownAnimatedTransitioning.m */; };
@@ -72,21 +111,101 @@
 		C8BBE11F2A9C46CC00E4CACE /* ZEJSlidePresentTransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1152A9C46CC00E4CACE /* ZEJSlidePresentTransitionDelegate.m */; };
 		C8BBE1212A9C484A00E4CACE /* GYUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE1202A9C484A00E4CACE /* GYUpdateViewController.swift */; };
 		C8BBE12F2A9C87E700E4CACE /* GYApiCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BBE12E2A9C87E700E4CACE /* GYApiCenter.swift */; };
+		C8BC3B9A2B47F3E30052A236 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = C8BC3B992B47F3E30052A236 /* index.html */; };
+		C8BC3B9C2B47F3E70052A236 /* o3dv.min.js in Resources */ = {isa = PBXBuildFile; fileRef = C8BC3B9B2B47F3E70052A236 /* o3dv.min.js */; };
+		C8BC3E482B454FDF00B6CD93 /* GYMainFlagData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BC3E472B454FDF00B6CD93 /* GYMainFlagData.swift */; };
+		C8BCA2132B0458BB005EE9D6 /* GYGraphicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCA2122B0458BB005EE9D6 /* GYGraphicViewController.swift */; };
+		C8BCA21A2B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCA2192B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift */; };
+		C8BCB39A2C102F2B00952C5D /* GYWMGraphicBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCB3992C102F2B00952C5D /* GYWMGraphicBarChartViewController.swift */; };
+		C8BCB39C2C10310400952C5D /* GYWMGraphicRadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BCB39B2C10310400952C5D /* GYWMGraphicRadarViewController.swift */; };
+		C8BD5E7B2B19CC2900F4A50A /* GYFSDataTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BD5E7A2B19CC2900F4A50A /* GYFSDataTimeViewController.swift */; };
+		C8BF8FAB2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FAA2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift */; };
+		C8BF8FAF2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FAE2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift */; };
+		C8BF8FB62B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FB52B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift */; };
+		C8BF8FB82B1D69D900FF9D65 /* GYTHCurveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */; };
+		C8C01B5A2C18152800BFD866 /* ball_can.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B532C18152700BFD866 /* ball_can.aiff */; };
+		C8C01B5B2C18152800BFD866 /* can_floor.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B542C18152700BFD866 /* can_floor.aiff */; };
+		C8C01B5C2C18152800BFD866 /* whoosh.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B552C18152700BFD866 /* whoosh.aiff */; };
+		C8C01B5D2C18152800BFD866 /* ball_floor.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B562C18152700BFD866 /* ball_floor.aiff */; };
+		C8C01B5E2C18152800BFD866 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C01B572C18152700BFD866 /* GameViewController.swift */; };
+		C8C01B5F2C18152800BFD866 /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C01B582C18152700BFD866 /* GameHelper.swift */; };
+		C8C01B602C18152800BFD866 /* resources.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B592C18152800BFD866 /* resources.scnassets */; };
+		C8C01B622C18153000BFD866 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8C01B612C18153000BFD866 /* Main.storyboard */; };
+		C8C03E282B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */; };
+		C8C06B252C06E6960041B796 /* GYWifiMeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C06B242C06E6960041B796 /* GYWifiMeasureViewController.swift */; };
+		C8C06B2B2C06EE600041B796 /* GYWMTotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C06B2A2C06EE600041B796 /* GYWMTotalViewController.swift */; };
+		C8C06B2E2C0707250041B796 /* GYWMModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C06B2D2C0707250041B796 /* GYWMModel.swift */; };
+		C8C06B312C07081B0041B796 /* GYWMTotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C06B302C07081B0041B796 /* GYWMTotalCell.swift */; };
+		C8C084E02B27F7DE0095F25B /* GYETDataResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C084DF2B27F7DE0095F25B /* GYETDataResultViewController.swift */; };
+		C8C15E0D2C0EA481004FDBD6 /* GYWMGraphicTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C15E0C2C0EA481004FDBD6 /* GYWMGraphicTrendViewController.swift */; };
+		C8C4C1552B43B22300065204 /* TESTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4C1542B43B22300065204 /* TESTViewController.swift */; };
+		C8C4C1582B43EC1100065204 /* GYFSGraphicRadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4C1572B43EC1100065204 /* GYFSGraphicRadarViewController.swift */; };
 		C8C4D3182A8F4539001297D2 /* GYHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4D3172A8F4539001297D2 /* GYHUD.swift */; };
 		C8C4D31E2A8F4DD9001297D2 /* CommonCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C4D31D2A8F4DD9001297D2 /* CommonCache.swift */; };
+		C8C57A282C0D53810091902E /* GYWMTotalTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C57A272C0D53810091902E /* GYWMTotalTrendViewController.swift */; };
+		C8C57A2A2C0D98D90091902E /* GYWMMidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C57A292C0D98D90091902E /* GYWMMidCell.swift */; };
+		C8C57A2E2C0DA4F90091902E /* GYWMTotalBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C57A2D2C0DA4F90091902E /* GYWMTotalBarChartViewController.swift */; };
+		C8C655E12B05BC4400DC4FC6 /* Pods_GY_app_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */; };
+		C8C656EC2B05BFF100DC4FC6 /* SpreadsheetView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8C656EB2B05BFF100DC4FC6 /* SpreadsheetView.framework */; };
+		C8C72D612AFC834700E30E9A /* GYFSTotalBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C72D602AFC834700E30E9A /* GYFSTotalBarChartViewController.swift */; };
+		C8C7FA132B0F394800B07063 /* GYTRTRadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C7FA122B0F394800B07063 /* GYTRTRadarViewController.swift */; };
+		C8C863A92C096934004DFBAE /* CollectionViewWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C863A82C096934004DFBAE /* CollectionViewWaterfallLayout.swift */; };
+		C8C863AB2C09A21B004DFBAE /* GYWMTotalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C863AA2C09A21B004DFBAE /* GYWMTotalDetailViewController.swift */; };
+		C8C863AD2C09A9C6004DFBAE /* GYWMDetaiSecCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C863AC2C09A9C6004DFBAE /* GYWMDetaiSecCell.swift */; };
 		C8C950D12A97366F00AC3FEE /* GYMyCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D02A97366F00AC3FEE /* GYMyCenterCell.swift */; };
 		C8C950D32A98490700AC3FEE /* GYDeviceTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D22A98490700AC3FEE /* GYDeviceTimeViewController.swift */; };
 		C8C950D52A98750900AC3FEE /* GYLoginTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D42A98750900AC3FEE /* GYLoginTimeViewController.swift */; };
 		C8C950D72A98777E00AC3FEE /* GYLoginTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D62A98777E00AC3FEE /* GYLoginTimeCell.swift */; };
 		C8C950D92A988EF200AC3FEE /* GYPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C950D82A988EF200AC3FEE /* GYPasswordViewController.swift */; };
+		C8CD5C112C196EA900E2BA52 /* 炉壳传感器UVa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C8CD5C102C196EA800E2BA52 /* 炉壳传感器UVa.jpg */; };
+		C8CD5C132C196EAD00E2BA52 /* CustomUVChecker_byValle_2K.png in Resources */ = {isa = PBXBuildFile; fileRef = C8CD5C122C196EAD00E2BA52 /* CustomUVChecker_byValle_2K.png */; };
+		C8CD5C152C19726F00E2BA52 /* Ball.scn in Resources */ = {isa = PBXBuildFile; fileRef = C8CD5C142C19726F00E2BA52 /* Ball.scn */; };
+		C8CD5C172C19729400E2BA52 /* Ball_Diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = C8CD5C162C19729400E2BA52 /* Ball_Diffuse.png */; };
+		C8CD5C192C19729E00E2BA52 /* Ball_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = C8CD5C182C19729E00E2BA52 /* Ball_Normal.png */; };
+		C8CF40CD2B0341AF00DE282A /* GYFSTotalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CF40CC2B0341AE00DE282A /* GYFSTotalDetailViewController.swift */; };
+		C8CF40D22B034D3700DE282A /* GYFSTotalTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CF40D12B034D3700DE282A /* GYFSTotalTrendViewController.swift */; };
+		C8D1D6A12B2A89F7008994B3 /* 1281702515263.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C8D1D6A02B2A89F7008994B3 /* 1281702515263.jpg */; };
+		C8D1D6A32B2A8A05008994B3 /* CaiJiHe_LED.obj in Resources */ = {isa = PBXBuildFile; fileRef = C8D1D6A22B2A8A05008994B3 /* CaiJiHe_LED.obj */; };
+		C8D241E72AF8908F00064574 /* GYFSTotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D241E62AF8908F00064574 /* GYFSTotalViewController.swift */; };
+		C8D241EA2AF8948600064574 /* GYFSTotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D241E92AF8948600064574 /* GYFSTotalCell.swift */; };
+		C8D241ED2AF89A0600064574 /* GYFSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D241EC2AF89A0600064574 /* GYFSModel.swift */; };
+		C8D5091A2B6F6AA70069BBAA /* GYETTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D509192B6F6AA70069BBAA /* GYETTrendViewController.swift */; };
+		C8D63F792B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D63F782B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift */; };
+		C8DAA1F12C11983900EF2641 /* GYWMDataTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DAA1F02C11983900EF2641 /* GYWMDataTimeViewController.swift */; };
 		C8DD77442A95A177003E184D /* GYNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD77432A95A177003E184D /* GYNavigationController.swift */; };
 		C8DD77472A95A246003E184D /* GYImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD77462A95A246003E184D /* GYImageExtension.swift */; };
 		C8DD77482A95A69F003E184D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8B39CDB2A6E61AD00532C53 /* LaunchScreen.storyboard */; };
 		C8DD774B2A95CFF4003E184D /* GYLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DD774A2A95CFF4003E184D /* GYLoginViewController.swift */; };
-		D9C1EF4F46FCBE70DA7B6A0C /* Pods_GY_app_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15264689D902FD38089CA6B1 /* Pods_GY_app_ios.framework */; };
+		C8DDBBC52B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DDBBC42B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift */; };
+		C8DDBBC72B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DDBBC62B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift */; };
+		C8EB0EC52AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EB0EC42AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift */; };
+		C8EB0EC72AD10BE600049C6A /* GYWTDTrendItemsGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EB0EC62AD10BE600049C6A /* GYWTDTrendItemsGroupViewController.swift */; };
+		C8EB0ECC2AD131C500049C6A /* GYWTDTrendItemsGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EB0ECB2AD131C500049C6A /* GYWTDTrendItemsGroupCell.swift */; };
+		C8FFF8AD2B26B2760067BF16 /* GYETErosionMorphologyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FFF8AC2B26B2760067BF16 /* GYETErosionMorphologyCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C8A7BBD02AE60EBF002882A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C8A7BBCA2AE60EBF002882A5 /* SpreadsheetView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 149E6A691EADE047000D851D;
+			remoteInfo = SpreadsheetView;
+		};
+		C8A7BBD22AE60EBF002882A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C8A7BBCA2AE60EBF002882A5 /* SpreadsheetView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 149E6A721EADE047000D851D;
+			remoteInfo = SpreadsheetViewTests;
+		};
+		C8A7BBD42AE60EBF002882A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C8A7BBCA2AE60EBF002882A5 /* SpreadsheetView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 149E6AA31EADE19F000D851D;
+			remoteInfo = HostApp;
+		};
 		C8B39CE42A6E61AE00532C53 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C8B39CC52A6E61AC00532C53 /* Project object */;
@@ -116,9 +235,12 @@
 		C80002682ABA877D00E7AFF9 /* GYWTDDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDetailViewController.swift; sourceTree = "<group>"; };
 		C800026A2ABADC3F00E7AFF9 /* GYWTDDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDetailCell.swift; sourceTree = "<group>"; };
 		C800026C2ABADDB100E7AFF9 /* GYWTDDetaiSecCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDetaiSecCell.swift; sourceTree = "<group>"; };
+		C80528842B4B911900A38D5F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		C80528852B4B911900A38D5F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C809AB9E2AA0650E002301BE /* GYDeviceExpireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYDeviceExpireViewController.swift; sourceTree = "<group>"; };
 		C814A2C42AB40BF500FF1E87 /* GYWTDTotalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTotalData.swift; sourceTree = "<group>"; };
 		C81A26432A8C8F3D00E40516 /* GYDefaultNetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYDefaultNetworkLogger.swift; sourceTree = "<group>"; };
+		C821FA552B2C2223004F98AD /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = "../../Downloads/assimp-master/lib/iOS/armv7/libassimp.a"; sourceTree = "<group>"; };
 		C86C35A22A832A3000AC28EC /* GYNoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYNoDataView.swift; sourceTree = "<group>"; };
 		C86C35A42A832B8D00AC28EC /* APPConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APPConstant.swift; sourceTree = "<group>"; };
 		C86C35A62A832F1800AC28EC /* UIColorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorConstant.swift; sourceTree = "<group>"; };
@@ -132,6 +254,12 @@
 		C874263C2A94983900F2382A /* gobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gobalFunction.swift; sourceTree = "<group>"; };
 		C87426402A94A13400F2382A /* GYMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYMainViewController.swift; sourceTree = "<group>"; };
 		C87426462A94A26D00F2382A /* GYMyCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYMyCenterViewController.swift; sourceTree = "<group>"; };
+		C87840062ABC2AD300E67037 /* GYWTDTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTrendViewController.swift; sourceTree = "<group>"; };
+		C896241F2AC26BA1005DE286 /* GYWTDDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDataViewController.swift; sourceTree = "<group>"; };
+		C89624222AC27448005DE286 /* GYWTDDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDataCell.swift; sourceTree = "<group>"; };
+		C89624242AC287D5005DE286 /* GYWTDDataBaseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDataBaseHeaderView.swift; sourceTree = "<group>"; };
+		C89624262AC2B7FD005DE286 /* GYWTDDataHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDataHeaderView.swift; sourceTree = "<group>"; };
+		C89624282AC2B84A005DE286 /* GYWTDDataBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDataBaseCell.swift; sourceTree = "<group>"; };
 		C897921F2A8608E900CDB5A1 /* GYNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYNetworkManager.swift; sourceTree = "<group>"; };
 		C89D32C82A8DA9AF0032C17B /* NotificationConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationConstant.swift; sourceTree = "<group>"; };
 		C89D8D7C2A9F09E10013E1B1 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
@@ -142,9 +270,111 @@
 		C89E762A2AA95FA300985EFC /* GYWaterTimeDiffHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWaterTimeDiffHeaderView.swift; sourceTree = "<group>"; };
 		C89E762C2AA97EAF00985EFC /* GYWaterTimeDiffFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWaterTimeDiffFooterView.swift; sourceTree = "<group>"; };
 		C89E762E2AA9B62000985EFC /* GYTotalWTDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTotalWTDViewController.swift; sourceTree = "<group>"; };
+		C89EE8452AC3B0680097D1DE /* GYWTDRadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDRadarViewController.swift; sourceTree = "<group>"; };
+		C89F6AE62AC11CEE00FE541A /* GYWTDTrendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTrendData.swift; sourceTree = "<group>"; };
+		C89F6AE82AC16FA800FE541A /* GYWTDTrendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTrendCell.swift; sourceTree = "<group>"; };
 		C89FE6522AA5877F003BE557 /* GYCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYCustomFlowLayout.swift; sourceTree = "<group>"; };
 		C89FE6542AA5882E003BE557 /* NumberExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtension.swift; sourceTree = "<group>"; };
 		C89FE6572AA588BB003BE557 /* GYMainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYMainViewCell.swift; sourceTree = "<group>"; };
+		C8A2BC2E2AD25389009BB260 /* GYFurnaceShellMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFurnaceShellMainViewController.swift; sourceTree = "<group>"; };
+		C8A2BC352AD25BD2009BB260 /* GYErosionThicknessMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYErosionThicknessMainViewController.swift; sourceTree = "<group>"; };
+		C8A2BC382AD25D71009BB260 /* GYThermocoupleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYThermocoupleViewController.swift; sourceTree = "<group>"; };
+		C8A3883B2AE0B23C0022410F /* GYWTDWarnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDWarnViewController.swift; sourceTree = "<group>"; };
+		C8A3883E2AE0FDC60022410F /* GYWTDWarnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDWarnCell.swift; sourceTree = "<group>"; };
+		C8A388432AE10DC00022410F /* GYWTDWarnDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDWarnDataModel.swift; sourceTree = "<group>"; };
+		C8A559C22AE222E900446837 /* GYWTDDataTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDataTimeViewController.swift; sourceTree = "<group>"; };
+		C8A658202AE7AF44003CA4AB /* GYWTDRadarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDRadarModel.swift; sourceTree = "<group>"; };
+		C8A7BB602AE60EBE002882A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C8A7BB622AE60EBE002882A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C8A7BB632AE60EBE002882A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C8A7BB642AE60EBE002882A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8A7BB652AE60EBE002882A5 /* CellRangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRangeTests.swift; sourceTree = "<group>"; };
+		C8A7BB662AE60EBE002882A5 /* MergedCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergedCellTests.swift; sourceTree = "<group>"; };
+		C8A7BB672AE60EBE002882A5 /* SelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTests.swift; sourceTree = "<group>"; };
+		C8A7BB682AE60EBE002882A5 /* HelperObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperObjects.swift; sourceTree = "<group>"; };
+		C8A7BB692AE60EBE002882A5 /* ViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
+		C8A7BB6A2AE60EBE002882A5 /* ConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTests.swift; sourceTree = "<group>"; };
+		C8A7BB6B2AE60EBE002882A5 /* DataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
+		C8A7BB6C2AE60EBE002882A5 /* ScrollTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTests.swift; sourceTree = "<group>"; };
+		C8A7BB6D2AE60EBE002882A5 /* PerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
+		C8A7BB6E2AE60EBE002882A5 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		C8A7BB6F2AE60EBE002882A5 /* CellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTests.swift; sourceTree = "<group>"; };
+		C8A7BB702AE60EBE002882A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8A7BB722AE60EBE002882A5 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		C8A7BB732AE60EBE002882A5 /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
+		C8A7BB752AE60EBE002882A5 /* highlight.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = highlight.css; sourceTree = "<group>"; };
+		C8A7BB762AE60EBE002882A5 /* jazzy.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = jazzy.css; sourceTree = "<group>"; };
+		C8A7BB782AE60EBE002882A5 /* SpreadsheetView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = SpreadsheetView.html; sourceTree = "<group>"; };
+		C8A7BB7A2AE60EBE002882A5 /* jquery.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		C8A7BB7B2AE60EBE002882A5 /* jazzy.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jazzy.js; sourceTree = "<group>"; };
+		C8A7BB7D2AE60EBE002882A5 /* Border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Border.png; sourceTree = "<group>"; };
+		C8A7BB7E2AE60EBE002882A5 /* DailySchedule_portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DailySchedule_portrait.png; sourceTree = "<group>"; };
+		C8A7BB7F2AE60EBE002882A5 /* MergedCells.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MergedCells.png; sourceTree = "<group>"; };
+		C8A7BB802AE60EBE002882A5 /* BothHeaders.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = BothHeaders.gif; sourceTree = "<group>"; };
+		C8A7BB812AE60EBE002882A5 /* Timetable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Timetable.png; sourceTree = "<group>"; };
+		C8A7BB822AE60EBE002882A5 /* CircularScrolling.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = CircularScrolling.gif; sourceTree = "<group>"; };
+		C8A7BB832AE60EBE002882A5 /* Grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grid.png; sourceTree = "<group>"; };
+		C8A7BB842AE60EBE002882A5 /* GanttChart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GanttChart.png; sourceTree = "<group>"; };
+		C8A7BB852AE60EBE002882A5 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
+		C8A7BB862AE60EBE002882A5 /* ColumnHeader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ColumnHeader.gif; sourceTree = "<group>"; };
+		C8A7BB872AE60EBE002882A5 /* DailySchedule_landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DailySchedule_landscape.png; sourceTree = "<group>"; };
+		C8A7BB882AE60EBE002882A5 /* RowHeader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = RowHeader.gif; sourceTree = "<group>"; };
+		C8A7BB892AE60EBE002882A5 /* IntercellSpacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IntercellSpacing.png; sourceTree = "<group>"; };
+		C8A7BB8B2AE60EBE002882A5 /* carat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carat.png; sourceTree = "<group>"; };
+		C8A7BB8C2AE60EBE002882A5 /* dash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dash.png; sourceTree = "<group>"; };
+		C8A7BB8D2AE60EBE002882A5 /* gh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gh.png; sourceTree = "<group>"; };
+		C8A7BB8E2AE60EBE002882A5 /* undocumented.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = undocumented.json; sourceTree = "<group>"; };
+		C8A7BB8F2AE60EBE002882A5 /* badge.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = badge.svg; sourceTree = "<group>"; };
+		C8A7BB902AE60EBE002882A5 /* Classes.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Classes.html; sourceTree = "<group>"; };
+		C8A7BB952AE60EBE002882A5 /* docSet.dsidx */ = {isa = PBXFileReference; lastKnownFileType = file; path = docSet.dsidx; sourceTree = "<group>"; };
+		C8A7BB972AE60EBE002882A5 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = index.html; sourceTree = "<group>"; };
+		C8A7BB982AE60EBE002882A5 /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
+		C8A7BB9A2AE60EBE002882A5 /* highlight.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = highlight.css; sourceTree = "<group>"; };
+		C8A7BB9B2AE60EBE002882A5 /* jazzy.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = jazzy.css; sourceTree = "<group>"; };
+		C8A7BB9D2AE60EBE002882A5 /* SpreadsheetView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = SpreadsheetView.html; sourceTree = "<group>"; };
+		C8A7BB9F2AE60EBE002882A5 /* jquery.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		C8A7BBA02AE60EBE002882A5 /* jazzy.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jazzy.js; sourceTree = "<group>"; };
+		C8A7BBA22AE60EBE002882A5 /* carat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carat.png; sourceTree = "<group>"; };
+		C8A7BBA32AE60EBE002882A5 /* dash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dash.png; sourceTree = "<group>"; };
+		C8A7BBA42AE60EBE002882A5 /* gh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gh.png; sourceTree = "<group>"; };
+		C8A7BBA52AE60EBE002882A5 /* Classes.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Classes.html; sourceTree = "<group>"; };
+		C8A7BBA62AE60EBF002882A5 /* Protocols.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = Protocols.html; sourceTree = "<group>"; };
+		C8A7BBA82AE60EBF002882A5 /* SpreadsheetViewDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = SpreadsheetViewDelegate.html; sourceTree = "<group>"; };
+		C8A7BBA92AE60EBF002882A5 /* SpreadsheetViewDataSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html.documentation; path = SpreadsheetViewDataSource.html; sourceTree = "<group>"; };
+		C8A7BBAA2AE60EBF002882A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8A7BBAB2AE60EBF002882A5 /* .tgz */ = {isa = PBXFileReference; lastKnownFileType = text; path = .tgz; sourceTree = "<group>"; };
+		C8A7BBAC2AE60EBF002882A5 /* Protocols.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Protocols.html; sourceTree = "<group>"; };
+		C8A7BBAE2AE60EBF002882A5 /* SpreadsheetViewDelegate.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = SpreadsheetViewDelegate.html; sourceTree = "<group>"; };
+		C8A7BBAF2AE60EBF002882A5 /* SpreadsheetViewDataSource.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = SpreadsheetViewDataSource.html; sourceTree = "<group>"; };
+		C8A7BBB12AE60EBF002882A5 /* SpreadsheetView+UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpreadsheetView+UIScrollView.swift"; sourceTree = "<group>"; };
+		C8A7BBB22AE60EBF002882A5 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		C8A7BBB32AE60EBF002882A5 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		C8A7BBB42AE60EBF002882A5 /* CircularScrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularScrolling.swift; sourceTree = "<group>"; };
+		C8A7BBB52AE60EBF002882A5 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		C8A7BBB62AE60EBF002882A5 /* SpreadsheetViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetViewDataSource.swift; sourceTree = "<group>"; };
+		C8A7BBB72AE60EBF002882A5 /* Borders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Borders.swift; sourceTree = "<group>"; };
+		C8A7BBB82AE60EBF002882A5 /* Array+BinarySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+BinarySearch.swift"; sourceTree = "<group>"; };
+		C8A7BBB92AE60EBF002882A5 /* ScrollPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollPosition.swift; sourceTree = "<group>"; };
+		C8A7BBBA2AE60EBF002882A5 /* SpreadsheetView+UIViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpreadsheetView+UIViewHierarchy.swift"; sourceTree = "<group>"; };
+		C8A7BBBB2AE60EBF002882A5 /* SpreadsheetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpreadsheetView.h; sourceTree = "<group>"; };
+		C8A7BBBC2AE60EBF002882A5 /* CellRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRange.swift; sourceTree = "<group>"; };
+		C8A7BBBD2AE60EBF002882A5 /* LayoutEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutEngine.swift; sourceTree = "<group>"; };
+		C8A7BBBE2AE60EBF002882A5 /* IndexPath+Column.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexPath+Column.swift"; sourceTree = "<group>"; };
+		C8A7BBBF2AE60EBF002882A5 /* SpreadsheetView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpreadsheetView+Layout.swift"; sourceTree = "<group>"; };
+		C8A7BBC02AE60EBF002882A5 /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
+		C8A7BBC12AE60EBF002882A5 /* SpreadsheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetView.swift; sourceTree = "<group>"; };
+		C8A7BBC22AE60EBF002882A5 /* SpreadsheetView+UISnapshotting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpreadsheetView+UISnapshotting.swift"; sourceTree = "<group>"; };
+		C8A7BBC32AE60EBF002882A5 /* Gridlines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gridlines.swift; sourceTree = "<group>"; };
+		C8A7BBC42AE60EBF002882A5 /* SpreadsheetViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetViewDelegate.swift; sourceTree = "<group>"; };
+		C8A7BBC52AE60EBF002882A5 /* ReuseQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseQueue.swift; sourceTree = "<group>"; };
+		C8A7BBC62AE60EBF002882A5 /* SpreadsheetView+Touches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpreadsheetView+Touches.swift"; sourceTree = "<group>"; };
+		C8A7BBC72AE60EBF002882A5 /* SpreadsheetView+CirclularScrolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpreadsheetView+CirclularScrolling.swift"; sourceTree = "<group>"; };
+		C8A7BBC82AE60EBF002882A5 /* SpreadsheetView+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpreadsheetView+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
+		C8A7BBC92AE60EBF002882A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8A7BBCA2AE60EBF002882A5 /* SpreadsheetView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SpreadsheetView.xcodeproj; sourceTree = "<group>"; };
+		C8A7BC012AE63F65002882A5 /* SpreadsheetViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpreadsheetViewCells.swift; sourceTree = "<group>"; };
+		C8A7BC042AE65D31002882A5 /* GYWTDDeviceAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDeviceAddressViewController.swift; sourceTree = "<group>"; };
+		C8A7BC072AE66B18002882A5 /* GYWTDDeviceAdressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDeviceAdressCell.swift; sourceTree = "<group>"; };
 		C8A7DAC62AAEDA660031F778 /* GYTotalWTDHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTotalWTDHeaderView.swift; sourceTree = "<group>"; };
 		C8A84A702AB14B63009A4083 /* GYUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYUnitViewController.swift; sourceTree = "<group>"; };
 		C8AA2D962A78D835005CBD77 /* GYTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTabbarController.swift; sourceTree = "<group>"; };
@@ -153,6 +383,11 @@
 		C8AA2D9F2A78DBAC005CBD77 /* GYAppDeviceConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYAppDeviceConstant.swift; sourceTree = "<group>"; };
 		C8AA2DA42A78DC91005CBD77 /* UIViewFrameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewFrameExtension.swift; sourceTree = "<group>"; };
 		C8AA2DA62A78E059005CBD77 /* GYViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYViewController.swift; sourceTree = "<group>"; };
+		C8AB605F2B01D2710094A2F2 /* GYFSBarChartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSBarChartButton.swift; sourceTree = "<group>"; };
+		C8AB6FEC2ADE2710002EFEB9 /* GYSelectGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSelectGroupViewController.swift; sourceTree = "<group>"; };
+		C8AB6FEE2ADE29BE002EFEB9 /* GYSelectGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSelectGroupCell.swift; sourceTree = "<group>"; };
+		C8AB6FF12ADE67EA002EFEB9 /* GYWTDData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDData.swift; sourceTree = "<group>"; };
+		C8AB6FF32ADE79B1002EFEB9 /* GYWTDDataBaseBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDDataBaseBaseCell.swift; sourceTree = "<group>"; };
 		C8AC912D2A9346B00081DF90 /* GYCodingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYCodingObject.swift; sourceTree = "<group>"; };
 		C8AD079B2AAB0A6D00526DCB /* GYTotalWTDCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTotalWTDCell.swift; sourceTree = "<group>"; };
 		C8AE7C5D2AA8402D006B9748 /* GYWaterTemDiffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWaterTemDiffViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +396,8 @@
 		C8B30EDF2AB2D3F800570901 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		C8B30EE22AB2E84C00570901 /* GYSelectWaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSelectWaterViewController.swift; sourceTree = "<group>"; };
 		C8B30EE42AB2F5DD00570901 /* GYSelectWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYSelectWaterCell.swift; sourceTree = "<group>"; };
+		C8B33AF92B4694C40011626D /* SBRadarCharts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRadarCharts.h; sourceTree = "<group>"; };
+		C8B33AFA2B4694C60011626D /* SBRadarCharts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRadarCharts.m; sourceTree = "<group>"; };
 		C8B39CCD2A6E61AC00532C53 /* GY_app_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GY_app_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B39CD02A6E61AC00532C53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8B39CD92A6E61AD00532C53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -171,6 +408,18 @@
 		C8B39CED2A6E61AE00532C53 /* GY_app_iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GY_app_iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B39CF12A6E61AE00532C53 /* GY_app_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GY_app_iosUITests.swift; sourceTree = "<group>"; };
 		C8B39CF32A6E61AE00532C53 /* GY_app_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GY_app_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C8B5EF832AFE152A00887C33 /* GYTotalBarChartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTotalBarChartModel.swift; sourceTree = "<group>"; };
+		C8B687C22B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETStereoscopicMorphologyViewController.swift; sourceTree = "<group>"; };
+		C8B687C52B2989BF000768FC /* armadillo.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = armadillo.obj; sourceTree = "<group>"; };
+		C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */ = {isa = PBXFileReference; lastKnownFileType = file; path = CaiJiHe_LED.fbx; sourceTree = "<group>"; };
+		C8B9F8122C19650200A90C91 /* test.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = test.dae; sourceTree = "<group>"; };
+		C8B9F8132C19650200A90C91 /* 高炉主体003.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "高炉主体003.dae"; sourceTree = "<group>"; };
+		C8B9F8142C19650200A90C91 /* 高炉主体002.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "高炉主体002.dae"; sourceTree = "<group>"; };
+		C8B9F8152C19650200A90C91 /* 水温差002.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "水温差002.dae"; sourceTree = "<group>"; };
+		C8B9F8162C19650200A90C91 /* 水温差001.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "水温差001.dae"; sourceTree = "<group>"; };
+		C8B9F8172C19650200A90C91 /* 地面001.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "地面001.dae"; sourceTree = "<group>"; };
+		C8B9F8182C19650200A90C91 /* 炉壳001.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "炉壳001.dae"; sourceTree = "<group>"; };
+		C8B9F8192C19650200A90C91 /* 热电偶001.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "热电偶001.dae"; sourceTree = "<group>"; };
 		C8BBE0FE2A9C46CC00E4CACE /* UIViewController+ZEJPresent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ZEJPresent.m"; sourceTree = "<group>"; };
 		C8BBE0FF2A9C46CC00E4CACE /* UIViewController+ZEJPresent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ZEJPresent.h"; sourceTree = "<group>"; };
 		C8BBE1022A9C46CC00E4CACE /* ZEJRollDownPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZEJRollDownPresentationController.m; sourceTree = "<group>"; };
@@ -192,16 +441,77 @@
 		C8BBE1202A9C484A00E4CACE /* GYUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYUpdateViewController.swift; sourceTree = "<group>"; };
 		C8BBE12A2A9C626A00E4CACE /* GY_app_ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GY_app_ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		C8BBE12E2A9C87E700E4CACE /* GYApiCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYApiCenter.swift; sourceTree = "<group>"; };
+		C8BC3B992B47F3E30052A236 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		C8BC3B9B2B47F3E70052A236 /* o3dv.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = o3dv.min.js; sourceTree = "<group>"; };
+		C8BC3E472B454FDF00B6CD93 /* GYMainFlagData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYMainFlagData.swift; sourceTree = "<group>"; };
+		C8BCA2122B0458BB005EE9D6 /* GYGraphicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGraphicViewController.swift; sourceTree = "<group>"; };
+		C8BCA2192B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYGraphicBarChartViewController.swift; sourceTree = "<group>"; };
+		C8BCB3992C102F2B00952C5D /* GYWMGraphicBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMGraphicBarChartViewController.swift; sourceTree = "<group>"; };
+		C8BCB39B2C10310400952C5D /* GYWMGraphicRadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMGraphicRadarViewController.swift; sourceTree = "<group>"; };
+		C8BD5E7A2B19CC2900F4A50A /* GYFSDataTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSDataTimeViewController.swift; sourceTree = "<group>"; };
+		C8BF8FAA2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSGraphicTrendViewController.swift; sourceTree = "<group>"; };
+		C8BF8FAE2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSDeviceAddressViewController.swift; sourceTree = "<group>"; };
+		C8BF8FB52B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYThermocoupleReadlTimeDataViewController.swift; sourceTree = "<group>"; };
+		C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTHCurveViewController.swift; sourceTree = "<group>"; };
+		C8C01B532C18152700BFD866 /* ball_can.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ball_can.aiff; sourceTree = "<group>"; };
+		C8C01B542C18152700BFD866 /* can_floor.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = can_floor.aiff; sourceTree = "<group>"; };
+		C8C01B552C18152700BFD866 /* whoosh.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = whoosh.aiff; sourceTree = "<group>"; };
+		C8C01B562C18152700BFD866 /* ball_floor.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ball_floor.aiff; sourceTree = "<group>"; };
+		C8C01B572C18152700BFD866 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		C8C01B582C18152700BFD866 /* GameHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
+		C8C01B592C18152800BFD866 /* resources.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = resources.scnassets; sourceTree = "<group>"; };
+		C8C01B612C18153000BFD866 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETErosionMorphologyViewController.swift; sourceTree = "<group>"; };
+		C8C06B242C06E6960041B796 /* GYWifiMeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWifiMeasureViewController.swift; sourceTree = "<group>"; };
+		C8C06B2A2C06EE600041B796 /* GYWMTotalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalViewController.swift; sourceTree = "<group>"; };
+		C8C06B2D2C0707250041B796 /* GYWMModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMModel.swift; sourceTree = "<group>"; };
+		C8C06B302C07081B0041B796 /* GYWMTotalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalCell.swift; sourceTree = "<group>"; };
+		C8C084DF2B27F7DE0095F25B /* GYETDataResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETDataResultViewController.swift; sourceTree = "<group>"; };
+		C8C15E0C2C0EA481004FDBD6 /* GYWMGraphicTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMGraphicTrendViewController.swift; sourceTree = "<group>"; };
+		C8C4C1542B43B22300065204 /* TESTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TESTViewController.swift; sourceTree = "<group>"; };
+		C8C4C1572B43EC1100065204 /* GYFSGraphicRadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSGraphicRadarViewController.swift; sourceTree = "<group>"; };
 		C8C4D3172A8F4539001297D2 /* GYHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYHUD.swift; sourceTree = "<group>"; };
 		C8C4D31D2A8F4DD9001297D2 /* CommonCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCache.swift; sourceTree = "<group>"; };
+		C8C57A272C0D53810091902E /* GYWMTotalTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalTrendViewController.swift; sourceTree = "<group>"; };
+		C8C57A292C0D98D90091902E /* GYWMMidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMMidCell.swift; sourceTree = "<group>"; };
+		C8C57A2D2C0DA4F90091902E /* GYWMTotalBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalBarChartViewController.swift; sourceTree = "<group>"; };
+		C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GY_app_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8C656EB2B05BFF100DC4FC6 /* SpreadsheetView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SpreadsheetView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8C72D602AFC834700E30E9A /* GYFSTotalBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalBarChartViewController.swift; sourceTree = "<group>"; };
+		C8C7FA122B0F394800B07063 /* GYTRTRadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarViewController.swift; sourceTree = "<group>"; };
+		C8C863A82C096934004DFBAE /* CollectionViewWaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewWaterfallLayout.swift; sourceTree = "<group>"; };
+		C8C863AA2C09A21B004DFBAE /* GYWMTotalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMTotalDetailViewController.swift; sourceTree = "<group>"; };
+		C8C863AC2C09A9C6004DFBAE /* GYWMDetaiSecCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMDetaiSecCell.swift; sourceTree = "<group>"; };
 		C8C950D02A97366F00AC3FEE /* GYMyCenterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYMyCenterCell.swift; sourceTree = "<group>"; };
 		C8C950D22A98490700AC3FEE /* GYDeviceTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYDeviceTimeViewController.swift; sourceTree = "<group>"; };
 		C8C950D42A98750900AC3FEE /* GYLoginTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginTimeViewController.swift; sourceTree = "<group>"; };
 		C8C950D62A98777E00AC3FEE /* GYLoginTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginTimeCell.swift; sourceTree = "<group>"; };
 		C8C950D82A988EF200AC3FEE /* GYPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYPasswordViewController.swift; sourceTree = "<group>"; };
+		C8CD5C102C196EA800E2BA52 /* 炉壳传感器UVa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "炉壳传感器UVa.jpg"; sourceTree = "<group>"; };
+		C8CD5C122C196EAD00E2BA52 /* CustomUVChecker_byValle_2K.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CustomUVChecker_byValle_2K.png; sourceTree = "<group>"; };
+		C8CD5C142C19726F00E2BA52 /* Ball.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Ball.scn; sourceTree = "<group>"; };
+		C8CD5C162C19729400E2BA52 /* Ball_Diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Diffuse.png; sourceTree = "<group>"; };
+		C8CD5C182C19729E00E2BA52 /* Ball_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Normal.png; sourceTree = "<group>"; };
+		C8CF40CC2B0341AE00DE282A /* GYFSTotalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalDetailViewController.swift; sourceTree = "<group>"; };
+		C8CF40D12B034D3700DE282A /* GYFSTotalTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalTrendViewController.swift; sourceTree = "<group>"; };
+		C8D0DEA32C2286A700A91695 /* AAInfographics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AAInfographics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8D1D6A02B2A89F7008994B3 /* 1281702515263.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1281702515263.jpg; sourceTree = "<group>"; };
+		C8D1D6A22B2A8A05008994B3 /* CaiJiHe_LED.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CaiJiHe_LED.obj; sourceTree = "<group>"; };
+		C8D241E62AF8908F00064574 /* GYFSTotalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalViewController.swift; sourceTree = "<group>"; };
+		C8D241E92AF8948600064574 /* GYFSTotalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSTotalCell.swift; sourceTree = "<group>"; };
+		C8D241EC2AF89A0600064574 /* GYFSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYFSModel.swift; sourceTree = "<group>"; };
+		C8D509192B6F6AA70069BBAA /* GYETTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETTrendViewController.swift; sourceTree = "<group>"; };
+		C8D63F782B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYThermocoupleHistoryDataViewController.swift; sourceTree = "<group>"; };
+		C8DAA1F02C11983900EF2641 /* GYWMDataTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWMDataTimeViewController.swift; sourceTree = "<group>"; };
 		C8DD77432A95A177003E184D /* GYNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYNavigationController.swift; sourceTree = "<group>"; };
 		C8DD77462A95A246003E184D /* GYImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYImageExtension.swift; sourceTree = "<group>"; };
 		C8DD774A2A95CFF4003E184D /* GYLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYLoginViewController.swift; sourceTree = "<group>"; };
+		C8DDBBC42B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarDetailViewController.swift; sourceTree = "<group>"; };
+		C8DDBBC62B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYTRTRadarDetailTrendViewController.swift; sourceTree = "<group>"; };
+		C8EB0EC42AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTrendItemsViewController.swift; sourceTree = "<group>"; };
+		C8EB0EC62AD10BE600049C6A /* GYWTDTrendItemsGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTrendItemsGroupViewController.swift; sourceTree = "<group>"; };
+		C8EB0ECB2AD131C500049C6A /* GYWTDTrendItemsGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYWTDTrendItemsGroupCell.swift; sourceTree = "<group>"; };
+		C8FFF8AC2B26B2760067BF16 /* GYETErosionMorphologyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GYETErosionMorphologyCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,7 +519,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9C1EF4F46FCBE70DA7B6A0C /* Pods_GY_app_ios.framework in Frameworks */,
+				C8C656EC2B05BFF100DC4FC6 /* SpreadsheetView.framework in Frameworks */,
+				C8C655E12B05BC4400DC4FC6 /* Pods_GY_app_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +546,11 @@
 		301D7CBE22A177CDCCAD3D21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C8D0DEA32C2286A700A91695 /* AAInfographics.framework */,
+				C821FA552B2C2223004F98AD /* libassimp.a */,
+				C8C656EB2B05BFF100DC4FC6 /* SpreadsheetView.framework */,
+				C8C655E02B05BC4400DC4FC6 /* Pods_GY_app_ios.framework */,
+				C8A7BB5D2AE60EBE002882A5 /* Framework */,
 				15264689D902FD38089CA6B1 /* Pods_GY_app_ios.framework */,
 				B22EADA5C7E1967A85F29021 /* Pods_GY_app_ios_GY_app_iosUITests.framework */,
 				0BC4B0710A53F106A511AAA8 /* Pods_GY_app_iosTests.framework */,
@@ -258,6 +574,7 @@
 		C81A26422A8C8F1000E40516 /* NetWork */ = {
 			isa = PBXGroup;
 			children = (
+				C86C35A42A832B8D00AC28EC /* APPConstant.swift */,
 				C897921F2A8608E900CDB5A1 /* GYNetworkManager.swift */,
 				C81A26432A8C8F3D00E40516 /* GYDefaultNetworkLogger.swift */,
 				C87426342A94513900F2382A /* URLEncodedFormProtobufParameterEncoder.swift */,
@@ -290,7 +607,11 @@
 		C86C35AF2A8341C100AC28EC /* Moudles */ = {
 			isa = PBXGroup;
 			children = (
-				C8AE7C5B2AA83FBD006B9748 /* WaterTemDiff */,
+				C8AE7C5B2AA83FBD006B9748 /* WaterTemDiff【水温差】 */,
+				C8A2BC2B2AD24C05009BB260 /* FurnaceShell【炉壳温度】 */,
+				C8A2BC342AD25BB4009BB260 /* ErosionThickness【侵蚀结厚】 */,
+				C8A2BC372AD25D54009BB260 /* Thermocouple【热电偶】 */,
+				C8C06B232C06D5350041B796 /* WifiMeasure【无线测温】 */,
 				C87426422A94A1F700F2382A /* MyCenter */,
 				C874263E2A94A10900F2382A /* Main */,
 				C8AC912C2A9346970081DF90 /* Login */,
@@ -301,6 +622,7 @@
 		C874263E2A94A10900F2382A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				C8BC3E462B454FB700B6CD93 /* Model */,
 				C89FE6562AA5889D003BE557 /* View */,
 				C874263F2A94A11200F2382A /* Controller */,
 			);
@@ -337,10 +659,451 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		C896241B2AC26B51005DE286 /* Total【总览】 */ = {
+			isa = PBXGroup;
+			children = (
+				C896241C2AC26B75005DE286 /* Total【总览】 */,
+				C896241D2AC26B7F005DE286 /* Data【数据】 */,
+				C89EE8432AC3B0340097D1DE /* Radar【雷达图】 */,
+			);
+			path = "Total【总览】";
+			sourceTree = "<group>";
+		};
+		C896241C2AC26B75005DE286 /* Total【总览】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8B30EE12AB2D6C300570901 /* Model */,
+				C8AE7C5F2AA861EF006B9748 /* View */,
+				C8AE7C5C2AA83FD1006B9748 /* Controller */,
+			);
+			path = "Total【总览】";
+			sourceTree = "<group>";
+		};
+		C896241D2AC26B7F005DE286 /* Data【数据】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8AB6FF02ADE67C2002EFEB9 /* Model */,
+				C89624212AC27243005DE286 /* View */,
+				C896241E2AC26B86005DE286 /* Controller */,
+			);
+			path = "Data【数据】";
+			sourceTree = "<group>";
+		};
+		C896241E2AC26B86005DE286 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C896241F2AC26BA1005DE286 /* GYWTDDataViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C89624212AC27243005DE286 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C89624222AC27448005DE286 /* GYWTDDataCell.swift */,
+				C89624282AC2B84A005DE286 /* GYWTDDataBaseCell.swift */,
+				C8AB6FF32ADE79B1002EFEB9 /* GYWTDDataBaseBaseCell.swift */,
+				C89624242AC287D5005DE286 /* GYWTDDataBaseHeaderView.swift */,
+				C89624262AC2B7FD005DE286 /* GYWTDDataHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C89EE8432AC3B0340097D1DE /* Radar【雷达图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8A6581C2AE7AED2003CA4AB /* Model */,
+				C89EE8472AC3B5AC0097D1DE /* View */,
+				C89EE8442AC3B04A0097D1DE /* Controller */,
+			);
+			path = "Radar【雷达图】";
+			sourceTree = "<group>";
+		};
+		C89EE8442AC3B04A0097D1DE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C89EE8452AC3B0680097D1DE /* GYWTDRadarViewController.swift */,
+				C8AB6FEC2ADE2710002EFEB9 /* GYSelectGroupViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C89EE8472AC3B5AC0097D1DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8AB6FEE2ADE29BE002EFEB9 /* GYSelectGroupCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C89FE6562AA5889D003BE557 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				C89FE6572AA588BB003BE557 /* GYMainViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C8A2BC2B2AD24C05009BB260 /* FurnaceShell【炉壳温度】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8A2BC2E2AD25389009BB260 /* GYFurnaceShellMainViewController.swift */,
+				C8C72D5A2AFC7C6000E30E9A /* Total【总览】 */,
+				C8BCA2142B04AF83005EE9D6 /* Graphic【图示】 */,
+				C8BD5E772B19C77D00F4A50A /* Data【数据】 */,
+				C8BF8FAC2B1D589200FF9D65 /* Equipment【设备巡检】 */,
+			);
+			path = "FurnaceShell【炉壳温度】";
+			sourceTree = "<group>";
+		};
+		C8A2BC342AD25BB4009BB260 /* ErosionThickness【侵蚀结厚】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8A2BC352AD25BD2009BB260 /* GYErosionThicknessMainViewController.swift */,
+				C8C03E252B22BB94004C77B1 /* ErosionMorphology 【侵蚀形貌】 */,
+				C8C084DD2B27F7970095F25B /* DataResult【数据结果】 */,
+				C8B687C02B293A66000768FC /* StereoscopicMorphology 【立体形貌】 */,
+				C8D509122B6F69370069BBAA /* HistoryCurve【历史曲线】 */,
+			);
+			path = "ErosionThickness【侵蚀结厚】";
+			sourceTree = "<group>";
+		};
+		C8A2BC372AD25D54009BB260 /* Thermocouple【热电偶】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8A2BC382AD25D71009BB260 /* GYThermocoupleViewController.swift */,
+				C8C7FA0F2B0F2CB700B07063 /* RealTime【实时】 */,
+				C8BF8FB02B1D5B3F00FF9D65 /* History【历史】 */,
+			);
+			path = "Thermocouple【热电偶】";
+			sourceTree = "<group>";
+		};
+		C8A3883A2AE0B2120022410F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8A3883B2AE0B23C0022410F /* GYWTDWarnViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8A3883D2AE0FDB20022410F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8A3883E2AE0FDC60022410F /* GYWTDWarnCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C8A388422AE10DA80022410F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8A388432AE10DC00022410F /* GYWTDWarnDataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8A559C12AE221AF00446837 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8A559C22AE222E900446837 /* GYWTDDataTimeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8A6581C2AE7AED2003CA4AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8A658202AE7AF44003CA4AB /* GYWTDRadarModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8A7BB5D2AE60EBE002882A5 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB5E2AE60EBE002882A5 /* Tests */,
+				C8A7BB712AE60EBE002882A5 /* docs */,
+				C8A7BBB02AE60EBF002882A5 /* Sources */,
+				C8A7BBCA2AE60EBF002882A5 /* SpreadsheetView.xcodeproj */,
+			);
+			name = Framework;
+			path = ../Framework;
+			sourceTree = "<group>";
+		};
+		C8A7BB5E2AE60EBE002882A5 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB5F2AE60EBE002882A5 /* HostApp */,
+				C8A7BB652AE60EBE002882A5 /* CellRangeTests.swift */,
+				C8A7BB662AE60EBE002882A5 /* MergedCellTests.swift */,
+				C8A7BB672AE60EBE002882A5 /* SelectionTests.swift */,
+				C8A7BB682AE60EBE002882A5 /* HelperObjects.swift */,
+				C8A7BB692AE60EBE002882A5 /* ViewTests.swift */,
+				C8A7BB6A2AE60EBE002882A5 /* ConfigurationTests.swift */,
+				C8A7BB6B2AE60EBE002882A5 /* DataSourceTests.swift */,
+				C8A7BB6C2AE60EBE002882A5 /* ScrollTests.swift */,
+				C8A7BB6D2AE60EBE002882A5 /* PerformanceTests.swift */,
+				C8A7BB6E2AE60EBE002882A5 /* HelperFunctions.swift */,
+				C8A7BB6F2AE60EBE002882A5 /* CellTests.swift */,
+				C8A7BB702AE60EBE002882A5 /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		C8A7BB5F2AE60EBE002882A5 /* HostApp */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB602AE60EBE002882A5 /* Assets.xcassets */,
+				C8A7BB612AE60EBE002882A5 /* LaunchScreen.storyboard */,
+				C8A7BB632AE60EBE002882A5 /* AppDelegate.swift */,
+				C8A7BB642AE60EBE002882A5 /* Info.plist */,
+			);
+			path = HostApp;
+			sourceTree = "<group>";
+		};
+		C8A7BB712AE60EBE002882A5 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB722AE60EBE002882A5 /* index.html */,
+				C8A7BB732AE60EBE002882A5 /* search.json */,
+				C8A7BB742AE60EBE002882A5 /* css */,
+				C8A7BB772AE60EBE002882A5 /* Classes */,
+				C8A7BB792AE60EBE002882A5 /* js */,
+				C8A7BB7C2AE60EBE002882A5 /* Resources */,
+				C8A7BB8A2AE60EBE002882A5 /* img */,
+				C8A7BB8E2AE60EBE002882A5 /* undocumented.json */,
+				C8A7BB8F2AE60EBE002882A5 /* badge.svg */,
+				C8A7BB902AE60EBE002882A5 /* Classes.html */,
+				C8A7BB912AE60EBE002882A5 /* docsets */,
+				C8A7BBAC2AE60EBF002882A5 /* Protocols.html */,
+				C8A7BBAD2AE60EBF002882A5 /* Protocols */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
+		C8A7BB742AE60EBE002882A5 /* css */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB752AE60EBE002882A5 /* highlight.css */,
+				C8A7BB762AE60EBE002882A5 /* jazzy.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		C8A7BB772AE60EBE002882A5 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB782AE60EBE002882A5 /* SpreadsheetView.html */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		C8A7BB792AE60EBE002882A5 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB7A2AE60EBE002882A5 /* jquery.min.js */,
+				C8A7BB7B2AE60EBE002882A5 /* jazzy.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		C8A7BB7C2AE60EBE002882A5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB7D2AE60EBE002882A5 /* Border.png */,
+				C8A7BB7E2AE60EBE002882A5 /* DailySchedule_portrait.png */,
+				C8A7BB7F2AE60EBE002882A5 /* MergedCells.png */,
+				C8A7BB802AE60EBE002882A5 /* BothHeaders.gif */,
+				C8A7BB812AE60EBE002882A5 /* Timetable.png */,
+				C8A7BB822AE60EBE002882A5 /* CircularScrolling.gif */,
+				C8A7BB832AE60EBE002882A5 /* Grid.png */,
+				C8A7BB842AE60EBE002882A5 /* GanttChart.png */,
+				C8A7BB852AE60EBE002882A5 /* Logo.png */,
+				C8A7BB862AE60EBE002882A5 /* ColumnHeader.gif */,
+				C8A7BB872AE60EBE002882A5 /* DailySchedule_landscape.png */,
+				C8A7BB882AE60EBE002882A5 /* RowHeader.gif */,
+				C8A7BB892AE60EBE002882A5 /* IntercellSpacing.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C8A7BB8A2AE60EBE002882A5 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB8B2AE60EBE002882A5 /* carat.png */,
+				C8A7BB8C2AE60EBE002882A5 /* dash.png */,
+				C8A7BB8D2AE60EBE002882A5 /* gh.png */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+		C8A7BB912AE60EBE002882A5 /* docsets */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB922AE60EBE002882A5 /* .docset */,
+				C8A7BBAB2AE60EBF002882A5 /* .tgz */,
+			);
+			path = docsets;
+			sourceTree = "<group>";
+		};
+		C8A7BB922AE60EBE002882A5 /* .docset */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB932AE60EBE002882A5 /* Contents */,
+			);
+			path = .docset;
+			sourceTree = "<group>";
+		};
+		C8A7BB932AE60EBE002882A5 /* Contents */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB942AE60EBE002882A5 /* Resources */,
+				C8A7BBAA2AE60EBF002882A5 /* Info.plist */,
+			);
+			path = Contents;
+			sourceTree = "<group>";
+		};
+		C8A7BB942AE60EBE002882A5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB952AE60EBE002882A5 /* docSet.dsidx */,
+				C8A7BB962AE60EBE002882A5 /* Documents */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C8A7BB962AE60EBE002882A5 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB972AE60EBE002882A5 /* index.html */,
+				C8A7BB982AE60EBE002882A5 /* search.json */,
+				C8A7BB992AE60EBE002882A5 /* css */,
+				C8A7BB9C2AE60EBE002882A5 /* Classes */,
+				C8A7BB9E2AE60EBE002882A5 /* js */,
+				C8A7BBA12AE60EBE002882A5 /* img */,
+				C8A7BBA52AE60EBE002882A5 /* Classes.html */,
+				C8A7BBA62AE60EBF002882A5 /* Protocols.html */,
+				C8A7BBA72AE60EBF002882A5 /* Protocols */,
+			);
+			path = Documents;
+			sourceTree = "<group>";
+		};
+		C8A7BB992AE60EBE002882A5 /* css */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB9A2AE60EBE002882A5 /* highlight.css */,
+				C8A7BB9B2AE60EBE002882A5 /* jazzy.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		C8A7BB9C2AE60EBE002882A5 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB9D2AE60EBE002882A5 /* SpreadsheetView.html */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		C8A7BB9E2AE60EBE002882A5 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BB9F2AE60EBE002882A5 /* jquery.min.js */,
+				C8A7BBA02AE60EBE002882A5 /* jazzy.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		C8A7BBA12AE60EBE002882A5 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BBA22AE60EBE002882A5 /* carat.png */,
+				C8A7BBA32AE60EBE002882A5 /* dash.png */,
+				C8A7BBA42AE60EBE002882A5 /* gh.png */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+		C8A7BBA72AE60EBF002882A5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BBA82AE60EBF002882A5 /* SpreadsheetViewDelegate.html */,
+				C8A7BBA92AE60EBF002882A5 /* SpreadsheetViewDataSource.html */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C8A7BBAD2AE60EBF002882A5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BBAE2AE60EBF002882A5 /* SpreadsheetViewDelegate.html */,
+				C8A7BBAF2AE60EBF002882A5 /* SpreadsheetViewDataSource.html */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C8A7BBB02AE60EBF002882A5 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BBB12AE60EBF002882A5 /* SpreadsheetView+UIScrollView.swift */,
+				C8A7BBB22AE60EBF002882A5 /* Location.swift */,
+				C8A7BBB32AE60EBF002882A5 /* Address.swift */,
+				C8A7BBB42AE60EBF002882A5 /* CircularScrolling.swift */,
+				C8A7BBB52AE60EBF002882A5 /* Cell.swift */,
+				C8A7BBB62AE60EBF002882A5 /* SpreadsheetViewDataSource.swift */,
+				C8A7BBB72AE60EBF002882A5 /* Borders.swift */,
+				C8A7BBB82AE60EBF002882A5 /* Array+BinarySearch.swift */,
+				C8A7BBB92AE60EBF002882A5 /* ScrollPosition.swift */,
+				C8A7BBBA2AE60EBF002882A5 /* SpreadsheetView+UIViewHierarchy.swift */,
+				C8A7BBBB2AE60EBF002882A5 /* SpreadsheetView.h */,
+				C8A7BBBC2AE60EBF002882A5 /* CellRange.swift */,
+				C8A7BBBD2AE60EBF002882A5 /* LayoutEngine.swift */,
+				C8A7BBBE2AE60EBF002882A5 /* IndexPath+Column.swift */,
+				C8A7BBBF2AE60EBF002882A5 /* SpreadsheetView+Layout.swift */,
+				C8A7BBC02AE60EBF002882A5 /* ScrollView.swift */,
+				C8A7BBC12AE60EBF002882A5 /* SpreadsheetView.swift */,
+				C8A7BBC22AE60EBF002882A5 /* SpreadsheetView+UISnapshotting.swift */,
+				C8A7BBC32AE60EBF002882A5 /* Gridlines.swift */,
+				C8A7BBC42AE60EBF002882A5 /* SpreadsheetViewDelegate.swift */,
+				C8A7BBC52AE60EBF002882A5 /* ReuseQueue.swift */,
+				C8A7BBC62AE60EBF002882A5 /* SpreadsheetView+Touches.swift */,
+				C8A7BBC72AE60EBF002882A5 /* SpreadsheetView+CirclularScrolling.swift */,
+				C8A7BBC82AE60EBF002882A5 /* SpreadsheetView+UIScrollViewDelegate.swift */,
+				C8A7BBC92AE60EBF002882A5 /* Info.plist */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		C8A7BBCB2AE60EBF002882A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BBD12AE60EBF002882A5 /* SpreadsheetView.framework */,
+				C8A7BBD32AE60EBF002882A5 /* SpreadsheetViewTests.xctest */,
+				C8A7BBD52AE60EBF002882A5 /* HostApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C8A7BBFD2AE63F53002882A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BC012AE63F65002882A5 /* SpreadsheetViewCells.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C8A7BC032AE65CF7002882A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BC042AE65D31002882A5 /* GYWTDDeviceAddressViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8A7BC062AE66AF9002882A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BC072AE66B18002882A5 /* GYWTDDeviceAdressCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -368,7 +1131,6 @@
 			isa = PBXGroup;
 			children = (
 				C8AA2D9F2A78DBAC005CBD77 /* GYAppDeviceConstant.swift */,
-				C86C35A42A832B8D00AC28EC /* APPConstant.swift */,
 				C86C35A62A832F1800AC28EC /* UIColorConstant.swift */,
 				C86C35A82A8331BE00AC28EC /* SpacingConstant.swift */,
 				C89D32C82A8DA9AF0032C17B /* NotificationConstant.swift */,
@@ -392,11 +1154,26 @@
 			path = UIExtension;
 			sourceTree = "<group>";
 		};
+		C8AB605B2B01D2570094A2F2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8AB605F2B01D2710094A2F2 /* GYFSBarChartButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C8AB6FF02ADE67C2002EFEB9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8AB6FF12ADE67EA002EFEB9 /* GYWTDData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C8AC912C2A9346970081DF90 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				C8DD77492A95CFDF003E184D /* Controller */,
-				C8AC912F2A9346B60081DF90 /* Model */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -411,25 +1188,32 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		C8AE7C5B2AA83FBD006B9748 /* WaterTemDiff */ = {
+		C8AE7C5B2AA83FBD006B9748 /* WaterTemDiff【水温差】 */ = {
 			isa = PBXGroup;
 			children = (
-				C8B30EE12AB2D6C300570901 /* Model */,
-				C8AE7C5F2AA861EF006B9748 /* View */,
-				C8AE7C5C2AA83FD1006B9748 /* Controller */,
+				C8AE7C5D2AA8402D006B9748 /* GYWaterTemDiffViewController.swift */,
+				C8AE7C602AA8620D006B9748 /* GYWaterTemDiffCell.swift */,
+				C89E762A2AA95FA300985EFC /* GYWaterTimeDiffHeaderView.swift */,
+				C89E762C2AA97EAF00985EFC /* GYWaterTimeDiffFooterView.swift */,
+				C896241B2AC26B51005DE286 /* Total【总览】 */,
+				C8BCA20D2B045857005EE9D6 /* Graphic【图示】 */,
+				C8EB0EC02AD0EE8F00049C6A /* Trend【趋势】 */,
+				C8EB0ECE2AD134CD00049C6A /* Warn【报警】 */,
+				C8EB0ECD2AD134A400049C6A /* Data【数据】 */,
+				C8EB0ECF2AD134DD00049C6A /* Equipment【设备巡检】 */,
 			);
-			path = WaterTemDiff;
+			path = "WaterTemDiff【水温差】";
 			sourceTree = "<group>";
 		};
 		C8AE7C5C2AA83FD1006B9748 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C8AE7C5D2AA8402D006B9748 /* GYWaterTemDiffViewController.swift */,
 				C89E762E2AA9B62000985EFC /* GYTotalWTDViewController.swift */,
 				C8A84A702AB14B63009A4083 /* GYUnitViewController.swift */,
 				C8B30EDD2AB2934300570901 /* GYSelectWTDViewController.swift */,
 				C8B30EE22AB2E84C00570901 /* GYSelectWaterViewController.swift */,
 				C80002682ABA877D00E7AFF9 /* GYWTDDetailViewController.swift */,
+				C87840062ABC2AD300E67037 /* GYWTDTrendViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -437,9 +1221,6 @@
 		C8AE7C5F2AA861EF006B9748 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C8AE7C602AA8620D006B9748 /* GYWaterTemDiffCell.swift */,
-				C89E762A2AA95FA300985EFC /* GYWaterTimeDiffHeaderView.swift */,
-				C89E762C2AA97EAF00985EFC /* GYWaterTimeDiffFooterView.swift */,
 				C8AD079B2AAB0A6D00526DCB /* GYTotalWTDCell.swift */,
 				C89E13382AB013BD00ECC5AA /* GYTotalWTDTVCell.swift */,
 				C8A7DAC62AAEDA660031F778 /* GYTotalWTDHeaderView.swift */,
@@ -447,6 +1228,7 @@
 				C8B30EE42AB2F5DD00570901 /* GYSelectWaterCell.swift */,
 				C800026A2ABADC3F00E7AFF9 /* GYWTDDetailCell.swift */,
 				C800026C2ABADDB100E7AFF9 /* GYWTDDetaiSecCell.swift */,
+				C89F6AE82AC16FA800FE541A /* GYWTDTrendCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -455,6 +1237,7 @@
 			isa = PBXGroup;
 			children = (
 				C814A2C42AB40BF500FF1E87 /* GYWTDTotalData.swift */,
+				C89F6AE62AC11CEE00FE541A /* GYWTDTrendData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -484,7 +1267,19 @@
 		C8B39CCF2A6E61AC00532C53 /* GY_app_ios */ = {
 			isa = PBXGroup;
 			children = (
+				C8B9F8112C19650200A90C91 /* dae_moder */,
 				C8B39CD02A6E61AC00532C53 /* AppDelegate.swift */,
+				C8C01B582C18152700BFD866 /* GameHelper.swift */,
+				C8C01B572C18152700BFD866 /* GameViewController.swift */,
+				C8C01B612C18153000BFD866 /* Main.storyboard */,
+				C8C01B592C18152800BFD866 /* resources.scnassets */,
+				C8C01B522C18152700BFD866 /* sounds */,
+				C8C4C1542B43B22300065204 /* TESTViewController.swift */,
+				C80528842B4B911900A38D5F /* ViewController.h */,
+				C80528852B4B911900A38D5F /* ViewController.m */,
+				C8BC3B992B47F3E30052A236 /* index.html */,
+				C8BC3B9B2B47F3E70052A236 /* o3dv.min.js */,
+				C8B687CA2B2992E7000768FC /* CaiJiHe_LED.fbx */,
 				C8BBE12A2A9C626A00E4CACE /* GY_app_ios-Bridging-Header.h */,
 				C8AA2D952A78D801005CBD77 /* Root */,
 				C8AA2D9B2A78DB05005CBD77 /* Extension */,
@@ -515,6 +1310,51 @@
 				C8B39CF32A6E61AE00532C53 /* GY_app_iosUITestsLaunchTests.swift */,
 			);
 			path = GY_app_iosUITests;
+			sourceTree = "<group>";
+		};
+		C8B5EF7F2AFE14A700887C33 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8B5EF832AFE152A00887C33 /* GYTotalBarChartModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8B687C02B293A66000768FC /* StereoscopicMorphology 【立体形貌】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8B687C12B293A7D000768FC /* Controller */,
+			);
+			path = "StereoscopicMorphology 【立体形貌】";
+			sourceTree = "<group>";
+		};
+		C8B687C12B293A7D000768FC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8B687C22B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8B9F8112C19650200A90C91 /* dae_moder */ = {
+			isa = PBXGroup;
+			children = (
+				C8CD5C142C19726F00E2BA52 /* Ball.scn */,
+				C8CD5C162C19729400E2BA52 /* Ball_Diffuse.png */,
+				C8CD5C182C19729E00E2BA52 /* Ball_Normal.png */,
+				C8CD5C122C196EAD00E2BA52 /* CustomUVChecker_byValle_2K.png */,
+				C8CD5C102C196EA800E2BA52 /* 炉壳传感器UVa.jpg */,
+				C8B9F8122C19650200A90C91 /* test.dae */,
+				C8B9F8132C19650200A90C91 /* 高炉主体003.dae */,
+				C8B9F8142C19650200A90C91 /* 高炉主体002.dae */,
+				C8B9F8152C19650200A90C91 /* 水温差002.dae */,
+				C8B9F8162C19650200A90C91 /* 水温差001.dae */,
+				C8B9F8172C19650200A90C91 /* 地面001.dae */,
+				C8B9F8182C19650200A90C91 /* 炉壳001.dae */,
+				C8B9F8192C19650200A90C91 /* 热电偶001.dae */,
+			);
+			name = dae_moder;
+			path = ../../dae_moder;
 			sourceTree = "<group>";
 		};
 		C8BBE0FD2A9C46CC00E4CACE /* Present */ = {
@@ -575,10 +1415,280 @@
 			path = SlidePresentTransition;
 			sourceTree = "<group>";
 		};
+		C8BC3E462B454FB700B6CD93 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8BC3E472B454FDF00B6CD93 /* GYMainFlagData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8BCA20D2B045857005EE9D6 /* Graphic【图示】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCA2112B04586C005EE9D6 /* Controller */,
+			);
+			path = "Graphic【图示】";
+			sourceTree = "<group>";
+		};
+		C8BCA2112B04586C005EE9D6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCA2122B0458BB005EE9D6 /* GYGraphicViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BCA2142B04AF83005EE9D6 /* Graphic【图示】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCA2152B04B037005EE9D6 /* Trend【趋势】 */,
+				C8BCA2162B04B042005EE9D6 /* BarChart【柱状图】 */,
+				C8BCA2172B04B067005EE9D6 /* Radar【雷达图】 */,
+			);
+			path = "Graphic【图示】";
+			sourceTree = "<group>";
+		};
+		C8BCA2152B04B037005EE9D6 /* Trend【趋势】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FA72B1D569200FF9D65 /* Controller */,
+			);
+			path = "Trend【趋势】";
+			sourceTree = "<group>";
+		};
+		C8BCA2162B04B042005EE9D6 /* BarChart【柱状图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCA2182B04B0B6005EE9D6 /* Controller */,
+			);
+			path = "BarChart【柱状图】";
+			sourceTree = "<group>";
+		};
+		C8BCA2172B04B067005EE9D6 /* Radar【雷达图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C4C1562B43EBE800065204 /* Controller */,
+			);
+			path = "Radar【雷达图】";
+			sourceTree = "<group>";
+		};
+		C8BCA2182B04B0B6005EE9D6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCA2192B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BD5E772B19C77D00F4A50A /* Data【数据】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BD5E782B19CBF400F4A50A /* Controller */,
+			);
+			path = "Data【数据】";
+			sourceTree = "<group>";
+		};
+		C8BD5E782B19CBF400F4A50A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BD5E7A2B19CC2900F4A50A /* GYFSDataTimeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BF8FA72B1D569200FF9D65 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FAA2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BF8FAC2B1D589200FF9D65 /* Equipment【设备巡检】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FAD2B1D58A000FF9D65 /* Controller */,
+			);
+			path = "Equipment【设备巡检】";
+			sourceTree = "<group>";
+		};
+		C8BF8FAD2B1D58A000FF9D65 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FAE2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BF8FB02B1D5B3F00FF9D65 /* History【历史】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FB32B1D5B8F00FF9D65 /* Curve【曲线】 */,
+				C8BF8FB22B1D5B7A00FF9D65 /* Data【数据】 */,
+			);
+			path = "History【历史】";
+			sourceTree = "<group>";
+		};
+		C8BF8FB12B1D5B6400FF9D65 /* Data【数据】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FB42B1D5BAF00FF9D65 /* Controller */,
+			);
+			path = "Data【数据】";
+			sourceTree = "<group>";
+		};
+		C8BF8FB22B1D5B7A00FF9D65 /* Data【数据】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8D63F772B201458003163B8 /* Controller */,
+			);
+			path = "Data【数据】";
+			sourceTree = "<group>";
+		};
+		C8BF8FB32B1D5B8F00FF9D65 /* Curve【曲线】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FB92B1D6D6800FF9D65 /* Controller */,
+			);
+			path = "Curve【曲线】";
+			sourceTree = "<group>";
+		};
+		C8BF8FB42B1D5BAF00FF9D65 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FB52B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8BF8FB92B1D6D6800FF9D65 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF8FB72B1D69D900FF9D65 /* GYTHCurveViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C01B522C18152700BFD866 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				C8C01B532C18152700BFD866 /* ball_can.aiff */,
+				C8C01B542C18152700BFD866 /* can_floor.aiff */,
+				C8C01B552C18152700BFD866 /* whoosh.aiff */,
+				C8C01B562C18152700BFD866 /* ball_floor.aiff */,
+			);
+			name = sounds;
+			path = "../../../Downloads/Blog_DEMO-master/Beer Can Bully Final/Beer Can Bully/sounds";
+			sourceTree = "<group>";
+		};
+		C8C03E252B22BB94004C77B1 /* ErosionMorphology 【侵蚀形貌】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8FFF8AB2B26B2470067BF16 /* View */,
+				C8C03E262B22BC27004C77B1 /* Controller */,
+			);
+			path = "ErosionMorphology 【侵蚀形貌】";
+			sourceTree = "<group>";
+		};
+		C8C03E262B22BC27004C77B1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C03E272B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C06B232C06D5350041B796 /* WifiMeasure【无线测温】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C06B242C06E6960041B796 /* GYWifiMeasureViewController.swift */,
+				C8C06B262C06EDE80041B796 /* Total【总览】 */,
+				C8C57A2F2C0DB5F10091902E /* Graphic【图示】 */,
+				C8DAA1EE2C11980D00EF2641 /* Data【数据】 */,
+			);
+			path = "WifiMeasure【无线测温】";
+			sourceTree = "<group>";
+		};
+		C8C06B262C06EDE80041B796 /* Total【总览】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C06B272C06EDF70041B796 /* Total【总览】 */,
+				C8C57A2B2C0DA4BD0091902E /* BarChart【柱状图】 */,
+			);
+			path = "Total【总览】";
+			sourceTree = "<group>";
+		};
+		C8C06B272C06EDF70041B796 /* Total【总览】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C06B2C2C07070C0041B796 /* Model */,
+				C8C06B2F2C0707FE0041B796 /* View */,
+				C8C06B282C06EE0E0041B796 /* Controller */,
+			);
+			path = "Total【总览】";
+			sourceTree = "<group>";
+		};
+		C8C06B282C06EE0E0041B796 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C06B2A2C06EE600041B796 /* GYWMTotalViewController.swift */,
+				C8C863AA2C09A21B004DFBAE /* GYWMTotalDetailViewController.swift */,
+				C8C57A272C0D53810091902E /* GYWMTotalTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C06B2C2C07070C0041B796 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8C06B2D2C0707250041B796 /* GYWMModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8C06B2F2C0707FE0041B796 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8C863A82C096934004DFBAE /* CollectionViewWaterfallLayout.swift */,
+				C8C06B302C07081B0041B796 /* GYWMTotalCell.swift */,
+				C8C863AC2C09A9C6004DFBAE /* GYWMDetaiSecCell.swift */,
+				C8C57A292C0D98D90091902E /* GYWMMidCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C8C084DD2B27F7970095F25B /* DataResult【数据结果】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C084DE2B27F7AD0095F25B /* Controller */,
+			);
+			path = "DataResult【数据结果】";
+			sourceTree = "<group>";
+		};
+		C8C084DE2B27F7AD0095F25B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C084DF2B27F7DE0095F25B /* GYETDataResultViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C4C1562B43EBE800065204 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C4C1572B43EC1100065204 /* GYFSGraphicRadarViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C8C4D3192A8F45D5001297D2 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C8D1D6A22B2A8A05008994B3 /* CaiJiHe_LED.obj */,
 				C89D8D7C2A9F09E10013E1B1 /* loading.gif */,
+				C8D1D6A02B2A89F7008994B3 /* 1281702515263.jpg */,
+				C8B687C52B2989BF000768FC /* armadillo.obj */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -591,6 +1701,119 @@
 			path = CommonUtil;
 			sourceTree = "<group>";
 		};
+		C8C57A2B2C0DA4BD0091902E /* BarChart【柱状图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C57A2C2C0DA4D80091902E /* Controller */,
+			);
+			path = "BarChart【柱状图】";
+			sourceTree = "<group>";
+		};
+		C8C57A2C2C0DA4D80091902E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C57A2D2C0DA4F90091902E /* GYWMTotalBarChartViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C57A2F2C0DB5F10091902E /* Graphic【图示】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C57A302C0DB6170091902E /* Trend【趋势】 */,
+				C8C57A312C0DB61E0091902E /* BarChart【柱状图】 */,
+				C8C57A322C0DB6240091902E /* Radar【雷达图】 */,
+			);
+			path = "Graphic【图示】";
+			sourceTree = "<group>";
+		};
+		C8C57A302C0DB6170091902E /* Trend【趋势】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C57A332C0DB6330091902E /* Controller */,
+			);
+			path = "Trend【趋势】";
+			sourceTree = "<group>";
+		};
+		C8C57A312C0DB61E0091902E /* BarChart【柱状图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCB3992C102F2B00952C5D /* GYWMGraphicBarChartViewController.swift */,
+			);
+			path = "BarChart【柱状图】";
+			sourceTree = "<group>";
+		};
+		C8C57A322C0DB6240091902E /* Radar【雷达图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8BCB39B2C10310400952C5D /* GYWMGraphicRadarViewController.swift */,
+			);
+			path = "Radar【雷达图】";
+			sourceTree = "<group>";
+		};
+		C8C57A332C0DB6330091902E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C15E0C2C0EA481004FDBD6 /* GYWMGraphicTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C72D5A2AFC7C6000E30E9A /* Total【总览】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8D241DF2AF88D6400064574 /* Total【总览】 */,
+				C8C72D5E2AFC82C700E30E9A /* BarChart【柱状图】 */,
+			);
+			path = "Total【总览】";
+			sourceTree = "<group>";
+		};
+		C8C72D5E2AFC82C700E30E9A /* BarChart【柱状图】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8B5EF7F2AFE14A700887C33 /* Model */,
+				C8AB605B2B01D2570094A2F2 /* View */,
+				C8C72D5F2AFC831800E30E9A /* Controller */,
+			);
+			path = "BarChart【柱状图】";
+			sourceTree = "<group>";
+		};
+		C8C72D5F2AFC831800E30E9A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C72D602AFC834700E30E9A /* GYFSTotalBarChartViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8C7FA0F2B0F2CB700B07063 /* RealTime【实时】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8C7FA102B0F2CDC00B07063 /* Radar【雷达】 */,
+				C8BF8FB12B1D5B6400FF9D65 /* Data【数据】 */,
+			);
+			path = "RealTime【实时】";
+			sourceTree = "<group>";
+		};
+		C8C7FA102B0F2CDC00B07063 /* Radar【雷达】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8DDBBC12B16E823008A8ED8 /* View */,
+				C8C7FA112B0F2CEB00B07063 /* Controller */,
+			);
+			path = "Radar【雷达】";
+			sourceTree = "<group>";
+		};
+		C8C7FA112B0F2CEB00B07063 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8C7FA122B0F394800B07063 /* GYTRTRadarViewController.swift */,
+				C8DDBBC42B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift */,
+				C8DDBBC62B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C8C950CF2A97348900AC3FEE /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -600,12 +1823,160 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		C8D241DF2AF88D6400064574 /* Total【总览】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8D241EB2AF899F200064574 /* Model */,
+				C8D241E82AF8947400064574 /* View */,
+				C8D241E32AF88FD700064574 /* Controller */,
+			);
+			path = "Total【总览】";
+			sourceTree = "<group>";
+		};
+		C8D241E32AF88FD700064574 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8D241E62AF8908F00064574 /* GYFSTotalViewController.swift */,
+				C8CF40CC2B0341AE00DE282A /* GYFSTotalDetailViewController.swift */,
+				C8CF40D12B034D3700DE282A /* GYFSTotalTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8D241E82AF8947400064574 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8D241E92AF8948600064574 /* GYFSTotalCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C8D241EB2AF899F200064574 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8D241EC2AF89A0600064574 /* GYFSModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C8D509122B6F69370069BBAA /* HistoryCurve【历史曲线】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8D509132B6F695E0069BBAA /* Controller */,
+			);
+			path = "HistoryCurve【历史曲线】";
+			sourceTree = "<group>";
+		};
+		C8D509132B6F695E0069BBAA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8D509192B6F6AA70069BBAA /* GYETTrendViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8D63F772B201458003163B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8D63F782B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8DAA1EE2C11980D00EF2641 /* Data【数据】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8DAA1EF2C11981E00EF2641 /* Controller */,
+			);
+			path = "Data【数据】";
+			sourceTree = "<group>";
+		};
+		C8DAA1EF2C11981E00EF2641 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8DAA1F02C11983900EF2641 /* GYWMDataTimeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C8DD77492A95CFDF003E184D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				C8DD774A2A95CFF4003E184D /* GYLoginViewController.swift */,
+				C8AC912F2A9346B60081DF90 /* Model */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8DDBBC12B16E823008A8ED8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8B33AF92B4694C40011626D /* SBRadarCharts.h */,
+				C8B33AFA2B4694C60011626D /* SBRadarCharts.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C8EB0EC02AD0EE8F00049C6A /* Trend【趋势】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8EB0EC82AD1318D00049C6A /* View */,
+				C8EB0EC12AD0EE9D00049C6A /* Controller */,
+			);
+			path = "Trend【趋势】";
+			sourceTree = "<group>";
+		};
+		C8EB0EC12AD0EE9D00049C6A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C8EB0EC42AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift */,
+				C8EB0EC62AD10BE600049C6A /* GYWTDTrendItemsGroupViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C8EB0EC82AD1318D00049C6A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8EB0ECB2AD131C500049C6A /* GYWTDTrendItemsGroupCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C8EB0ECD2AD134A400049C6A /* Data【数据】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BBFD2AE63F53002882A5 /* View */,
+				C8A559C12AE221AF00446837 /* Controller */,
+			);
+			path = "Data【数据】";
+			sourceTree = "<group>";
+		};
+		C8EB0ECE2AD134CD00049C6A /* Warn【报警】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8A388422AE10DA80022410F /* Model */,
+				C8A3883D2AE0FDB20022410F /* View */,
+				C8A3883A2AE0B2120022410F /* Controller */,
+			);
+			path = "Warn【报警】";
+			sourceTree = "<group>";
+		};
+		C8EB0ECF2AD134DD00049C6A /* Equipment【设备巡检】 */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7BC062AE66AF9002882A5 /* View */,
+				C8A7BC032AE65CF7002882A5 /* Controller */,
+			);
+			path = "Equipment【设备巡检】";
+			sourceTree = "<group>";
+		};
+		C8FFF8AB2B26B2470067BF16 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C8FFF8AC2B26B2760067BF16 /* GYETErosionMorphologyCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -703,6 +2074,12 @@
 			mainGroup = C8B39CC42A6E61AC00532C53;
 			productRefGroup = C8B39CCE2A6E61AC00532C53 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C8A7BBCB2AE60EBF002882A5 /* Products */;
+					ProjectRef = C8A7BBCA2AE60EBF002882A5 /* SpreadsheetView.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C8B39CCC2A6E61AC00532C53 /* GY_app_ios */,
@@ -712,14 +2089,63 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		C8A7BBD12AE60EBF002882A5 /* SpreadsheetView.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SpreadsheetView.framework;
+			remoteRef = C8A7BBD02AE60EBF002882A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C8A7BBD32AE60EBF002882A5 /* SpreadsheetViewTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SpreadsheetViewTests.xctest;
+			remoteRef = C8A7BBD22AE60EBF002882A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C8A7BBD52AE60EBF002882A5 /* HostApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = HostApp.app;
+			remoteRef = C8A7BBD42AE60EBF002882A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		C8B39CCB2A6E61AC00532C53 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C89D8D7D2A9F09E10013E1B1 /* loading.gif in Resources */,
+				C8B9F81B2C19650200A90C91 /* 高炉主体003.dae in Resources */,
+				C8CD5C112C196EA900E2BA52 /* 炉壳传感器UVa.jpg in Resources */,
+				C8C01B5A2C18152800BFD866 /* ball_can.aiff in Resources */,
+				C8D1D6A12B2A89F7008994B3 /* 1281702515263.jpg in Resources */,
+				C8B9F8202C19650200A90C91 /* 炉壳001.dae in Resources */,
+				C8B9F81A2C19650200A90C91 /* test.dae in Resources */,
+				C8CD5C152C19726F00E2BA52 /* Ball.scn in Resources */,
 				C8DD77482A95A69F003E184D /* LaunchScreen.storyboard in Resources */,
+				C8D1D6A32B2A8A05008994B3 /* CaiJiHe_LED.obj in Resources */,
 				C8B39CDA2A6E61AD00532C53 /* Assets.xcassets in Resources */,
+				C8CD5C172C19729400E2BA52 /* Ball_Diffuse.png in Resources */,
+				C8C01B622C18153000BFD866 /* Main.storyboard in Resources */,
+				C8CD5C192C19729E00E2BA52 /* Ball_Normal.png in Resources */,
+				C8B9F8212C19650200A90C91 /* 热电偶001.dae in Resources */,
+				C8C01B5B2C18152800BFD866 /* can_floor.aiff in Resources */,
+				C8C01B5C2C18152800BFD866 /* whoosh.aiff in Resources */,
+				C8B9F81D2C19650200A90C91 /* 水温差002.dae in Resources */,
+				C8C01B5D2C18152800BFD866 /* ball_floor.aiff in Resources */,
+				C8BC3B9A2B47F3E30052A236 /* index.html in Resources */,
+				C8B9F81E2C19650200A90C91 /* 水温差001.dae in Resources */,
+				C8BC3B9C2B47F3E70052A236 /* o3dv.min.js in Resources */,
+				C8C01B602C18152800BFD866 /* resources.scnassets in Resources */,
+				C8B687CB2B2992E7000768FC /* CaiJiHe_LED.fbx in Resources */,
+				C8B9F81C2C19650200A90C91 /* 高炉主体002.dae in Resources */,
+				C8CD5C132C196EAD00E2BA52 /* CustomUVChecker_byValle_2K.png in Resources */,
+				C8B687C62B2989BF000768FC /* armadillo.obj in Resources */,
+				C8B9F81F2C19650200A90C91 /* 地面001.dae in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -847,39 +2273,89 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8AB6FEF2ADE29BE002EFEB9 /* GYSelectGroupCell.swift in Sources */,
 				C87426372A9492F300F2382A /* GYUserLoginData.swift in Sources */,
 				C8C950D52A98750900AC3FEE /* GYLoginTimeViewController.swift in Sources */,
+				C89624272AC2B7FD005DE286 /* GYWTDDataHeaderView.swift in Sources */,
 				C8C950D72A98777E00AC3FEE /* GYLoginTimeCell.swift in Sources */,
+				C8C01B5F2C18152800BFD866 /* GameHelper.swift in Sources */,
+				C8C06B2E2C0707250041B796 /* GYWMModel.swift in Sources */,
 				C8A7DAC72AAEDA660031F778 /* GYTotalWTDHeaderView.swift in Sources */,
 				C89D8D802A9F1F690013E1B1 /* ZEJRollDownViewController.m in Sources */,
 				C89E762B2AA95FA400985EFC /* GYWaterTimeDiffHeaderView.swift in Sources */,
 				C8C950D92A988EF200AC3FEE /* GYPasswordViewController.swift in Sources */,
 				C8AA2D9D2A78DB48005CBD77 /* UIExtension.swift in Sources */,
+				C8C7FA132B0F394800B07063 /* GYTRTRadarViewController.swift in Sources */,
 				C8BBE11C2A9C46CC00E4CACE /* ZEJBottomPresentPresentationController.m in Sources */,
+				C8C57A282C0D53810091902E /* GYWMTotalTrendViewController.swift in Sources */,
+				C8BF8FAB2B1D56E000FF9D65 /* GYFSGraphicTrendViewController.swift in Sources */,
+				C8C72D612AFC834700E30E9A /* GYFSTotalBarChartViewController.swift in Sources */,
+				C8A388442AE10DC00022410F /* GYWTDWarnDataModel.swift in Sources */,
+				C8BCA2132B0458BB005EE9D6 /* GYGraphicViewController.swift in Sources */,
 				C87426472A94A26D00F2382A /* GYMyCenterViewController.swift in Sources */,
 				C86C35A92A8331BE00AC28EC /* SpacingConstant.swift in Sources */,
+				C8BF8FB62B1D5BD900FF9D65 /* GYThermocoupleReadlTimeDataViewController.swift in Sources */,
 				C8AA2DA72A78E059005CBD77 /* GYViewController.swift in Sources */,
 				C8DD77442A95A177003E184D /* GYNavigationController.swift in Sources */,
+				C89624292AC2B84A005DE286 /* GYWTDDataBaseCell.swift in Sources */,
 				C8B39CD12A6E61AC00532C53 /* AppDelegate.swift in Sources */,
+				C8A2BC362AD25BD2009BB260 /* GYErosionThicknessMainViewController.swift in Sources */,
+				C80528862B4B911900A38D5F /* ViewController.m in Sources */,
 				C8DD77472A95A246003E184D /* GYImageExtension.swift in Sources */,
+				C89F6AE92AC16FA800FE541A /* GYWTDTrendCell.swift in Sources */,
+				C8C06B252C06E6960041B796 /* GYWifiMeasureViewController.swift in Sources */,
 				C8BBE11D2A9C46CC00E4CACE /* ZEJBottomPresentTransitionDelegate.m in Sources */,
+				C8A2BC2F2AD25389009BB260 /* GYFurnaceShellMainViewController.swift in Sources */,
+				C8D63F792B201487003163B8 /* GYThermocoupleHistoryDataViewController.swift in Sources */,
 				C800026D2ABADDB100E7AFF9 /* GYWTDDetaiSecCell.swift in Sources */,
+				C8BCB39A2C102F2B00952C5D /* GYWMGraphicBarChartViewController.swift in Sources */,
+				C8A2BC392AD25D71009BB260 /* GYThermocoupleViewController.swift in Sources */,
+				C8A7BC082AE66B18002882A5 /* GYWTDDeviceAdressCell.swift in Sources */,
+				C8BF8FAF2B1D58B900FF9D65 /* GYFSDeviceAddressViewController.swift in Sources */,
 				C86C35AE2A833D9C00AC28EC /* UINavigationController.swift in Sources */,
 				C89E133B2AB05E6300ECC5AA /* GYTotalWTDFooterView.swift in Sources */,
 				C8B30EDE2AB2934300570901 /* GYSelectWTDViewController.swift in Sources */,
+				C8A559C32AE222E900446837 /* GYWTDDataTimeViewController.swift in Sources */,
+				C8C4C1582B43EC1100065204 /* GYFSGraphicRadarViewController.swift in Sources */,
+				C8BF8FB82B1D69D900FF9D65 /* GYTHCurveViewController.swift in Sources */,
+				C8EB0EC52AD0EF7E00049C6A /* GYWTDTrendItemsViewController.swift in Sources */,
+				C8C03E282B22DFB6004C77B1 /* GYETErosionMorphologyViewController.swift in Sources */,
+				C8C863A92C096934004DFBAE /* CollectionViewWaterfallLayout.swift in Sources */,
+				C8C01B5E2C18152800BFD866 /* GameViewController.swift in Sources */,
+				C87840072ABC2AD300E67037 /* GYWTDTrendViewController.swift in Sources */,
 				C8BBE1162A9C46CC00E4CACE /* UIViewController+ZEJPresent.m in Sources */,
 				C8AC912E2A9346B00081DF90 /* GYCodingObject.swift in Sources */,
+				C8A7BC022AE63F65002882A5 /* SpreadsheetViewCells.swift in Sources */,
+				C89624202AC26BA1005DE286 /* GYWTDDataViewController.swift in Sources */,
 				C80002692ABA877D00E7AFF9 /* GYWTDDetailViewController.swift in Sources */,
+				C8A658212AE7AF44003CA4AB /* GYWTDRadarModel.swift in Sources */,
+				C8CF40D22B034D3700DE282A /* GYFSTotalTrendViewController.swift in Sources */,
+				C8D241ED2AF89A0600064574 /* GYFSModel.swift in Sources */,
 				C8BBE1182A9C46CC00E4CACE /* ZEJRollDownAnimatedTransitioning.m in Sources */,
+				C8C06B312C07081B0041B796 /* GYWMTotalCell.swift in Sources */,
+				C8BCB39C2C10310400952C5D /* GYWMGraphicRadarViewController.swift in Sources */,
 				C8AA2D972A78D835005CBD77 /* GYTabbarController.swift in Sources */,
+				C8D241EA2AF8948600064574 /* GYFSTotalCell.swift in Sources */,
+				C8A7BC052AE65D31002882A5 /* GYWTDDeviceAddressViewController.swift in Sources */,
 				C8DD774B2A95CFF4003E184D /* GYLoginViewController.swift in Sources */,
+				C8C084E02B27F7DE0095F25B /* GYETDataResultViewController.swift in Sources */,
 				C8BBE1172A9C46CC00E4CACE /* ZEJRollDownPresentationController.m in Sources */,
 				C87426412A94A13400F2382A /* GYMainViewController.swift in Sources */,
+				C89EE8462AC3B0680097D1DE /* GYWTDRadarViewController.swift in Sources */,
 				C8BBE1212A9C484A00E4CACE /* GYUpdateViewController.swift in Sources */,
+				C8BD5E7B2B19CC2900F4A50A /* GYFSDataTimeViewController.swift in Sources */,
+				C8EB0ECC2AD131C500049C6A /* GYWTDTrendItemsGroupCell.swift in Sources */,
+				C8B33AFB2B4694C60011626D /* SBRadarCharts.m in Sources */,
+				C8DDBBC52B1712A1008A8ED8 /* GYTRTRadarDetailViewController.swift in Sources */,
 				C800026B2ABADC3F00E7AFF9 /* GYWTDDetailCell.swift in Sources */,
+				C8A3883F2AE0FDC60022410F /* GYWTDWarnCell.swift in Sources */,
 				C89FE6582AA588BB003BE557 /* GYMainViewCell.swift in Sources */,
+				C8CF40CD2B0341AF00DE282A /* GYFSTotalDetailViewController.swift in Sources */,
 				C89792202A8608E900CDB5A1 /* GYNetworkManager.swift in Sources */,
+				C8C06B2B2C06EE600041B796 /* GYWMTotalViewController.swift in Sources */,
 				C874263B2A9493AC00F2382A /* CacheConstant.swift in Sources */,
+				C8AB6FED2ADE2710002EFEB9 /* GYSelectGroupViewController.swift in Sources */,
+				C8DAA1F12C11983900EF2641 /* GYWMDataTimeViewController.swift in Sources */,
 				C89E762D2AA97EAF00985EFC /* GYWaterTimeDiffFooterView.swift in Sources */,
 				C8B30EE02AB2D3F800570901 /* UIButton+Extension.swift in Sources */,
 				C87426392A94932D00F2382A /* GYUserBaseInfoData.swift in Sources */,
@@ -888,33 +2364,55 @@
 				C86C35A52A832B8D00AC28EC /* APPConstant.swift in Sources */,
 				C8B30EE32AB2E84C00570901 /* GYSelectWaterViewController.swift in Sources */,
 				C8C950D12A97366F00AC3FEE /* GYMyCenterCell.swift in Sources */,
+				C8A3883C2AE0B23C0022410F /* GYWTDWarnViewController.swift in Sources */,
+				C8C57A2A2C0D98D90091902E /* GYWMMidCell.swift in Sources */,
 				C8BBE12F2A9C87E700E4CACE /* GYApiCenter.swift in Sources */,
 				C8C4D3182A8F4539001297D2 /* GYHUD.swift in Sources */,
 				C8AE7C5E2AA8402D006B9748 /* GYWaterTemDiffViewController.swift in Sources */,
+				C89624252AC287D5005DE286 /* GYWTDDataBaseHeaderView.swift in Sources */,
+				C8C863AD2C09A9C6004DFBAE /* GYWMDetaiSecCell.swift in Sources */,
 				C8BBE11A2A9C46CC00E4CACE /* ZEJRollDownTransitionDelegate.m in Sources */,
 				C89E762F2AA9B62000985EFC /* GYTotalWTDViewController.swift in Sources */,
+				C8C4C1552B43B22300065204 /* TESTViewController.swift in Sources */,
 				C8AA2D992A78DAA9005CBD77 /* GYTabBar.swift in Sources */,
 				C89FE6552AA5882E003BE557 /* NumberExtension.swift in Sources */,
+				C89624232AC27448005DE286 /* GYWTDDataCell.swift in Sources */,
 				C81A26442A8C8F3D00E40516 /* GYDefaultNetworkLogger.swift in Sources */,
 				C8AA2DA52A78DC91005CBD77 /* UIViewFrameExtension.swift in Sources */,
 				C8C950D32A98490700AC3FEE /* GYDeviceTimeViewController.swift in Sources */,
 				C8AD079C2AAB0A6D00526DCB /* GYTotalWTDCell.swift in Sources */,
 				C89E13392AB013BD00ECC5AA /* GYTotalWTDTVCell.swift in Sources */,
 				C89FE6532AA5877F003BE557 /* GYCustomFlowLayout.swift in Sources */,
+				C89F6AE72AC11CEE00FE541A /* GYWTDTrendData.swift in Sources */,
+				C8BC3E482B454FDF00B6CD93 /* GYMainFlagData.swift in Sources */,
+				C8DDBBC72B172680008A8ED8 /* GYTRTRadarDetailTrendViewController.swift in Sources */,
+				C8AB6FF42ADE79B1002EFEB9 /* GYWTDDataBaseBaseCell.swift in Sources */,
 				C874263D2A94983900F2382A /* gobalFunction.swift in Sources */,
 				C8BBE11F2A9C46CC00E4CACE /* ZEJSlidePresentTransitionDelegate.m in Sources */,
 				C8B30EE52AB2F5DD00570901 /* GYSelectWaterCell.swift in Sources */,
 				C809AB9F2AA0650E002301BE /* GYDeviceExpireViewController.swift in Sources */,
+				C8C863AB2C09A21B004DFBAE /* GYWMTotalDetailViewController.swift in Sources */,
+				C8EB0EC72AD10BE600049C6A /* GYWTDTrendItemsGroupViewController.swift in Sources */,
+				C8C15E0D2C0EA481004FDBD6 /* GYWMGraphicTrendViewController.swift in Sources */,
+				C8FFF8AD2B26B2760067BF16 /* GYETErosionMorphologyCell.swift in Sources */,
+				C8C57A2E2C0DA4F90091902E /* GYWMTotalBarChartViewController.swift in Sources */,
+				C8B687C32B293C0A000768FC /* GYETStereoscopicMorphologyViewController.swift in Sources */,
+				C8D241E72AF8908F00064574 /* GYFSTotalViewController.swift in Sources */,
 				C8BBE11E2A9C46CC00E4CACE /* ZEJSlidePresentAnimatedTransitioning.m in Sources */,
 				C8AA2DA02A78DBAC005CBD77 /* GYAppDeviceConstant.swift in Sources */,
+				C8AB6FF22ADE67EA002EFEB9 /* GYWTDData.swift in Sources */,
 				C8AE7C612AA8620D006B9748 /* GYWaterTemDiffCell.swift in Sources */,
 				C8BBE11B2A9C46CC00E4CACE /* ZEJBottomPresentViewController.m in Sources */,
+				C8BCA21A2B04B0E1005EE9D6 /* GYGraphicBarChartViewController.swift in Sources */,
 				C86C35A32A832A3000AC28EC /* GYNoDataView.swift in Sources */,
 				C89D32C92A8DA9AF0032C17B /* NotificationConstant.swift in Sources */,
 				C814A2C52AB40BF500FF1E87 /* GYWTDTotalData.swift in Sources */,
 				C86C35AC2A83347900AC28EC /* GYUIViewExtension.swift in Sources */,
+				C8B5EF842AFE152A00887C33 /* GYTotalBarChartModel.swift in Sources */,
 				C86C35A72A832F1800AC28EC /* UIColorConstant.swift in Sources */,
+				C8D5091A2B6F6AA70069BBAA /* GYETTrendViewController.swift in Sources */,
 				C8C4D31E2A8F4DD9001297D2 /* CommonCache.swift in Sources */,
+				C8AB60602B01D2710094A2F2 /* GYFSBarChartButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,6 +2449,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		C8A7BB612AE60EBE002882A5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C8A7BB622AE60EBE002882A5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		C8B39CDB2A6E61AD00532C53 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1012,7 +2518,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1066,7 +2572,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1082,22 +2588,131 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2.04.2;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 74XZH4Q8F6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GY_app_ios",
+					"$(PROJECT_DIR)/GY_app_ios/Resource/include",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AAInfographics/AAInfographics.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BRPickerView/BRPickerView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DGCharts/DGCharts.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FLAnimatedImage/FLAnimatedImage.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FSPagerView/FSPagerView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON/HandyJSON.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JJCollectionViewRoundFlowLayout_Swift/JJCollectionViewRoundFlowLayout_Swift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JJException/JJException.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JXSegmentedView/JXSegmentedView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD/MBProgressHUD.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh/MJRefresh.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PINCache/PINCache.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImageFLPlugin/SDWebImageFLPlugin.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKitExtend/SnapKitExtend.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SpreadsheetView/SpreadsheetView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftPopMenu/SwiftPopMenu.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers\"",
+					"\"$(SRCROOT)/GY_app_ios/Resource/include\"",
+				);
 				INFOPLIST_FILE = GY_app_ios/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "大连国业";
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "文件权限";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GY_app_ios/Resource",
+				);
+				MARKETING_VERSION = 2.04;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"swiftCoreGraphics\"",
+					"-framework",
+					"\"AAInfographics\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BRPickerView\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"DGCharts\"",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"FSPagerView\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"HandyJSON\"",
+					"-framework",
+					"\"IQKeyboardManagerSwift\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JJCollectionViewRoundFlowLayout_Swift\"",
+					"-framework",
+					"\"JJException\"",
+					"-framework",
+					"\"JXSegmentedView\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"OpenGLUtils\"",
+					"-framework",
+					"\"PINCache\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageFLPlugin\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SnapKitExtend\"",
+					"-framework",
+					"\"SpreadsheetView\"",
+					"-framework",
+					"\"SwiftPopMenu\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-lstdc++",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DTESTING";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.demo.GY-app-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dlguoye.GY-app-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "GY_app_ios/GY_app_ios-Bridging-Header.h";
@@ -1112,22 +2727,131 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2.04.2;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 74XZH4Q8F6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GY_app_ios",
+					"$(PROJECT_DIR)/GY_app_ios/Resource/include",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AAInfographics/AAInfographics.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BRPickerView/BRPickerView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DGCharts/DGCharts.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FLAnimatedImage/FLAnimatedImage.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FSPagerView/FSPagerView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON/HandyJSON.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JJCollectionViewRoundFlowLayout_Swift/JJCollectionViewRoundFlowLayout_Swift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JJException/JJException.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JXSegmentedView/JXSegmentedView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD/MBProgressHUD.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh/MJRefresh.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PINCache/PINCache.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImageFLPlugin/SDWebImageFLPlugin.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKit/SnapKit.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SnapKitExtend/SnapKitExtend.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SpreadsheetView/SpreadsheetView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftPopMenu/SwiftPopMenu.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers\"",
+					"\"$(SRCROOT)/GY_app_ios/Resource/include\"",
+				);
 				INFOPLIST_FILE = GY_app_ios/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "大连国业";
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "文件权限";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GY_app_ios/Resource",
+				);
+				MARKETING_VERSION = 2.04;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"swiftCoreGraphics\"",
+					"-framework",
+					"\"AAInfographics\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BRPickerView\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"DGCharts\"",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"FSPagerView\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"HandyJSON\"",
+					"-framework",
+					"\"IQKeyboardManagerSwift\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JJCollectionViewRoundFlowLayout_Swift\"",
+					"-framework",
+					"\"JJException\"",
+					"-framework",
+					"\"JXSegmentedView\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"OpenGLUtils\"",
+					"-framework",
+					"\"PINCache\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageFLPlugin\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SnapKitExtend\"",
+					"-framework",
+					"\"SpreadsheetView\"",
+					"-framework",
+					"\"SwiftPopMenu\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-lstdc++",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DTESTING";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.demo.GY-app-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dlguoye.GY-app-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "GY_app_ios/GY_app_ios-Bridging-Header.h";

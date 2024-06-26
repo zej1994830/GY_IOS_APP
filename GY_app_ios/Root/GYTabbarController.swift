@@ -39,6 +39,7 @@ class GYTabbarController: UITabBarController {
         viewController.tabBarItem.image = UIImage.init(named: imageName)?.scalingToSize(CGSize.init(width: 47, height: 47))
         viewController.tabBarItem.selectedImage = UIImage.init(named: selectImagePath)?.scalingToSize(CGSize.init(width: 47, height: 47))
 //        viewController.tabBarItem.selectedImage = gifImage(gifPath: selectGifPath)?.withRenderingMode(.alwaysOriginal)
+        viewController.tabBarItem.setTitleTextAttributes([.foregroundColor:UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")], for: .selected)
         let navigationController = GYNavigationController.init(rootViewController: viewController)
         self.addChild(navigationController)
     }

@@ -18,6 +18,7 @@ import UIKit
 enum TFemptyState {
     //通用
     case common
+    
 }
 class GYNoDataView: UIView {
 
@@ -36,14 +37,14 @@ class GYNoDataView: UIView {
     private lazy var titleLabel:UILabel = {
         let label = UILabel()
         label.textColor = UIColorConstant.textGray
-        label.text = "当前暂无数据哟~"
+        label.text = "暂无相关数据"
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
        
     private lazy var nodataImageV:UIImageView = {
         let imageview = UIImageView()
-        imageview.image = UIImage.init(named: "nodata")
+        imageview.image = UIImage.init(named: "ic_wushuju")
         return imageview
     }()
     
@@ -96,47 +97,22 @@ class GYNoDataView: UIView {
 }
 extension GYNoDataView {
     private func setupViews(){
-        self.backgroundColor = UIColorConstant.mainBackground
+        self.backgroundColor = .white
         self.addSubview(nodataImageV)
         self.addSubview(titleLabel)
-        self.addSubview(refreshButton)
+//        self.addSubview(refreshButton)
     }
     
     private func addLayout(){
-        if APP.IS_IPAD{
-            nodataImageV.snp.makeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.centerY.equalToSuperview().offset(-80)
-                make.size.equalTo(CGSize(width: 236, height: 236))
-            }
-            titleLabel.snp.makeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.height.equalTo(20)
-                make.top.equalTo(nodataImageV.snp.bottom).offset(18)
-            }
-            
-            refreshButton.snp.makeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.size.equalTo(CGSize(width: 110, height: 44))
-                make.top.equalTo(titleLabel.snp.bottom).offset(FOUR_SPACING)
-            }
-        }else{
-            nodataImageV.snp.makeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.centerY.equalToSuperview().offset(-60)
-                make.size.equalTo(CGSize(width: 179, height: 179))
-            }
-            titleLabel.snp.makeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.height.equalTo(20)
-                make.top.equalTo(nodataImageV.snp.bottom).offset(18)
-            }
-            
-            refreshButton.snp.makeConstraints { (make) in
-                make.centerX.equalToSuperview()
-                make.size.equalTo(CGSize(width: 110, height: 44))
-                make.top.equalTo(titleLabel.snp.bottom).offset(FOUR_SPACING)
-            }
+        nodataImageV.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-60)
+            make.size.equalTo(CGSize(width: 115, height: 85))
+        }
+        titleLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(20)
+            make.top.equalTo(nodataImageV.snp.bottom).offset(18)
         }
         
     }
@@ -144,8 +120,8 @@ extension GYNoDataView {
     private func updateUI(){
         switch mainstate {
 //        case .evaluation:
-//            titleLabel.text = "哟~你的评价都写完了~"
-//            nodataImageV.image = UIImage.init(named: "empty_evaluation")
+//            titleLabel.text = "暂无相关数据~"
+//            nodataImageV.image = UIImage.init(named: "ic_wushuju")
         default:
             break
         }
