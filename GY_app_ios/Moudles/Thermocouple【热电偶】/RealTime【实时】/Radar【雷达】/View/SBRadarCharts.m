@@ -33,8 +33,8 @@
 }
 
 - (void)setup{    
-    _dioWdith = 8;
-    _dioBoderWdith = 8;
+    _dioWdith = 4;
+    _dioBoderWdith = 4;
 
     _labelWidth = 20;
     _labelHeight = 22.5;
