@@ -212,6 +212,7 @@ extension GYWTDTrendItemsGroupViewController:UITableViewDelegate,UITableViewData
                 if isselectbool {
                     if weakSelf.tempArray.count > 4 && !weakSelf.iswmbool{
                         GYHUD.show("目前不让选中超过五个")
+                        cell?.cellBtn.isSelected = false
                         return
                     }
                     weakSelf.tempArray.add(dic)

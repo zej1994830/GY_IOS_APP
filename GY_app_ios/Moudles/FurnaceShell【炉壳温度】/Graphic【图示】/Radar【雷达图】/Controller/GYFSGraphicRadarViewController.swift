@@ -62,9 +62,9 @@ class GYFSGraphicRadarViewController: GYViewController {
         let view = LMJDropdownMenu()
         view.delegate = self
         view.dataSource = self
-        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         view.layer.borderWidth = 1
-        view.layer.cornerRadius = 6
+        view.layer.cornerRadius = 2
         view.layer.masksToBounds = true
         
         view.title = ""

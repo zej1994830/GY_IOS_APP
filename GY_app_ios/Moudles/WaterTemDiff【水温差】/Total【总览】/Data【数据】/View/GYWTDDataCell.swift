@@ -71,13 +71,12 @@ extension GYWTDDataCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return CGSize(width: 119, height: Int(36 + strArray.count * 36))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         // 返回每个 section 的 header 大小
-        return CGSize(width: 119, height: 36 + strArray.count * 36)
+        return CGSize(width: 150, height: 36 + strArray.count * 36)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {

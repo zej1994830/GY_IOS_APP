@@ -18,6 +18,7 @@ class GYWTDRadarData: HandyJSON {
     var wcValue:Double? = 0
     var stove_number:String? = ""
     var stove_name:String? = "" //热电偶用到的名字
+    var name:String? = ""
     required init() { }
 }
 

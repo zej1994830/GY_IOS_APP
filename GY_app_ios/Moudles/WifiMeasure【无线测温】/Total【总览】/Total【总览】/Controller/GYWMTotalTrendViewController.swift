@@ -18,6 +18,14 @@ class GYWMTotalTrendViewController: GYViewController {
     var timeArray:[String] = ["5分钟","15分钟","30分钟","1小时","2小时","8小时","16小时","1天","7天","15天","1个月"]
     var rate:Int32 = 0
     var selectIndex:IndexPath = IndexPath(row: -1, section: 0)
+    
+    private lazy var bgscrollView:UIScrollView = {
+        let view = UIScrollView()
+        view.bounces = false
+        view.backgroundColor = .white
+        return view
+    }()
+    
     //MARK: - 头视图
     private lazy var headView:UIView = {
         let view = UIView()
@@ -74,9 +82,9 @@ class GYWMTotalTrendViewController: GYViewController {
         let view = LMJDropdownMenu()
         view.delegate = self
         view.dataSource = self
-        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         view.layer.borderWidth = 1
-        view.layer.cornerRadius = 6
+        view.layer.cornerRadius = 2
         view.layer.masksToBounds = true
         
         view.title = "分钟"
@@ -187,13 +195,14 @@ extension GYWMTotalTrendViewController {
     func setupViews() {
         self.title = "趋势"
         
-        self.view.addSubview(headView)
+        self.view.addSubview(bgscrollView)
+        bgscrollView.addSubview(headView)
         headView.addSubview(timeLabel)
         headView.addSubview(timeBtn)
         headView.addSubview(pinlvLabel)
         headView.addSubview(pinlvBtnMenu)
         
-        self.view.addSubview(midView)
+        bgscrollView.addSubview(midView)
         midView.addSubview(bgView)
         midView.addSubview(midtimeLabel)
         midView.addSubview(midCollectionV)
@@ -216,9 +225,16 @@ extension GYWMTotalTrendViewController {
     
     }
     func addLayout() {
+        bgscrollView.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(0)
+            make.top.equalTo(topHeight)
+            make.height.equalTo(APP.HEIGHT)
+        }
+        
         headView.snp.makeConstraints { make in
             make.left.right.equalTo(0)
-            make.top.equalTo(topHeight + 5)
+            make.top.equalTo(5)
+            make.width.equalTo(APP.WIDTH)
         }
         
         timeLabel.snp.makeConstraints { make in
@@ -274,6 +290,7 @@ extension GYWMTotalTrendViewController {
             make.left.right.equalTo(bgView)
             make.top.equalTo(bgView.snp.bottom).offset(20)
             make.bottom.equalTo(-115)
+            make.height.equalTo(350)
         }
         
         collectionV.snp.makeConstraints { make in

@@ -57,6 +57,11 @@ class GYWTDDataBaseHeaderView: UICollectionReusableView {
             }
         }
     }
+    private lazy var headBgView:UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#EFF4FA")
+        return view
+    }()
     
     private lazy var titleLabel:UILabel = {
         let label = UILabel()
@@ -64,6 +69,7 @@ class GYWTDDataBaseHeaderView: UICollectionReusableView {
         label.textColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
         label.font = UIFont.systemFont(ofSize: 16 ,weight: .bold)
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -140,7 +146,7 @@ extension GYWTDDataBaseHeaderView {
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.layer.shadowRadius = 4
         
-        
+        self.addSubview(headBgView)
         self.addSubview(titleLabel)
         self.addSubview(titlelineLabel)
         self.addSubview(bgView)
@@ -152,9 +158,16 @@ extension GYWTDDataBaseHeaderView {
         self.addSubview(linelabel)
     }
     func addLayout() {
+        headBgView.snp.makeConstraints { make in
+            make.top.right.left.equalTo(0)
+            make.height.equalTo(36)
+        }
+        
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.left.right.top.equalTo(0)
+            make.top.equalTo(0)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
             make.height.equalTo(36)
         }
         

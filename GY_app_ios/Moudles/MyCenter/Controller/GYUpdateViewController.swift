@@ -44,7 +44,7 @@ class GYUpdateViewController: ZEJRollDownViewController {
     
     private lazy var updateLabel:UILabel = {
         let label = UILabel()
-        label.text = "1.xxxxx\n\n2.xxxxxx\n\n3.xxxxxxxxx"
+        label.text = "请尽快更新新版本,点击立即更新，将跳转到App Store"
         label.numberOfLines = 0
         return label
     }()
@@ -55,6 +55,7 @@ class GYUpdateViewController: ZEJRollDownViewController {
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         btn.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#EEEEEE")
+        btn.addTarget(self, action: #selector(noupdateBtnClick), for: .touchUpInside)
         return btn
     }()
     
@@ -64,6 +65,7 @@ class GYUpdateViewController: ZEJRollDownViewController {
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         btn.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
+        btn.addTarget(self, action: #selector(updateBtnClick), for: .touchUpInside)
         return btn
     }()
 }
@@ -121,6 +123,21 @@ extension GYUpdateViewController {
             make.width.height.bottom.equalTo(noupdateBtn)
         }
         
+    }
+    
+    @objc func noupdateBtnClick() {
+        self.dismiss(animated: true)
+    }
+    
+    @objc func updateBtnClick() {
+        let appId = "yourAppIdHere"
+            let appStoreURL = URL(string: "https://apps.apple.com/cn/app/%E5%A4%A7%E8%BF%9E%E5%9B%BD%E4%B8%9A/id6498993795")!
+            
+            UIApplication.shared.open(appStoreURL, options: [:]) { (success) in
+                if !success {
+                    GYHUD.show("跳转失败，正在修复")
+                }
+            }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

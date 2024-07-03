@@ -102,6 +102,15 @@ class GYMyCenterViewController: GYViewController{
         btn.addTarget(self, action: #selector(logoutBtnClick), for: .touchUpInside)
         return btn
     }()
+    
+    private lazy var beianLabel:UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 10.0)
+        label.textColor = UIColor.UIColorFromHexvalue(color_vaule: "#999999")
+        label.text = "ICP备案号：辽ICP备17013742号-2A"
+        label.textAlignment = .center
+        return label
+    }()
 }
 
 extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
@@ -116,6 +125,7 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
         companyView.addSubview(companyImageV)
         self.view.addSubview(tableView)
         self.view.addSubview(logoutBtn)
+        self.view.addSubview(beianLabel)
         
         iconLabel.text = "\(GYUserBaseInfoData.default.user_name.first ?? " ")"
         nameLabel.text = GYUserBaseInfoData.default.user_name
@@ -182,6 +192,11 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             make.height.equalTo(49)
         }
         
+        beianLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(-15)
+            make.left.right.equalTo(0)
+        }
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -226,7 +241,7 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             self.navigationController?.pushViewController(vc, animated: true)
         }else if indexPath.row == 3{
             //版本更新
-            
+            compareVersions()
         }
     }
     
@@ -268,4 +283,41 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
         vc.function_type = 4
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func compareVersions() {
+        guard let appStoreURL = URL(string: "http://itunes.apple.com/lookup?bundleId=com.dlguoye.GY-app-ios") else {
+                return
+            }
+            
+            let task = URLSession.shared.dataTask(with: appStoreURL) { (data, response, error) in
+                if let data = data {
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                        
+                        if let results = json?["results"] as? [[String: Any]], let appStoreVersion = results.first?["version"] as? String {
+                            let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                            
+                            if let currentVersion = currentVersion, appStoreVersion != currentVersion {
+                                // Prompt user to update
+                                DispatchQueue.main.async {
+                                    let vc = GYUpdateViewController()
+                                    self.zej_present(vc, vcTransitionDelegate: ZEJRollDownTransitionDelegate()) {
+                                        
+                                    }
+                                }
+                            } else {
+                                GYHUD.show("当前版本是最新版本，无需更新")
+                                // App is up to date
+                            }
+                        }
+                    } catch {
+                        print("Error parsing JSON: \(error.localizedDescription)")
+                    }
+                }
+            }
+            
+            task.resume()
+    }
 }
+
+

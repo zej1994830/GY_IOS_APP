@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
         self.window = UIWindow.init(frame: UIScreen.main.bounds)
-//        self.window?.rootViewController = GYTabbarController.share
+//        self.window?.rootViewController = GYETStereoscopicMorphologyViewController()
         self.window?.rootViewController = GYLoginViewController()
         
         self.window?.makeKeyAndVisible()

@@ -93,8 +93,8 @@ extension GYWTDDataViewController {
             }
         }
         
-        let params = ["device_db":GYDeviceData.default.device_db,"partidString":partidString,"rate":"1","typeString":"[0,1,2,3,4]"] as [String : Any]
-        GYNetworkManager.share.requestData(.get, api: Api.getswcdata, parameters: params) {[weak self] (result) in
+        let params = ["device_db":GYDeviceData.default.device_db,"partidString":partidString] as [String : Any]
+        GYNetworkManager.share.requestData(.get, api: Api.getswczonglan, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
                 return
             }
@@ -123,7 +123,6 @@ extension GYWTDDataViewController:UICollectionViewDelegate,UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return CGSize(width: Int(APP.WIDTH), height: Int(36 + strArray.count * 36))
     }
    

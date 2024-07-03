@@ -127,24 +127,27 @@ class GYETStereoscopicMorphologyViewController: GYViewController {
     private lazy var fbxView:SCNView = {
         let sceneURL = Bundle.main.url(forResource: "test", withExtension: "dae")
             
-        // 创建一个场景
+        var qiangNode = SCNNode()
+        // 创建一个场景 Line2610138
         var scene:SCNScene = SCNScene()
         do {
             
             // 创建物理场
             let gravityField = SCNPhysicsField.linearGravity()
             gravityField.strength = 9.8
-            
+    
+            scene = try SCNScene(url: (sceneURL)!)
+            scene.physicsWorld.contactDelegate = self
             
             // 创建一个物理刚体并添加到场景中
-                    let sphereGeometry = SCNSphere(radius: 2.0)
+                    let sphereGeometry = SCNSphere(radius: 11.0)
                     let sphereNode = SCNNode(geometry: sphereGeometry)
-                    sphereNode.position = SCNVector3(x: 0, y: 1, z: 0)
+                    sphereNode.position = SCNVector3(x: 2, y: 33, z: 0)
                     sphereNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
                     scene.rootNode.addChildNode(sphereNode)
             
-            scene = try SCNScene(url: (sceneURL)!)
-            scene.physicsWorld.contactDelegate = self
+            
+            
             // 遍历场景中的节点
             for node in scene.rootNode.childNodes {
                 if node.name == "Box001" {
@@ -158,6 +161,10 @@ class GYETStereoscopicMorphologyViewController: GYViewController {
                     
                 if node.name == "Plane001" {
                     node.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
+                }
+                
+                if node.name == "Line2610138" {
+                    qiangNode = node
                 }
                 // 检查节点是否包含几何体
                 if let geometry = node.geometry {
@@ -184,6 +191,11 @@ class GYETStereoscopicMorphologyViewController: GYViewController {
         view.allowsCameraControl = true
         view.showsStatistics = true
         
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 5.0
+        qiangNode.scale = SCNVector3(x: 1, y: -11, z: 1)
+        SCNTransaction.commit()
+//
         return view
     }()
     

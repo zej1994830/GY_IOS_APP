@@ -76,9 +76,9 @@ class GYWTDRadarViewController: GYViewController {
         let view = LMJDropdownMenu()
         view.delegate = self
         view.dataSource = self
-        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         view.layer.borderWidth = 1
-        view.layer.cornerRadius = 6
+        view.layer.cornerRadius = 2
         view.layer.masksToBounds = true
         
         view.title = ""
@@ -100,9 +100,9 @@ class GYWTDRadarViewController: GYViewController {
         let view = LMJDropdownMenu()
         view.delegate = self
         view.dataSource = self
-        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         view.layer.borderWidth = 1
-        view.layer.cornerRadius = 6
+        view.layer.cornerRadius = 2
         view.layer.masksToBounds = true
         
         view.title = "温差"
@@ -128,7 +128,7 @@ class GYWTDRadarViewController: GYViewController {
     
     private lazy var groupBtn:UIButton = {
         let btn = UIButton()
-        btn.setTitle("C1-1、C1-2、C1-3、C1-4", for: .normal)
+        btn.setTitle("请选择组别", for: .normal)
         btn.setTitleColor(UIColorConstant.textBlack, for: .normal)
         btn.setImage(UIImage(named: "ic_arrow_blue"), for: .normal)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 255, bottom: 0, right: -30)
@@ -151,6 +151,7 @@ class GYWTDRadarViewController: GYViewController {
         btn.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
         btn.layer.cornerRadius = 2
         btn.layer.masksToBounds = true
+        btn.addTarget(self, action: #selector(queryBtnClick), for: .touchUpInside)
         return btn
     }()
     
@@ -174,8 +175,8 @@ class GYWTDRadarViewController: GYViewController {
     private lazy var midshowview:showView = {
         let view = showView()
         view.label1.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F5C105")
-        view.label2.text = "组别"
-        view.label3.text = "00.00"
+        view.label2.text = ""
+        view.label3.text = ""
         view.label3.snp.remakeConstraints { make in
             make.left.equalTo(0)
             make.bottom.equalTo(0)
@@ -405,7 +406,7 @@ extension GYWTDRadarViewController {
             let diccc:NSDictionary = weakSelf.dataArray.firstObject as! NSDictionary
             weakSelf.tempmodel = GYWTDRadarModel.deserialize(from: diccc)!
             if weakSelf.tempmodel.stove_list.count > 10 {
-                weakSelf.radarCharData(array: NSArray(array: Array(weakSelf.tempmodel.stove_list.prefix(10))))
+                weakSelf.radarCharData(array: NSArray(array: Array(weakSelf.tempmodel.stove_list.prefix(1))))
             }else{
                 weakSelf.radarCharData(array: weakSelf.tempmodel.stove_list)
             }
@@ -440,10 +441,6 @@ extension GYWTDRadarViewController {
             label.tag = 1000 + i
             bgView.addSubview(label)
             
-            let selfWidth = radarCharView.frame.size.width - 40
-            let selfHeight = radarCharView.frame.size.height - 40
-            let labelWidth = label.frame.size.width
-            let labelHeight = label.frame.size.height
             let view = SBRadarCharts()
             let  p = view.calcCircleCoordinate(withCenter: radarCharView.center, andWithAngle: CGFloat(angle + 90 * i), andWithRadius: radius - 5)
             label.center = p
@@ -559,6 +556,14 @@ extension GYWTDRadarViewController {
     
     @objc func screenBtn2Click() {
         namepickView2.isHidden = false
+    }
+    
+    @objc func queryBtnClick() {
+        if datatempSectionArray.count == 0 {
+            GYHUD.show("请先选择组别")
+            return
+        }
+        radarCharData(array: datatempSectionArray)
     }
 }
 

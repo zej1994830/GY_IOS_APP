@@ -15,7 +15,7 @@ import HandyJSON
 class GYViewController: UIViewController,UIGestureRecognizerDelegate {
     lazy var noDataView: GYNoDataView = {
         let view = GYNoDataView()
-        view.isUserInteractionEnabled = true
+        view.isUserInteractionEnabled = false
         view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(refresh)))
         view.frame = self.view.bounds
         view.isHidden = true

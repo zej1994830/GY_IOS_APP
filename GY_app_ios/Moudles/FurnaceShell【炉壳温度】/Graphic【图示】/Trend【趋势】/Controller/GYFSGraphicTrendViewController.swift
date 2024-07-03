@@ -30,6 +30,13 @@ class GYFSGraphicTrendViewController: GYViewController {
     var maincolors = ["#EA173D","#02BE8B","#02BE8B","#A75FF0","#F9861B"]
     var selectcolors = ["#BB1231","#02986F","#02986F","#864CC0","#C76B16"]
     
+    private lazy var bgscrollView:UIScrollView = {
+        let view = UIScrollView()
+        view.bounces = false
+        view.backgroundColor = .white
+        return view
+    }()
+    
     private lazy var headView:UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -96,9 +103,9 @@ class GYFSGraphicTrendViewController: GYViewController {
         let view = LMJDropdownMenu()
         view.delegate = self
         view.dataSource = self
-        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         view.layer.borderWidth = 1
-        view.layer.cornerRadius = 6
+        view.layer.cornerRadius = 2
         view.layer.masksToBounds = true
         
         view.title = ""
@@ -120,9 +127,9 @@ class GYFSGraphicTrendViewController: GYViewController {
         let view = LMJDropdownMenu()
         view.delegate = self
         view.dataSource = self
-        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2").cgColor
+        view.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD").cgColor
         view.layer.borderWidth = 1
-        view.layer.cornerRadius = 6
+        view.layer.cornerRadius = 2
         view.layer.masksToBounds = true
         
         view.title = "分钟"
@@ -302,7 +309,9 @@ class GYFSGraphicTrendViewController: GYViewController {
 extension GYFSGraphicTrendViewController {
     func setupViews() {
         self.title = "趋势"
-        self.view.addSubview(headView)
+        
+        self.view.addSubview(bgscrollView)
+        bgscrollView.addSubview(headView)
         headView.addSubview(nameLabel)
         headView.addSubview(nameBtnMenu)
         headView.addSubview(pinlvLabel)
@@ -312,7 +321,7 @@ extension GYFSGraphicTrendViewController {
         headView.addSubview(groupLabel)
         headView.addSubview(groupBtn)
         
-        self.view.addSubview(midView)
+        bgscrollView.addSubview(midView)
         midView.addSubview(bgView)
         midView.addSubview(midtimeLabel)
         midView.addSubview(showGroupView)
@@ -337,9 +346,16 @@ extension GYFSGraphicTrendViewController {
         timeBtn.setTitle(String(format: "%@ 至 %@", currentLastHourDateString,currentDateString), for: .normal)
     }
     func addLayout() {
+        bgscrollView.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(0)
+            make.top.equalTo(topHeight)
+            make.height.equalTo(APP.HEIGHT)
+        }
+        
         headView.snp.makeConstraints { make in
             make.left.right.equalTo(0)
-            make.top.equalTo(topHeight + 5)
+            make.top.equalTo(5)
+            make.width.equalTo(APP.WIDTH)
         }
         
         nameLabel.snp.makeConstraints { make in
@@ -419,6 +435,7 @@ extension GYFSGraphicTrendViewController {
         lineView.snp.makeConstraints { make in
             make.left.right.equalTo(bgView)
             make.top.equalTo(bgView.snp.bottom).offset(20)
+            make.height.equalTo(350)
             make.bottom.equalTo(-115)
         }
         
@@ -501,6 +518,8 @@ extension GYFSGraphicTrendViewController {
                 stoveidString = stoveidString + "," + idstr
             }
         }
+        GYHUD.showGif(view: self.view)
+        
         groupBtn.setTitle(namestr, for: .normal)
         let params = ["device_db":GYDeviceData.default.device_db,"start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00","rate":rate,"stoveid_list":stoveidString] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getlktrend, parameters: params) {[weak self] (result) in

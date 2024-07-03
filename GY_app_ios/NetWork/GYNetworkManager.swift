@@ -311,6 +311,9 @@ class GYNetworkManager {
         let header:HTTPHeaders = [
             HTTPHeader(name: "api_token", value: token?.count != 0 ? token! : "0123456789ABCDEF")
         ]
+        //每次请求之前，取消其他所有请求
+        Alamofire.AF.cancelAllRequests()
+        
         Alamofire.AF.request(urlString, method: method, parameters: parameters,headers: header).responseJSON {[weak self] (response) in
             guard let weakSelf = self else{
                 return

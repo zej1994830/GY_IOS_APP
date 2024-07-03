@@ -68,7 +68,7 @@ extension GYWTDDataBaseCell:UITableViewDelegate,UITableViewDataSource {
         cell?.istitleView = false
         if indexPath.row == 0 {
             cell?.istitleView = true
-            cell?.valueLabel.text = model?.stove_number
+            cell?.valueLabel.text = model?.name
         }else{
             let str:String = strArray[indexPath.row - 1] as! String
             if str == "温差" {

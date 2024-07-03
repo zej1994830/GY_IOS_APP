@@ -35,7 +35,6 @@ class GYHUD: NSObject {
     
     class func showGif(view: UIView? = nil){
         let hud = MBProgressHUD.showAdded(to: view ?? UIApplication.shared.windows.last ?? UIView(), animated: true)
-
         let path = Bundle.main.url(forResource: "loading", withExtension: "gif")
         if path != nil {
             let data = try? Data.init(contentsOf: path!)
@@ -52,7 +51,8 @@ class GYHUD: NSObject {
         hud.graceTime = 0.5
         hud.minShowTime = 0.25
         hud.removeFromSuperViewOnHide = true
-        hud.hide(animated: true, afterDelay: 10)
+//        hud.hide(animated: true, afterDelay: 10)
+        hud.isUserInteractionEnabled = false
     }
     
     class func showSuccess(_ success: String, icon: String = "success_hud_icon", view: UIView? = nil){
@@ -136,6 +136,10 @@ class GYHUD: NSObject {
     }
     
     class func hideHudForView(_ view:  UIView? = nil){
+        MBProgressHUD.hide(for: view ?? UIApplication.shared.windows.last ?? UIView(), animated: true)
+        MBProgressHUD.hide(for: view ?? UIApplication.shared.windows.last ?? UIView(), animated: true)
+        MBProgressHUD.hide(for: view ?? UIApplication.shared.windows.last ?? UIView(), animated: true)
+        MBProgressHUD.hide(for: view ?? UIApplication.shared.windows.last ?? UIView(), animated: true)
         MBProgressHUD.hide(for: view ?? UIApplication.shared.windows.last ?? UIView(), animated: true)
     }
     

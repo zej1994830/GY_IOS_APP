@@ -39,7 +39,7 @@
     _labelWidth = 20;
     _labelHeight = 22.5;
     
-    _labelWidth2 = 65;
+    _labelWidth2 = 22;
     _labelHeight2 = 22.5;
     
     _themColor = ColorWithHEAL;
@@ -186,7 +186,7 @@
         CGPoint psmall = [pointArraysmall[i] CGPointValue];
         
         CGFloat pointradius = ((_radiusmax - [_values[i] floatValue] * 1000) / _radiusmax) * _radius;
-        UIBezierPath* aPath_yuanhuan = [UIBezierPath bezierPathWithArcCenter:CGPointMake((self.frame.size.width - 2) / 2, (self.frame.size.width - 2) / 2) radius:pointradius startAngle:0 endAngle:(M_PI * 2) clockwise:true];
+        UIBezierPath* aPath_yuanhuan = [UIBezierPath bezierPathWithArcCenter:CGPointMake((self.frame.size.width) / 2, (self.frame.size.width) / 2) radius:pointradius startAngle:0 endAngle:(M_PI * 2) clockwise:true];
         [aPath_yuanhuan setLineDash:dashPattern count:2 phase:1];
         aPath_yuanhuan.lineWidth = lineWidth;
         [[self colorWithHexString:@"#165DFF" alpha:0.35] set];
@@ -223,40 +223,41 @@
         
         double doubleValue = [[_titles[i] componentsSeparatedByString:@","].firstObject doubleValue];
         int roundedIntValue = (int)round(doubleValue);
-        UIButton *label = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _labelWidth, _labelHeight)];
-        [label setTitle:[NSString stringWithFormat:@"%d",roundedIntValue] forState:UIControlStateNormal];
-        label.titleLabel.font = [UIFont systemFontOfSize:5 weight:UIFontWeightMedium];
-        [label setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+       
+        UIButton *label2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _labelWidth, _labelHeight)];
+        [label2 setTitle:[NSString stringWithFormat:@"%d",roundedIntValue] forState:UIControlStateNormal];
+        label2.titleLabel.font = [UIFont systemFontOfSize:5 weight:UIFontWeightMedium];
+        [label2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
-        label.tag = 100 + i;
-        [label addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        label2.tag = 100 + i;
+        [label2 addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *label2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _labelWidth2, _labelHeight2)];
-        [label2 setTitle:[_titles[i] componentsSeparatedByString:@","].lastObject forState:UIControlStateNormal];
-        label2.titleLabel.font = [UIFont systemFontOfSize:5];
-        [label2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        label2.tag = 1000 + i;
-        [label2 addTarget:self action:@selector(buttonClick2:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *label = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, _labelWidth2, _labelHeight2)];
+        [label setTitle:[_titles[i] componentsSeparatedByString:@","].lastObject forState:UIControlStateNormal];
+        label.titleLabel.font = [UIFont systemFontOfSize:5];
+        [label setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        label.tag = 1000 + i;
+        [label addTarget:self action:@selector(buttonClick2:) forControlEvents:UIControlEventTouchUpInside];
         
         if ([tempdic[@"alarm"] isEqualToString: @"0"]) {
 //            label.backgroundColor = [UIColor colorWithRed:(CGFloat)(234/255) green:(CGFloat)(23/255) blue:(CGFloat)(61/255) alpha:1];
-            label.backgroundColor = [UIColor colorWithRed:(CGFloat)(234.0/255.0)
+            label2.backgroundColor = [UIColor colorWithRed:(CGFloat)(234.0/255.0)
                                                     green:(CGFloat)(23.0/255.0)
                                                      blue:(CGFloat)(61.0/255.0)
                                                     alpha:1];
-            label2.backgroundColor = [UIColor colorWithRed:(CGFloat)(234.0/255.0)
+            label.backgroundColor = [UIColor colorWithRed:(CGFloat)(234.0/255.0)
                                                      green:(CGFloat)(23.0/255.0)
                                                       blue:(CGFloat)(61.0/255.0)
                                                      alpha:0.18];;
         }else {
-            label.backgroundColor = [self colorFromDecimalValue:[tempdic[@"color"] intValue] alpha:1];
-            label2.backgroundColor = [self colorFromDecimalValue:[tempdic[@"color"] intValue] alpha:0.18];
+            label2.backgroundColor = [self colorFromDecimalValue:[tempdic[@"color"] intValue] alpha:1];
+            label.backgroundColor = [self colorFromDecimalValue:[tempdic[@"color"] intValue] alpha:0.18];
         }
         
         CGFloat selfWidth = self.frame.size.width;
         CGFloat selfHeight = self.frame.size.height;
-        CGFloat labelWidth = label.frame.size.width;
-        CGFloat labelHeight = label.frame.size.height;
+        CGFloat labelWidth = label2.frame.size.width;
+        CGFloat labelHeight = label2.frame.size.height;
         
         if (p.x<selfWidth/2-labelWidth) {
             CGFloat x = p.x - labelWidth/2;
@@ -299,8 +300,8 @@
         [label sizeToFit];
         [label2 sizeToFit];
         
-        label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width - 15, 5);
-        label2.frame = CGRectMake(label2.frame.origin.x, label2.frame.origin.y, label2.frame.size.width - 5, 5);
+        label2.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y, label2.frame.size.width - 15, 5);
+        label.frame = CGRectMake(label2.frame.origin.x, label2.frame.origin.y, label.frame.size.width, 5);
         
         UIBezierPath *path4 = [UIBezierPath bezierPath];//线条指向的坐标记录
 //        [path4 moveToPoint:p];

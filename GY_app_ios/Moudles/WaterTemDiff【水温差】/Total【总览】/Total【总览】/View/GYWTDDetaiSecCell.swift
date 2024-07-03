@@ -73,7 +73,7 @@ extension GYWTDDetaiSecCell {
             make.top.equalTo(14)
             make.left.equalTo(26.5)
             make.width.equalTo(100)
-            make.right.equalTo(-rellySizeForiPhoneWidth(375 - 127.5, 10).width)
+            make.right.equalTo(-(APP.WIDTH - 100 - 26.5))
         }
         
         valueLabel.snp.makeConstraints { make in

@@ -21,4 +21,5 @@ struct GYWTDDataData:HandyJSON {
     var stove_id:Int64? = 0
     var wcValue:Int64? = 0
     var stove_number:String? = ""
+    var name:String? = ""
 }
