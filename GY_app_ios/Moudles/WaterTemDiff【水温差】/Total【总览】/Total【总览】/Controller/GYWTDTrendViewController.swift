@@ -420,7 +420,6 @@ extension GYWTDTrendViewController {
         
        
         let arr = [wenchaView,ruwenView,chuwenView,liuliangView,reliuView]
-//        arr.snp.distributeViewsAlong(axisType:.horizontal,fixedSpacing: 24,leadSpacing: 24,tailSpacing: 24)
         arr.snp.distributeViewsAlong(axisType: .horizontal,fixedItemLength: 45,leadSpacing: 24,tailSpacing: 24)
         arr.snp.makeConstraints { make in
             make.top.equalTo(midtimeLabel.snp.bottom).offset(11)
@@ -511,6 +510,7 @@ extension GYWTDTrendViewController {
             .zoomType(.x)//缩放功能
             .legendEnabled(true)
         lineView2.aa_drawChartWithChartModel(chartmodel)
+        lineView2.aa_drawChartWithChartModel(chartmodel)
     }
     
     @objc func timeBtnClick() {
@@ -545,18 +545,44 @@ extension GYWTDTrendViewController {
     
     @objc func optionBtnClick(_ button:UIButton){
         button.isSelected = !button.isSelected
-        
+        wenchaView.removeFromSuperview()
+        ruwenView.removeFromSuperview()
+        chuwenView.removeFromSuperview()
+        liuliangView.removeFromSuperview()
+        reliuView.removeFromSuperview()
+    
         var dataEntries = [AASeriesElement]()
-        var labelarray:NSMutableArray = []
+        let labelarray:NSMutableArray = []
         let labelarray2:NSMutableArray = []
         let colorarray:NSMutableArray = []
-        
+        var viewarray:[showView] = []
+    
         for i in 0..<5 {
             let tempbutton:UIButton = self.view.viewWithTag(i + 100)! as! UIButton
             if tempbutton.isSelected  {
                 labelarray.add(["温差","入温","出温","流量","热流"][i])
                 labelarray2.add(["tempWc","inTemp","outTemp","flow","reFlow"][i])
                 colorarray.add(["#BC7DFC","#12B48D","#F5C105","#0182F9","#FF6E66"][i])
+                viewarray.append([wenchaView,ruwenView,chuwenView,liuliangView,reliuView][i])
+                midView.addSubview([wenchaView,ruwenView,chuwenView,liuliangView,reliuView][i])
+            }
+        }
+        if viewarray.count == 1 {
+            viewarray.snp.distributeViewsAlong(axisType: .horizontal,fixedItemLength: 45,leadSpacing: 24,tailSpacing: 24)
+            viewarray.snp.makeConstraints { make in
+                make.top.equalTo(midtimeLabel.snp.bottom).offset(11)
+                make.left.equalTo(midtimeLabel)
+            }
+        }else if viewarray.count == 2 {
+//            viewarray.snp.distributeViewsAlong(axisType: .horizontal,fixedSpacing: 24,leadSpacing: midView.width / 2)
+            viewarray.snp.distributeViewsAlong(axisType: .horizontal,fixedItemLength: 45,leadSpacing: 24,tailSpacing:  midView.width / 2)
+            viewarray.snp.makeConstraints { make in
+                make.top.equalTo(midtimeLabel.snp.bottom).offset(11)
+            }
+        }else{
+            viewarray.snp.distributeViewsAlong(axisType: .horizontal,fixedItemLength: 45,leadSpacing: 24,tailSpacing: 24)
+            viewarray.snp.makeConstraints { make in
+                make.top.equalTo(midtimeLabel.snp.bottom).offset(11)
             }
         }
         
@@ -578,7 +604,7 @@ extension GYWTDTrendViewController {
             dataEntries.append(aa)
         }
         
-        
+//        lineView2.aa_refreshChartWholeContentWithChartModel(AAChartModelchartmodel)
         let chartmodel = AAChartModel()
             .chartType(.line)
             .colorsTheme(colorarray as! [Any])
@@ -592,7 +618,8 @@ extension GYWTDTrendViewController {
             .markerSymbol(.circle)
             .zoomType(.x)//缩放功能
             .legendEnabled(true)
-        lineView2.aa_drawChartWithChartModel(chartmodel)
+        lineView2.aa_refreshChartWholeContentWithChartModel(chartmodel)
+        lineView2.aa_refreshChartWholeContentWithChartModel(chartmodel)
     }
     
 }
@@ -690,6 +717,11 @@ extension GYWTDTrendViewController:UICollectionViewDataSource,UICollectionViewDe
         }
 //        let startIndex = currentDateString.index(currentDateString.startIndex, offsetBy: 5)
         timeBtn.setTitle(currentLastHourDateString + " 至 " + currentDateString, for: .normal)
+        wenchaBtn.isSelected = true
+        ruwenBtn.isSelected = true
+        chuwenBtn.isSelected = true
+        liuliangBtn.isSelected = true
+        reliuBtn.isSelected = true
         request()
         collectionView.reloadData()
     }
@@ -720,6 +752,7 @@ extension GYWTDTrendViewController:AAChartViewDelegate {
         )
 //        let labelarray = ["热流","出温","入温","温差","流量"]
 //        let labelarray2 = ["reFlow","outTemp","inTemp","tempWc","flow"]
+        
         let dic = dataarray[clickEventMessage.index!] as! NSDictionary
         midtimeLabel.text = String(format: "时间：%@", dic["dt"] as! String)
         wenchaView.label3.text = String(format: "%.2f", dic["tempWc"] as! Double)
@@ -728,6 +761,8 @@ extension GYWTDTrendViewController:AAChartViewDelegate {
         liuliangView.label3.text = String(format: "%.2f", dic["flow"] as! Double)
         reliuView.label3.text = String(format: "%.0f", dic["reFlow"] as! Double)
     }
+    
+    
     
     func cleartext() {
         midtimeLabel.text = "时间："

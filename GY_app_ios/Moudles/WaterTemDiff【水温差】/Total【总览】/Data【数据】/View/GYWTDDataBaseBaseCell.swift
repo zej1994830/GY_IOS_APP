@@ -36,6 +36,12 @@ class GYWTDDataBaseBaseCell: UITableViewCell {
         return label
     }()
     
+    private lazy var linelable:UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -59,7 +65,7 @@ extension GYWTDDataBaseBaseCell {
         self.contentView.addSubview(valueLabel)
         
         let separatorView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: 1))
-        separatorView.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#F2F2F2")
+        separatorView.backgroundColor = UIColor.UIColorFromHexvalue(color_vaule: "#DDDDDD")
         self.addSubview(separatorView)
     }
     

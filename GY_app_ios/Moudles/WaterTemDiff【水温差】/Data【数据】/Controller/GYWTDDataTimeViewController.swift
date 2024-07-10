@@ -471,6 +471,15 @@ extension GYWTDDataTimeViewController: SpreadsheetViewDataSource, SpreadsheetVie
         }else if column == 1 {
             return 156
         }else{
+            let dic:NSDictionary = dataArray.firstObject as! NSDictionary
+            let dicc = NSMutableDictionary(dictionary: dic)
+            if dicc["时间"] != nil {
+                dicc.removeObject(forKey: "时间")
+            }
+            let width = width(for: dicc.allKeys[column - 2] as! String, withFont: UIFont.systemFont(ofSize: 15, weight: .bold))
+            if width > 108 {
+                return width
+            }
             return 108
         }
     }
@@ -541,7 +550,7 @@ extension GYWTDDataTimeViewController: SpreadsheetViewDataSource, SpreadsheetVie
             if dicc["时间"] != nil {
                 dicc.removeObject(forKey: "时间")
             }
-            cell.label.text = String(format: "%.3f", (dicc.allValues[indexPath.column - 2]) as? Double ?? 0.00)
+            cell.label.text = dicc.allValues[indexPath.column - 2] as! String
         }
         return cell
     }
@@ -591,4 +600,9 @@ extension GYWTDDataTimeViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDat
         }
     }
     
+    func width(for text: String, withFont font: UIFont) -> CGFloat {
+            let attributes: [NSAttributedString.Key: Any] = [.font: font]
+            let size = (text as NSString).size(withAttributes: attributes)
+            return size.width + 30 // Add some padding if needed
+    }
 }

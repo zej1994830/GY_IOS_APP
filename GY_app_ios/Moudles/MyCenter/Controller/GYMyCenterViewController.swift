@@ -288,7 +288,7 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
         guard let appStoreURL = URL(string: "http://itunes.apple.com/lookup?bundleId=com.dlguoye.GY-app-ios") else {
                 return
             }
-            
+        
             let task = URLSession.shared.dataTask(with: appStoreURL) { (data, response, error) in
                 if let data = data {
                     do {
@@ -298,16 +298,27 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
                             let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
                             
                             if let currentVersion = currentVersion, appStoreVersion != currentVersion {
-                                // Prompt user to update
-                                DispatchQueue.main.async {
-                                    let vc = GYUpdateViewController()
-                                    self.zej_present(vc, vcTransitionDelegate: ZEJRollDownTransitionDelegate()) {
-                                        
+                                
+                                if self.compareVersions(currentVersion, appStoreVersion) == .orderedAscending {
+                                    // Prompt user to update
+                                    DispatchQueue.main.async {
+                                        let vc = GYUpdateViewController()
+                                        vc.versionLabel.text = currentVersion
+                                        self.zej_present(vc, vcTransitionDelegate: ZEJRollDownTransitionDelegate()) {
+                                            
+                                        }
                                     }
+                                }else{
+                                    DispatchQueue.main.async {
+                                        GYHUD.show("当前版本是最新版本，无需更新")
+                                    }
+                                   
                                 }
+                                
                             } else {
-                                GYHUD.show("当前版本是最新版本，无需更新")
-                                // App is up to date
+                                DispatchQueue.main.async {
+                                    GYHUD.show("当前版本是最新版本，无需更新")
+                                }
                             }
                         }
                     } catch {
@@ -318,6 +329,28 @@ extension GYMyCenterViewController:UITableViewDelegate, UITableViewDataSource  {
             
             task.resume()
     }
+    
+    func compareVersions(_ version1: String, _ version2: String) -> ComparisonResult {
+        // 将版本号字符串分割为整数数组
+        let v1Components = version1.split(separator: ".").compactMap { Int($0) }
+        let v2Components = version2.split(separator: ".").compactMap { Int($0) }
+        
+        // 比较两个版本号的每个部分
+        for i in 0..<max(v1Components.count, v2Components.count) {
+            let v1Value = i < v1Components.count ? v1Components[i] : 0
+            let v2Value = i < v2Components.count ? v2Components[i] : 0
+            
+            if v1Value < v2Value {
+                return .orderedAscending
+            } else if v1Value > v2Value {
+                return .orderedDescending
+            }
+        }
+        
+        // 两个版本号相等
+        return .orderedSame
+    }
+
 }
 
 

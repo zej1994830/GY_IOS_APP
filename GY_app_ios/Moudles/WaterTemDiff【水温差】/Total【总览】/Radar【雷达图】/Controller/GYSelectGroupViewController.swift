@@ -173,7 +173,7 @@ extension GYSelectGroupViewController:UITableViewDelegate,UITableViewDataSource 
         if dataArray.count != 0 {
             let dataModel = GYWTDRadarData.deserialize(from: dataArray[indexPath.row] as? NSDictionary)
             
-            cell?.titleStr = (dataModel?.stove_number)!
+            cell?.titleStr = (dataModel?.name)!
             if type == 3 {
                 cell?.titleStr = (dataModel?.stove_name)!
             }
@@ -187,7 +187,7 @@ extension GYSelectGroupViewController:UITableViewDelegate,UITableViewDataSource 
                         break
                     }
                 }else{
-                    if dataModel?.stove_number == tempmodel?.stove_number{
+                    if dataModel?.name == tempmodel?.name{
                         cell?.iselectAll = true
                         break
                     }
@@ -262,14 +262,14 @@ extension GYSelectGroupViewController {
             if isOn {
                 for temp in dataArray {
                     let dic:NSDictionary = temp as! NSDictionary
-                    if name == (dic["stove_number"] as! String){
+                    if name == (dic["name"] as! String){
                         tempArray.add(temp)
                     }
                 }
             }else{
                 for temp in dataArray {
                     let dic:NSDictionary = temp as! NSDictionary
-                    if name == (dic["stove_number"] as! String){
+                    if name == (dic["name"] as! String){
                         tempArray.remove(temp)
                     }
                 }

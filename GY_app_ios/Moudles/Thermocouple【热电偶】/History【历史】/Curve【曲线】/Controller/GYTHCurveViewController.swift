@@ -573,6 +573,7 @@ extension GYTHCurveViewController {
             .tooltipEnabled(true)
         
         lineView.aa_drawChartWithChartModel(model)
+        lineView.aa_drawChartWithChartModel(model)
         
     }
     

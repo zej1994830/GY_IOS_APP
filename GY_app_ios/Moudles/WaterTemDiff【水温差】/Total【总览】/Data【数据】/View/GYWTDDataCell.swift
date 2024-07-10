@@ -26,7 +26,7 @@ class GYWTDDataCell: UICollectionViewCell {
         layout.minimumInteritemSpacing = 1
         layout.minimumLineSpacing = 1
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 119, height: 216)
+        layout.estimatedItemSize = CGSize(width: 119, height: 216)
         layout.sectionHeadersPinToVisibleBounds = true
         
         let collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
@@ -71,11 +71,22 @@ extension GYWTDDataCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let namestr = GYWTDDataData.deserialize(from: dataArray[indexPath.row] as? NSDictionary)?.name
+        let label = UILabel()
+        let width = width(for: namestr!, withFont:label.font)
+        if (width > 119) {
+            return CGSize(width: Int(width), height: Int(36 + strArray.count * 36))
+        }
         return CGSize(width: 119, height: Int(36 + strArray.count * 36))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         // 返回每个 section 的 header 大小
+        let width = width(for: titleStr, withFont:UIFont.systemFont(ofSize: 16, weight: .bold))
+        if (width > 150) {
+            return CGSize(width: Int(width), height: Int(36 + strArray.count * 36))
+        }
         return CGSize(width: 150, height: 36 + strArray.count * 36)
     }
     
@@ -110,7 +121,7 @@ extension GYWTDDataCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
             cell = GYWTDDataBaseCell()
         }
         cell?.strArray = strArray
-        cell?.model = GYWTDDataData.deserialize(from: dataArray[indexPath.row] as? NSDictionary)
+        cell?.model = GYWTDDataModel.deserialize(from: dataArray[indexPath.row] as? NSDictionary)
         return cell!
     }
     
@@ -123,4 +134,9 @@ extension GYWTDDataCell:UICollectionViewDelegate,UICollectionViewDataSource,UICo
         }
     }
    
+    func width(for text: String, withFont font: UIFont) -> CGFloat {
+            let attributes: [NSAttributedString.Key: Any] = [.font: font]
+            let size = (text as NSString).size(withAttributes: attributes)
+            return size.width + 30 // Add some padding if needed
+    }
 }

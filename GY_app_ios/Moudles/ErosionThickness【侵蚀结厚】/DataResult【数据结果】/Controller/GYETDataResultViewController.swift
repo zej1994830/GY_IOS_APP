@@ -204,10 +204,14 @@ extension GYETDataResultViewController {
     }
     
     func reloaddata() {
-        let index = dataStr.index(dataStr.startIndex, offsetBy: 171) // 获取第10位的索引
-        let endIndex = dataStr.index(index, offsetBy: dataStr.count - 172 - 43, limitedBy: dataStr.endIndex) ?? dataStr.endIndex // 获取结束索引
-        let substring = dataStr[index..<endIndex] // 切片获取子字符串
-        strArray = substring.components(separatedBy: "\r\n       ")
+//        let index = dataStr.index(dataStr.startIndex, offsetBy: 171) // 获取第10位的索引
+//        let endIndex = dataStr.index(index, offsetBy: dataStr.count - 172 - 43, limitedBy: dataStr.endIndex) ?? dataStr.endIndex // 获取结束索引
+//        let substring = dataStr[index..<endIndex] // 切片获取子字符串
+         
+        
+        let substring = dataStr.components(separatedBy: "LinH\r\n\r\n        ")
+        let substring2 = substring[1].components(separatedBy: "\r\n\r\n注:")
+        strArray = substring2[0].components(separatedBy: "\r\n       ")
         dataResultArray.removeAllObjects()
         for str in strArray {
             dataResultArray.add(str.split(separator: " ").map(String.init))
@@ -228,7 +232,7 @@ extension GYETDataResultViewController: SpreadsheetViewDataSource, SpreadsheetVi
         if column == 0 {
             return 38
         }
-        return 82
+        return 90
     }
     
     func mergedCells(in spreadsheetView: SpreadsheetView) -> [CellRange] {

@@ -9,7 +9,7 @@ import UIKit
 
 class GYWTDDataBaseCell: UICollectionViewCell {
     static let indentifier: String = "GYWTDDataBaseCell"
-    var model: GYWTDDataData? = nil{
+    var model: GYWTDDataModel? = nil{
         didSet{
             tv.snp.updateConstraints { make in
                 make.height.equalTo(36 * strArray.count + 36)
@@ -72,18 +72,20 @@ extension GYWTDDataBaseCell:UITableViewDelegate,UITableViewDataSource {
         }else{
             let str:String = strArray[indexPath.row - 1] as! String
             if str == "温差" {
-                cell?.valueLabel.text = "\(model?.wcValue ?? 1)"
+                cell?.valueLabel.text = String(format: "%.2f", model?.wcValue ?? 0)
             }else if str == "入温" {
-                cell?.valueLabel.text = "\(model?.inTagValue ?? 1)"
+                cell?.valueLabel.text = String(format: "%.2f", model?.inTagValue ?? 0)
             }else if str == "出温" {
-                cell?.valueLabel.text = "\(model?.outTagValue ?? 1)"
+                cell?.valueLabel.text = String(format: "%.2f", model?.outTagValue ?? 0)
             }else if str == "流量" {
-                cell?.valueLabel.text = "\(model?.flowTagValue ?? 1)"
+                cell?.valueLabel.text = String(format: "%.2f", model?.flowTagValue ?? 0)
             }else if str == "热流" {
-                cell?.valueLabel.text = "\(model?.reFlowTagValue ?? 1)"
+                cell?.valueLabel.text = String(format: "%.0f", model?.reFlowTagValue ?? 0)
             }
         }
         
         return cell ?? UITableViewCell()
     }
+    
+   
 }

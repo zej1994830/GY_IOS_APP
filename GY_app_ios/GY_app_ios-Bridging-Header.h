@@ -15,4 +15,7 @@
 #import "SBRadarCharts.h"
 #import "ViewController.h"
 #import "SBRadarCharts.h"
+#import "GYWTDRadarView.h"
+#import "GYFSRadarView.h"
+#import "GYWMRadarView.h"
 #import "LMJDropdownMenu.h"

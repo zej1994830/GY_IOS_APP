@@ -568,6 +568,7 @@ extension GYFSGraphicTrendViewController {
             .zoomType(.x)//缩放功能
             .legendEnabled(true)
         lineView.aa_drawChartWithChartModel(chartmodel)
+        lineView.aa_drawChartWithChartModel(chartmodel)
     }
     
     @objc func nameBtnClick() {

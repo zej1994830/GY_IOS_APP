@@ -16,7 +16,7 @@ class GYWMGraphicRadarViewController: GYViewController {
         didSet {
             noDataView.isHidden = dataArray.count != 0
             noDataView.snp.remakeConstraints { make in
-                make.center.size.equalTo(lineView)
+                make.center.size.equalTo(scrollView)
             }
         }
     }
@@ -24,6 +24,8 @@ class GYWMGraphicRadarViewController: GYViewController {
     var datatempGroupArray:NSMutableArray = []
     var currentDateString:String = ""
     var currentLastHourDateString:String = ""
+    var oricontentoffset:CGPoint = CGPoint(x: 0, y: 0)
+
     
     private lazy var headView:UIView = {
         let view = UIView()
@@ -154,9 +156,28 @@ class GYWMGraphicRadarViewController: GYViewController {
         return view
     }()
     
+    private lazy var scrollView:UIScrollView = {
+        let view = UIScrollView()
+        view.contentSize = CGSize(width: APP.WIDTH * 2, height: APP.WIDTH * 3)
+        view.backgroundColor = .white
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        view.bounces = false
+        view.delegate = self
+        view.minimumZoomScale = 1.0
+        view.maximumZoomScale = 4.0
+        return view
+    }()
+    
+    private lazy var radarView:GYWMRadarView = {
+        let view = GYWMRadarView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
     private lazy var lineView:AAChartView = {
         let view = AAChartView()
-        view.isScrollEnabled = false
+        view.contentWidth = APP.WIDTH * 2
         view.delegate = self
         return view
     }()
@@ -180,6 +201,8 @@ class GYWMGraphicRadarViewController: GYViewController {
         setupViews()
         addLayout()
         requestdata()
+        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
+        oricontentoffset = scrollView.contentOffset
     }
 
 }
@@ -199,11 +222,12 @@ extension GYWMGraphicRadarViewController {
         midView.addSubview(bgView)
         midView.addSubview(midtimeLabel)
         midView.addSubview(showGroupView)
-        midView.addSubview(lineView)
+        midView.addSubview(scrollView)
+        scrollView.addSubview(radarView)
         self.view.addSubview(namepickView)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm" // 根据需要设置日期时间格式
+        dateFormatter.dateFormat = "yyyy-MM-dd HH" // 根据需要设置日期时间格式
         let currentDate = Date()
         //当前时间
         currentDateString = dateFormatter.string(from: currentDate)
@@ -280,10 +304,17 @@ extension GYWMGraphicRadarViewController {
             make.bottom.equalTo(bgView).offset(-7)
         }
         
-        lineView.snp.makeConstraints { make in
-            make.left.right.equalTo(bgView)
-            make.top.equalTo(bgView.snp.bottom).offset(20)
-            make.bottom.equalTo(-115)
+        scrollView.snp.makeConstraints { make in
+            make.left.right.equalTo(0)
+            make.top.equalTo(bgView.snp.bottom)
+            make.height.equalTo(APP.WIDTH * 1.4)
+        }
+        
+        radarView.snp.makeConstraints { make in
+            make.height.equalTo(APP.WIDTH - 60)
+            make.width.equalTo(APP.WIDTH - 60)
+            make.centerX.equalTo(scrollView.contentSize.width / 2)
+            make.centerY.equalTo(scrollView.contentSize.height / 2)
         }
         
         namepickView.snp.makeConstraints { make in
@@ -365,7 +396,7 @@ extension GYWMGraphicRadarViewController {
             return
         }
         
-        let params = ["device_db":GYDeviceData.default.device_db,"end_time":currentDateString + ":00","idString":stoveidString,"type":2] as [String : Any]
+        let params = ["device_db":GYDeviceData.default.device_db,"end_time":currentDateString + ":00:00","idString":stoveidString,"type":2] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getwmchartdata, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -373,130 +404,37 @@ extension GYWMGraphicRadarViewController {
             GYHUD.hideHudForView(weakSelf.view)
             let dic:NSDictionary = result as! NSDictionary
             weakSelf.dataArray = dic["data"] as! NSArray
-            weakSelf.radarCharData(array: weakSelf.dataArray)
+            weakSelf.radarCharData(array: weakSelf.dataArray,dic: dic)
             
         }
     }
     
-    func radarCharData(array:NSArray) {
-        if array.count == 0 {
-            return
-        }
+    func radarCharData(array:NSArray,dic:NSDictionary) {
+        scrollView.setZoomScale(1, animated: true)
+        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
+        scrollView.contentOffset = CGPoint(x: oricontentoffset.x * scrollView.zoomScale, y: oricontentoffset.y * scrollView.zoomScale)
         
-        var dataEntries = [AASeriesElement]()
+        radarView.dataDic = dic as! [AnyHashable : Any]
         
-        var datanameStr = [String]()
-        
-        
-        //默认从正北开始0，所以要多加90
-        let angle = 90
-        let radius = self.view.frame.size.width / 2 - 25
-        for i in 0..<4 {
-            let angleInRadians = -CGFloat(angle + 90 * i).truncatingRemainder(dividingBy: 360)
-            let x1 = radius * cos(angleInRadians*Double.pi/180)
-            let y1 = radius * sin(angleInRadians*Double.pi/180)
-            let label = UILabel(frame: CGRect(x: radius + x1, y: radius - y1, width: 35, height: 20))
-
-            label.text = "\(90 * i)°"
-            label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-            label.textAlignment = .center
-            bgView.addSubview(label)
-            
-            let selfWidth = lineView.frame.size.width
-            let selfHeight = lineView.frame.size.height
-            let labelWidth = label.frame.size.width
-            let labelHeight = label.frame.size.height
-            let view = SBRadarCharts()
-            let  p = view.calcCircleCoordinate(withCenter: lineView.center, andWithAngle: CGFloat(angle + 90 * i), andWithRadius: radius)
-            if p.x < selfWidth/2 - labelWidth {
-                var x = p.x - labelWidth/2
-                var y: CGFloat
-                if p.y < (selfHeight/2 - labelHeight) {
-                    y = p.y - labelHeight/2
-                } else {
-                    y = p.y + labelHeight/2
-                }
-                label.center = CGPoint(x: x, y: y)
-            } else {
-                var x = p.x + labelWidth/2
-                var y: CGFloat
-                if p.y < (selfHeight/2 - labelHeight) {
-                    y = p.y - labelHeight/2
-                } else {
-                    y = p.y + labelHeight/2
-                }
-                label.center = CGPoint(x: x, y: y)
-            }
-
-            if (p.y > (selfHeight/2 - labelHeight/2) && p.y < (selfHeight/2 + labelHeight/2)) {
-                if (p.x < selfWidth/2 - labelHeight) {
-                    label.center = CGPoint(x: p.x - labelWidth/2, y: p.y)
-                } else {
-                    label.center = CGPoint(x: p.x + labelWidth/2, y: p.y)
-                }
-            } else {
-                if (p.x > (selfWidth/2 - labelWidth/2) && p.x < (selfWidth/2 + labelWidth/2)) {
-                    if (p.y < selfHeight/2 - labelWidth) {
-                        label.center = CGPoint(x: p.x, y: p.y - labelHeight/2)
-                    } else {
-                        label.center = CGPoint(x: p.x, y: p.y + labelHeight/2)
-                    }
-                }
-            }
-        }
-        bgView.bringSubviewToFront(namepickView)
-        var data = [Any]()
-        var data2 = [Any]()
-        
-        for temp in array {
-            guard let tempp = temp as? NSDictionary else {
+        radarView.themColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
+        radarView.block = { [weak self] (value) in
+            guard let weakSelf = self else {
                 return
             }
-            
-            
-            datanameStr.append(tempp["name"] as! String)
-            data2.append(tempp["value"] as! Double )
-            
-            
+            let dic:NSDictionary = weakSelf.dataArray[value] as! NSDictionary
+            weakSelf.showGroupView.label2.text = (dic["name"] as! String)
+            weakSelf.showGroupView.label3.text = String(format: "%.3f", dic["value"] as! Double)
         }
         
-        let gradientColor = AAGradientColor.linearGradient(
-            direction: .toLeft,
-            startColor: "#ADC6FF",
-            endColor: "#ADC6FF"
-        )
-        
-        
-        let aa2 = AASeriesElement()
-            .name("温度")
-            .data(data2)
-            .color(gradientColor)
-        
-        dataEntries.append(aa2)
-        
-        let model = AAChartModel()
-            .polar(true)
-            .dataLabelsEnabled(false)
-            .categories(datanameStr)
-            .margin(right: 30, left: 50)
-            .series([
-                AASeriesElement()
-                    .name(sectionStr)
-                    .data(data2)
-                    .colorByPoint(true)
-            ])
-            .chartType(.area)
-            
-            .tooltipValueSuffix("°C")
-//
-//            .markerSymbol(.circle)
-//            .markerSymbolStyle(.borderBlank)
-//            .categories(datanameStr)
-            .zoomType(.xy)
-        
-        lineView.aa_drawChartWithChartModel(model)
-        
-        
+        radarView.block2 = { [weak self] (value) in
+            guard let weakSelf = self else {
+                return
+            }
+            let dic:NSDictionary = weakSelf.dataArray[value] as! NSDictionary
+            weakSelf.showGroupView.label2.text = (dic["name"] as! String)
+            weakSelf.showGroupView.label3.text = String(format: "%.3f", dic["value"] as! Double)
+        }
+        radarView.setNeedsDisplay()
     }
     
     @objc func nameBtnClick() {
@@ -505,16 +443,14 @@ extension GYWMGraphicRadarViewController {
     }
     
     @objc func timeBtnClick() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: .init(block: {
-            BRDatePickerView.showDatePicker(with: .YMDHM, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
-                guard let weakSelf = self else{
-                    return
-                }
-                weakSelf.timeBtn.setTitle(str2!, for: .normal)
-                weakSelf.currentDateString = str2!
-                weakSelf.requestdata()
+        BRDatePickerView.showDatePicker(with: .YMDH, title: "选择时间", selectValue: nil ,isAutoSelect: false) { [weak self] (date2,str2) in
+            guard let weakSelf = self else{
+                return
             }
-        }))
+            weakSelf.timeBtn.setTitle(str2!, for: .normal)
+            weakSelf.currentDateString = str2!
+            weakSelf.requestdata()
+        }
     }
     
     @objc func groupBtnClick() {
@@ -591,15 +527,22 @@ extension GYWMGraphicRadarViewController:AAChartViewDelegate {
             return
         }
         
-        showGroupView.label2.textAlignment = .left
-        showGroupView.label2.snp.remakeConstraints { make in
-            make.left.equalTo(showGroupView.label1.snp.right).offset(15)
-            make.right.equalTo(0)
-            make.height.equalTo(20)
-        }
-        showGroupView.label2.text = (tempp["name"] as! String)
-        showGroupView.label3.text = String(format: "%.3f", tempp["value"] as! Double)
+    }
+}
+
+extension GYWMGraphicRadarViewController:UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return radarView
+    }
+     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        oricontentoffset = CGPointMake(scrollView.contentOffset.x / scrollView.zoomScale, scrollView.contentOffset.y / scrollView.zoomScale)
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         
+        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
+        scrollView.contentOffset = CGPoint(x: oricontentoffset.x * scrollView.zoomScale, y: oricontentoffset.y * scrollView.zoomScale)
     }
 }
 

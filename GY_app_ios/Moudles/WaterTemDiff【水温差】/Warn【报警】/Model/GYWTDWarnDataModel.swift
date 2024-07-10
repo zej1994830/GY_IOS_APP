@@ -19,5 +19,6 @@ struct GYWTDWarnDataModel:HandyJSON {
     var alarm_type:Int? = 0
     var id_type:Int? = 0
     var state:Int? = 0
+    var name:String? = ""
     
 }

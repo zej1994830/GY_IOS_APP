@@ -141,7 +141,7 @@ class GYETErosionMorphologyViewController: GYViewController {
         view.layer.cornerRadius = 2
         view.layer.masksToBounds = true
         
-        view.title = "前界面-方位3"
+        view.title = "方位3"
         view.titleColor = .black
         view.titleBgColor = .white
         view.rotateIcon = UIImage(named: "ic_arrow_blue")!
@@ -178,6 +178,20 @@ class GYETErosionMorphologyViewController: GYViewController {
         view.showsVerticalScrollIndicatorOfOptionsList = false
         view.optionsListLimitHeight = 200
         return view
+    }()
+        
+    private lazy var leftBtn:UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "ic_leftbtn"), for: .normal)
+        btn.addTarget(self, action: #selector(leftBtnClick), for: .touchUpInside)
+        return btn
+    }()
+    
+    private lazy var rightBtn:UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "ic_rightbtn"), for: .normal)
+        btn.addTarget(self, action: #selector(rightBtnClick), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var frontpickView:UIPickerView = {//废弃
@@ -254,8 +268,8 @@ class GYETErosionMorphologyViewController: GYViewController {
     
     private lazy var autoBtn:UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "ic_select_nor"), for: .normal)
-        btn.setImage(UIImage(named: "ic_select2"), for: .selected)
+        btn.setImage(UIImage(named: "checkbox_default"), for: .normal)
+        btn.setImage(UIImage(named: "checkbox_seleted"), for: .selected)
         btn.setTitle(" 自动巡检", for: .normal)
         btn.setTitleColor(UIColor.UIColorFromHexvalue(color_vaule: "#666666"), for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -310,8 +324,9 @@ extension GYETErosionMorphologyViewController {
         headView.addSubview(zhoujiemianBtn)
         headView.addSubview(hengjiemianBtn)
         headView.addSubview(sectionorientationLabel)
+        headView.addSubview(leftBtn)
         headView.addSubview(frontBtnMenu)
-        headView.addSubview(behindBtnMenu)
+        headView.addSubview(rightBtn)
         
         bgView.addSubview(midView)
         midView.addSubview(collectionV)
@@ -380,19 +395,24 @@ extension GYETErosionMorphologyViewController {
             make.height.equalTo(21)
         }
         
-        frontBtnMenu.snp.makeConstraints { make in
+        leftBtn.snp.makeConstraints { make in
             make.left.equalTo(modelBtn)
+            make.width.height.equalTo(40)
             make.top.equalTo(sectionorientationLabel)
-            make.height.equalTo(40)
-            make.width.equalTo(200)
         }
         
-        behindBtnMenu.snp.makeConstraints { make in
-            make.left.equalTo(frontBtnMenu)
-            make.top.equalTo(frontBtnMenu.snp.bottom).offset(10)
+        frontBtnMenu.snp.makeConstraints { make in
+            make.left.equalTo(leftBtn.snp.right).offset(15)
+            make.top.equalTo(sectionorientationLabel)
             make.height.equalTo(40)
-            make.width.equalTo(200)
+            make.width.equalTo(150)
             make.bottom.equalTo(-10)
+        }
+        
+        rightBtn.snp.makeConstraints { make in
+            make.left.equalTo(frontBtnMenu.snp.right).offset(15)
+            make.width.height.equalTo(40)
+            make.top.equalTo(sectionorientationLabel)
         }
         
         midView.snp.makeConstraints { make in
@@ -496,6 +516,24 @@ extension GYETErosionMorphologyViewController {
         frontpickView.isHidden = false
     }
     
+    @objc func leftBtnClick(){
+        inttimecount -= 1
+        let dic:NSDictionary = dataArray[Int((inttimecount + dataArray.count) % dataArray.count)] as! NSDictionary
+        frontBtnMenu.title = "\(dic["stove_name"] ?? "")"
+        midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(dic["stove_name"] ?? "")）"
+        stove_id = dic["stove_id"] as! Int32
+        request3()
+    }
+    
+    @objc func rightBtnClick(){
+        inttimecount += 1
+        let dic:NSDictionary = dataArray[Int((inttimecount + dataArray.count) % dataArray.count)] as! NSDictionary
+        frontBtnMenu.title = "\(dic["stove_name"] ?? "")"
+        midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(dic["stove_name"] ?? "")）"
+        stove_id = dic["stove_id"] as! Int32
+        request3()
+    }
+    
     @objc func autoBtnClick(_ button:UIButton){
         button.isSelected = !button.isSelected
         
@@ -505,8 +543,7 @@ extension GYETErosionMorphologyViewController {
                 inttimecount += 1
                 let dd = inttimecount % dataArray.count
                 let dic:NSDictionary = dataArray[dd] as! NSDictionary
-                frontBtn.setTitle("前界面-\(dic["stove_name"] ?? "")", for: .normal)
-                behindBtn.setTitle("后界面-\(dic["stove_name"] ?? "")", for: .normal)
+                frontBtnMenu.title = "\(dic["stove_name"] ?? "")"
                 midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(dic["stove_name"] ?? "")）"
                 stove_id = dic["stove_id"] as! Int32
                 request3()
@@ -546,8 +583,7 @@ extension GYETErosionMorphologyViewController {
             weakSelf.dataArray = dicc["data"] as! NSArray
             weakSelf.frontpickView.reloadAllComponents()
             let diccc:NSDictionary = weakSelf.dataArray.firstObject as! NSDictionary
-            weakSelf.frontBtnMenu.title = "前界面-\(diccc["stove_name"] ?? "")"
-            weakSelf.behindBtnMenu.title = "后界面-\(diccc["stove_name"] ?? "")"
+            weakSelf.frontBtnMenu.title = "\(diccc["stove_name"] ?? "")"
             weakSelf.midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(diccc["stove_name"] ?? "")）"
             if let stove_id = diccc["stove_id"] as? Int32 {
                 weakSelf.stove_id = stove_id
@@ -714,8 +750,7 @@ extension GYETErosionMorphologyViewController:LMJDropdownMenuDelegate,LMJDropdow
         
         inttimecount = Int(index)
         let dic:NSDictionary = dataArray[Int(index)] as! NSDictionary
-        frontBtnMenu.title = "前界面-\(dic["stove_name"] ?? "")"
-        behindBtnMenu.title = "后界面-\(dic["stove_name"] ?? "")"
+        frontBtnMenu.title = "\(dic["stove_name"] ?? "")"
         midtitleLabel.text = "炉缸轴截面侵蚀形貌（\(dic["stove_name"] ?? "")）"
         stove_id = dic["stove_id"] as! Int32
         request3()

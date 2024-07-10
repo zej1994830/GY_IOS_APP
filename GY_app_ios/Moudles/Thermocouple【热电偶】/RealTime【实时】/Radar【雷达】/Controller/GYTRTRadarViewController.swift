@@ -157,21 +157,7 @@ extension GYTRTRadarViewController:UIScrollViewDelegate {
         
         scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
         scrollView.contentOffset = CGPoint(x: oricontentoffset.x * scrollView.zoomScale, y: oricontentoffset.y * scrollView.zoomScale)
-//        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
-        
-//        radarView.snp.remakeConstraints { make in
-//            make.height.equalTo(APP.WIDTH - 60)
-//            make.width.equalTo(APP.WIDTH - 60)
-//            make.centerX.equalTo(scrollView.contentSize.width / 2)
-//            make.centerY.equalTo(scrollView.contentSize.height / 2)
-//        }
-//        scrollView.contentOffset = CGPoint(x: radarView.center.x - (APP.WIDTH / 2), y: radarView.center.y - (scrollView.frame.width / 2))
-//
-        print("scrollView.contentOffset === %ld",scrollView.contentOffset)
-        print("oricontentoffset -----%ld",oricontentoffset)
     }
-    
-    
 }
 
 extension GYTRTRadarViewController {

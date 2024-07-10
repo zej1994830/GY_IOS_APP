@@ -402,6 +402,7 @@ extension GYTRTRadarDetailTrendViewController {
                 .minWidth(3000)
                 .scrollPositionX(1))
         lineView.aa_drawChartWithChartModel(chartmodel)
+        lineView.aa_drawChartWithChartModel(chartmodel)
     }
     
     open func aaChartView(_ aaChartView: AAChartView, clickEventMessage: AAClickEventMessageModel) {

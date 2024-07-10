@@ -473,6 +473,10 @@ extension GYWTDTrendItemsViewController {
         
     }
     func requestnextdata(array:NSArray){
+        showGroupView2.isHidden = false
+        showGroupView3.isHidden = false
+        showGroupView4.isHidden = false
+        showGroupView5.isHidden = false
         var partid:Int32 = 0
         sectionStr = ""
         let dic:NSDictionary = array.firstObject as! NSDictionary
@@ -481,7 +485,7 @@ extension GYWTDTrendItemsViewController {
         sectionStr = String(format: "%@", dic["name"] as! String)
         nameBtnMenu.title = sectionStr
         let params = ["device_db":GYDeviceData.default.device_db,"partId":partid,"type":indexrow] as [String : Any]
-        GYNetworkManager.share.requestData(.get, api: Api.getGroupDataListByPartId, parameters: params) {[weak self] (result) in
+        GYNetworkManager.share.requestData(.get, api: Api.getlkGroupListByPartId, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
                 return
             }
@@ -552,7 +556,7 @@ extension GYWTDTrendItemsViewController {
         
         let chartmodel = AAChartModel()
             .chartType(.line)
-            .colorsTheme(["#0182F9","#BC7DFC","#12B48D","#F5C105","#FF6E66"])
+            .colorsTheme(["#BC7DFC","#12B48D","#12B48D","#0182F9","#FF6E66"])
             .xAxisLabelsStyle(AAStyle(color: AAColor.black,fontSize: 14))
             .dataLabelsEnabled(false)
             .animationType(.bounce)
@@ -563,6 +567,7 @@ extension GYWTDTrendItemsViewController {
             .markerSymbol(.circle)
             .zoomType(.x)//缩放功能
             .legendEnabled(true)
+        lineView.aa_drawChartWithChartModel(chartmodel)
         lineView.aa_drawChartWithChartModel(chartmodel)
     }
     
@@ -619,6 +624,23 @@ extension GYWTDTrendItemsViewController {
             guard let weakSelf = self else {
                 return
             }
+            weakSelf.showGroupView2.isHidden = true
+            weakSelf.showGroupView3.isHidden = true
+            weakSelf.showGroupView4.isHidden = true
+            weakSelf.showGroupView5.isHidden = true
+            if array.count > 1 {
+                weakSelf.showGroupView2.isHidden = false
+            }
+            if array.count > 2 {
+                weakSelf.showGroupView3.isHidden = false
+            }
+            if array.count > 3 {
+                weakSelf.showGroupView4.isHidden = false
+            }
+            if array.count > 4 {
+                weakSelf.showGroupView5.isHidden = false
+            }
+            
             weakSelf.requestlastdata(array: array)
         }
         self.zej_present(vc, vcTransitionDelegate: ZEJBottomPresentTransitionDelegate()){
@@ -815,6 +837,7 @@ extension GYWTDTrendItemsViewController:LMJDropdownMenuDelegate,LMJDropdownMenuD
             }
             requestnextdata(array: [dataSectionArray[Int(index)]])
         }else{
+
             if index == 0 {
                 rate = 0
             }else{

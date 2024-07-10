@@ -365,6 +365,8 @@ extension GYETTrendViewController {
                     weakSelf.timeBtn.setTitle(str! + " 至 " + str2!, for: .normal)
                     weakSelf.currentDateString = str2!
                     weakSelf.currentLastHourDateString = str!
+                    weakSelf.showGroupView.label2.text = ""
+                    weakSelf.showGroupView.label3.text = ""
                     weakSelf.requestlastdata()
                 }
             }))
@@ -422,6 +424,7 @@ extension GYETTrendViewController:AAChartViewDelegate {
     }
     
     func requestlastdata() {
+        
         let params = ["device_db":GYDeviceData.default.device_db,"direction":position,"number":number,"start_time":currentLastHourDateString + ":00","end_time":currentDateString + ":00"] as [String:Any]
         GYNetworkManager.share.requestData(.get, api: Api.getqsjhHistoryTimeData, parameters: params) { [weak self] (result) in
             guard let weakSelf = self else{
@@ -473,6 +476,7 @@ extension GYETTrendViewController:AAChartViewDelegate {
             .markerSymbol(.circle)
             .zoomType(.x)//缩放功能
             .legendEnabled(true)
+        lineView.aa_drawChartWithChartModel(chartmodel)
         lineView.aa_drawChartWithChartModel(chartmodel)
     }
     
@@ -599,7 +603,10 @@ extension GYETTrendViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSou
                 numberBtnMenu.title = NSString(format: "编号｜%@", dic["stove_name"] as! CVarArg) as String
             }
         }
+        showGroupView.label2.text = ""
+        showGroupView.label3.text = ""
         requestlastdata()
+        
     }
     
 }

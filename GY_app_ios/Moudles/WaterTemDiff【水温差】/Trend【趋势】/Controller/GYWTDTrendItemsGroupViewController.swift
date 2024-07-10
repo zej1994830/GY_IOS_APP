@@ -12,7 +12,13 @@ class GYWTDTrendItemsGroupViewController: ZEJBottomPresentViewController {
     var ClickBlock: ((NSMutableArray)->())? = nil
 
     //无线测温可以随便加
-    var iswmbool:Bool = false
+    var iswmbool:Bool = false {
+        didSet{
+            if iswmbool {
+//                allBtn.isHidden = false
+            }
+        }
+    }
     //3:GYTHCurveViewController
     var type:Int = 0
     //源数组
@@ -71,12 +77,14 @@ class GYWTDTrendItemsGroupViewController: ZEJBottomPresentViewController {
     private lazy var allBtn:UIButton = {
         let btn = UIButton()
         btn.setTitle("全选", for: .normal)
+        btn.setTitle("取消全选", for: .selected)
         btn.setTitleColor(UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8"), for: .normal)
         btn.addTarget(self, action: #selector(allBtnClick), for: .touchUpInside)
         btn.layer.cornerRadius = 14
         btn.layer.borderWidth = 1
         btn.layer.borderColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8").cgColor
         btn.layer.masksToBounds = true
+//        btn.isHidden = true
         return btn
     }()
     
@@ -84,6 +92,10 @@ class GYWTDTrendItemsGroupViewController: ZEJBottomPresentViewController {
         super.viewDidLoad()
         setupViews()
         addLayout()
+        
+        if tempArray.count == dataArray.count {
+            allBtn.isSelected = true
+        }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(cancelBtnClick))
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(cancel2BtnClick))
@@ -98,7 +110,7 @@ extension GYWTDTrendItemsGroupViewController {
     func setupViews() {
         self.view.addSubview(contentView)
         contentView.addSubview(titleLabel)
-//        contentView.addSubview(allBtn)
+        contentView.addSubview(allBtn)
         contentView.addSubview(tableView)
         contentView.addSubview(cancelBtn)
         contentView.addSubview(sureBtn)
@@ -116,7 +128,12 @@ extension GYWTDTrendItemsGroupViewController {
             make.height.equalTo(28)
         }
         
-        
+        allBtn.snp.makeConstraints { make in
+            make.right.equalTo(-20)
+            make.width.equalTo(100)
+            make.height.equalTo(30)
+            make.centerY.equalTo(titleLabel)
+        }
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(15)
@@ -160,7 +177,13 @@ extension GYWTDTrendItemsGroupViewController {
     }
     
     @objc func allBtnClick() {
-
+        if allBtn.isSelected {
+            tempArray.removeAllObjects()
+        }else{
+            tempArray = NSMutableArray(array: dataArray)
+        }
+        allBtn.isSelected = !allBtn.isSelected
+        tableView.reloadData()
     }
 }
 
@@ -186,7 +209,7 @@ extension GYWTDTrendItemsGroupViewController:UITableViewDelegate,UITableViewData
             }else {
                 cell?.titleStr = dic["name"] as! String
             }
-            
+            cell?.cellBtn.isSelected = false
             for temp in tempArray {
                 let tempdic:NSDictionary = temp as! NSDictionary
                 var str = ""
@@ -210,12 +233,16 @@ extension GYWTDTrendItemsGroupViewController:UITableViewDelegate,UITableViewData
                 }
                 let dic:NSDictionary = weakSelf.dataArray[indexPath.row] as! NSDictionary
                 if isselectbool {
-                    if weakSelf.tempArray.count > 4 && !weakSelf.iswmbool{
-                        GYHUD.show("目前不让选中超过五个")
-                        cell?.cellBtn.isSelected = false
-                        return
-                    }
+//                    if weakSelf.tempArray.count > 4 && !weakSelf.iswmbool{
+//                        GYHUD.show("目前不让选中超过五个")
+//                        cell?.cellBtn.isSelected = false
+//                        return
+//                    }
+                    
                     weakSelf.tempArray.add(dic)
+                    if weakSelf.tempArray.count == weakSelf.dataArray.count {
+                        weakSelf.allBtn.isSelected = true
+                    }
                 }else{
                     for item in weakSelf.tempArray {
                         let tempdic:NSDictionary = item as! NSDictionary
@@ -228,8 +255,8 @@ extension GYWTDTrendItemsGroupViewController:UITableViewDelegate,UITableViewData
                                 weakSelf.tempArray.remove(tempdic)
                             }
                         }
-                        
                     }
+                    weakSelf.allBtn.isSelected = false
                 }
             }
         }

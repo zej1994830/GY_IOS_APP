@@ -416,8 +416,8 @@ extension GYThermocoupleHistoryDataViewController: SpreadsheetViewDataSource, Sp
             }else{
                 let dic:NSDictionary = dataArray.firstObject as! NSDictionary
                 let dicc = NSMutableDictionary(dictionary: dic)
-                if dicc["time"] != nil {
-                    dicc.removeObject(forKey: "time")
+                if dicc["time "] != nil {
+                    dicc.removeObject(forKey: "time ")
                 }
 
                 cell.label.text = (dicc.allKeys[indexPath.column - 2] as! String)
@@ -431,14 +431,14 @@ extension GYThermocoupleHistoryDataViewController: SpreadsheetViewDataSource, Sp
         }else if indexPath.column == 1 {
             //时间
             let dic:NSDictionary = dataArray[indexPath.row - 1] as! NSDictionary
-            cell.label.text = (dic["time"] as! String)
+            cell.label.text = (dic["time "] as! String)
             return cell
         }else{
             //值
             let dic:NSDictionary = dataArray[indexPath.row - 1] as! NSDictionary
             let dicc = NSMutableDictionary(dictionary: dic)
-            if dicc["time"] != nil {
-                dicc.removeObject(forKey: "time")
+            if dicc["time "] != nil {
+                dicc.removeObject(forKey: "time ")
             }
             cell.label.text = String(format: "%.3f", (dicc.allValues[indexPath.column - 2] as! Double))
         }

@@ -150,12 +150,12 @@ class ETResultCell: Cell {
         label.textAlignment = .center
         contentView.addSubview(label)
         
-        label2.frame = CGRect(x: 0, y: 31, width: 82, height: 31)
+        label2.frame = CGRect(x: 0, y: 31, width: 90, height: 31)
         label2.font = UIFont.systemFont(ofSize: 15)
         label2.textAlignment = .center
         contentView.addSubview(label2)
         
-        label3.frame = CGRect(x: 82, y: 31, width: 82, height: 31)
+        label3.frame = CGRect(x: 90, y: 31, width: 90, height: 31)
         label3.font = UIFont.systemFont(ofSize: 15)
         label3.textAlignment = .center
         contentView.addSubview(label3)

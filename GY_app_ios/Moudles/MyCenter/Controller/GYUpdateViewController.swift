@@ -35,9 +35,9 @@ class GYUpdateViewController: ZEJRollDownViewController {
         return label
     }()
     
-    private lazy var versionLabel:UILabel = {
+    lazy var versionLabel:UILabel = {
         let label = UILabel()
-        label.text = "V2.0.6"
+        label.text = ""
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()

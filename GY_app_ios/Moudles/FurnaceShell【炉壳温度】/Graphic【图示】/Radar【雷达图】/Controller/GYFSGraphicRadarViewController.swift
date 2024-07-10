@@ -17,6 +17,7 @@ class GYFSGraphicRadarViewController: GYViewController {
     var datatempGroupArray:NSMutableArray = []
     var currentDateString:String = ""
     var currentLastHourDateString:String = ""
+    var oricontentoffset:CGPoint = CGPoint(x: 0, y: 0)
     
     private lazy var headView:UIView = {
         let view = UIView()
@@ -92,7 +93,7 @@ class GYFSGraphicRadarViewController: GYViewController {
         btn.layer.borderWidth = 1
         btn.layer.masksToBounds = true
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: APP.WIDTH - 110, bottom: 0, right: -50)
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.contentHorizontalAlignment = .left
         btn.addTarget(self, action: #selector(timeBtnClick), for: .touchUpInside)
@@ -147,6 +148,25 @@ class GYFSGraphicRadarViewController: GYViewController {
         return view
     }()
     
+    private lazy var scrollView:UIScrollView = {
+        let view = UIScrollView()
+        view.contentSize = CGSize(width: APP.WIDTH * 2, height: APP.WIDTH * 3)
+        view.backgroundColor = .white
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        view.bounces = false
+        view.delegate = self
+        view.minimumZoomScale = 1.0
+        view.maximumZoomScale = 4.0
+        return view
+    }()
+    
+    private lazy var radarView:GYFSRadarView = {
+        let view = GYFSRadarView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
     private lazy var lineView:AAChartView = {
         let view = AAChartView()
         view.isScrollEnabled = false
@@ -173,6 +193,9 @@ class GYFSGraphicRadarViewController: GYViewController {
         setupViews()
         addLayout()
         requestdata()
+        
+        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
+        oricontentoffset = scrollView.contentOffset
     }
 
 }
@@ -193,6 +216,8 @@ extension GYFSGraphicRadarViewController {
         midView.addSubview(midtimeLabel)
         midView.addSubview(showGroupView)
         midView.addSubview(lineView)
+        midView.addSubview(scrollView)
+        scrollView.addSubview(radarView)
         self.view.addSubview(namepickView)
         
         let dateFormatter = DateFormatter()
@@ -272,6 +297,18 @@ extension GYFSGraphicRadarViewController {
             make.top.equalTo(midtimeLabel.snp.bottom).offset(11)
         }
         
+        scrollView.snp.makeConstraints { make in
+            make.left.right.equalTo(0)
+            make.top.equalTo(bgView.snp.bottom).offset(5)
+            make.height.equalTo(APP.WIDTH * 1.4)
+        }
+        
+        radarView.snp.makeConstraints { make in
+            make.height.equalTo(APP.WIDTH - 60)
+            make.width.equalTo(APP.WIDTH - 60)
+            make.centerX.equalTo(scrollView.contentSize.width / 2)
+            make.centerY.equalTo(scrollView.contentSize.height / 2)
+        }
         lineView.snp.makeConstraints { make in
             make.left.right.equalTo(bgView)
             make.top.equalTo(bgView.snp.bottom).offset(20)
@@ -363,9 +400,37 @@ extension GYFSGraphicRadarViewController {
             let dic:NSDictionary = result as! NSDictionary
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.dataArray = dicc["data"] as! NSArray
-            weakSelf.radarCharData(array: weakSelf.dataArray)
+            weakSelf.radarCharData(array: weakSelf.dataArray,dic: dicc)
             
         }
+    }
+    
+    func radarCharData(array:NSArray,dic:NSDictionary) {
+        scrollView.setZoomScale(1, animated: true)
+        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
+        scrollView.contentOffset = CGPoint(x: oricontentoffset.x * scrollView.zoomScale, y: oricontentoffset.y * scrollView.zoomScale)
+        
+        radarView.dataDic = dic as! [AnyHashable : Any]
+        
+        radarView.themColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
+        radarView.block = { [weak self] (value) in
+            guard let weakSelf = self else {
+                return
+            }
+            let dic:NSDictionary = weakSelf.dataArray[value] as! NSDictionary
+            weakSelf.showGroupView.label2.text = dic["stove_name"] as? String
+            weakSelf.showGroupView.label3.text = dic["value"] as? String ?? "0.00"
+        }
+        
+        radarView.block2 = { [weak self] (value) in
+            guard let weakSelf = self else {
+                return
+            }
+            let dic:NSDictionary = weakSelf.dataArray[value] as! NSDictionary
+            weakSelf.showGroupView.label2.text = dic["stove_name"] as? String
+            weakSelf.showGroupView.label3.text = dic["value"] as? String ?? "0.00"
+        }
+        radarView.setNeedsDisplay()
     }
     
     func radarCharData(array:NSArray) {
@@ -405,7 +470,7 @@ extension GYFSGraphicRadarViewController {
             .tooltipEnabled(true)
         
         lineView.aa_drawChartWithChartModel(model)
-        
+        lineView.aa_drawChartWithChartModel(model)
         
     }
     
@@ -508,6 +573,22 @@ extension GYFSGraphicRadarViewController:AAChartViewDelegate {
         showGroupView.label2.text = String(describing: clickEventMessage.name)
         showGroupView.label3.text = String(describing: clickEventMessage.x)
         
+    }
+}
+
+extension GYFSGraphicRadarViewController:UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return radarView
+    }
+     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        oricontentoffset = CGPointMake(scrollView.contentOffset.x / scrollView.zoomScale, scrollView.contentOffset.y / scrollView.zoomScale)
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        
+        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
+        scrollView.contentOffset = CGPoint(x: oricontentoffset.x * scrollView.zoomScale, y: oricontentoffset.y * scrollView.zoomScale)
     }
 }
 

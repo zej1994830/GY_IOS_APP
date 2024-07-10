@@ -19,6 +19,7 @@ class GYWTDRadarData: HandyJSON {
     var stove_number:String? = ""
     var stove_name:String? = "" //热电偶用到的名字
     var name:String? = ""
+    var value:Double? = 0
     required init() { }
 }
 
@@ -28,7 +29,7 @@ struct GYWTDRadarModel:HandyJSON {
     var offsetAngle:Int64? = 0
     var section_id:Int64? = 0
     var section_name:String? = ""
-    var stove_list:NSArray = []
+    var stove_lists:NSArray = []
 }
  
 @objc class GYRTRadarModel:NSObject, HandyJSON {

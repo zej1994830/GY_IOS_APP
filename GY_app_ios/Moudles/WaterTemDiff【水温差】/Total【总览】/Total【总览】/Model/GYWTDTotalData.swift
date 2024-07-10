@@ -16,6 +16,7 @@ struct GYWTDBaseModel:HandyJSON {
     var section_id:Int64 = 0
     
     var stove_list:NSArray = []
+    var stove_lists:NSArray = []
     var section_name:String = ""
 }
 
@@ -56,7 +57,7 @@ struct GYWTDDataModel:HandyJSON{
     /**流量  t*/
     var flowTagTValue:Double {
         get{
-            return (flowTagValue ?? 0) / 1000
+            return (flowTagValue ?? 0)
         }
     }
     /**流量标签主机地址 */

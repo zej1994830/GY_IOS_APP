@@ -367,6 +367,7 @@ extension GYFSTotalTrendViewController {
             .zoomType(.x)//缩放功能
             .legendEnabled(true)
         lineView2.aa_drawChartWithChartModel(chartmodel)
+        lineView2.aa_drawChartWithChartModel(chartmodel)
     }
     
     @objc func timeBtnClick() {

@@ -9,13 +9,15 @@ import UIKit
 import AAInfographics
 
 class GYWTDRadarViewController: GYViewController {
+    var oricontentoffset:CGPoint = CGPoint(x: 0, y: 0)
     var dataSectionArray:NSArray = []
     var datatempSectionArray:NSMutableArray = []
     let labelarray = ["温差","入温","出温","流量","热流"]
     var nameStr:String = "温差"
+    var typeString:Int = 1
     var tempmodel:GYWTDRadarModel = GYWTDRadarModel(){
         didSet {
-            noDataView.isHidden = tempmodel.stove_list.count != 0
+            noDataView.isHidden = tempmodel.stove_lists.count != 0
             noDataView.snp.remakeConstraints { make in
                 make.center.size.equalTo(radarCharView)
             }
@@ -193,32 +195,23 @@ class GYWTDRadarViewController: GYViewController {
         return view
     }()
     
-    private lazy var label0:UILabel = {
-        let label = UILabel()
-        label.text = "0°"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        return label
+    private lazy var scrollView:UIScrollView = {
+        let view = UIScrollView()
+        view.contentSize = CGSize(width: APP.WIDTH * 2, height: APP.WIDTH * 3)
+        view.backgroundColor = .white
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        view.bounces = false
+        view.delegate = self
+        view.minimumZoomScale = 1.0
+        view.maximumZoomScale = 4.0
+        return view
     }()
     
-    private lazy var label90:UILabel = {
-        let label = UILabel()
-        label.text = "90°"
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        return label
-    }()
-    
-    private lazy var label180:UILabel = {
-        let label = UILabel()
-        label.text = "180°"
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        return label
-    }()
-    
-    private lazy var label270:UILabel = {
-        let label = UILabel()
-        label.text = "270°"
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        return label
+    private lazy var radarView:GYWTDRadarView = {
+        let view = GYWTDRadarView()
+        view.backgroundColor = .white
+        return view
     }()
     
     private lazy var namepickView:UIPickerView = {//废弃
@@ -252,7 +245,8 @@ class GYWTDRadarViewController: GYViewController {
         addLayout()
         
         requestdata()
-        
+        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width / 4, y: (scrollView.contentSize.height / 4))
+        oricontentoffset = scrollView.contentOffset
     }
     
 }
@@ -273,12 +267,9 @@ extension GYWTDRadarViewController {
         bgView.addSubview(midtitleLabel)
         bgView.addSubview(midshowview)
         bgView.addSubview(radarCharView)
-//        
-//        radarCharView.addSubview(label0)
-//        radarCharView.addSubview(label90)
-//        radarCharView.addSubview(label180)
-//        radarCharView.addSubview(label270)
-//        
+        bgView.addSubview(scrollView)
+        scrollView.addSubview(radarView)
+        
         bgView.addSubview(namepickView)
         bgView.addSubview(namepickView2)
     }
@@ -357,6 +348,19 @@ extension GYWTDRadarViewController {
             make.height.equalTo(APP.WIDTH)
         }
         
+        scrollView.snp.makeConstraints { make in
+            make.left.right.equalTo(0)
+            make.top.equalTo(midBgView.snp.bottom)
+            make.height.equalTo(APP.WIDTH * 1.4)
+        }
+        
+        radarView.snp.makeConstraints { make in
+            make.height.equalTo(APP.WIDTH - 60)
+            make.width.equalTo(APP.WIDTH - 60)
+            make.centerX.equalTo(scrollView.contentSize.width / 2)
+            make.centerY.equalTo(scrollView.contentSize.height / 2)
+        }
+        
         namepickView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
@@ -380,21 +384,50 @@ extension GYWTDRadarViewController {
             let dicc:NSDictionary = dic["data"] as! NSDictionary
             weakSelf.dataSectionArray = dicc["section_list"] as! NSArray
             weakSelf.namepickView.reloadAllComponents()
-            weakSelf.requestnextdata(array: weakSelf.dataSectionArray)
+            weakSelf.requestdata2(array: weakSelf.dataSectionArray)
         }
         
+    }
+    
+    func requestdata2(array:NSArray){
+        var partid:Int32 = 0
+        sectionStr = ""
+        let dic:NSDictionary = array.firstObject as! NSDictionary
+        partid = dic["id"] as! Int32
+        //段名
+        sectionStr = String(format: "%@", dic["name"] as! String)
+        screenBtnMenu.title = sectionStr
+        let params = ["device_db":GYDeviceData.default.device_db,"partId":partid,"type":typeString] as [String : Any]
+        GYNetworkManager.share.requestData(.get, api: Api.getGroupDataListByPartId, parameters: params) {[weak self] (result) in
+            guard let weakSelf = self else{
+                return
+            }
+            let dic:NSDictionary = result as! NSDictionary
+            let dicc:NSDictionary = dic["data"] as! NSDictionary
+            weakSelf.dataArray = dicc["temperature_list"] as! NSArray
+            weakSelf.datatempSectionArray = NSMutableArray.init(array: weakSelf.dataArray.subarray(with: NSRange(location: 0, length: 5)))
+            weakSelf.requestnextdata(array: NSArray(objects: weakSelf.dataArray.subarray(with: NSRange(location: 0, length: 5))))
+        }
     }
     
     func requestnextdata(array:NSArray){
         //显示项。这里认为只要重新筛选，那么默认全部显示数据
         var partidString:String = ""
-        sectionStr = ""
-        let dic:NSDictionary = array.firstObject as! NSDictionary
-        partidString = String(format: "%d", dic["id"] as! Int64)
+        var datanameStr:String = ""
+        for i in 0..<array.count {
+            let dic:NSDictionary = array[i] as! NSDictionary
+            
+            if i == 0 {
+                datanameStr = String(format: "%@", dic["name"] as! String)
+                partidString = String(format: "%d", dic["id"] as! Int64)
+            }else{
+                datanameStr = datanameStr + "，" + String(format: "%@", dic["name"] as! String)
+                partidString = partidString + "," + String(format: "%d", dic["id"] as! Int64)
+            }
+        }
         //段名
-        sectionStr = String(format: "%@", dic["name"] as! String)
-        screenBtnMenu.title = sectionStr
-        let params = ["device_db":GYDeviceData.default.device_db,"partidString":partidString,"rate":"1","typeString":"[0,1,2,3,4]"] as [String : Any]
+        groupBtn.setTitle(datanameStr, for: .normal)
+        let params = ["device_db":GYDeviceData.default.device_db,"partidString":partidString,"rate":"2","typeString":typeString] as [String : Any]
         GYNetworkManager.share.requestData(.get, api: Api.getswcdata, parameters: params) {[weak self] (result) in
             guard let weakSelf = self else{
                 return
@@ -402,25 +435,56 @@ extension GYWTDRadarViewController {
             GYHUD.hideHudForView(weakSelf.view)
             let dic:NSDictionary = result as! NSDictionary
             let dicc:NSDictionary = dic["data"] as! NSDictionary
-            weakSelf.dataArray = dicc["temperature_list"] as! NSArray
-            let diccc:NSDictionary = weakSelf.dataArray.firstObject as! NSDictionary
+            let diccc:NSDictionary = (dicc["temperature_list"] as! NSArray).firstObject as! NSDictionary
             weakSelf.tempmodel = GYWTDRadarModel.deserialize(from: diccc)!
-            if weakSelf.tempmodel.stove_list.count > 10 {
-                weakSelf.radarCharData(array: NSArray(array: Array(weakSelf.tempmodel.stove_list.prefix(1))))
-            }else{
-                weakSelf.radarCharData(array: weakSelf.tempmodel.stove_list)
-            }
+            weakSelf.radarCharData(array: weakSelf.tempmodel.stove_lists,dic: diccc)
             
         }
+    }
+    
+    func radarCharData(array:NSArray,dic:NSDictionary) {
+        scrollView.setZoomScale(1, animated: true)
+        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
+        scrollView.contentOffset = CGPoint(x: oricontentoffset.x * scrollView.zoomScale, y: oricontentoffset.y * scrollView.zoomScale)
+        
+        radarView.dataDic = dic as! [AnyHashable : Any]
+        
+        radarView.themColor = UIColor.UIColorFromHexvalue(color_vaule: "#1A73E8")
+        radarView.block = { [weak self] (value) in
+            guard let weakSelf = self else {
+                return
+            }
+            let dataModel = GYWTDRadarData.deserialize(from: weakSelf.tempmodel.stove_lists[value] as? NSDictionary)
+            weakSelf.midshowview.label2.text = dataModel?.name
+            weakSelf.midshowview.label3.text = String(format: "%.2f", (dataModel?.value)!)
+        }
+        
+        radarView.block2 = { [weak self] (value) in
+            guard let weakSelf = self else {
+                return
+            }
+            let dataModel = GYWTDRadarData.deserialize(from: weakSelf.tempmodel.stove_lists[value] as? NSDictionary)
+            weakSelf.midshowview.label2.text = dataModel?.name
+            weakSelf.midshowview.label3.text = String(format: "%.2f", (dataModel?.value)!)
+        }
+        radarView.setNeedsDisplay()
+//        spreadsheetView.reloadData()
+//        spreadsheetView.snp.remakeConstraints { make in
+//            make.top.equalTo(scrollView.snp.bottom).offset(20)
+//            make.left.equalTo(10)
+//            make.right.equalTo(-10)
+//            make.width.equalTo(APP.WIDTH - 20)
+//            make.height.equalTo((dataArray.count + 1) * 39)
+//            make.bottom.equalTo(-30)
+//        }
     }
     
     func radarCharData(array:NSArray) {
         var dataEntries = [AASeriesElement]()
         var data = [Any]()
-        var data2 = [Any]()
-        var datanameStr:String = ""
+        var data2:NSMutableArray = []
         var chartmodelStr = [String]()
-        datatempSectionArray = NSMutableArray.init(array: array)
+        
         //默认从正北开始0，所以要多加90
         let angle = Int(tempmodel.offsetAngle! + tempmodel.offsetAngle2! + 90) % 360
         let radius = self.view.frame.size.width / 2 - 25
@@ -452,8 +516,8 @@ extension GYWTDRadarViewController {
             chartmodelStr.append("")
         }
         for i in 0..<array.count {
-            let dataModel = GYWTDRadarData.deserialize(from: array[i] as? NSDictionary)
-            var angle:Int = Int((dataModel?.angle)!)
+            let dataModel = GYWTDRadarData.deserialize(from: (array[i] as? NSArray)![0] as? NSDictionary)
+            var angle:Int64 = Int64((dataModel?.angle)!)
             if tempmodel.clockwise == 1 {
                 print("当前为顺时针")
                 //顺时针
@@ -471,27 +535,11 @@ extension GYWTDRadarViewController {
                     angle = angle + 360
                 }
             }
-            if nameStr == "热流" {
-                data2.append([angle,(dataModel?.reFlowTagValue)!] as [Any])
-            }else if nameStr == "出温" {
-                data2.append([angle,(dataModel?.outTagValue)!] as [Any])
-            }else if nameStr == "入温" {
-                data2.append([angle,(dataModel?.inTagValue)!] as [Any])
-            }else if nameStr == "温差" {
-                data2.append([angle,(dataModel?.wcValue)!] as [Any])
-            }else if nameStr == "流量" {
-                data2.append([angle,(dataModel?.flowTagValue)!] as [Any])
-            }
-            if i == 0 {
-                datanameStr = (dataModel?.stove_number)!
-            }else{
-                datanameStr = datanameStr + "，" + (dataModel?.stove_number)!
-            }
+            data2.add([angle,dataModel?.value])
         }
         data.append([0,0.1])
         data.append([359,0])
         
-        groupBtn.setTitle(datanameStr, for: .normal)
         
         let gradientColor = AAGradientColor.linearGradient(
             direction: .toLeft,
@@ -507,7 +555,7 @@ extension GYWTDRadarViewController {
         
         let aa2 = AASeriesElement()
             .name(nameStr)
-            .data(data2)
+            .data(data2 as! [Any])
             .color(gradientColor)
         
         dataEntries.append(aa)
@@ -531,19 +579,22 @@ extension GYWTDRadarViewController {
     }
     
     @objc func groupBtnClick() {
+        if dataArray.count == 0 {
+            return
+        }
+        
         let vc = GYSelectGroupViewController()
-        let dic:NSDictionary = dataArray[0] as! NSDictionary
-        let tempmodel:GYWTDBaseModel = GYWTDBaseModel.deserialize(from: dic)!
-        vc.dataArray = NSMutableArray(array: tempmodel.stove_list)
+        vc.dataArray = NSMutableArray(array: dataArray)
         vc.tempArray = NSMutableArray(array: datatempSectionArray)
         vc.titleLabel.text = "组别"
         vc.ClickBlock = { [weak self] array in
             guard let weakSelf = self else {
                 return
             }
+            GYHUD.showGif(view: weakSelf.view)
             weakSelf.datatempSectionArray = NSMutableArray(array: array)
             //拿回来的数组存在顺序错乱，是否排列以后再定
-            weakSelf.radarCharData(array: weakSelf.datatempSectionArray)
+            weakSelf.requestnextdata(array: weakSelf.datatempSectionArray)
         }
         self.zej_present(vc, vcTransitionDelegate: ZEJBottomPresentTransitionDelegate()){
             
@@ -563,7 +614,7 @@ extension GYWTDRadarViewController {
             GYHUD.show("请先选择组别")
             return
         }
-        radarCharData(array: datatempSectionArray)
+        requestnextdata(array: datatempSectionArray)
     }
 }
 
@@ -593,24 +644,15 @@ extension GYWTDRadarViewController:AAChartViewDelegate {
 //        let labelarray2 = ["reFlow","outTemp","inTemp","tempWc","flow"]
 //        let dic:NSDictionary = dataArray[0] as! NSDictionary
 //        let tempmodel:GYWTDBaseModel = GYWTDBaseModel.deserialize(from: dic)!
-        let dataModel = GYWTDRadarData.deserialize(from: datatempSectionArray[clickEventMessage.index!] as? NSDictionary)
-        midshowview.label2.text = dataModel?.stove_number
-        if nameStr == "热流" {
-            midshowview.label3.text = String(format: "%.2f", (dataModel?.reFlowTagValue)!)
-        }else if nameStr == "出温" {
-            midshowview.label3.text = String(format: "%.2f", (dataModel?.outTagValue)!)
-        }else if nameStr == "入温" {
-            midshowview.label3.text = String(format: "%.2f", (dataModel?.inTagValue)!)
-        }else if nameStr == "温差" {
-            midshowview.label3.text = String(format: "%.2f", (dataModel?.wcValue)!)
-        }else if nameStr == "流量" {
-            midshowview.label3.text = String(format: "%.2f", (dataModel?.flowTagValue)!)
+        if clickEventMessage.name == "定位点" {
+            midshowview.label2.text = "定位点"
+            midshowview.label3.text = "0.00"
+            return
         }
         
-        if clickEventMessage.name == "原点" {
-            midshowview.label2.text = "原点"
-            midshowview.label3.text = "0.00"
-        }
+        let dataModel = GYWTDRadarData.deserialize(from: datatempSectionArray[clickEventMessage.index!] as? NSDictionary)
+        midshowview.label2.text = dataModel?.name
+        midshowview.label3.text = String(format: "%.2f", (dataModel?.value)!)
     }
 }
 
@@ -659,6 +701,22 @@ extension GYWTDRadarViewController:UIPickerViewDelegate,UIPickerViewDataSource {
     }
 }
 
+extension GYWTDRadarViewController:UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return radarView
+    }
+     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        oricontentoffset = CGPointMake(scrollView.contentOffset.x / scrollView.zoomScale, scrollView.contentOffset.y / scrollView.zoomScale)
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        
+        scrollView.contentSize = CGSize(width: APP.WIDTH * 2 * scrollView.zoomScale, height: APP.WIDTH * 3 * scrollView.zoomScale)
+        scrollView.contentOffset = CGPoint(x: oricontentoffset.x * scrollView.zoomScale, y: oricontentoffset.y * scrollView.zoomScale)
+    }
+}
+
 extension GYWTDRadarViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSource{
     func numberOfOptions(in menu: LMJDropdownMenu) -> UInt {
         if menu == screenBtnMenu {
@@ -685,18 +743,20 @@ extension GYWTDRadarViewController:LMJDropdownMenuDelegate,LMJDropdownMenuDataSo
     func dropdownMenu(_ menu: LMJDropdownMenu, didSelectOptionAt index: UInt, optionTitle title: String) {
         midshowview.label2.text = "组别"
         midshowview.label3.text = "0.00"
+        GYHUD.showGif(view: self.view)
         if menu == screenBtnMenu {
             if dataSectionArray.count == 0 {
                 return
             }
             let dic:NSDictionary = dataSectionArray[Int(index)] as! NSDictionary
-            requestnextdata(array: [dataSectionArray[Int(index)]])
+            requestdata2(array: [dataSectionArray[Int(index)]])
         }else{
             if datatempSectionArray.count == 0 {
                 return
             }
+            typeString = Int(index + 1)
             nameStr = labelarray[Int(index)]
-            radarCharData(array: datatempSectionArray)
+            requestnextdata(array: datatempSectionArray)
         }
     }
     

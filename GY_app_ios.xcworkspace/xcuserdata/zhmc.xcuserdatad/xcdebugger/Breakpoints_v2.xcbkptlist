@@ -20,5 +20,51 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7688D030-1DBA-4518-9B0F-182D447B7E47"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GY_app_ios/Moudles/MyCenter/Controller/GYMyCenterViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "compareVersions(_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7688D030-1DBA-4518-9B0F-182D447B7E47 - 2b91b7c994a34f36"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GY_app_ios.GYMyCenterViewController.compareVersions(Swift.String, Swift.String) -&gt; __C.NSComparisonResult"
+                  moduleName = "GY_app_ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhmc/Desktop/GY_IOS_APP_1/GY_app_ios/Moudles/MyCenter/Controller/GYMyCenterViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "339"
+                  endingLineNumber = "339">
+               </Location>
+               <Location
+                  uuid = "7688D030-1DBA-4518-9B0F-182D447B7E47 - 2b91b7c994a34f36"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GY_app_ios.GYMyCenterViewController.compareVersions(Swift.String, Swift.String) -&gt; __C.NSComparisonResult"
+                  moduleName = "GY_app_ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhmc/Desktop/GY_IOS_APP_1/GY_app_ios/Moudles/MyCenter/Controller/GYMyCenterViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "339"
+                  endingLineNumber = "339">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
